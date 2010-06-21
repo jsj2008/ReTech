@@ -1,0 +1,6 @@
+Prerequisites
+1 - Slik SVN Client (http://www.sliksvn.com/en/download)
+
+Workflow
+1 - If you don't have code dir with libraries or it is broken, use GetCleanCopy.bat.
+2 - To Update your dependencies use UpdateDependencies.bat. 
