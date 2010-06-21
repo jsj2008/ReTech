@@ -20,20 +20,20 @@ namespace rt
 		class ExecHolder : public BaseExec
 		{
 		public:
-			ExecHolder(boost::function< void(T) > iFunction)
+			ExecHolder(fastdelegate::FastDelegate1<T> iFunction)
 				: mFunction(iFunction), BaseExec(true){}
 
-			boost::function< void(T) >	mFunction;
+			fastdelegate::FastDelegate1<T>	mFunction;
 		};
 
 		template<>
 		class ExecHolder<void> : public BaseExec
 		{
 		public:
-			ExecHolder(boost::function< void(void) > iFunction)
+			ExecHolder(fastdelegate::FastDelegate0<> iFunction)
 				: mFunction(iFunction), BaseExec(false){}
 
-			boost::function< void(void) >	mFunction;
+			fastdelegate::FastDelegate0<>	mFunction;
 		};
 
 		typedef std::map<std::string, Poco::SharedPtr<BaseExec> > ExecMap;
@@ -44,13 +44,13 @@ namespace rt
 		template<class C>
 		void RegisterExec(const std::string& iExecName, void(C::*iFunc)(void), C* iObject)
 		{
-			mExecs[iExecName].assign(new ExecHolder<void>(boost::bind(iFunc, iObject)));
+			mExecs[iExecName].assign(new ExecHolder<void>(fastdelegate::MakeDelegate(iObject, iFunc)));
 		}
 
 		template<class T, class C>
 		void RegisterExec(const std::string& iExecName, void(C::*iFunc)(T), C* iObject)
 		{
-			mExecs[iExecName].assign(new ExecHolder<T>(boost::bind(iFunc, iObject, _1)));
+			mExecs[iExecName].assign(new ExecHolder<T>(fastdelegate::MakeDelegate(iObject, iFunc)));
 		}
 
 		void RunExec(const std::string& iExecName)

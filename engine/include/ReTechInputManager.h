@@ -8,10 +8,10 @@ namespace rt
 	class InputManager : public Singleton<InputManager>
 	{
 	public:
-		typedef std::multimap<sf::Key::Code, std::string>		KeyboardBinds;
-		typedef std::multimap<sf::Mouse::Button, std::string>	MouseBinds;
-		typedef boost::function< bool(const sf::Event&) >		InputHandler;
-		typedef std::list<InputHandler*>						HandlersList;
+		typedef std::multimap<sf::Key::Code, std::string>			KeyboardBinds;
+		typedef std::multimap<sf::Mouse::Button, std::string>		MouseBinds;
+		typedef fastdelegate::FastDelegate1<const sf::Event&, bool>	InputHandler;
+		typedef std::list<InputHandler*>							HandlersList;
 
 		InputManager();
 		~InputManager();
@@ -27,7 +27,7 @@ namespace rt
 		template<class T>
 		static InputHandler MakeHandler(bool(T::*iFunc)(const sf::Event&), T* iObject)
 		{
-			return boost::bind(iFunc, iObject, _1);
+			return fastdelegate::MakeDelegate(iObject, iFunc);//boost::bind(iFunc, iObject, _1);
 		}
 
 		sf::Vector2f GetMousePosition();

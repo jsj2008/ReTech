@@ -1,1 +1,14 @@
-/*.ncb
+*.ncb
+*.user
+*.exe
+*.exp
+*.ilk
+*.lib
+*.pdb
+*.log
+/dependencies
+/libraries/code
+/game/build
+/engine/build
+/engine/lib
+/bin/AS_DEBUG

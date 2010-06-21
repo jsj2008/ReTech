@@ -24,14 +24,13 @@
 #include "poco/dom/DOMParser.h"
 #include "poco/dom/NamedNodeMap.h"
 
-#include "boost/function.hpp"
-#include "boost/bind.hpp"
-
 #include "SFML/Audio.hpp"
 #include "SFML/Graphics.hpp"
 #include "SFML/Network.hpp"
 #include "SFML/System.hpp"
 #include "SFML/Window.hpp"
+
+#include "fastdelegates/fastdelegate.h"
 
 #include "angelscript/angelscript.h"
 

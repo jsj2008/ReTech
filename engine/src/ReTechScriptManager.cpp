@@ -25,8 +25,6 @@ namespace rt
 		mMainModule->AddScriptSection("section1", test.c_str());
 
 		int r = mMainModule->Build();
-
-		mEngine->mo
 	}
 
 	ScriptManager::~ScriptManager()
@@ -42,6 +40,5 @@ namespace rt
 		else if( iMessage->type == asMSGTYPE_INFORMATION ) 
 			type = "INFO";
 		printf("%s (%d, %d) : %s : %s\n", iMessage->section, iMessage->row, iMessage->col, type, iMessage->message);
-
 	}
 }
