@@ -50,9 +50,9 @@ namespace rt
 
 		float				mProgress;
 
-		Poco::SharedPtr<Serializer>	mSerializer;
-		std::vector<DataChunk>		mDataChunks;
-		int							mCurrentChunkIndex;
+		YAML::Node			mDocument;
+		const YAML::Node*	mObjectsData;
+		int					mCurrentObjectIndex;
 	};
 }
 

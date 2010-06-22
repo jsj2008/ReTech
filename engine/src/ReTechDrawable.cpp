@@ -14,9 +14,14 @@ namespace rt
 
 	}
 
-	void Drawable::UnSerialize(DataChunk& iDataChunk)
+	void Drawable::UnSerialize( const YAML::Node& iNode )
 	{
-		WorldObject::UnSerialize(iDataChunk);
+		WorldObject::UnSerialize(iNode);
+	}
+
+	void Drawable::Serialize( YAML::Emitter& iEmitter ) const
+	{
+
 	}
 
 	void Drawable::Draw(sf::RenderWindow* iRenderWindow)

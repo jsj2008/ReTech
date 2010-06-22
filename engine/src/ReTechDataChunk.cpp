@@ -95,7 +95,7 @@ namespace rt
 	WorldObject* DataChunk::CreateWorldObject()
 	{
 		WorldObject* worldObject = static_cast<WorldObject*>(ObjectsFactory::CreateObject(GetOption("class")));
-		worldObject->UnSerialize(*this);
+		//worldObject->UnSerializeOld(*this);
 
 		return worldObject;
 	}

@@ -6,6 +6,7 @@
 *.lib
 *.pdb
 *.log
+*.suo
 /dependencies
 /libraries/code
 /game/build

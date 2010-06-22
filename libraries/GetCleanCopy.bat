@@ -9,6 +9,7 @@ md code\POCO
 md code\box2d
 md code\sfml
 md code\AngelScript
+md code\yaml-cpp
 
 echo Checkout clean copies...
 
@@ -20,6 +21,9 @@ echo Checkout SFML...
 svn co https://sfml.svn.sourceforge.net/svnroot/sfml/branches/sfml2 code\sfml
 echo Checkout AngelScript
 svn co https://angelscript.svn.sourceforge.net/svnroot/angelscript/trunk code\Angelscript
+echo Checkout YAML Cpp
+svn co http://yaml-cpp.googlecode.com/svn/trunk/ code\yaml-cpp
+
 
 echo Done
 pause

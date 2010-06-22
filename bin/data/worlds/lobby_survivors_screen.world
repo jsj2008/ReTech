@@ -1,4 +1,0 @@
-<world>
-  <object class="Sprite" sprite="./media/game/wallpapers/zombie_walk.png" layer="0" x="0" y="0"/>
-  <object class="Text" string="Survivors screen" font="./media/game/fonts/birth_of_a_hero.ttf" size="30"/>
-</world>

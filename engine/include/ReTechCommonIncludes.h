@@ -30,8 +30,9 @@
 #include "SFML/System.hpp"
 #include "SFML/Window.hpp"
 
-#include "fastdelegates/fastdelegate.h"
 
+#include "yaml-cpp/yaml.h"
+#include "fastdelegates/fastdelegate.h"
 #include "angelscript/angelscript.h"
 
 #include "ReTechLogManager.h"

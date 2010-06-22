@@ -11,7 +11,8 @@ namespace rt
 		Drawable(sf::Drawable* iDrawable);
 		virtual ~Drawable();
 
-		virtual void UnSerialize(DataChunk& iDataChunk);
+		virtual void UnSerialize(const YAML::Node& iNode);
+		virtual void Serialize(YAML::Emitter& iEmitter) const;
 
 		virtual void Draw(sf::RenderWindow* iRenderWindow);
 

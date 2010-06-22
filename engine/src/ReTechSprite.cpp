@@ -16,11 +16,16 @@ namespace rt
 
 	}
 
-	void Sprite::UnSerialize(DataChunk& iDataChunk)
+	void Sprite::UnSerialize( const YAML::Node& iNode )
 	{
-		Drawable::UnSerialize(iDataChunk);
+		Drawable::UnSerialize(iNode);
 
-		SetResource(iDataChunk.GetOption("sprite"));
+		SafeGet(iNode, "sprite", fastdelegate::MakeDelegate(this, &Sprite::SetResource));
+	}
+
+	void Sprite::Serialize( YAML::Emitter& iEmitter ) const
+	{
+
 	}
 
 	void Sprite::SetResource( const std::string& iResourceName )

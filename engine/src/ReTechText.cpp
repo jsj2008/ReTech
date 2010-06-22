@@ -15,20 +15,31 @@ namespace rt
 
 	}
 
-	void Text::UnSerialize(DataChunk& iDataChunk)
+	void Text::UnSerialize( const YAML::Node& iNode )
 	{
-		Drawable::UnSerialize(iDataChunk);
+		Drawable::UnSerialize(iNode);
 
-		static_cast<sf::Text*>(mDrawable.get())->SetString(iDataChunk.GetOption("string"));
-
-		SetResource(iDataChunk.GetOption("font"));
-		
-		int size = 30;
-		Poco::NumberParser::tryParse(iDataChunk.GetOption("size"), size);
-		static_cast<sf::Text*>(mDrawable.get())->SetCharacterSize(size);
+		SafeGet(iNode, "string", fastdelegate::MakeDelegate(this, &Text::SetString));
+		SafeGet(iNode, "font", fastdelegate::MakeDelegate(this, &Text::SetFont));
+		SafeGet(iNode, "char_size", fastdelegate::MakeDelegate(this, &Text::SetSize));
 	}
 
-	void Text::SetResource( const std::string& iResourceName )
+	void Text::Serialize( YAML::Emitter& iEmitter ) const
+	{
+
+	}
+
+	void Text::SetString( const std::string& iString )
+	{
+		static_cast<sf::Text*>(mDrawable.get())->SetString(iString);
+	}
+
+	void Text::SetSize( int iSize )
+	{
+		static_cast<sf::Text*>(mDrawable.get())->SetCharacterSize(iSize);
+	}
+
+	void Text::SetFont( const std::string& iResourceName )
 	{
 		Font* font = UResource(Font, iResourceName);
 		font->Load();

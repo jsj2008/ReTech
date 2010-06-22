@@ -13,7 +13,8 @@ namespace rt
 		WorldObject();
 		virtual ~WorldObject();
 
-		virtual void UnSerialize(DataChunk& iDataChunk);
+		virtual void UnSerialize(const YAML::Node& iNode);
+		virtual void Serialize(YAML::Emitter& iEmitter) const;
 
 		virtual void OnAddToWorld();
 

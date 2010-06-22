@@ -11,7 +11,8 @@ namespace rt
 		Sprite();
 		virtual ~Sprite();
 
-		virtual void UnSerialize(DataChunk& iDataChunk);
+		virtual void UnSerialize(const YAML::Node& iNode);
+		virtual void Serialize(YAML::Emitter& iEmitter) const;
 
 		void SetResource(const std::string& iResourceName);
 	};

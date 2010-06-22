@@ -13,11 +13,20 @@ namespace rt
 
 	}
 
-	void Animation::UnSerialize(DataChunk& iDataChunk)
+	void Animation::UnSerialize( const YAML::Node& iNode )
 	{
-		Sprite::UnSerialize(iDataChunk);
+		Sprite::UnSerialize(iNode);
 
-		mAnimation.assign(new FrameAnimation(iDataChunk.GetOption("file"), static_cast<sf::Sprite*>(mDrawable.get())));
+		std::string animationFile;
+
+		SafeGet(iNode, "file", animationFile);
+
+		mAnimation.assign(new FrameAnimation(animationFile, static_cast<sf::Sprite*>(mDrawable.get())));
+	}
+
+	void Animation::Serialize( YAML::Emitter& iEmitter ) const
+	{
+
 	}
 
 	void Animation::Update( float iFrameTime )

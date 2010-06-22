@@ -8,6 +8,8 @@ echo Update box2d...
 svn update code\box2d
 echo Update SFML...
 svn update code\sfml
+echo Update YAML Cpp...
+svn update code\yaml-cpp
 
 echo Build libraries...
 echo Build SFML debug...
@@ -42,6 +44,12 @@ devenv code\AngelScript\sdk\angelscript\projects\msvc9\angelscript.sln /build "D
 echo Build AngelScript release...
 devenv code\AngelScript\sdk\angelscript\projects\msvc9\angelscript.sln /build "Release"
 
+echo Build YAML Cpp debug...
+devenv code\yaml-cpp\yamlcpp.sln /build "Debug" /project yamlcpp
+
+echo Build YAML Cpp release...
+devenv code\yaml-cpp\yamlcpp.sln /build "Release" /project yamlcpp
+
 echo Remove old files...
 rd /q /s ..\dependencies
 md ..\dependencies
@@ -62,11 +70,14 @@ md ..\dependencies\include\sfml
 xcopy code\sfml\include\sfml\* ..\dependencies\include\sfml\ /s /q
 md ..\dependencies\include\angelscript
 xcopy code\AngelScript\sdk\angelscript\include\* ..\dependencies\include\angelscript\ /s /q
+md ..\dependencies\include\yaml-cpp
+xcopy code\yaml-cpp\include\* ..\dependencies\include\yaml-cpp\ /s /q
 
 echo Copy libraries...
 xcopy code\sfml\lib\vc2008\*.lib ..\dependencies\lib /q
 xcopy code\POCO\lib\*.lib ..\dependencies\lib /q
 xcopy code\AngelScript\sdk\angelscript\lib\*.lib ..\dependencies\lib /q
+xcopy code\yaml-cpp\lib\*.lib ..\dependencies\lib /q
 
 echo Copy binaries...
 rem xcopy code\POCO\bin\*.dll ..\bin /q

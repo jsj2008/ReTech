@@ -2,6 +2,6 @@
 #include "LobbyJobScreen.h"
 
 LobbyJobScreen::LobbyJobScreen( GameManager* iManager )
-: GameScreen(iManager, "./data/worlds/lobby_job_screen.world")
+: GameScreen(iManager, "./data/worlds/lobby_job_screen.yaml")
 {
 }

@@ -6,7 +6,7 @@ namespace rt
 {
 	World::World(const std::string& iName)
 		: mName(iName), mRootObject(new WorldObject()), mIsLoading(false), mIsLoaded(true), mIsVisible(true), mShowAfterLoad(false), 
-		mProgress(0.0f), mCurrentChunkIndex(0)
+		mProgress(0.0f), mObjectsData(0), mCurrentObjectIndex(0)
 	{
 		mRootObject->SetWorld(this);
 	}
@@ -85,21 +85,20 @@ namespace rt
 
 	void World::ProcessLoad()
 	{
- 		if(mCurrentChunkIndex < mDataChunks.size())
+ 		if(mCurrentObjectIndex < mObjectsData->size())
  		{
-			if(mDataChunks[mCurrentChunkIndex].GetName() == "object")
-			{
-				AddObject(mDataChunks[mCurrentChunkIndex].CreateWorldObject());
-			}
+			WorldObject* worldObject = static_cast<WorldObject*>(ObjectsFactory::CreateObject((*mObjectsData)[mCurrentObjectIndex]["class"]));
+			(*mObjectsData)[mCurrentObjectIndex] >> worldObject;
 
-			++mCurrentChunkIndex;
-			mProgress = static_cast<float>(mCurrentChunkIndex) / static_cast<float>(mDataChunks.size());
+			AddObject(worldObject);
+
+			++mCurrentObjectIndex;
+			mProgress = static_cast<float>(mCurrentObjectIndex) / static_cast<float>(mObjectsData->size());
 		}
 		else
 		{
-			//end loading
-			mSerializer.assign(0);
-			mDataChunks.clear();
+			mDocument.Clear();
+			mObjectsData = 0;
 
 			mIsLoaded = true;
 			mIsLoading = false;
@@ -129,22 +128,19 @@ namespace rt
 		{
 			mIsVisible = false;
 
-			mSerializer.assign(new Serializer());
-			mSerializer->SetFile(iFileName);
+			std::ifstream inFile(iFileName.c_str());
 
-			if(mSerializer->GetChunk().GetName() != "world")
+			if(inFile.is_open())
 			{
-				LogManager::Get()->Error("Wrong level file. " + iFileName);
-			}
-			
-			if(mSerializer->GetChunk().HasSubChunks())
-			{
-				mSerializer->GetChunk().GetSubChunks(mDataChunks);
-			}
+				YAML::Parser parser(inFile);
+				parser.GetNextDocument(mDocument);
 
-			mShowAfterLoad = iShowAfterLoad;
+				mObjectsData = &(mDocument["objects"]);
 
-			mIsLoading = true;
+				mShowAfterLoad = iShowAfterLoad;
+
+				mIsLoading = true;
+			}
 		}
 	}
 
@@ -159,6 +155,7 @@ namespace rt
 		}
 
 		mIsLoaded = false;
+		mCurrentObjectIndex = 0;
 	}
 
 	void World::SetVisible( bool iVisible )

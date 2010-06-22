@@ -12,7 +12,8 @@ namespace rt
 		Animation();
 		virtual ~Animation();
 
-		virtual void UnSerialize(DataChunk& iDataChunk);
+		virtual void UnSerialize(const YAML::Node& iNode);
+		virtual void Serialize(YAML::Emitter& iEmitter) const;
 
 		virtual void Update(float iFrameTime);
 

@@ -11,9 +11,12 @@ namespace rt
 		Text();
 		virtual ~Text();
 
-		virtual void UnSerialize(DataChunk& iDataChunk);
+		virtual void UnSerialize(const YAML::Node& iNode);
+		virtual void Serialize(YAML::Emitter& iEmitter) const;
 
-		void SetResource(const std::string& iResourceName);
+		void SetString(const std::string& iString);
+		void SetSize(int iSize);
+		void SetFont(const std::string& iResourceName);
 	};
 }
 

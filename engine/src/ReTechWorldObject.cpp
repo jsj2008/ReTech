@@ -22,39 +22,30 @@ namespace rt
 		}
 	}
 
-	void WorldObject::UnSerialize(DataChunk& iDataChunk)
+	void WorldObject::UnSerialize( const YAML::Node& iNode )
 	{
-		double posX = 0.0f;
-		double posY = 0.0f;
-		double width = 0.0f;
-		double height = 0.0f;
-
-		Poco::NumberParser::tryParseFloat(iDataChunk.GetOption("x"), posX);
-		Poco::NumberParser::tryParseFloat(iDataChunk.GetOption("y"), posY);
-		Poco::NumberParser::tryParseFloat(iDataChunk.GetOption("width"), width);
-		Poco::NumberParser::tryParseFloat(iDataChunk.GetOption("height"), height);
-
-		SetWorldPosition(sf::Vector2f(static_cast<float>(posX), static_cast<float>(posY)));
-		SetWorldSize(sf::Vector2f(static_cast<float>(width), static_cast<float>(height)));
-
-		Poco::NumberParser::tryParse(iDataChunk.GetOption("layer"), mLayer);
-
-		mTag = iDataChunk.GetOption("tag");
+		SafeGet(iNode, "position", mWorldPosition);
+		SafeGet(iNode, "size", mWorldSize);
+		SafeGet(iNode, "layer", mLayer);
+		SafeGet(iNode, "tag", mTag);
 
 		//load sub objects
- 		if(iDataChunk.HasSubChunks())
- 		{
- 			std::vector<DataChunk> dataChunks;
- 			iDataChunk.GetSubChunks(dataChunks);
- 
- 			for(std::vector<DataChunk>::iterator iter = dataChunks.begin(); iter != dataChunks.end(); ++iter)
- 			{
-				if((*iter).GetName() == "object")
-				{
-					mPendingAttaches.push_back((*iter).CreateWorldObject());
-				}
- 			}
- 		}
+		const YAML::Node* subObjects = iNode.FindValue("objects");
+		if(subObjects)
+		{
+			for(YAML::Iterator iter = subObjects->begin(); iter != subObjects->end(); ++iter)
+			{
+				WorldObject* worldObject = static_cast<WorldObject*>(ObjectsFactory::CreateObject((*iter)["class"]));
+				*iter >> worldObject;
+
+				mPendingAttaches.push_back(worldObject);
+			}
+		}
+	}
+
+	void WorldObject::Serialize( YAML::Emitter& iEmitter ) const
+	{
+
 	}
 
 	void WorldObject::OnAddToWorld()

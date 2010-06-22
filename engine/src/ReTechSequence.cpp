@@ -46,14 +46,6 @@ namespace rt
 						}
 					}
 				}
-// 				serializer.NextChunk();
-// 
-// 				while(serializer.GetChunk().IsValid() && serializer.GetChunk().GetName() == "frame")
-// 				{
-// 					mFrames.push_back(UResource(Image, serializer.GetChunk().GetOption("file")));
-// 
-// 					serializer.NextChunk();
-// 				}
 			}
 		}
 	}

@@ -16,11 +16,16 @@ namespace rt
 		InputManager::Get()->UnregisterHandler(&mHandler);
 	}
 
-	void Button::UnSerialize(DataChunk& iDataChunk)
+	void Button::UnSerialize( const YAML::Node& iNode )
 	{
-		WorldObject::UnSerialize(iDataChunk);
+		WorldObject::UnSerialize(iNode);
 
-		mOnPressExec = iDataChunk.GetOption("onPress");
+		SafeGet(iNode, "on_press", mOnPressExec);
+	}
+
+	void Button::Serialize( YAML::Emitter& iEmitter ) const
+	{
+
 	}
 
 	void Button::OnAddToWorld()

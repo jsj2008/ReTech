@@ -1,0 +1,10 @@
+script:
+objects:
+ - class: Sprite
+   sprite: ./media/game/wallpapers/zombie_walk.png
+   layer: 0
+   position: [0, 0]
+ - class: Text
+   string: Job Screen
+   font: ./media/game/fonts/birth_of_a_hero.ttf
+   char_size: 30
