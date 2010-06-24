@@ -5,8 +5,7 @@
 namespace rt
 {
 	World::World(const std::string& iName)
-		: mName(iName), mRootObject(new WorldObject()), mIsLoading(false), mIsLoaded(true), mIsVisible(true), mShowAfterLoad(false), 
-		mProgress(0.0f), mObjectsData(0), mCurrentObjectIndex(0)
+		: mName(iName), mRootObject(new WorldObject()), mIsLoading(false), mIsLoaded(true), mIsVisible(true), mShowAfterLoad(false)
 	{
 		mRootObject->SetWorld(this);
 	}
@@ -85,20 +84,24 @@ namespace rt
 
 	void World::ProcessLoad()
 	{
- 		if(mCurrentObjectIndex < mObjectsData->size())
+ 		if(!mObjectsIterator->End())
  		{
-			WorldObject* worldObject = static_cast<WorldObject*>(ObjectsFactory::CreateObject((*mObjectsData)[mCurrentObjectIndex]["class"]));
-			(*mObjectsData)[mCurrentObjectIndex] >> worldObject;
+			std::string className;
+			mObjectsIterator->SafeGet("class", className);
 
-			AddObject(worldObject);
+			if(!className.empty())
+			{
+				WorldObject* worldObject = static_cast<WorldObject*>(ObjectsFactory::CreateObject(className));
+				mObjectsIterator->Node() >> worldObject;
 
-			++mCurrentObjectIndex;
-			mProgress = static_cast<float>(mCurrentObjectIndex) / static_cast<float>(mObjectsData->size());
+				AddObject(worldObject);
+			}
+
+			mObjectsIterator->Next();
 		}
 		else
 		{
-			mDocument.Clear();
-			mObjectsData = 0;
+			mDocumentIterator->Clear();
 
 			mIsLoaded = true;
 			mIsLoading = false;
@@ -128,19 +131,11 @@ namespace rt
 		{
 			mIsVisible = false;
 
-			std::ifstream inFile(iFileName.c_str());
+			mDocumentIterator.assign(new CollectionIterator(iFileName));
+			mObjectsIterator.assign(new CollectionIterator(mDocumentIterator->Extract("objects")));
 
-			if(inFile.is_open())
-			{
-				YAML::Parser parser(inFile);
-				parser.GetNextDocument(mDocument);
-
-				mObjectsData = &(mDocument["objects"]);
-
-				mShowAfterLoad = iShowAfterLoad;
-
-				mIsLoading = true;
-			}
+			mShowAfterLoad = iShowAfterLoad;
+			mIsLoading = true;
 		}
 	}
 
@@ -155,7 +150,6 @@ namespace rt
 		}
 
 		mIsLoaded = false;
-		mCurrentObjectIndex = 0;
 	}
 
 	void World::SetVisible( bool iVisible )
@@ -165,7 +159,7 @@ namespace rt
 
 	float World::GetProgress()
 	{
-		return mProgress;
+		return mObjectsIterator->Progress();
 	}
 
 	std::string World::GetName() const

@@ -36,7 +36,6 @@
 #include "angelscript/angelscript.h"
 
 #include "ReTechLogManager.h"
-#include "ReTechSerializer.h"
 #include "ReTechGameCore.h"
 #include "ReTechOption.h"
 #include "ReTechOptionsManager.h"

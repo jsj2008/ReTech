@@ -1,6 +1,8 @@
 #ifndef __rtWorld_H__
 #define __rtWorld_H__
 
+#include "ReTechCollectionIterator.h"
+
 namespace rt
 {
 	class World
@@ -48,11 +50,8 @@ namespace rt
 
 		bool				mShowAfterLoad;
 
-		float				mProgress;
-
-		YAML::Node			mDocument;
-		const YAML::Node*	mObjectsData;
-		int					mCurrentObjectIndex;
+		Poco::SharedPtr<CollectionIterator>	mDocumentIterator;
+		Poco::SharedPtr<CollectionIterator>	mObjectsIterator;
 	};
 }
 

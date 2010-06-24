@@ -1,4 +1,2 @@
-<sequence>
-  <frame file="./media/redist/sprites/actors/zombie_leg1.tga" />
-  <frame file="./media/redist/sprites/actors/zombie_leg2.tga" />
-</sequence>
+- file: ./media/redist/sprites/actors/zombie_leg1.tga
+- file: ./media/redist/sprites/actors/zombie_leg2.tga

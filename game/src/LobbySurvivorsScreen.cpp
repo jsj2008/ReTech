@@ -2,6 +2,6 @@
 #include "LobbySurvivorsScreen.h"
 
 LobbySurvivorsScreen::LobbySurvivorsScreen( GameManager* iManager )
-: GameScreen(iManager, "./data/worlds/lobby_survivors_screen.yaml")
+: GameScreen(iManager, "./data/worlds/lobby_survivors_screen.world")
 {
 }

@@ -276,11 +276,11 @@
 					Name="Serialization"
 					>
 					<File
-						RelativePath=".\src\ReTechDataChunk.cpp"
+						RelativePath=".\src\ReTechCollectionIterator.cpp"
 						>
 					</File>
 					<File
-						RelativePath=".\include\ReTechDataChunk.h"
+						RelativePath=".\include\ReTechCollectionIterator.h"
 						>
 					</File>
 					<File
@@ -297,14 +297,6 @@
 					</File>
 					<File
 						RelativePath=".\include\ReTechSerializeable.h"
-						>
-					</File>
-					<File
-						RelativePath=".\src\ReTechSerializer.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\include\ReTechSerializer.h"
 						>
 					</File>
 				</Filter>

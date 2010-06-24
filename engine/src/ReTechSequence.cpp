@@ -2,7 +2,7 @@
 #include "ReTechSequence.h"
 
 #include "ReTechResourceManager.h"
-#include "ReTechSerializer.h"
+#include "ReTechCollectionIterator.h"
 
 namespace rt
 {
@@ -27,25 +27,19 @@ namespace rt
 	{
 		if(!IsLoaded())
 		{
-			Serializer serializer;
-			serializer.SetFile(mResourceName);
+			CollectionIterator frames(mResourceName);
 
-			if(serializer.GetChunk().IsValid() && serializer.GetChunk().GetName() == "sequence")
+			while(!frames.End())
 			{
-				if(serializer.GetChunk().HasSubChunks())
-				{
-					std::vector<DataChunk> dataChunks;
+				std::string frameFile;
+				frames.SafeGet("file", frameFile);
 
-					serializer.GetChunk().GetSubChunks(dataChunks);
-					
-					for(std::vector<DataChunk>::iterator iter = dataChunks.begin(); iter != dataChunks.end(); ++iter)
-					{
-						if((*iter).GetName() == "frame")
-						{
-							mFrames.push_back(UResource(Image, (*iter).GetOption("file")));
-						}
-					}
+				if(!frameFile.empty())
+				{
+					mFrames.push_back(UResource(Image, frameFile));
 				}
+				
+				frames.Next();
 			}
 		}
 	}

@@ -30,16 +30,20 @@ namespace rt
 		SafeGet(iNode, "tag", mTag);
 
 		//load sub objects
-		const YAML::Node* subObjects = iNode.FindValue("objects");
-		if(subObjects)
+		CollectionIterator subObjects(iNode.FindValue("objects"));
+		while(!subObjects.End())
 		{
-			for(YAML::Iterator iter = subObjects->begin(); iter != subObjects->end(); ++iter)
+			std::string className;
+			subObjects.SafeGet("class", className);
+			if(!className.empty())
 			{
-				WorldObject* worldObject = static_cast<WorldObject*>(ObjectsFactory::CreateObject((*iter)["class"]));
-				*iter >> worldObject;
+				WorldObject* worldObject = static_cast<WorldObject*>(ObjectsFactory::CreateObject(className));
+				subObjects.Node() >> worldObject;
 
 				mPendingAttaches.push_back(worldObject);
 			}
+
+			subObjects.Next();
 		}
 	}
 
