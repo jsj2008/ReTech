@@ -23,7 +23,20 @@ namespace rt
 		template<class T>
 		void SafeGet(const std::string iKey, T& iValue)
 		{
-			const YAML::Node* value = (*mSectionNode)[mCurrentIndex].FindValue(iKey);
+			const YAML::Node* value = 0;
+
+			switch(mSectionNode->GetType())
+			{
+			case YAML::CT_MAP:
+				value = mSectionNode->FindValue(iKey);
+				break;
+			case YAML::CT_SEQUENCE:
+				value = (*mSectionNode)[mCurrentIndex].FindValue(iKey);
+				break;
+			case YAML::CT_SCALAR:
+				mSectionNode->GetScalar(iValue);
+				break;
+			}		
 
 			if(value)
 			{
@@ -35,7 +48,7 @@ namespace rt
 		void SafeGet(const std::string iKey, fastdelegate::FastDelegate1<const T&, void> iSetter)
 		{
 			typename T tempValue;
-			SafeGet((*mSectionNode)[mCurrentIndex], iKey, tempValue);
+			SafeGet(iKey, tempValue);
 
 			iSetter(tempValue);
 		}
@@ -44,7 +57,7 @@ namespace rt
 		void SafeGet(const std::string iKey, fastdelegate::FastDelegate1<T, void> iSetter)
 		{
 			typename T tempValue;
-			SafeGet((*mSectionNode)[mCurrentIndex], iKey, tempValue);
+			SafeGet(iKey, tempValue);
 
 			iSetter(tempValue);
 		}

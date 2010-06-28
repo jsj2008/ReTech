@@ -101,7 +101,8 @@ namespace rt
 		}
 		else
 		{
-			mDocumentIterator->Clear();
+			mObjectsIterator.assign(0);
+			mDocumentIterator.assign(0);
 
 			mIsLoaded = true;
 			mIsLoading = false;

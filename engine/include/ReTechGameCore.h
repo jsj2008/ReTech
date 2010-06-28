@@ -38,7 +38,7 @@ namespace rt
 		Poco::SharedPtr<sf::RenderWindow>	mMainWindow;
 		Poco::SharedPtr<sf::View>			mMainView;
 
-		OptionsManager	mOptionsManager;
+		OptionsManager		mOptionsManager;
 
 		RenderManager		mRender;
 		InputManager		mInput;

@@ -9,6 +9,7 @@
 *.suo
 /dependencies
 /libraries/code
+/libraries/external
 /game/build
 /engine/build
 /engine/lib
