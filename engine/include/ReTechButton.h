@@ -7,7 +7,7 @@
 
 namespace rt
 {
-	class Button : public WorldObject
+	class Button : public Sprite
 	{
 	public:
 		Button();
@@ -16,14 +16,12 @@ namespace rt
 		virtual void UnSerialize(const YAML::Node& iNode);
 		virtual void Serialize(YAML::Emitter& iEmitter) const;
 
-		virtual void OnAddToWorld();
-
 		bool IsInside(const sf::Vector2f& iPoint);
 		bool HandleEvent(const sf::Event& iEvent);
 
 	protected:
-		WorldObject*	mNormal;
-		WorldObject*	mHover;
+		std::string		mNormalResource;
+		std::string		mHoverResource;
 
 		std::string		mOnPressExec;
 

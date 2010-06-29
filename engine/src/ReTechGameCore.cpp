@@ -5,7 +5,6 @@
 #include "ReTechFont.h"
 #include "ReTechSequence.h"
 
-#include "ReTechContainer.h"
 #include "ReTechSprite.h"
 #include "ReTechAnimation.h"
 #include "ReTechButton.h"
@@ -47,7 +46,6 @@ namespace rt
 		URegisterObject(Image);
 		URegisterObject(Font);
 		URegisterObject(Sequence);
-		URegisterObject(Container);
 		URegisterObject(Sprite);
 		URegisterObject(Animation);
 		URegisterObject(Button);

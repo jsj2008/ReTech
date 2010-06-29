@@ -2,6 +2,8 @@
 call "%VS90COMNTOOLS%vsvars32.bat"
 
 echo Update libraries...
+echo Update boost...
+svn update code\boost
 echo Update POCO...
 svn update code\POCO
 echo Update box2d...
@@ -58,6 +60,8 @@ md ..\dependencies\include
 rem del ..\bin\*.dll /q
 
 echo Copy includes...
+md ..\dependencies\include\boost
+xcopy code\boost\boost\* ..\dependencies\include\boost\ /s /q
 md ..\dependencies\include\POCO
 xcopy code\POCO\Foundation\include\POCO\* ..\dependencies\include\POCO\ /s /q
 xcopy code\POCO\XML\include\POCO\* ..\dependencies\include\POCO\ /s /q

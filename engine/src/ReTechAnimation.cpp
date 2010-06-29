@@ -21,7 +21,7 @@ namespace rt
 
 		SafeGet(iNode, "file", animationFile);
 
-		mAnimation.assign(new FrameAnimation(animationFile, static_cast<sf::Sprite*>(mDrawable.get())));
+		mAnimation.assign(new FrameAnimation(animationFile, &mSprite));
 	}
 
 	void Animation::Serialize( YAML::Emitter& iEmitter ) const

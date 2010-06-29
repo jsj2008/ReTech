@@ -5,32 +5,19 @@
 namespace rt
 {
 	World::World(const std::string& iName)
-		: mName(iName), mRootObject(new WorldObject()), mIsLoading(false), mIsLoaded(true), mIsVisible(true), mShowAfterLoad(false)
+		: mName(iName), mIsLoading(false), mIsLoaded(true), mIsVisible(true), mShowAfterLoad(false)
 	{
-		mRootObject->SetWorld(this);
 	}
 
 	World::~World()
 	{
-		mRootObject.assign(0);
 	}
 
-	void World::AddObject( WorldObject* iObject, WorldObject* iParent )
+	void World::AddObject( WorldObject* iObject)
 	{
 		iObject->SetWorld(this);
 
-		if(iParent != 0)
-		{
-			iParent->Attach(iObject);
-		}
-		else
-		{
-			mRootObject->Attach(iObject);
-		}
-
 		mObjects.push_back(iObject);
-
-		iObject->OnAddToWorld();
 	}
 
 	void World::DestroyObject( WorldObject* iObject )

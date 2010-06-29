@@ -11,7 +11,6 @@
 #include "ReTechLogManager.h"
 #include "ReTechConsoleManager.h"
 #include "ReTechWorldsManager.h"
-#include "ReTechScriptManager.h"
 
 namespace rt
 {
@@ -46,7 +45,6 @@ namespace rt
 		LogManager			mLog;
 		ConsoleManager		mExec;
 		WorldsManager		mWorlds;
-		ScriptManager		mScript;
 
 		int mRandomizeSeed;
 

@@ -14,7 +14,7 @@ namespace rt
 		World(const std::string& iName);
 		~World();
 
-		void AddObject(WorldObject* iObject, WorldObject* iParent = 0);
+		void AddObject(WorldObject* iObject);
 		void DestroyObject(WorldObject* iObject);
 
 		void Update(float iFrameTime);
@@ -41,8 +41,6 @@ namespace rt
 		ObjectsManagedVec	mObjects;
 
 		ObjectsVec			mVisibleObjectsCache;
-
-		Poco::SharedPtr<WorldObject> mRootObject;	
 
 		bool				mIsLoading;
 		bool				mIsLoaded;

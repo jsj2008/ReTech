@@ -5,7 +5,6 @@
 namespace rt
 {
 	Text::Text()
-		: Drawable(new sf::Text())
 	{
 
 	}
@@ -17,7 +16,7 @@ namespace rt
 
 	void Text::UnSerialize( const YAML::Node& iNode )
 	{
-		Drawable::UnSerialize(iNode);
+		WorldObject::UnSerialize(iNode);
 
 		SafeGet(iNode, "string", fastdelegate::MakeDelegate(this, &Text::SetString));
 		SafeGet(iNode, "font", fastdelegate::MakeDelegate(this, &Text::SetFont));
@@ -29,14 +28,24 @@ namespace rt
 
 	}
 
+	void Text::Draw( sf::RenderWindow* iRenderWindow )
+	{
+		mText.SetPosition(GetPosition());
+		mText.SetScale(GetScale());
+		mText.SetOrigin(GetOrigin());
+		mText.SetRotation(GetRotation());
+
+		iRenderWindow->Draw(mText);
+	}
+
 	void Text::SetString( const std::string& iString )
 	{
-		static_cast<sf::Text*>(mDrawable.get())->SetString(iString);
+		mText.SetString(iString);
 	}
 
 	void Text::SetSize( int iSize )
 	{
-		static_cast<sf::Text*>(mDrawable.get())->SetCharacterSize(iSize);
+		mText.SetCharacterSize(iSize);
 	}
 
 	void Text::SetFont( const std::string& iResourceName )
@@ -44,6 +53,6 @@ namespace rt
 		Font* font = UResource(Font, iResourceName);
 		font->Load();
 
-		static_cast<sf::Text*>(mDrawable.get())->SetFont(*font);
+		mText.SetFont(*font);
 	}
 }

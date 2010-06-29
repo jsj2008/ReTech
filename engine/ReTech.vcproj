@@ -165,22 +165,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\src\ReTechContainer.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\include\ReTechContainer.h"
-					>
-				</File>
-				<File
-					RelativePath=".\src\ReTechDrawable.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\include\ReTechDrawable.h"
-					>
-				</File>
-				<File
 					RelativePath=".\src\ReTechSprite.cpp"
 					>
 				</File>
@@ -248,6 +232,10 @@
 					RelativePath=".\include\ReTechFrameAnimation.h"
 					>
 				</File>
+			</Filter>
+			<Filter
+				Name="Primitives"
+				>
 			</Filter>
 		</Filter>
 		<Filter
@@ -421,18 +409,6 @@
 					</File>
 					<File
 						RelativePath=".\include\ReTechRenderManager.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="ScriptManager"
-					>
-					<File
-						RelativePath=".\src\ReTechScriptManager.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\include\ReTechScriptManager.h"
 						>
 					</File>
 				</Filter>

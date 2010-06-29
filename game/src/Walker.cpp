@@ -15,5 +15,5 @@ Walker::~Walker()
 
 void Walker::Update( float iFrameTime )
 {
-	SetWorldPosition(GetWorldPosition() + sf::Vector2f(mSpeed * iFrameTime, 0));
+	//SetWorldPosition(GetWorldPosition() + sf::Vector2f(mSpeed * iFrameTime, 0));
 }

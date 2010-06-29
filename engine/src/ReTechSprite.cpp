@@ -6,7 +6,6 @@
 namespace rt
 {
 	Sprite::Sprite()
-		: Drawable(new sf::Sprite())
 	{
 		
 	}
@@ -18,7 +17,7 @@ namespace rt
 
 	void Sprite::UnSerialize( const YAML::Node& iNode )
 	{
-		Drawable::UnSerialize(iNode);
+		WorldObject::UnSerialize(iNode);
 
 		SafeGet(iNode, "sprite", fastdelegate::MakeDelegate(this, &Sprite::SetResource));
 	}
@@ -28,13 +27,24 @@ namespace rt
 
 	}
 
+	void Sprite::Draw( sf::RenderWindow* iRenderWindow )
+	{
+		mSprite.SetPosition(GetPosition());
+		mSprite.SetScale(GetScale());
+		mSprite.SetOrigin(GetOrigin());
+		mSprite.SetRotation(GetRotation());
+
+		iRenderWindow->Draw(mSprite);
+	}
+
 	void Sprite::SetResource( const std::string& iResourceName )
 	{
 		Image* image = UResource(Image, iResourceName);
-		image->Load();
 
-		static_cast<sf::Sprite*>(mDrawable.get())->SetImage(*image);
-
-		SetWorldSize(static_cast<sf::Sprite*>(mDrawable.get())->GetSize());
+		if(image)
+		{
+			image->Load();
+			mSprite.SetImage(*image);
+		}
 	}
 }

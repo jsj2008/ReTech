@@ -8,7 +8,6 @@
 	#pragma comment(lib, "sfml-network-s-d.lib")
 	#pragma comment(lib, "sfml-system-s-d.lib")
 	#pragma comment(lib, "sfml-window-s-d.lib")
-	#pragma comment(lib, "angelscriptd.lib")
 	#pragma comment(lib, "yamlcppd.lib")
 #else
 	#pragma comment(lib, "Iphlpapi.lib")
@@ -17,7 +16,6 @@
 	#pragma comment(lib, "sfml-network-s.lib")
 	#pragma comment(lib, "sfml-system-s.lib")
 	#pragma comment(lib, "sfml-window-s.lib")
-	#pragma comment(lib, "angelscript.lib")
 	#pragma comment(lib, "yamlcpp.lib")
 #endif
 

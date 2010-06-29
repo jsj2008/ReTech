@@ -33,7 +33,6 @@
 
 #include "yaml-cpp/yaml.h"
 #include "fastdelegates/fastdelegate.h"
-#include "angelscript/angelscript.h"
 
 #include "ReTechLogManager.h"
 #include "ReTechGameCore.h"

@@ -5,7 +5,7 @@
 namespace rt
 {
 	Button::Button()
-		: mIsMouseOver(false), mNormal(0), mHover(0)
+		: mIsMouseOver(false)
 	{
 		mHandler = InputManager::MakeHandler(&Button::HandleEvent, this);
 		InputManager::Get()->RegisterHandler(&mHandler);
@@ -21,6 +21,11 @@ namespace rt
 		WorldObject::UnSerialize(iNode);
 
 		SafeGet(iNode, "on_press", mOnPressExec);
+
+		SafeGet(iNode, "normal", mNormalResource);
+		SafeGet(iNode, "hover", mHoverResource);
+
+		SetResource(mNormalResource);
 	}
 
 	void Button::Serialize( YAML::Emitter& iEmitter ) const
@@ -28,19 +33,9 @@ namespace rt
 
 	}
 
-	void Button::OnAddToWorld()
-	{
-		WorldObject::OnAddToWorld();
-
-		mNormal = GetSubObjectByTag("normal");
-		mHover = GetSubObjectByTag("hover");
-
-		mHover->SetVisible(false);
-	}
-
 	bool Button::IsInside(const sf::Vector2f& iPoint)
 	{
-		return sf::FloatRect(GetInheritedWorldPosition(), GetWorldSize()).Contains(iPoint);
+		return sf::FloatRect(GetPosition(), mSprite.GetSize()).Contains(iPoint);
 	}
 
 	bool Button::HandleEvent(const sf::Event& iEvent)
@@ -53,13 +48,11 @@ namespace rt
 
 				if(mIsMouseOver)
 				{
-					mNormal->SetVisible(false);
-					mHover->SetVisible(true);
+					SetResource(mHoverResource);
 				}
 				else
 				{
-					mNormal->SetVisible(true);
-					mHover->SetVisible(false);
+					SetResource(mNormalResource);
 				}
 			}
 		}

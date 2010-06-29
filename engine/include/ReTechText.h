@@ -1,11 +1,11 @@
 #ifndef __rtText_H__
 #define __rtText_H__
 
-#include "ReTechDrawable.h"
+#include "ReTechWorldObject.h"
 
 namespace rt
 {
-	class Text : public Drawable
+	class Text : public WorldObject
 	{
 	public:
 		Text();
@@ -14,9 +14,14 @@ namespace rt
 		virtual void UnSerialize(const YAML::Node& iNode);
 		virtual void Serialize(YAML::Emitter& iEmitter) const;
 
+		virtual void Draw(sf::RenderWindow* iRenderWindow);
+
 		void SetString(const std::string& iString);
 		void SetSize(int iSize);
 		void SetFont(const std::string& iResourceName);
+
+		protected:
+			sf::Text mText;
 	};
 }
 

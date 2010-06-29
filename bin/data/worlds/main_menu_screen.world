@@ -4,31 +4,13 @@ objects:
    sprite: ./media/game/wallpapers/zombie_walk.png
    layer: 0
    position: [0, 0]
+ - class: Text
+   string: Main menu
+   font: ./media/game/fonts/birth_of_a_hero.ttf
+   char_size: 30
  - class: Button
    layer: 1
    position: [150, 300]
-   size: [150, 25]
    on_press: activate_lobby_survivors
-   objects:
-    - class: Container
-      tag: normal
-      objects:
-       - class: Sprite
-         tag: rect
-         sprite: ./media/game/buttons/new_game.png
-       - class: Text
-         string: New Game
-         font: ./media/game/fonts/birth_of_a_hero.ttf
-         char_size: 20
-         position: [40, 0] 
-    - class: Container
-      tag: hover
-      objects:
-       - class: Sprite
-         tag: rect
-         sprite: ./media/game/buttons/new_game.png
-       - class: Text
-         string: New Game
-         font: ./media/game/fonts/birth_of_a_hero.ttf
-         char_size: 25
-         position: [38, 0]
+   normal: ./media/game/buttons/new_game.png
+   hover: ./media/game/buttons/new_game.png
