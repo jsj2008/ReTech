@@ -9,6 +9,7 @@
 #include "ReTechAnimation.h"
 #include "ReTechButton.h"
 #include "ReTechText.h"
+#include "ReTechParticleSystem.h"
 
 URegisterSingleton(GameCore)
 
@@ -39,6 +40,7 @@ namespace rt
 		mMainWindow->SetView(*mMainView);
 
 		mRandomizeSeed = (int)time(0);
+		SPK::randomSeed = mRandomizeSeed;
 
 		mLog.Initialize();
 
@@ -50,6 +52,7 @@ namespace rt
 		URegisterObject(Animation);
 		URegisterObject(Button);
 		URegisterObject(Text);
+		URegisterObject(ParticleSystem);
 
 		//Register resource classes
 		mResource.RegisterExtension("tga", "Image");

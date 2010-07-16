@@ -1,7 +1,7 @@
 script:
 objects:
  - class: Sprite
-   sprite: ./media/game/wallpapers/zombie_walk.png
+   sprite: ./media/game/wallpapers/zombie_walk1.png
    layer: 0
    position: [0, 0]
  - class: Text
@@ -14,3 +14,6 @@ objects:
    on_press: activate_lobby_survivors
    normal: ./media/game/buttons/new_game.png
    hover: ./media/game/buttons/new_game.png
+ - class: ParticleSystem
+   layer: 2
+   position: [250, 250]

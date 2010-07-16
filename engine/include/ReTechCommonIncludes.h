@@ -19,17 +19,14 @@
 #include "poco/HashMap.h"
 #include "poco/StringTokenizer.h"
 
-#include "poco/dom/Node.h"
-#include "POCO/dom/Document.h"
-#include "poco/dom/DOMParser.h"
-#include "poco/dom/NamedNodeMap.h"
-
 #include "SFML/Audio.hpp"
 #include "SFML/Graphics.hpp"
 #include "SFML/Network.hpp"
 #include "SFML/System.hpp"
 #include "SFML/Window.hpp"
 
+#include "spark/SPK.h"
+#include "spark/SPK_SFML.h"
 
 #include "yaml-cpp/yaml.h"
 #include "fastdelegates/fastdelegate.h"
