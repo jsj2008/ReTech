@@ -4,6 +4,7 @@
 #include "ReTechImage.h"
 #include "ReTechFont.h"
 #include "ReTechSequence.h"
+#include "ReTechParticle.h"
 
 #include "ReTechSprite.h"
 #include "ReTechAnimation.h"
@@ -48,6 +49,7 @@ namespace rt
 		URegisterObject(Image);
 		URegisterObject(Font);
 		URegisterObject(Sequence);
+		URegisterObject(Particle);
 		URegisterObject(Sprite);
 		URegisterObject(Animation);
 		URegisterObject(Button);
@@ -59,6 +61,7 @@ namespace rt
 		mResource.RegisterExtension("png", "Image");
 		mResource.RegisterExtension("ttf", "Font");
 		mResource.RegisterExtension("seq", "Sequence");
+		mResource.RegisterExtension("ps", "Particle");
 
 		mResource.CreateResources();
 

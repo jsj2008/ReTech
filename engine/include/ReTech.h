@@ -18,6 +18,7 @@
 
 #include "ReTechImage.h"
 #include "ReTechSequence.h"
+#include "ReTechParticle.h"
 
 #include "ReTechAnimation.h"
 #include "ReTechSprite.h"

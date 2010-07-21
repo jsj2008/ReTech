@@ -209,6 +209,14 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\ReTechParticle.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\ReTechParticle.h"
+					>
+				</File>
+				<File
 					RelativePath=".\src\ReTechSequence.cpp"
 					>
 				</File>

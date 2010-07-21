@@ -17,9 +17,10 @@ namespace rt
 		virtual void Update(float iFrameTime);
 		virtual void Draw(sf::RenderWindow* iRenderWindow);
 
+		void SetResource(const std::string& iResourceName);
+
 	protected:
 		SPK::SFML::SFMLSystem* mSystem;
-		SPK::SFML::SFMLSystem* mSystem2;
 	};
 }
 
