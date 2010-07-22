@@ -24,6 +24,17 @@ namespace rt
 		}
 
 		template<class T>
+		void SafeGet(const YAML::Node& iNode, const std::string iKey, T* iValue)
+		{
+			const YAML::Node* value = iNode.FindValue(iKey);
+
+			if(value)
+			{
+				*value >> iValue;
+			}
+		}
+
+		template<class T>
 		void SafeGet(const YAML::Node& iNode, const std::string iKey, fastdelegate::FastDelegate1<const T&, void> iSetter)
 		{
 			typename T tempValue;
@@ -59,5 +70,8 @@ YAML::Emitter& operator<<( YAML::Emitter& iEmitter, const T* iSerializeable )
 
 void operator>>( const YAML::Node& iNode, sf::Vector2f& iVector );
 YAML::Emitter& operator<<( YAML::Emitter& iEmitter, const sf::Vector2f& iVector );
+
+void operator>>( const YAML::Node& iNode, SPK::Vector3D& iVector );
+YAML::Emitter& operator<<( YAML::Emitter& iEmitter, const SPK::Vector3D& iVector );
 
 #endif

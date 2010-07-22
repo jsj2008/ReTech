@@ -28,3 +28,18 @@ YAML::Emitter& operator<<( YAML::Emitter& iEmitter, const sf::Vector2f& iVector 
 
 	return iEmitter;
 }
+
+void operator>>( const YAML::Node& iNode, SPK::Vector3D& iVector )
+{
+	iNode[0] >> iVector.x;
+	iNode[1] >> iVector.y;
+	iNode[2] >> iVector.z;
+}
+
+YAML::Emitter& operator<<( YAML::Emitter& iEmitter, const SPK::Vector3D& iVector )
+{
+	iEmitter << YAML::Flow;
+	iEmitter << YAML::BeginSeq << iVector.x << iVector.y  << iVector.z << YAML::EndSeq;
+
+	return iEmitter;
+}

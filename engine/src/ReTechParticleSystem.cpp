@@ -46,7 +46,6 @@ namespace rt
 		{
 			iRenderWindow->SaveGLStates();
 			iRenderWindow->Draw(*mSystem);
-			iRenderWindow->Draw(*mSystem);
 			iRenderWindow->RestoreGLStates();
 		}
 	}

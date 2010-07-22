@@ -35,7 +35,17 @@ namespace rt
 
 	const YAML::Node& CollectionIterator::Node()
 	{
-		return (*mSectionNode)[mCurrentIndex];
+		switch(mSectionNode->GetType())
+		{
+		case YAML::CT_MAP:
+			return (*mSectionNode);
+			break;
+		case YAML::CT_SEQUENCE:
+			return (*mSectionNode)[mCurrentIndex];
+			break;
+		}
+
+		return (*mSectionNode);
 	}
 
 	float CollectionIterator::Progress()

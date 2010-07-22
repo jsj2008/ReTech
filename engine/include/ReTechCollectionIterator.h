@@ -33,9 +33,6 @@ namespace rt
 			case YAML::CT_SEQUENCE:
 				value = (*mSectionNode)[mCurrentIndex].FindValue(iKey);
 				break;
-			case YAML::CT_SCALAR:
-				mSectionNode->GetScalar(iValue);
-				break;
 			}		
 
 			if(value)
