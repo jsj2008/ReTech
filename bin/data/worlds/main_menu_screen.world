@@ -5,6 +5,7 @@ objects:
    layer: 0
    position: [0, 0]
  - class: Text
+   layer: 1
    string: Main menu
    font: ./media/game/fonts/birth_of_a_hero.ttf
    char_size: 30

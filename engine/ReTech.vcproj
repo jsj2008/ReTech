@@ -296,6 +296,10 @@
 						>
 					</File>
 					<File
+						RelativePath=".\include\ReTechProperty.h"
+						>
+					</File>
+					<File
 						RelativePath=".\src\ReTechSerializeable.cpp"
 						>
 					</File>

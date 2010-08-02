@@ -8,23 +8,12 @@ namespace rt
 	ParticleSystem::ParticleSystem()
 		: mSystem(0)
 	{
+		CreateFuncProperty("particle", fastdelegate::MakeDelegate(this, &ParticleSystem::SetResource), fastdelegate::MakeDelegate(this, &ParticleSystem::GetResource));
 	}
 
 	ParticleSystem::~ParticleSystem()
 	{
 		SPK_Destroy(mSystem);
-	}
-
-	void ParticleSystem::UnSerialize( const YAML::Node& iNode )
-	{
-		WorldObject::UnSerialize(iNode);
-
-		SafeGet(iNode, "particle", fastdelegate::MakeDelegate(this, &ParticleSystem::SetResource));
-	}
-
-	void ParticleSystem::Serialize( YAML::Emitter& iEmitter ) const
-	{
-
 	}
 
 	void ParticleSystem::Update( float iFrameTime )
@@ -52,11 +41,18 @@ namespace rt
 
 	void ParticleSystem::SetResource( const std::string& iResourceName )
 	{
+		mResourceName = iResourceName;
+
 		Particle* resourceParticle = UResource(Particle, iResourceName);
 		if(resourceParticle)
 		{
 			resourceParticle->Load();
 			mSystem = SPK_Copy(SPK::SFML::SFMLSystem, resourceParticle->GetSystemID());
 		}
+	}
+
+	const std::string& ParticleSystem::GetResource()
+	{
+		return mResourceName;
 	}
 }

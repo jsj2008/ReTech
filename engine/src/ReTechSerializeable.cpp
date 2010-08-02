@@ -43,3 +43,10 @@ YAML::Emitter& operator<<( YAML::Emitter& iEmitter, const SPK::Vector3D& iVector
 
 	return iEmitter;
 }
+
+void operator>>( const YAML::Node& iNode, sf::String& iString )
+{
+	std::string temp;
+	iNode >> temp;
+	iString = temp;
+}

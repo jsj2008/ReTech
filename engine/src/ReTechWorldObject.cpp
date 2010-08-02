@@ -2,11 +2,16 @@
 #include "ReTechWorldObject.h"
 #include "ReTechWorld.h"
 
+#include "ReTechProperty.h"
+
 namespace rt
 {
 	WorldObject::WorldObject()
 		: mVisible(true), mEnabled(true), mLayer(0), mWorld(0)
 	{
+		CreateFuncProperty("position", fastdelegate::FastDelegate1<const sf::Vector2f&>(this, &WorldObject::SetPosition), fastdelegate::MakeDelegate(this, &WorldObject::GetPosition));
+		CreateVarProperty("layer", mLayer);
+		CreateVarProperty("tag", mTag);
 	}
 
 	WorldObject::~WorldObject()
@@ -15,12 +20,10 @@ namespace rt
 
 	void WorldObject::UnSerialize( const YAML::Node& iNode )
 	{
-		sf::Vector2f position;
-		SafeGet(iNode, "position", position);
-		SetPosition(position);
-
-		SafeGet(iNode, "layer", mLayer);
-		SafeGet(iNode, "tag", mTag);
+		for(SerializeableVecIter iter = mProperties.begin(); iter != mProperties.end(); ++iter)
+		{
+			(*iter)->UnSerialize(iNode);
+		}
 	}
 
 	void WorldObject::Serialize( YAML::Emitter& iEmitter ) const
@@ -96,5 +99,10 @@ namespace rt
 	void WorldObject::Render( sf::RenderTarget& target, sf::Renderer& renderer ) const
 	{
 
+	}
+
+	void WorldObject::AddProperty( Serializeable* iProperty )
+	{
+		mProperties.push_back(iProperty);
 	}
 }

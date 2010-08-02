@@ -7,22 +7,10 @@ namespace rt
 {
 	Sprite::Sprite()
 	{
-		
+		CreateFuncProperty("sprite", fastdelegate::MakeDelegate(this, &Sprite::SetResource), fastdelegate::MakeDelegate(this, &Sprite::GetResource));
 	}
 
 	Sprite::~Sprite()
-	{
-
-	}
-
-	void Sprite::UnSerialize( const YAML::Node& iNode )
-	{
-		WorldObject::UnSerialize(iNode);
-
-		SafeGet(iNode, "sprite", fastdelegate::MakeDelegate(this, &Sprite::SetResource));
-	}
-
-	void Sprite::Serialize( YAML::Emitter& iEmitter ) const
 	{
 
 	}
@@ -39,6 +27,8 @@ namespace rt
 
 	void Sprite::SetResource( const std::string& iResourceName )
 	{
+		mResourceName = iResourceName;
+
 		Image* image = UResource(Image, iResourceName);
 
 		if(image)
@@ -46,5 +36,10 @@ namespace rt
 			image->Load();
 			mSprite.SetImage(*image);
 		}
+	}
+
+	const std::string& Sprite::GetResource()
+	{
+		return  mResourceName;
 	}
 }
