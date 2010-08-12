@@ -219,7 +219,7 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="Screens"
+			Name="Screen"
 			>
 			<File
 				RelativePath=".\src\GameScreen.cpp"
@@ -229,26 +229,6 @@
 				RelativePath=".\include\GameScreen.h"
 				>
 			</File>
-			<Filter
-				Name="Menu"
-				>
-				<File
-					RelativePath=".\src\LobbyDwarfsScreen.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\include\LobbyDwarfsScreen.h"
-					>
-				</File>
-				<File
-					RelativePath=".\src\MainMenuScreen.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\include\MainMenuScreen.h"
-					>
-				</File>
-			</Filter>
 		</Filter>
 		<Filter
 			Name="Objects"

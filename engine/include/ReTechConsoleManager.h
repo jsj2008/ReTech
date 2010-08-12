@@ -11,9 +11,10 @@ namespace rt
 		class BaseExec
 		{
 		public:
-			BaseExec(bool iHasArgs)
-				: mHasArgs(iHasArgs){}
+			BaseExec(bool iHasArgs, bool iRefArg)
+				: mHasArgs(iHasArgs), mRefArg(iRefArg){}
 			bool mHasArgs;
+			bool mRefArg;
 		};
 
 		template<class T>
@@ -21,7 +22,7 @@ namespace rt
 		{
 		public:
 			ExecHolder(fastdelegate::FastDelegate1<T> iFunction)
-				: mFunction(iFunction), BaseExec(true){}
+				: mFunction(iFunction), BaseExec(true, false){}
 
 			fastdelegate::FastDelegate1<T>	mFunction;
 		};
@@ -31,7 +32,7 @@ namespace rt
 		{
 		public:
 			ExecHolder(fastdelegate::FastDelegate0<> iFunction)
-				: mFunction(iFunction), BaseExec(false){}
+				: mFunction(iFunction), BaseExec(false, false){}
 
 			fastdelegate::FastDelegate0<>	mFunction;
 		};
@@ -50,7 +51,14 @@ namespace rt
 		template<class T, class C>
 		void RegisterExec(const std::string& iExecName, void(C::*iFunc)(T), C* iObject)
 		{
-			mExecs[iExecName].assign(new ExecHolder<T>(fastdelegate::MakeDelegate(iObject, iFunc)));
+			mExecs[iExecName].assign(new ExecHolder<T>(fastdelegate::FastDelegate1<T>(iObject, iFunc)));
+		}
+
+		template<class T, class C>
+		void RegisterExec(const std::string& iExecName, void(C::*iFunc)(T&), C* iObject)
+		{
+			mExecs[iExecName].assign(new ExecHolder<T&>(fastdelegate::FastDelegate1<T&>(iObject, iFunc)));
+			mExecs[iExecName]->mRefArg = true;
 		}
 
 		void RunExec(const std::string& iExecName)
@@ -66,7 +74,14 @@ namespace rt
 		{
 			if(mExecs.find(iExecName) != mExecs.end())
 			{
-				static_cast<ExecHolder<T>* >(mExecs[iExecName].get())->mFunction(iValue);
+				if(mExecs[iExecName]->mRefArg)
+				{
+					static_cast<ExecHolder<T&>* >(mExecs[iExecName].get())->mFunction(iValue);
+				}
+				else
+				{
+					static_cast<ExecHolder<T>* >(mExecs[iExecName].get())->mFunction(iValue);
+				}
 			}
 		}
 

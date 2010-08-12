@@ -13,9 +13,6 @@ public:
 
 	virtual void Update(float iFrameTime);
 
-// 	void ActivateMainMenu();
-// 	void ActivateLobbyDwarfs();
-
 	void ChangeScreen(const std::string& iScreenName);
 
 protected:
