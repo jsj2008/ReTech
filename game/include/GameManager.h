@@ -13,12 +13,8 @@ public:
 
 	virtual void Update(float iFrameTime);
 
-	void ActivateMainMenu();
-	void ActivateLobbySurvivors();
-	void ActivateLobbyArsenal();
-	void ActivateLobbyJob();
-	void ActivateLobbyTactics();
-	void ActivateLobbyWorld();
+// 	void ActivateMainMenu();
+// 	void ActivateLobbyDwarfs();
 
 	void ChangeScreen(const std::string& iScreenName);
 

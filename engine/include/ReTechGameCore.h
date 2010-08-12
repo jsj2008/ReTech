@@ -33,7 +33,12 @@ namespace rt
 		sf::RenderWindow*	GetMainWindow();
 		sf::View*			GetMainView();
 
+		void SetFullscreen(bool iIsFullscreen);
+		void ToggleFullscreen();
+
 	protected:
+		void recreateWindow();
+
 		Poco::SharedPtr<sf::RenderWindow>	mMainWindow;
 		Poco::SharedPtr<sf::View>			mMainView;
 
@@ -46,9 +51,10 @@ namespace rt
 		ConsoleManager		mExec;
 		WorldsManager		mWorlds;
 
-		int mRandomizeSeed;
+		bool				mIsFullscreen;
 
-		static int mLastId;
+		int					mRandomizeSeed;
+		static int			mLastId;
 	};
 }
 

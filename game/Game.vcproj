@@ -230,8 +230,16 @@
 				>
 			</File>
 			<Filter
-				Name="MainMenu"
+				Name="Menu"
 				>
+				<File
+					RelativePath=".\src\LobbyDwarfsScreen.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\LobbyDwarfsScreen.h"
+					>
+				</File>
 				<File
 					RelativePath=".\src\MainMenuScreen.cpp"
 					>
@@ -241,66 +249,14 @@
 					>
 				</File>
 			</Filter>
-			<Filter
-				Name="Lobby"
-				>
-				<File
-					RelativePath=".\src\LobbyArsenalScreen.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\include\LobbyArsenalScreen.h"
-					>
-				</File>
-				<File
-					RelativePath=".\src\LobbyJobScreen.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\include\LobbyJobScreen.h"
-					>
-				</File>
-				<File
-					RelativePath=".\src\LobbySurvivorsScreen.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\include\LobbySurvivorsScreen.h"
-					>
-				</File>
-				<File
-					RelativePath=".\src\LobbyTacticsScreen.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\include\LobbyTacticsScreen.h"
-					>
-				</File>
-				<File
-					RelativePath=".\src\LobbyWorldScreen.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\include\LobbyWorldScreen.h"
-					>
-				</File>
-			</Filter>
 		</Filter>
 		<Filter
 			Name="Objects"
 			>
-			<Filter
-				Name="Zombies"
-				>
-				<File
-					RelativePath=".\src\Walker.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\include\Walker.h"
-					>
-				</File>
-			</Filter>
+		</Filter>
+		<Filter
+			Name="GameRules"
+			>
 		</Filter>
 		<File
 			RelativePath=".\src\Game.cpp"

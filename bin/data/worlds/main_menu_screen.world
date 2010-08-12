@@ -1,20 +1,32 @@
 script:
 objects:
  - class: Sprite
-   sprite: ./media/game/wallpapers/zombie_walk.png
+   sprite: ./media/game/wallpapers/main_menu_back.png
    layer: 0
    position: [0, 0]
- - class: Text
-   string: Main menu
-   font: ./media/game/fonts/birth_of_a_hero.ttf
-   char_size: 30
  - class: Button
    layer: 1
-   position: [150, 300]
-   on_press: activate_lobby_survivors
-   normal: ./media/game/buttons/new_game.png
-   hover: ./media/game/buttons/new_game.png
- - class: ParticleSystem
-   particle: ./media/game/particles/dummy.ps
-   layer: 2
-   position: [250, 250]
+   position: [310, 320]
+   on_press: change_screen lobby_dwarfs
+   normal: ./media/game/buttons/new_game_normal.png
+   hover: ./media/game/buttons/new_game_hover.png
+ - class: Button
+   layer: 1
+   position: [323, 401]
+   on_press: activate_lobby_dwarfs
+   normal: ./media/game/buttons/continue_normal.png
+   hover: ./media/game/buttons/continue_hover.png
+ - class: Button
+   layer: 1
+   position: [344, 472]
+   on_press: activate_lobby_dwarfs
+   normal: ./media/game/buttons/credits_normal.png
+   hover: ./media/game/buttons/credits_hover.png
+ - class: Button
+   layer: 1
+   position: [382, 552]
+   on_press: quit
+   normal: ./media/game/buttons/exit_normal.png
+   hover: ./media/game/buttons/exit_hover.png
+
+

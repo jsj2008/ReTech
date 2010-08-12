@@ -27,7 +27,7 @@ namespace rt
 		template<class T>
 		static InputHandler MakeHandler(bool(T::*iFunc)(const sf::Event&), T* iObject)
 		{
-			return fastdelegate::MakeDelegate(iObject, iFunc);//boost::bind(iFunc, iObject, _1);
+			return fastdelegate::MakeDelegate(iObject, iFunc);
 		}
 
 		sf::Vector2f GetMousePosition();

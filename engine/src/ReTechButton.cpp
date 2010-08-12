@@ -21,6 +21,13 @@ namespace rt
 		WorldObject::UnSerialize(iNode);
 
 		SafeGet(iNode, "on_press", mOnPressExec);
+		
+		Poco::StringTokenizer tokenizer(mOnPressExec, " ");
+		if(tokenizer.count() == 2)
+		{
+			mOnPressExec = tokenizer[0];
+			mOnPressExecParam = tokenizer[1];
+		}
 
 		SafeGet(iNode, "normal", mNormalResource);
 		SafeGet(iNode, "hover", mHoverResource);
@@ -60,7 +67,14 @@ namespace rt
 		{
 			if(IsInside(WorldsManager::Get()->ScreenToWorld(iEvent.MouseButton.X, iEvent.MouseButton.Y)))
 			{
-				ConsoleManager::Get()->RunExec(mOnPressExec);
+				if(ConsoleManager::Get()->HasArgs(mOnPressExec))
+				{
+					ConsoleManager::Get()->RunExec(mOnPressExec, mOnPressExecParam);
+				}
+				else
+				{
+					ConsoleManager::Get()->RunExec(mOnPressExec);
+				}
 			}
 		}
 

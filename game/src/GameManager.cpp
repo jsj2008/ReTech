@@ -2,34 +2,27 @@
 #include "GameManager.h"
 #include "GameScreen.h"
 #include "MainMenuScreen.h"
-#include "LobbySurvivorsScreen.h"
-#include "LobbyArsenalScreen.h"
-#include "LobbyJobScreen.h"
-#include "LobbyTacticsScreen.h"
-#include "LobbyWorldScreen.h"
+#include "LobbyDwarfsScreen.h"
 
 GameManager::GameManager()
 	: mActiveScreen(0)
 {
-	rt::InputManager::Get()->RegisterBind(sf::Key::Escape, "quit");
+	rt::InputManager::Get()->RegisterBind(sf::Mouse::XButton1, "toggle_fullscreen");
 
 	rt::ConsoleManager::Get()->RegisterExec("change_screen", &GameManager::ChangeScreen, this);
 
-	rt::ConsoleManager::Get()->RegisterExec("activate_main_menu", &GameManager::ActivateMainMenu, this);
-	rt::ConsoleManager::Get()->RegisterExec("activate_lobby_survivors", &GameManager::ActivateLobbySurvivors, this);
-	rt::ConsoleManager::Get()->RegisterExec("activate_lobby_arsenal", &GameManager::ActivateLobbyArsenal, this);
-	rt::ConsoleManager::Get()->RegisterExec("activate_lobby_job", &GameManager::ActivateLobbyJob, this);
-	rt::ConsoleManager::Get()->RegisterExec("activate_lobby_tactics", &GameManager::ActivateLobbyTactics, this);
-	rt::ConsoleManager::Get()->RegisterExec("activate_lobby_world", &GameManager::ActivateLobbyWorld, this);
+	//fastdelegate::FastDelegate1<const std::string&> test1 = rt::ConsoleManager::Get()->GetExec("change_screen");
+	//fastdelegate::FastDelegate1<const std::string&> test = fastdelegate::MakeDelegate(this, &GameManager::ChangeScreen);
+	//test(std::string("test"));
+	//test1(std::string("test"));
 
-	mScreens["main_menu"].assign(new MainMenuScreen(this));
-	mScreens["lobby_survivors"].assign(new LobbySurvivorsScreen(this));
-	mScreens["lobby_arsenal"].assign(new LobbyArsenalScreen(this));
-	mScreens["lobby_job"].assign(new LobbyJobScreen(this));
-	mScreens["lobby_tactics"].assign(new LobbyTacticsScreen(this));
-	mScreens["lobby_world"].assign(new LobbyWorldScreen(this));
+	//rt::ConsoleManager::Get()->RegisterExec("activate_main_menu", &GameManager::ActivateMainMenu, this);
+	//rt::ConsoleManager::Get()->RegisterExec("activate_lobby_dwarfs", &GameManager::ActivateLobbyDwarfs, this);
 
-	ActivateMainMenu();
+	mScreens["main_menu"].assign(new GameScreen(this, "./data/worlds/main_menu_screen.world"));
+	mScreens["lobby_dwarfs"].assign(new GameScreen(this, "./data/worlds/lobby_dwarfs_screen.world"));
+
+	ChangeScreen("main_menu");
 }
 
 GameManager::~GameManager()
@@ -45,35 +38,15 @@ void GameManager::Update( float iFrameTime )
 	}
 }
 
-void GameManager::ActivateMainMenu()
-{
-	ChangeScreen("main_menu");
-}
-
-void GameManager::ActivateLobbySurvivors()
-{
-	ChangeScreen("lobby_survivors");
-}
-
-void GameManager::ActivateLobbyArsenal()
-{
-	ChangeScreen("lobby_arsenal");
-}
-
-void GameManager::ActivateLobbyJob()
-{
-	ChangeScreen("lobby_job");
-}
-
-void GameManager::ActivateLobbyTactics()
-{
-	ChangeScreen("lobby_tactics");
-}
-
-void GameManager::ActivateLobbyWorld()
-{
-	ChangeScreen("lobby_world");
-}
+// void GameManager::ActivateMainMenu()
+// {
+// 	ChangeScreen("main_menu");
+// }
+// 
+// void GameManager::ActivateLobbyDwarfs()
+// {
+// 	ChangeScreen("lobby_dwarfs");
+// }
 
 void GameManager::ChangeScreen( const std::string& iScreenName )
 {

@@ -24,6 +24,7 @@ namespace rt
 		std::string		mHoverResource;
 
 		std::string		mOnPressExec;
+		std::string		mOnPressExecParam;
 
 		bool			mIsMouseOver;
 

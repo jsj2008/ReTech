@@ -57,7 +57,7 @@ namespace rt
 		{
 			if(mExecs.find(iExecName) != mExecs.end())
 			{
-				reinterpret_cast<ExecHolder<void>* >(mExecs[iExecName].get())->mFunction();
+				static_cast<ExecHolder<void>* >(mExecs[iExecName].get())->mFunction();
 			}
 		}
 
@@ -66,7 +66,7 @@ namespace rt
 		{
 			if(mExecs.find(iExecName) != mExecs.end())
 			{
-				reinterpret_cast<ExecHolder<T>* >(mExecs[iExecName].get())->mFunction(iValue);
+				static_cast<ExecHolder<T>* >(mExecs[iExecName].get())->mFunction(iValue);
 			}
 		}
 
