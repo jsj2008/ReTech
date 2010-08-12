@@ -11,15 +11,15 @@ namespace rt
 		Sprite();
 		virtual ~Sprite();
 
-		virtual void UnSerialize(const YAML::Node& iNode);
-		virtual void Serialize(YAML::Emitter& iEmitter) const;
-
 		virtual void Draw(sf::RenderWindow* iRenderWindow);
 
 		void SetResource(const std::string& iResourceName);
+		const std::string& GetResource(); 
 
 		protected:
 			sf::Sprite mSprite;
+
+			std::string mResourceName;
 	};
 }
 

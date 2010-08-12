@@ -11,17 +11,15 @@ namespace rt
 		Text();
 		virtual ~Text();
 
-		virtual void UnSerialize(const YAML::Node& iNode);
-		virtual void Serialize(YAML::Emitter& iEmitter) const;
-
 		virtual void Draw(sf::RenderWindow* iRenderWindow);
 
-		void SetString(const std::string& iString);
-		void SetSize(int iSize);
 		void SetFont(const std::string& iResourceName);
+		const std::string& GetFont();
 
-		protected:
-			sf::Text mText;
+	protected:
+		sf::Text mText;
+
+		std::string mResourceName;
 	};
 }
 

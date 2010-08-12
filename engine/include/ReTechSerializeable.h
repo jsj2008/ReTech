@@ -74,4 +74,6 @@ YAML::Emitter& operator<<( YAML::Emitter& iEmitter, const sf::Vector2f& iVector 
 void operator>>( const YAML::Node& iNode, SPK::Vector3D& iVector );
 YAML::Emitter& operator<<( YAML::Emitter& iEmitter, const SPK::Vector3D& iVector );
 
+void operator>>( const YAML::Node& iNode, sf::String& iString );
+
 #endif

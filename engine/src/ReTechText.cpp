@@ -6,24 +6,12 @@ namespace rt
 {
 	Text::Text()
 	{
-
+		CreateFuncProperty("string", fastdelegate::MakeDelegate(&mText, &sf::Text::SetString), fastdelegate::MakeDelegate(&mText, &sf::Text::GetString));
+		CreateFuncProperty("char_size", fastdelegate::MakeDelegate(&mText, &sf::Text::SetCharacterSize),  fastdelegate::MakeDelegate(&mText, &sf::Text::GetCharacterSize));
+		CreateFuncProperty("font", fastdelegate::MakeDelegate(this, &Text::SetFont),  fastdelegate::MakeDelegate(this, &Text::GetFont));
 	}
 
 	Text::~Text()
-	{
-
-	}
-
-	void Text::UnSerialize( const YAML::Node& iNode )
-	{
-		WorldObject::UnSerialize(iNode);
-
-		SafeGet(iNode, "string", fastdelegate::MakeDelegate(this, &Text::SetString));
-		SafeGet(iNode, "font", fastdelegate::MakeDelegate(this, &Text::SetFont));
-		SafeGet(iNode, "char_size", fastdelegate::MakeDelegate(this, &Text::SetSize));
-	}
-
-	void Text::Serialize( YAML::Emitter& iEmitter ) const
 	{
 
 	}
@@ -35,24 +23,22 @@ namespace rt
 		mText.SetOrigin(GetOrigin());
 		mText.SetRotation(GetRotation());
 
+
 		iRenderWindow->Draw(mText);
-	}
-
-	void Text::SetString( const std::string& iString )
-	{
-		mText.SetString(iString);
-	}
-
-	void Text::SetSize( int iSize )
-	{
-		mText.SetCharacterSize(iSize);
 	}
 
 	void Text::SetFont( const std::string& iResourceName )
 	{
+		mResourceName = iResourceName;
+
 		Font* font = UResource(Font, iResourceName);
 		font->Load();
 
 		mText.SetFont(*font);
+	}
+
+	const std::string& Text::GetFont()
+	{
+		return mResourceName;
 	}
 }
