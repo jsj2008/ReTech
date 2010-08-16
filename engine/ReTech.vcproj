@@ -432,6 +432,26 @@
 						>
 					</File>
 				</Filter>
+				<Filter
+					Name="ScreenManager"
+					>
+					<File
+						RelativePath=".\src\ReTechScreen.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\include\ReTechScreen.h"
+						>
+					</File>
+					<File
+						RelativePath=".\src\ReTechScreenManager.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\include\ReTechScreenManager.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter

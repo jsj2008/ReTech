@@ -11,6 +11,7 @@
 #include "ReTechLogManager.h"
 #include "ReTechConsoleManager.h"
 #include "ReTechWorldsManager.h"
+#include "ReTechScreenManager.h"
 
 namespace rt
 {
@@ -50,6 +51,7 @@ namespace rt
 		LogManager			mLog;
 		ConsoleManager		mExec;
 		WorldsManager		mWorlds;
+		ScreenManager		mScreens;
 
 		bool				mIsFullscreen;
 

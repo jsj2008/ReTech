@@ -207,28 +207,8 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="GameManager"
+			Name="Screens"
 			>
-			<File
-				RelativePath=".\src\GameManager.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\include\GameManager.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="Screen"
-			>
-			<File
-				RelativePath=".\src\GameScreen.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\include\GameScreen.h"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Objects"

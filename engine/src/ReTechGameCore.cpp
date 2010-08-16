@@ -81,6 +81,7 @@ namespace rt
 			float frameTime = mMainWindow->GetFrameTime();
 
 			mInput.Update(frameTime);
+			mScreens.Update(frameTime);
 			mWorlds.Update(frameTime);
 			mRender.Update(frameTime);
 		}

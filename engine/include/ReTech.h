@@ -15,6 +15,8 @@
 #include "ReTechLogManager.h"
 #include "ReTechResourceManager.h"
 #include "ReTechResource.h"
+#include "ReTechScreenManager.h"
+#include "ReTechScreen.h"
 
 #include "ReTechImage.h"
 #include "ReTechSequence.h"
