@@ -140,6 +140,31 @@ namespace rt
 		mIsLoaded = false;
 	}
 
+	void World::Save( const std::string& iFileName )
+	{
+		YAML::Emitter myEmitter;
+
+		myEmitter << YAML::BeginMap;
+		myEmitter << YAML::Key << "objects";
+		myEmitter << YAML::Value;
+
+		myEmitter << YAML::BeginSeq;
+
+		for(ObjectsManagedVec::iterator iter = mObjects.begin(); iter != mObjects.end(); ++iter)
+		{
+			myEmitter << YAML::BeginMap;
+			(*iter)->Serialize(myEmitter);
+			myEmitter << YAML::EndMap;
+		}
+
+		myEmitter << YAML::EndSeq;
+		myEmitter << YAML::EndMap;
+
+		std::ofstream myFile(iFileName.c_str());
+
+		myFile << myEmitter.c_str();
+	}
+
 	void World::SetVisible( bool iVisible )
 	{
 		mIsVisible = iVisible;

@@ -6,6 +6,8 @@ namespace rt
 {
 	Text::Text()
 	{
+		mClassName = "Text";
+
 		CreateFuncProperty("string", fastdelegate::MakeDelegate(&mText, &sf::Text::SetString), fastdelegate::MakeDelegate(&mText, &sf::Text::GetString));
 		CreateFuncProperty("char_size", fastdelegate::MakeDelegate(&mText, &sf::Text::SetCharacterSize),  fastdelegate::MakeDelegate(&mText, &sf::Text::GetCharacterSize));
 		CreateFuncProperty("font", fastdelegate::MakeDelegate(this, &Text::SetFont),  fastdelegate::MakeDelegate(this, &Text::GetFont));

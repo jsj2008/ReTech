@@ -39,7 +39,8 @@ namespace rt
 
 		void Serialize( YAML::Emitter& iEmitter ) const
 		{
-
+			iEmitter << YAML::Key << mName;
+			iEmitter << YAML::Value << Get();
 		}
 
 		void Set(const T& iVariable)
@@ -56,6 +57,26 @@ namespace rt
 			{
 				mSetterConst(iVariable);
 			}
+		}
+
+		T Get() const
+		{
+			T retValue;
+
+			if(mVariable)
+			{
+				retValue = *mVariable;
+			}
+			else if(mSetter)
+			{
+				retValue = mGetter();
+			}
+			else if(mSetterConst)
+			{
+				retValue = mGetterConst();
+			}
+
+			return retValue;
 		}
 
 	protected:

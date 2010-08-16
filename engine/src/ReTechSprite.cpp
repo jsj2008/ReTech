@@ -7,6 +7,8 @@ namespace rt
 {
 	Sprite::Sprite()
 	{
+		mClassName = "Sprite";
+
 		CreateFuncProperty("sprite", fastdelegate::MakeDelegate(this, &Sprite::SetResource), fastdelegate::MakeDelegate(this, &Sprite::GetResource));
 	}
 

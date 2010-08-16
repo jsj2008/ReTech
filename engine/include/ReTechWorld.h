@@ -29,6 +29,8 @@ namespace rt
 		void Load(const std::string& iFileName, bool iShowAfterLoad = false);
 		void Unload();
 
+		void Save(const std::string& iFileName);
+
 		void SetVisible(bool iActivated);
 
 		float GetProgress();

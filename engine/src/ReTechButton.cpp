@@ -7,6 +7,8 @@ namespace rt
 	Button::Button()
 		: mIsMouseOver(false)
 	{
+		mClassName = "Button";
+
 		mHandler = InputManager::MakeHandler(&Button::HandleEvent, this);
 		InputManager::Get()->RegisterHandler(&mHandler);
 	}
@@ -37,7 +39,7 @@ namespace rt
 
 	void Button::Serialize( YAML::Emitter& iEmitter ) const
 	{
-
+		WorldObject::Serialize(iEmitter);
 	}
 
 	bool Button::IsInside(const sf::Vector2f& iPoint)

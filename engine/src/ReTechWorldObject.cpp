@@ -9,6 +9,8 @@ namespace rt
 	WorldObject::WorldObject()
 		: mVisible(true), mEnabled(true), mLayer(0), mWorld(0)
 	{
+		mClassName = "WorldObject";
+
 		CreateFuncProperty("position", fastdelegate::FastDelegate1<const sf::Vector2f&>(this, &WorldObject::SetPosition), fastdelegate::MakeDelegate(this, &WorldObject::GetPosition));
 		CreateVarProperty("layer", mLayer);
 		CreateVarProperty("tag", mTag);
@@ -28,7 +30,18 @@ namespace rt
 
 	void WorldObject::Serialize( YAML::Emitter& iEmitter ) const
 	{
+		iEmitter << YAML::Key << "class";
+		iEmitter << YAML::Value << GetClassName();
 
+		for(SerializeableVec::const_iterator iter = mProperties.begin(); iter != mProperties.end(); ++iter)
+		{
+			(*iter)->Serialize(iEmitter);
+		}
+	}
+
+	std::string WorldObject::GetClassName() const
+	{
+		return mClassName;
 	}
 
 	void WorldObject::Update( float iFrameTime )

@@ -209,6 +209,14 @@
 		<Filter
 			Name="Screens"
 			>
+			<File
+				RelativePath=".\src\EditorScreen.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\EditorScreen.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Objects"

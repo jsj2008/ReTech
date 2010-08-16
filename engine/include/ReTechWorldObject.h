@@ -18,6 +18,8 @@ namespace rt
 		virtual void UnSerialize(const YAML::Node& iNode);
 		virtual void Serialize(YAML::Emitter& iEmitter) const;
 
+		virtual std::string GetClassName() const;
+
 		virtual void Update(float iFrameTime);
 		virtual void Draw(sf::RenderWindow* iRenderWindow);
 
@@ -66,7 +68,9 @@ namespace rt
 		std::string			mTag;
 		World*				mWorld;
 
-		SerializeableVec	mProperties;	
+		std::string			mClassName;
+
+		SerializeableVec	mProperties;
 	};
 }
 
