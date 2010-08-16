@@ -3,7 +3,6 @@
 #include "GameScreen.h"
 
 GameManager::GameManager()
-	: mActiveScreen(0)
 {
 	rt::InputManager::Get()->RegisterBind(sf::Mouse::XButton1, "toggle_fullscreen");
 
@@ -17,28 +16,55 @@ GameManager::GameManager()
 
 GameManager::~GameManager()
 {
-
+	ClearScreens();
 }
 
 void GameManager::Update( float iFrameTime )
 {
-	if(!mActiveScreen->GetWorld()->IsVisible() && mActiveScreen->GetWorld()->IsLoaded())
+	if(!mScreenStack.empty())
 	{
-		mActiveScreen->GetWorld()->SetVisible(true);
+		mScreenStack.back()->Update(iFrameTime);
+	}
+}
+
+void GameManager::PushScreen( const std::string& iScreenName )
+{
+	if(!mScreenStack.empty())
+	{
+		mScreenStack.back()->Paused();
+	}
+
+	mScreenStack.push_back(mScreens[iScreenName]);
+
+	mScreenStack.back()->Pushed();
+}
+
+void GameManager::PopScreen()
+{
+	if(!mScreenStack.empty())
+	{
+		mScreenStack.back()->Poped();
+		mScreenStack.pop_back();
+	}
+
+	if(!mScreenStack.empty())
+	{
+		mScreenStack.back()->Resumed();
 	}
 }
 
 void GameManager::ChangeScreen( const std::string& iScreenName )
 {
-	if(mActiveScreen && mActiveScreen->GetWorld()->IsLoaded())
+	ClearScreens();
+	PushScreen(iScreenName);
+}
+
+void GameManager::ClearScreens()
+{
+	for(ScreenStack::iterator iter = mScreenStack.begin(); iter != mScreenStack.end(); ++iter)
 	{
-		mActiveScreen->GetWorld()->SetVisible(false);
+		(*iter)->Poped();
 	}
 
-	mActiveScreen = mScreens[iScreenName];
-
-	if(mActiveScreen && mActiveScreen->GetWorld()->IsLoaded())
-	{
-		mActiveScreen->GetWorld()->SetVisible(true);
-	}
+	mScreenStack.clear();
 }

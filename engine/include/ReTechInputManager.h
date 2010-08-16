@@ -21,6 +21,9 @@ namespace rt
 		void RegisterBind(sf::Key::Code iKey, const std::string& iExecName);
 		void RegisterBind(sf::Mouse::Button iButton, const std::string& iExecName);
 
+		void UnregisterBind(sf::Key::Code iKey);
+		void UnregisterBind(sf::Mouse::Button iButton);
+
 		void RegisterHandler(InputHandler* iHandler);
 		void UnregisterHandler(InputHandler* iHandler);
 

@@ -18,6 +18,40 @@ GameScreen::~GameScreen()
 	rt::WorldsManager::Get()->DestroyWorld(mWorld->GetName());
 }
 
+void GameScreen::Pushed()
+{
+	if(mWorld->IsLoaded())
+	{
+		mWorld->SetVisible(true);
+	}
+}
+
+void GameScreen::Poped()
+{
+	if(mWorld->IsLoaded())
+	{
+		mWorld->SetVisible(false);
+	}
+}
+
+void GameScreen::Paused()
+{
+
+}
+
+void GameScreen::Resumed()
+{
+
+}
+
+void GameScreen::Update( float iFrameTime )
+{
+	if(!mWorld->IsVisible() && mWorld->IsLoaded())
+	{
+		mWorld->SetVisible(true);
+	}
+}
+
 rt::World* GameScreen::GetWorld()
 {
 	return mWorld;

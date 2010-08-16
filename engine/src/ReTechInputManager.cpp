@@ -74,7 +74,19 @@ namespace rt
 		{
 			mBinaryMouseBinds.insert(std::make_pair(iButton, iExecName));
 		}
-	}		
+	}	
+
+	void InputManager::UnregisterBind( sf::Key::Code iKey )
+	{
+		mUnaryKeyboardBinds.erase(iKey);
+		mBinaryKeyboardBinds.erase(iKey);
+	}
+
+	void InputManager::UnregisterBind( sf::Mouse::Button iButton )
+	{
+		mUnaryMouseBinds.erase(iButton);
+		mBinaryMouseBinds.erase(iButton);
+	}
 
 	void InputManager::RegisterHandler( InputHandler* iHandler )
 	{

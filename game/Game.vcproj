@@ -234,10 +234,6 @@
 			Name="Objects"
 			>
 		</Filter>
-		<Filter
-			Name="GameRules"
-			>
-		</Filter>
 		<File
 			RelativePath=".\src\Game.cpp"
 			>
