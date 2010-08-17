@@ -2,10 +2,15 @@
 #include "ReTechRenderManager.h"
 #include "ReTechWorldObject.h"
 
+URegisterSingleton(RenderManager)
+
 namespace rt
 {
 	RenderManager::RenderManager()
+		: mRenderStatistics(false)
 	{
+		mStatisticsText.SetFont(sf::Font::GetDefaultFont());
+		mStatisticsText.SetCharacterSize(10);
 	}
 
 	RenderManager::~RenderManager()
@@ -27,6 +32,11 @@ namespace rt
  		{
  			(*iter)->Draw(GameCore::Get()->GetMainWindow());
  		}
+
+		if(mRenderStatistics)
+		{
+			renderStatistics();
+		}
  
  		GameCore::Get()->GetMainWindow()->Display();
 	}
@@ -49,5 +59,20 @@ namespace rt
 	void RenderManager::SetCameraZoom( float iZoom )
 	{
 		GameCore::Get()->GetMainView()->Zoom(iZoom);
+	}
+
+	void RenderManager::SetRenderStatistics( bool iRenderStatistics )
+	{
+		mRenderStatistics = iRenderStatistics;
+	}
+
+	void RenderManager::renderStatistics()
+	{
+		sf::String statisticsString = 
+			"FPS: " + Poco::NumberFormatter::format(1.0f / GameCore::Get()->GetMainWindow()->GetFrameTime());
+
+		mStatisticsText.SetString(statisticsString);
+
+		GameCore::Get()->GetMainWindow()->Draw(mStatisticsText);
 	}
 }

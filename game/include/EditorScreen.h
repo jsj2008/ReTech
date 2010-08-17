@@ -10,9 +10,19 @@ public:
 	virtual void Pushed();
 	virtual void Poped();
 
+	void New();
+
+	void Load();
 	void Save();
 
+	bool HandleEvent(const sf::Event& iEvent);
+
 protected:
+	rt::World*	mEditingWorld;
+
+	std::string mWorldFileName;
+
+	rt::InputManager::InputHandler mHandler;
 };
 
 #endif

@@ -77,6 +77,8 @@ namespace rt
 				{
 					ConsoleManager::Get()->RunExec(mOnPressExec);
 				}
+
+				return true;
 			}
 		}
 

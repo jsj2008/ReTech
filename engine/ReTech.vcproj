@@ -165,11 +165,35 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\ReTechCircle.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\ReTechCircle.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\ReTechLine.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\ReTechLine.h"
+					>
+				</File>
+				<File
 					RelativePath=".\src\ReTechParticleSystem.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\include\ReTechParticleSystem.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\ReTechRectangle.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\ReTechRectangle.h"
 					>
 				</File>
 				<File

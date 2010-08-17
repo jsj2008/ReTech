@@ -33,8 +33,10 @@ namespace rt
 		void UnSerialize( const YAML::Node& iNode )
 		{
 			T tempVariable;
-			SafeGet(iNode, mName, tempVariable);
-			Set(tempVariable);
+			if(SafeGet(iNode, mName, tempVariable))
+			{
+				Set(tempVariable);
+			}
 		}
 
 		void Serialize( YAML::Emitter& iEmitter ) const

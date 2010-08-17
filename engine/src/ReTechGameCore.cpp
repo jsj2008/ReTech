@@ -11,6 +11,9 @@
 #include "ReTechButton.h"
 #include "ReTechText.h"
 #include "ReTechParticleSystem.h"
+#include "ReTechLine.h"
+#include "ReTechCircle.h"
+#include "ReTechRectangle.h"
 
 URegisterSingleton(GameCore)
 
@@ -54,6 +57,9 @@ namespace rt
 		URegisterObject(Button);
 		URegisterObject(Text);
 		URegisterObject(ParticleSystem);
+		URegisterObject(Line);
+		URegisterObject(Circle);
+		URegisterObject(Rectangle);
 
 		//Register resource classes
 		mResource.RegisterExtension("tga", "Image");

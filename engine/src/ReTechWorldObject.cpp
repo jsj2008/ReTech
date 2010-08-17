@@ -30,6 +30,8 @@ namespace rt
 
 	void WorldObject::Serialize( YAML::Emitter& iEmitter ) const
 	{
+		iEmitter << YAML::BeginMap;
+
 		iEmitter << YAML::Key << "class";
 		iEmitter << YAML::Value << GetClassName();
 
@@ -37,6 +39,8 @@ namespace rt
 		{
 			(*iter)->Serialize(iEmitter);
 		}
+
+		iEmitter << YAML::EndMap;
 	}
 
 	std::string WorldObject::GetClassName() const

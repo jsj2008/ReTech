@@ -1,11 +1,13 @@
 #ifndef __rtRenderManager_H__
 #define __rtRenderManager_H__
 
+#include "ReTechSingleton.h"
+
 namespace rt
 {
 	class WorldObject;
 
-	class RenderManager
+	class RenderManager : public Singleton<RenderManager>
 	{
 	public:
 		RenderManager();
@@ -19,8 +21,13 @@ namespace rt
 
 		static bool Sort(WorldObject* iFirst, WorldObject* iSecond);
 
+		void SetRenderStatistics(bool iRenderStatistics);
+
 	protected:
-		
+		void renderStatistics();
+
+		bool		mRenderStatistics;
+		sf::Text	mStatisticsText;
 	};
 }
 

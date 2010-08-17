@@ -24,6 +24,13 @@
 
 #include "ReTechAnimation.h"
 #include "ReTechSprite.h"
+#include "ReTechText.h"
+#include "ReTechParticleSystem.h"
+#include "ReTechLine.h"
+#include "ReTechCircle.h"
+#include "ReTechRectangle.h"
+
+#include "ReTechButton.h"
 
 #include "ReTechWorldsManager.h"
 #include "ReTechWorldObject.h"

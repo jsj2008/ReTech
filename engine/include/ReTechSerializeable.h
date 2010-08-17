@@ -13,43 +13,55 @@ namespace rt
 		virtual void Serialize(YAML::Emitter& iEmitter) const {}
 
 		template<class T>
-		void SafeGet(const YAML::Node& iNode, const std::string iKey, T& iValue)
+		bool SafeGet(const YAML::Node& iNode, const std::string iKey, T& iValue)
 		{
 			const YAML::Node* value = iNode.FindValue(iKey);
 
 			if(value)
 			{
 				*value >> iValue;
+				return true;
 			}
+
+			return false;
 		}
 
 		template<class T>
-		void SafeGet(const YAML::Node& iNode, const std::string iKey, T* iValue)
+		bool SafeGet(const YAML::Node& iNode, const std::string iKey, T* iValue)
 		{
 			const YAML::Node* value = iNode.FindValue(iKey);
 
 			if(value)
 			{
 				*value >> iValue;
+				return true;
 			}
+
+			return false;
 		}
 
 		template<class T>
-		void SafeGet(const YAML::Node& iNode, const std::string iKey, fastdelegate::FastDelegate1<const T&, void> iSetter)
+		bool SafeGet(const YAML::Node& iNode, const std::string iKey, fastdelegate::FastDelegate1<const T&, void> iSetter)
 		{
 			typename T tempValue;
-			SafeGet(iNode, iKey, tempValue);
-
-			iSetter(tempValue);
+			if(SafeGet(iNode, iKey, tempValue))
+			{
+				iSetter(tempValue);
+				return true;
+			}
+			return false;
 		}
 
 		template<class T>
-		void SafeGet(const YAML::Node& iNode, const std::string iKey, fastdelegate::FastDelegate1<T, void> iSetter)
+		bool SafeGet(const YAML::Node& iNode, const std::string iKey, fastdelegate::FastDelegate1<T, void> iSetter)
 		{
 			typename T tempValue;
-			SafeGet(iNode, iKey, tempValue);
-
-			iSetter(tempValue);
+			if(SafeGet(iNode, iKey, tempValue))
+			{
+				iSetter(tempValue);
+				return true;
+			}
+			return false;			
 		}
 	};
 }
@@ -70,6 +82,12 @@ YAML::Emitter& operator<<( YAML::Emitter& iEmitter, const T* iSerializeable )
 
 void operator>>( const YAML::Node& iNode, sf::Vector2f& iVector );
 YAML::Emitter& operator<<( YAML::Emitter& iEmitter, const sf::Vector2f& iVector );
+
+void operator>>( const YAML::Node& iNode, sf::FloatRect& iRect );
+YAML::Emitter& operator<<( YAML::Emitter& iEmitter, const sf::FloatRect& iRect );
+
+void operator>>( const YAML::Node& iNode, sf::Color& iColor );
+YAML::Emitter& operator<<( YAML::Emitter& iEmitter, const sf::Color& iColor );
 
 void operator>>( const YAML::Node& iNode, SPK::Vector3D& iVector );
 YAML::Emitter& operator<<( YAML::Emitter& iEmitter, const SPK::Vector3D& iVector );
