@@ -6,6 +6,9 @@
 #include <fstream>
 #include <sstream>
 
+#include "boost/shared_ptr.hpp"
+#include "boost/weak_ptr.hpp"
+
 #define POCO_STATIC
 #include "POCO/SharedPtr.h"
 #include "POCO/DynamicFactory.h"

@@ -21,11 +21,11 @@ namespace rt
 	{
 		mVisibleObjectsCache.clear();
 
-		mWorlds.erase(std::remove(mWorlds.begin(), mWorlds.end(), Poco::SharedPtr<World>()), mWorlds.end());
+		mWorlds.erase(std::remove(mWorlds.begin(), mWorlds.end(), boost::shared_ptr<World>()), mWorlds.end());
 
 		for(WorldsVec::iterator iter = mWorlds.begin(); iter != mWorlds.end(); ++iter)
 		{
-			if(!(*iter).isNull())
+			if((*iter))
 			{
 				(*iter)->Update(iFrameTime);
 
@@ -34,16 +34,16 @@ namespace rt
 		}
 	}
 
-	World* WorldsManager::CreateWorld( const std::string& iName )
+	World* WorldsManager::CreateWorld( const std::string& iName, int iLayer )
 	{
 		if(GetWorld(iName) != 0)
 		{
 			LogManager::Get()->Warning("World " + iName + " already exist.");
 			return 0;
 		}
-		mWorlds.push_back(new World(iName));
+		mWorlds.push_back(boost::shared_ptr<World>(new World(iName, iLayer)));
 		
-		return mWorlds.back();
+		return mWorlds.back().get();
 	}
 
 	void WorldsManager::DestroyWorld( const std::string& iName )
@@ -55,7 +55,7 @@ namespace rt
 			return;
 		}
 
-		(*finded).assign(0);
+		(*finded).reset(static_cast<World*>(0));
 	}
 
 	World* WorldsManager::GetWorld( const std::string& iName )
@@ -70,7 +70,7 @@ namespace rt
 		return 0;
 	}
 
-	void WorldsManager::GetVisibleObjects( std::vector<WorldObject*>& iVisibleObjects )
+	void WorldsManager::GetVisibleObjects( std::vector<boost::weak_ptr<WorldObject>>& iVisibleObjects )
 	{
 		iVisibleObjects.swap(mVisibleObjectsCache);
 	}
@@ -80,8 +80,8 @@ namespace rt
 		return GameCore::Get()->GetMainWindow()->ConvertCoords(iX, iY);
 	}
 
-	bool WorldsManager::IsNamed::operator()( const Poco::SharedPtr<World>& iWorld )
+	bool WorldsManager::IsNamed::operator()( const boost::shared_ptr<World>& iWorld )
 	{
-		return iWorld.isNull() ? false : iWorld->GetName() == mName;
+		return !iWorld ? false : iWorld->GetName() == mName;
 	}
 }

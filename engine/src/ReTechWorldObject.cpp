@@ -60,12 +60,36 @@ namespace rt
 
 	bool WorldObject::LowerThen (const WorldObject* const iOther)
 	{
-		if(mLayer != iOther->mLayer)
+		if(mWorld->GetLayer() != iOther->GetWorld()->GetLayer())
+		{
+			return mWorld->GetLayer() < iOther->GetWorld()->GetLayer();
+		}
+		else if(mLayer != iOther->mLayer)
 		{
 			return mLayer < iOther->mLayer;
 		}
 		
 		return false;
+	}
+
+	bool WorldObject::IsMouseInside( const sf::Vector2f& iMousePos )
+	{
+		return false;
+	}
+
+	bool WorldObject::HandleFocusedEvent( const sf::Event& iEvent )
+	{
+		return false;
+	}
+
+	void WorldObject::MouseEnter()
+	{
+
+	}
+
+	void WorldObject::MouseLeave()
+	{
+
 	}
 
 	void WorldObject::SetLayer(int iLayer)
@@ -113,6 +137,11 @@ namespace rt
 		mWorld = iWorld;
 	}
 
+	World* WorldObject::GetWorld() const
+	{
+		return mWorld;
+	}
+
 	void WorldObject::Render( sf::RenderTarget& target, sf::Renderer& renderer ) const
 	{
 
@@ -120,6 +149,6 @@ namespace rt
 
 	void WorldObject::AddProperty( Serializeable* iProperty )
 	{
-		mProperties.push_back(iProperty);
+		mProperties.push_back(boost::shared_ptr<Serializeable>(iProperty));
 	}
 }

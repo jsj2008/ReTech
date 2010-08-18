@@ -4,8 +4,8 @@
 
 namespace rt
 {
-	World::World(const std::string& iName)
-		: mName(iName), mIsLoading(false), mIsLoaded(true), mIsVisible(true), mShowAfterLoad(false)
+	World::World(const std::string& iName, int iLayer)
+		: mName(iName), mLayer(iLayer), mIsLoading(false), mIsLoaded(true), mIsVisible(true), mShowAfterLoad(false)
 	{
 	}
 
@@ -17,16 +17,16 @@ namespace rt
 	{
 		iObject->SetWorld(this);
 
-		mObjects.push_back(iObject);
+		mObjects.push_back(boost::shared_ptr<WorldObject>(iObject));
 	}
 
 	void World::DestroyObject( WorldObject* iObject )
 	{
-		ObjectsManagedVec::iterator finded = std::find(mObjects.begin(), mObjects.end(), iObject);
+		ObjectsManagedVec::iterator finded = std::find(mObjects.begin(), mObjects.end(), boost::shared_ptr<WorldObject>(iObject));
 
 		if(finded != mObjects.end())
 		{
-			(*finded).assign(0);
+			(*finded).reset(static_cast<WorldObject*>(0));
 		}
 		else
 		{
@@ -40,11 +40,11 @@ namespace rt
 
 		if(mIsVisible)
 		{
-			mObjects.erase(std::remove(mObjects.begin(), mObjects.end(), Poco::SharedPtr<WorldObject>()), mObjects.end());
+			mObjects.erase(std::remove(mObjects.begin(), mObjects.end(), boost::shared_ptr<WorldObject>()), mObjects.end());
 
 			for(ObjectsManagedVec::iterator iter = mObjects.begin(); iter != mObjects.end(); ++iter)
 			{
-				if(!(*iter).isNull())
+				if((*iter))
 				{
 					if((*iter)->IsEnabled())
 					{
@@ -53,7 +53,7 @@ namespace rt
 					
 					if((*iter)->IsVisible())
 					{
-						mVisibleObjectsCache.push_back((*iter).get());
+						mVisibleObjectsCache.push_back((*iter));
 					}
 				}
 			}
@@ -64,7 +64,7 @@ namespace rt
 		}
 	}
 
-	void World::GetVisibleObjects( std::vector<WorldObject*>& iVisibleObjects )
+	void World::GetVisibleObjects( std::vector<boost::weak_ptr<WorldObject>>& iVisibleObjects )
 	{
 		iVisibleObjects.insert(iVisibleObjects.end(), mVisibleObjectsCache.begin(), mVisibleObjectsCache.end());
 	}
@@ -88,8 +88,8 @@ namespace rt
 		}
 		else
 		{
-			mObjectsIterator.assign(0);
-			mDocumentIterator.assign(0);
+			mObjectsIterator.reset(static_cast<CollectionIterator*>(0));
+			mDocumentIterator.reset(static_cast<CollectionIterator*>(0));
 
 			mIsLoaded = true;
 			mIsLoading = false;
@@ -119,8 +119,8 @@ namespace rt
 		{
 			mIsVisible = false;
 
-			mDocumentIterator.assign(new CollectionIterator(iFileName));
-			mObjectsIterator.assign(new CollectionIterator(mDocumentIterator->Extract("objects")));
+			mDocumentIterator.reset(new CollectionIterator(iFileName));
+			mObjectsIterator.reset(new CollectionIterator(mDocumentIterator->Extract("objects")));
 
 			mShowAfterLoad = iShowAfterLoad;
 			mIsLoading = true;
@@ -131,9 +131,9 @@ namespace rt
 	{
 		for(ObjectsManagedVec::iterator iter = mObjects.begin(); iter != mObjects.end(); ++iter)
 		{
-			if(!(*iter).isNull())
+			if((*iter))
 			{
-				DestroyObject((*iter));
+				DestroyObject((*iter).get());
 			}
 		}
 
@@ -176,5 +176,15 @@ namespace rt
 	std::string World::GetName() const
 	{
 		return mName;
+	}
+
+	int World::GetLayer() const
+	{
+		return mLayer;
+	}
+
+	void World::SetLayer( int iLayer )
+	{
+		mLayer = iLayer;
 	}
 }

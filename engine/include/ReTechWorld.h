@@ -8,10 +8,10 @@ namespace rt
 	class World
 	{
 	public:
-		typedef std::list<Poco::SharedPtr<WorldObject>>	ObjectsManagedVec;
-		typedef std::vector<WorldObject*>				ObjectsVec;
+		typedef std::list<boost::shared_ptr<WorldObject>>	ObjectsManagedVec;
+		typedef std::vector<boost::weak_ptr<WorldObject>>	ObjectsWeakVec;
 
-		World(const std::string& iName);
+		World(const std::string& iName, int iLayer);
 		~World();
 
 		void AddObject(WorldObject* iObject);
@@ -19,7 +19,7 @@ namespace rt
 
 		void Update(float iFrameTime);
 
-		void GetVisibleObjects(std::vector<WorldObject*>& iVisibleObjects);
+		void GetVisibleObjects(std::vector<boost::weak_ptr<WorldObject>>& iVisibleObjects);
 
 		void ProcessLoad();
 
@@ -37,12 +37,17 @@ namespace rt
 
 		std::string GetName() const;
 
+		int GetLayer() const;
+		void SetLayer(int iLayer);
+
 	protected:
 		std::string			mName;
 
+		int					mLayer;
+
 		ObjectsManagedVec	mObjects;
 
-		ObjectsVec			mVisibleObjectsCache;
+		ObjectsWeakVec		mVisibleObjectsCache;
 
 		bool				mIsLoading;
 		bool				mIsLoaded;
@@ -50,8 +55,8 @@ namespace rt
 
 		bool				mShowAfterLoad;
 
-		Poco::SharedPtr<CollectionIterator>	mDocumentIterator;
-		Poco::SharedPtr<CollectionIterator>	mObjectsIterator;
+		boost::shared_ptr<CollectionIterator>	mDocumentIterator;
+		boost::shared_ptr<CollectionIterator>	mObjectsIterator;
 	};
 }
 

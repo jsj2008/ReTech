@@ -477,6 +477,34 @@
 					</File>
 				</Filter>
 			</Filter>
+			<Filter
+				Name="Micropather"
+				>
+				<File
+					RelativePath=".\src\micropather.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="0"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="0"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\include\micropather.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Common"

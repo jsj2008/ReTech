@@ -1,6 +1,8 @@
 #include "ReTechCommonIncludes.h"
 #include "ReTechInputManager.h"
 #include "ReTechConsoleManager.h"
+#include "ReTechRenderManager.h"
+#include "ReTechWorldObject.h"
 
 URegisterSingleton(InputManager);
 
@@ -18,11 +20,13 @@ namespace rt
 
 	void InputManager::Update( float iFrameTime )
 	{
+		updateFocused();
+
 		// Process events
 		sf::Event Event;
 		while (GameCore::Get()->GetMainWindow()->GetEvent(Event))
 		{
-			if(!isHandledByExternals(Event))
+			if(!isHandledByFocused(Event) && !isHandledByExternals(Event))
 			{
 				// Close window : exit
 				if (Event.Type == sf::Event::Closed)
@@ -128,5 +132,42 @@ namespace rt
 		}
 
 		return false;
+	}
+
+	bool InputManager::isHandledByFocused( const sf::Event& iEvent )
+	{
+		return !mFocusedObject.expired() ? mFocusedObject.lock()->HandleFocusedEvent(iEvent) : false;
+	}
+
+	void InputManager::updateFocused()
+	{
+		sf::Vector2f mousePos = GetMousePosition();
+		RenderManager::WorldObjectsVec visibleObjects = RenderManager::Get()->GetVisibleObjectsCache();
+
+		boost::weak_ptr<WorldObject> newFocused;
+		
+		for(RenderManager::WorldObjectsVec::reverse_iterator iter = visibleObjects.rbegin(); iter != visibleObjects.rend(); ++iter)
+		{
+			if((*iter).lock()->IsMouseInside(mousePos))
+			{
+				newFocused = (*iter);
+				break;
+			}
+		}
+
+		if(newFocused.lock() != mFocusedObject.lock())
+		{
+			if(!mFocusedObject.expired())
+			{
+				mFocusedObject.lock()->MouseLeave();
+			}
+
+			if(!newFocused.expired())
+			{
+				newFocused.lock()->MouseEnter();
+			}
+
+			mFocusedObject = newFocused;
+		}
 	}
 }

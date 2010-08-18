@@ -5,17 +5,12 @@
 namespace rt
 {
 	Button::Button()
-		: mIsMouseOver(false)
 	{
 		mClassName = "Button";
-
-		mHandler = InputManager::MakeHandler(&Button::HandleEvent, this);
-		InputManager::Get()->RegisterHandler(&mHandler);
 	}
 
 	Button::~Button()
 	{
-		InputManager::Get()->UnregisterHandler(&mHandler);
 	}
 
 	void Button::UnSerialize( const YAML::Node& iNode )
@@ -42,46 +37,37 @@ namespace rt
 		WorldObject::Serialize(iEmitter);
 	}
 
-	bool Button::IsInside(const sf::Vector2f& iPoint)
+	bool Button::IsMouseInside( const sf::Vector2f& iMousePos )
 	{
-		return sf::FloatRect(GetPosition(), mSprite.GetSize()).Contains(iPoint);
+		return sf::FloatRect(GetPosition(), mSprite.GetSize()).Contains(iMousePos);
 	}
 
-	bool Button::HandleEvent(const sf::Event& iEvent)
+	bool Button::HandleFocusedEvent( const sf::Event& iEvent )
 	{
-		if(iEvent.Type == sf::Event::MouseMoved)
+		if(iEvent.Type == sf::Event::MouseButtonReleased)
 		{
-			if(mIsMouseOver != IsInside(WorldsManager::Get()->ScreenToWorld(iEvent.MouseMove.X, iEvent.MouseMove.Y)))
+			if(ConsoleManager::Get()->HasArgs(mOnPressExec))
 			{
-				mIsMouseOver = !mIsMouseOver;
-
-				if(mIsMouseOver)
-				{
-					SetResource(mHoverResource);
-				}
-				else
-				{
-					SetResource(mNormalResource);
-				}
+				ConsoleManager::Get()->RunExec(mOnPressExec, mOnPressExecParam);
 			}
-		}
-		else if(iEvent.Type == sf::Event::MouseButtonReleased)
-		{
-			if(IsInside(WorldsManager::Get()->ScreenToWorld(iEvent.MouseButton.X, iEvent.MouseButton.Y)))
+			else
 			{
-				if(ConsoleManager::Get()->HasArgs(mOnPressExec))
-				{
-					ConsoleManager::Get()->RunExec(mOnPressExec, mOnPressExecParam);
-				}
-				else
-				{
-					ConsoleManager::Get()->RunExec(mOnPressExec);
-				}
-
-				return true;
+				ConsoleManager::Get()->RunExec(mOnPressExec);
 			}
+
+			return true;
 		}
 
 		return false;
+	}
+
+	void Button::MouseEnter()
+	{
+		SetResource(mHoverResource);
+	}
+
+	void Button::MouseLeave()
+	{
+		SetResource(mNormalResource);
 	}
 }

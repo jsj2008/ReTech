@@ -75,13 +75,18 @@ namespace rt
 		}
 
 		bool isHandledByExternals(const sf::Event& iEvent);
+		bool isHandledByFocused(const sf::Event& iEvent);
 
-		KeyboardBinds	mUnaryKeyboardBinds;
-		KeyboardBinds	mBinaryKeyboardBinds;
-		MouseBinds		mUnaryMouseBinds;
-		MouseBinds		mBinaryMouseBinds;
+		void updateFocused();
 
-		HandlersList	mHandlers;
+		KeyboardBinds					mUnaryKeyboardBinds;
+		KeyboardBinds					mBinaryKeyboardBinds;
+		MouseBinds						mUnaryMouseBinds;
+		MouseBinds						mBinaryMouseBinds;
+
+		HandlersList					mHandlers;
+
+		boost::weak_ptr<WorldObject>	mFocusedObject;
 	};
 }
 

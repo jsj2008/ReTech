@@ -9,7 +9,7 @@ namespace rt
 	class WorldObject : public Serializeable, public sf::Drawable
 	{
 	public:
-		typedef std::vector<Poco::SharedPtr<Serializeable>> SerializeableVec;
+		typedef std::vector<boost::shared_ptr<Serializeable>> SerializeableVec;
 		typedef SerializeableVec::iterator SerializeableVecIter;
 
 		WorldObject();
@@ -25,6 +25,12 @@ namespace rt
 
 		virtual bool LowerThen(const WorldObject* const iOther); 
 
+		virtual bool IsMouseInside(const sf::Vector2f& iMousePos);
+		virtual bool HandleFocusedEvent(const sf::Event& iEvent);
+
+		virtual void MouseEnter();
+		virtual void MouseLeave();
+
 		void SetLayer(int iLayer);
 		int GetLayer();
 
@@ -38,23 +44,24 @@ namespace rt
 		std::string GetTag();
 
 		void SetWorld(World* iWorld);
+		World* GetWorld() const;
 
 		template<class T>
 		void CreateVarProperty(const std::string& iName, T& iVariable)
 		{
-			mProperties.push_back(new Property<T>(iName, iVariable));
+			mProperties.push_back(boost::shared_ptr<Serializeable>(new Property<T>(iName, iVariable)));
 		}
 
 		template<class T>
 		void CreateFuncProperty(const std::string& iName, fastdelegate::FastDelegate1<T> iSetter, fastdelegate::FastDelegate0<T> iGetter)
 		{
-			mProperties.push_back(new Property<T>(iName, iSetter, iGetter));
+			mProperties.push_back(boost::shared_ptr<Serializeable>(new Property<T>(iName, iSetter, iGetter)));
 		}
 
 		template<class T>
 		void CreateFuncProperty(const std::string& iName, fastdelegate::FastDelegate1<const T&> iSetter, fastdelegate::FastDelegate0<const T&> iGetter)
 		{
-			mProperties.push_back(new Property<T>(iName, iSetter, iGetter));
+			mProperties.push_back(boost::shared_ptr<Serializeable>(new Property<T>(iName, iSetter, iGetter)));
 		}
 
 		void AddProperty(Serializeable* iProperty);

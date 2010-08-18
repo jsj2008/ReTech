@@ -17,11 +17,11 @@ int WINAPI WinMain(HINSTANCE /*hInstance*/, HINSTANCE /*hPrevInstance*/, LPSTR /
 
 	rt::RenderManager::Get()->SetRenderStatistics(true);
 
-	//rt::ScreenManager::Get()->AddScreen("main_menu", new rt::Screen("./data/worlds/main_menu_screen.world"));
-	//rt::ScreenManager::Get()->AddScreen("lobby_dwarfs", new rt::Screen("./data/worlds/lobby_dwarfs_screen.world"));
-	rt::ScreenManager::Get()->AddScreen("editor", new EditorScreen());
+	rt::ScreenManager::Get()->AddScreen("main_menu", new rt::Screen("./data/worlds/main_menu_screen.world"));
+	rt::ScreenManager::Get()->AddScreen("lobby_dwarfs", new rt::Screen("./data/worlds/lobby_dwarfs_screen.world"));
+	//rt::ScreenManager::Get()->AddScreen("editor", new EditorScreen());
 
-	rt::ScreenManager::Get()->ChangeScreen("editor");
+	rt::ScreenManager::Get()->ChangeScreen("main_menu");
 
 	gameCore.Run();
 

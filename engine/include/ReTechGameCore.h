@@ -40,8 +40,8 @@ namespace rt
 	protected:
 		void recreateWindow();
 
-		Poco::SharedPtr<sf::RenderWindow>	mMainWindow;
-		Poco::SharedPtr<sf::View>			mMainView;
+		boost::shared_ptr<sf::RenderWindow>	mMainWindow;
+		boost::shared_ptr<sf::View>			mMainView;
 
 		OptionsManager		mOptionsManager;
 

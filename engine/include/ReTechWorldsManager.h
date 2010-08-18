@@ -10,8 +10,8 @@ namespace rt
 	class WorldsManager : public Singleton<WorldsManager>
 	{
 	public:
-		typedef std::list<Poco::SharedPtr<World>>	WorldsVec;
-		typedef std::vector<WorldObject*>			ObjectsVec;
+		typedef std::list<boost::shared_ptr<World>>			WorldsVec;
+		typedef std::vector<boost::weak_ptr<WorldObject>>	ObjectsVec;
 
 		class IsNamed
 		{
@@ -19,7 +19,7 @@ namespace rt
 			IsNamed(const std::string& iName)
 				: mName(iName){}
 
-			bool operator()(const Poco::SharedPtr<World>& iWorld);
+			bool operator()(const boost::shared_ptr<World>& iWorld);
 
 		protected:
 			std::string mName;
@@ -30,12 +30,12 @@ namespace rt
 
 		void Update(float iFrameTime);
 
-		World* CreateWorld(const std::string& iName);
+		World* CreateWorld(const std::string& iName, int iLayer = 0);
 		void DestroyWorld(const std::string& iName);
 
 		World* GetWorld(const std::string& iName);
 
-		void GetVisibleObjects(std::vector<WorldObject*>& iVisibleObjects);
+		void GetVisibleObjects(std::vector<boost::weak_ptr<WorldObject>>& iVisibleObjects);
 
 		sf::Vector2f ScreenToWorld(unsigned int iX, unsigned int iY);
 

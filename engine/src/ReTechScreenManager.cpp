@@ -24,7 +24,7 @@ namespace rt
 			LogManager::Get()->Warning(iScreenName + " already exists");
 		}
 
-		mScreens[iScreenName].assign(iScreen);
+		mScreens[iScreenName].reset(iScreen);
 	}
 
 	void ScreenManager::Update( float iFrameTime )
@@ -42,7 +42,7 @@ namespace rt
 			mScreenStack.back()->Paused();
 		}
 
-		mScreenStack.push_back(mScreens[iScreenName]);
+		mScreenStack.push_back(mScreens[iScreenName].get());
 
 		mScreenStack.back()->Pushed();
 	}

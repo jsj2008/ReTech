@@ -10,6 +10,8 @@ namespace rt
 	class RenderManager : public Singleton<RenderManager>
 	{
 	public:
+		typedef std::vector<boost::weak_ptr<WorldObject>> WorldObjectsVec;
+
 		RenderManager();
 		~RenderManager();
 
@@ -19,15 +21,19 @@ namespace rt
 		void MoverCameraCenter(float iDeltaX, float iDeltaY);
 		void SetCameraZoom(float iZoom);
 
-		static bool Sort(WorldObject* iFirst, WorldObject* iSecond);
+		static bool Sort(boost::weak_ptr<WorldObject> iFirst, boost::weak_ptr<WorldObject> iSecond);
 
 		void SetRenderStatistics(bool iRenderStatistics);
+
+		const WorldObjectsVec& GetVisibleObjectsCache();
 
 	protected:
 		void renderStatistics();
 
-		bool		mRenderStatistics;
-		sf::Text	mStatisticsText;
+		bool			mRenderStatistics;
+		sf::Text		mStatisticsText;
+
+		WorldObjectsVec	mVisibleObjectsCache;
 	};
 }
 

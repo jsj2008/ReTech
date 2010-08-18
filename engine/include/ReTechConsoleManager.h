@@ -37,7 +37,7 @@ namespace rt
 			fastdelegate::FastDelegate0<>	mFunction;
 		};
 
-		typedef std::map<std::string, Poco::SharedPtr<BaseExec> > ExecMap;
+		typedef std::map<std::string, boost::shared_ptr<BaseExec> > ExecMap;
 
 		ConsoleManager();
 		~ConsoleManager();
@@ -45,19 +45,19 @@ namespace rt
 		template<class C>
 		void RegisterExec(const std::string& iExecName, void(C::*iFunc)(void), C* iObject)
 		{
-			mExecs[iExecName].assign(new ExecHolder<void>(fastdelegate::MakeDelegate(iObject, iFunc)));
+			mExecs[iExecName].reset(new ExecHolder<void>(fastdelegate::MakeDelegate(iObject, iFunc)));
 		}
 
 		template<class T, class C>
 		void RegisterExec(const std::string& iExecName, void(C::*iFunc)(T), C* iObject)
 		{
-			mExecs[iExecName].assign(new ExecHolder<T>(fastdelegate::FastDelegate1<T>(iObject, iFunc)));
+			mExecs[iExecName].reset(new ExecHolder<T>(fastdelegate::FastDelegate1<T>(iObject, iFunc)));
 		}
 
 		template<class T, class C>
 		void RegisterExec(const std::string& iExecName, void(C::*iFunc)(T&), C* iObject)
 		{
-			mExecs[iExecName].assign(new ExecHolder<T&>(fastdelegate::FastDelegate1<T&>(iObject, iFunc)));
+			mExecs[iExecName].reset(new ExecHolder<T&>(fastdelegate::FastDelegate1<T&>(iObject, iFunc)));
 			mExecs[iExecName]->mRefArg = true;
 		}
 

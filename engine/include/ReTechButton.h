@@ -16,8 +16,11 @@ namespace rt
 		virtual void UnSerialize(const YAML::Node& iNode);
 		virtual void Serialize(YAML::Emitter& iEmitter) const;
 
-		bool IsInside(const sf::Vector2f& iPoint);
-		bool HandleEvent(const sf::Event& iEvent);
+		virtual bool IsMouseInside(const sf::Vector2f& iMousePos);
+		virtual bool HandleFocusedEvent(const sf::Event& iEvent);
+
+		virtual void MouseEnter();
+		virtual void MouseLeave();
 
 	protected:
 		std::string		mNormalResource;
@@ -25,10 +28,6 @@ namespace rt
 
 		std::string		mOnPressExec;
 		std::string		mOnPressExecParam;
-
-		bool			mIsMouseOver;
-
-		InputManager::InputHandler mHandler;
 	};
 }
 

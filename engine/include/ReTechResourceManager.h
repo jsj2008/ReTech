@@ -9,7 +9,7 @@ namespace rt
 	{
 	public:
 		typedef std::map<std::string, std::string> StringMap;
-		typedef Poco::HashMap<std::string, Poco::SharedPtr<Resource>> ResourceMap;
+		typedef Poco::HashMap<std::string, boost::shared_ptr<Resource>> ResourceMap;
 
 		ResourceManager();
 		~ResourceManager();

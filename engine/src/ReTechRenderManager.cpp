@@ -21,16 +21,15 @@ namespace rt
 	{
  		GameCore::Get()->GetMainWindow()->Clear(sf::Color(0, 0, 0));
  
- 		std::vector<WorldObject*> visibleObjects;
-
-		WorldsManager::Get()->GetVisibleObjects(visibleObjects);
+		mVisibleObjectsCache.clear();
+		WorldsManager::Get()->GetVisibleObjects(mVisibleObjectsCache);
  
- 		std::sort(visibleObjects.begin(), visibleObjects.end(), RenderManager::Sort);
+ 		std::sort(mVisibleObjectsCache.begin(), mVisibleObjectsCache.end(), RenderManager::Sort);
  
- 		std::vector<WorldObject*>::iterator end = visibleObjects.end();
- 		for(std::vector<WorldObject*>::iterator iter = visibleObjects.begin(); iter != end; ++iter)
+ 		WorldObjectsVec::iterator end = mVisibleObjectsCache.end();
+ 		for(WorldObjectsVec::iterator iter = mVisibleObjectsCache.begin(); iter != end; ++iter)
  		{
- 			(*iter)->Draw(GameCore::Get()->GetMainWindow());
+ 			(*iter).lock()->Draw(GameCore::Get()->GetMainWindow());
  		}
 
 		if(mRenderStatistics)
@@ -41,9 +40,9 @@ namespace rt
  		GameCore::Get()->GetMainWindow()->Display();
 	}
 
-	bool RenderManager::Sort(WorldObject* iFirst, WorldObject* iSecond)
+	bool RenderManager::Sort(boost::weak_ptr<WorldObject> iFirst, boost::weak_ptr<WorldObject> iSecond)
 	{
-		return iFirst->LowerThen(iSecond);
+		return iFirst.lock()->LowerThen(iSecond.lock().get());
 	}
 
 	void RenderManager::SetCameraCenter( float iX, float iY )
@@ -64,6 +63,11 @@ namespace rt
 	void RenderManager::SetRenderStatistics( bool iRenderStatistics )
 	{
 		mRenderStatistics = iRenderStatistics;
+	}
+
+	const RenderManager::WorldObjectsVec& RenderManager::GetVisibleObjectsCache()
+	{
+		return mVisibleObjectsCache;
 	}
 
 	void RenderManager::renderStatistics()

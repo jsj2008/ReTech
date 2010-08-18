@@ -10,7 +10,7 @@ namespace rt
 	class ScreenManager : public Singleton<ScreenManager>
 	{
 	public:
-		typedef std::map<std::string, Poco::SharedPtr<Screen>>	ScreensMap;
+		typedef std::map<std::string, boost::shared_ptr<Screen>>	ScreensMap;
 		typedef std::vector<Screen*>							ScreenStack;
 
 		ScreenManager();

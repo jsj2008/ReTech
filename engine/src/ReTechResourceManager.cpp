@@ -25,7 +25,7 @@ namespace rt
 			return 0;
 		}
 
-		return mResources[resourceName];
+		return mResources[resourceName].get();
 	}
 
 	void ResourceManager::RegisterExtension( const std::string& iExtension, const std::string& iTypeName )
@@ -68,7 +68,7 @@ namespace rt
 				if(newResource != 0)
 				{
 					newResource->Initialize(*iter);
-					mResources[*iter].assign(newResource);
+					mResources[*iter].reset(newResource);
 				}
 				else
 				{

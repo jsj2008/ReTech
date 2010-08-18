@@ -37,7 +37,7 @@ namespace rt
 		int width = OptionsManager::Get()->GetOption("width").ToInt();
 		int height = OptionsManager::Get()->GetOption("height").ToInt();
 
-		mMainView.assign(new sf::View(sf::Vector2f(width * 0.5f, height * 0.5f), 
+		mMainView.reset(new sf::View(sf::Vector2f(width * 0.5f, height * 0.5f), 
 			sf::Vector2f(static_cast<float>(width), static_cast<float>(height))));
 
 		recreateWindow();
@@ -139,7 +139,7 @@ namespace rt
 		int width = OptionsManager::Get()->GetOption("width").ToInt();
 		int height = OptionsManager::Get()->GetOption("height").ToInt();
 
-		mMainWindow.assign(new sf::RenderWindow(sf::VideoMode(width, height, OptionsManager::Get()->GetOption("bpp").ToInt()), 
+		mMainWindow.reset(new sf::RenderWindow(sf::VideoMode(width, height, OptionsManager::Get()->GetOption("bpp").ToInt()), 
 			OptionsManager::Get()->GetOption("title").ToString(), mIsFullscreen ? sf::Style::Fullscreen : sf::Style::Close));
 
 		if(!mIsFullscreen)

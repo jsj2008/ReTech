@@ -18,7 +18,7 @@ namespace rt
 		virtual void Update(float iFrameTime);
 
 	protected:
-		Poco::SharedPtr<FrameAnimation> mAnimation;
+		boost::shared_ptr<FrameAnimation> mAnimation;
 	};
 }
 

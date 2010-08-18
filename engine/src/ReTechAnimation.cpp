@@ -21,7 +21,7 @@ namespace rt
 
 		SafeGet(iNode, "file", animationFile);
 
-		mAnimation.assign(new FrameAnimation(animationFile, &mSprite));
+		mAnimation.reset(new FrameAnimation(animationFile, &mSprite));
 	}
 
 	void Animation::Serialize( YAML::Emitter& iEmitter ) const
