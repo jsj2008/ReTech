@@ -15,6 +15,8 @@
 
 namespace rt
 {
+	typedef unsigned int RTID;
+
 	class Atom;
 
 	class GameCore : public Singleton<GameCore>
@@ -29,7 +31,7 @@ namespace rt
 		void Stop();
 		void Shutdown();
 
-		int CreateUniqueId();
+		RTID CreateUniqueId();
 
 		sf::RenderWindow*	GetMainWindow();
 		sf::View*			GetMainView();
@@ -56,7 +58,7 @@ namespace rt
 		bool				mIsFullscreen;
 
 		int					mRandomizeSeed;
-		static int			mLastId;
+		static RTID			mLastId;
 	};
 }
 

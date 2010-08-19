@@ -7,7 +7,7 @@
 namespace rt
 {
 	WorldObject::WorldObject()
-		: mVisible(true), mEnabled(true), mLayer(0), mWorld(0)
+		: mVisible(true), mEnabled(true), mLayer(0), mWorld(0), mUniqueID(GameCore::Get()->CreateUniqueId())
 	{
 		mClassName = "WorldObject";
 
@@ -22,25 +22,34 @@ namespace rt
 
 	void WorldObject::UnSerialize( const YAML::Node& iNode )
 	{
+		RTID savedID = -1;
+		if(SafeGet(iNode, "id", savedID))
+		{
+			mWorld->AddIDPair(savedID, mUniqueID);
+		}
+
 		for(SerializeableVecIter iter = mProperties.begin(); iter != mProperties.end(); ++iter)
 		{
 			(*iter)->UnSerialize(iNode);
 		}
 	}
 
-	void WorldObject::Serialize( YAML::Emitter& iEmitter ) const
+	void WorldObject::Serialize( YAML::Emitter& iEmitter )
 	{
-		iEmitter << YAML::BeginMap;
-
 		iEmitter << YAML::Key << "class";
 		iEmitter << YAML::Value << GetClassName();
+		iEmitter << YAML::Key << "id";
+		iEmitter << YAML::Value << mUniqueID;
 
 		for(SerializeableVec::const_iterator iter = mProperties.begin(); iter != mProperties.end(); ++iter)
 		{
 			(*iter)->Serialize(iEmitter);
 		}
+	}
 
-		iEmitter << YAML::EndMap;
+	void WorldObject::Fix()
+	{
+
 	}
 
 	std::string WorldObject::GetClassName() const
@@ -140,6 +149,11 @@ namespace rt
 	World* WorldObject::GetWorld() const
 	{
 		return mWorld;
+	}
+
+	rt::RTID WorldObject::GetUniqueID()
+	{
+		return mUniqueID;
 	}
 
 	void WorldObject::Render( sf::RenderTarget& target, sf::Renderer& renderer ) const

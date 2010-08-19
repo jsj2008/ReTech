@@ -10,12 +10,14 @@ namespace rt
 	public:
 		typedef std::list<boost::shared_ptr<WorldObject>>	ObjectsManagedVec;
 		typedef std::vector<boost::weak_ptr<WorldObject>>	ObjectsWeakVec;
+		typedef std::map<RTID, RTID>						RTIDMap;
 
 		World(const std::string& iName, int iLayer);
 		~World();
 
 		void AddObject(WorldObject* iObject);
 		void DestroyObject(WorldObject* iObject);
+		WorldObject* GetObject(const RTID& iObjectID);
 
 		void Update(float iFrameTime);
 
@@ -40,6 +42,11 @@ namespace rt
 		int GetLayer() const;
 		void SetLayer(int iLayer);
 
+		void AddIDPair(const RTID& iOld, const RTID& iNew);
+		RTID ResolveID(const RTID& iOld);
+
+		void FixObjects();
+
 	protected:
 		std::string			mName;
 
@@ -54,6 +61,8 @@ namespace rt
 		bool				mIsVisible;
 
 		bool				mShowAfterLoad;
+
+		RTIDMap				mIDResolveMap;
 
 		boost::shared_ptr<CollectionIterator>	mDocumentIterator;
 		boost::shared_ptr<CollectionIterator>	mObjectsIterator;

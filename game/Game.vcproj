@@ -221,6 +221,14 @@
 		<Filter
 			Name="Objects"
 			>
+			<File
+				RelativePath=".\src\Waypoint.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\Waypoint.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath=".\src\Game.cpp"

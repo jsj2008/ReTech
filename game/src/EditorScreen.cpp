@@ -1,6 +1,8 @@
 #include "GameCommonIncludes.h"
 #include "EditorScreen.h"
 
+#include "Waypoint.h"
+
 EditorScreen::EditorScreen()
 	: Screen(""), mEditingWorld(0)
 {
@@ -59,14 +61,12 @@ void EditorScreen::Save()
 
 bool EditorScreen::HandleEvent( const sf::Event& iEvent )
 {
-	if(iEvent.Type == sf::Event::MouseButtonReleased)
+	if(iEvent.Type == sf::Event::MouseButtonReleased && iEvent.MouseButton.Button == sf::Mouse::Left)
 	{
-		rt::Circle* newCircle = new rt::Circle();
-		newCircle->SetCenter(sf::Vector2f(iEvent.MouseButton.X, iEvent.MouseButton.Y), 7.0f);
-		newCircle->SetBrush(sf::Color(82, 255, 63, 255));
-		newCircle->SetOutline(2.0f, sf::Color(82, 97, 63, 255));
+		Waypoint* newWaypoint = new Waypoint();
+		newWaypoint->SetPosition(static_cast<float>(iEvent.MouseButton.X), static_cast<float>(iEvent.MouseButton.Y));
 
-		mEditingWorld->AddObject(newCircle);
+		mEditingWorld->AddObject(newWaypoint);
 
 		return true;
 	}

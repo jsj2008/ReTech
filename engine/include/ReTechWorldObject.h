@@ -16,7 +16,9 @@ namespace rt
 		virtual ~WorldObject();
 
 		virtual void UnSerialize(const YAML::Node& iNode);
-		virtual void Serialize(YAML::Emitter& iEmitter) const;
+		virtual void Serialize(YAML::Emitter& iEmitter);
+
+		virtual void Fix();
 
 		virtual std::string GetClassName() const;
 
@@ -45,6 +47,8 @@ namespace rt
 
 		void SetWorld(World* iWorld);
 		World* GetWorld() const;
+
+		RTID GetUniqueID();
 
 		template<class T>
 		void CreateVarProperty(const std::string& iName, T& iVariable)
@@ -78,6 +82,8 @@ namespace rt
 		std::string			mClassName;
 
 		SerializeableVec	mProperties;
+
+		RTID				mUniqueID;
 	};
 }
 

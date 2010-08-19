@@ -32,7 +32,7 @@ namespace rt
 		SetResource(mNormalResource);
 	}
 
-	void Button::Serialize( YAML::Emitter& iEmitter ) const
+	void Button::Serialize( YAML::Emitter& iEmitter )
 	{
 		WorldObject::Serialize(iEmitter);
 	}

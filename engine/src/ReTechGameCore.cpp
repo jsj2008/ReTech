@@ -17,7 +17,7 @@
 
 URegisterSingleton(GameCore)
 
-int rt::GameCore::mLastId = 0;
+rt::RTID rt::GameCore::mLastId = 0;
 
 namespace rt
 {
@@ -102,7 +102,7 @@ namespace rt
 	{
 	}
 
-	int GameCore::CreateUniqueId()
+	RTID GameCore::CreateUniqueId()
 	{
 		return mLastId++;
 	}

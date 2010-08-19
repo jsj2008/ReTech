@@ -33,6 +33,7 @@
 
 #include "yaml-cpp/yaml.h"
 #include "fastdelegates/fastdelegate.h"
+#include "SFMath.h"
 
 #include "ReTechLogManager.h"
 #include "ReTechGameCore.h"

@@ -13,7 +13,7 @@ namespace rt
 	{
 	}
 
-	void World::AddObject( WorldObject* iObject)
+	void World::AddObject( WorldObject* iObject )
 	{
 		iObject->SetWorld(this);
 
@@ -32,6 +32,19 @@ namespace rt
 		{
 			LogManager::Get()->Warning("Cannot destroy object. Out of world.");
 		}
+	}
+
+	WorldObject* World::GetObject( const RTID& iObjectID )
+	{
+		for(ObjectsManagedVec::iterator iter = mObjects.begin(); iter != mObjects.end(); ++iter)
+		{
+			if((*iter)->GetUniqueID() == iObjectID)
+			{
+				return (*iter).get();
+			}
+		}
+
+		return 0;
 	}
 
 	void World::Update( float iFrameTime )
@@ -79,9 +92,10 @@ namespace rt
 			if(!className.empty())
 			{
 				WorldObject* worldObject = static_cast<WorldObject*>(ObjectsFactory::CreateObject(className));
+				AddObject(worldObject);
 				mObjectsIterator->Node() >> worldObject;
 
-				AddObject(worldObject);
+				//AddObject(worldObject);
 			}
 
 			mObjectsIterator->Next();
@@ -93,6 +107,8 @@ namespace rt
 
 			mIsLoaded = true;
 			mIsLoading = false;
+
+			FixObjects();
 
 			if(mShowAfterLoad)
 			{
@@ -137,6 +153,8 @@ namespace rt
 			}
 		}
 
+		mIDResolveMap.clear();
+
 		mIsLoaded = false;
 	}
 
@@ -152,7 +170,9 @@ namespace rt
 
 		for(ObjectsManagedVec::iterator iter = mObjects.begin(); iter != mObjects.end(); ++iter)
 		{
+			myEmitter << YAML::BeginMap;
 			(*iter)->Serialize(myEmitter);
+			myEmitter << YAML::EndMap;
 		}
 
 		myEmitter << YAML::EndSeq;
@@ -161,6 +181,9 @@ namespace rt
 		std::ofstream myFile(iFileName.c_str());
 
 		myFile << myEmitter.c_str();
+
+		myFile.flush();
+		myFile.close();
 	}
 
 	void World::SetVisible( bool iVisible )
@@ -186,5 +209,38 @@ namespace rt
 	void World::SetLayer( int iLayer )
 	{
 		mLayer = iLayer;
+	}
+
+	void World::AddIDPair( const RTID& iOld, const RTID& iNew )
+	{
+		if(mIDResolveMap.find(iOld) != mIDResolveMap.end())
+		{
+			LogManager::Get()->Warning("ID pair already exists");
+			return;
+		}
+
+		mIDResolveMap[iOld] = iNew;
+	}
+
+	rt::RTID World::ResolveID( const RTID& iOld )
+	{
+		if(mIDResolveMap.find(iOld) == mIDResolveMap.end())
+		{
+			LogManager::Get()->Warning("ID pair dont exists");
+			return -1;
+		}
+
+		return mIDResolveMap[iOld];
+	}
+
+	void World::FixObjects()
+	{
+		for(ObjectsManagedVec::iterator iter = mObjects.begin(); iter != mObjects.end(); ++iter)
+		{
+			if((*iter))
+			{
+				(*iter)->Fix();
+			}
+		}
 	}
 }
