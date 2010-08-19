@@ -4,7 +4,7 @@
 Waypoint* Waypoint::mSelectedWaypoint = 0;
 
 Waypoint::Waypoint()
-	: mDotRadius(8.0f)
+	: mDotRadius(8.0f), mCanDrag(false), mWasDragged(false)
 {
 	mClassName = "Waypoint";
 
@@ -21,6 +21,14 @@ Waypoint::Waypoint()
 	mRenderLine.SetBrush(2.0f, sf::Color(255, 255, 0, 255));
 }
 
+Waypoint::~Waypoint()
+{
+	for(WaypointsVec::const_iterator iter = mConnectedWaypoints.begin(); iter != mConnectedWaypoints.end(); ++iter)
+	{
+		(*iter)->Disconnect(this);
+	}
+}
+
 void Waypoint::Serialize( YAML::Emitter& iEmitter )
 {
 	//populate IDs vector
@@ -35,6 +43,8 @@ void Waypoint::Serialize( YAML::Emitter& iEmitter )
 
 void Waypoint::Fix()
 {
+	mSelectedWaypoint = 0;
+
 	for(IDsVec::iterator iter = mConnectedWaypointsIDs.begin(); iter != mConnectedWaypointsIDs.end(); ++iter)
 	{
 		WorldObject* worldObject = mWorld->GetObject(mWorld->ResolveID((*iter)));
@@ -68,27 +78,57 @@ bool Waypoint::IsMouseInside( const sf::Vector2f& iMousePos )
 
 bool Waypoint::HandleFocusedEvent( const sf::Event& iEvent )
 {
-	if(iEvent.Type == sf::Event::MouseButtonReleased && iEvent.MouseButton.Button == sf::Mouse::Left)
+	if(iEvent.Type == sf::Event::MouseMoved)
 	{
-		if(!mSelectedWaypoint)
+		if(mCanDrag)
 		{
-			mSelectedWaypoint = this;
-			mRenderDot.SetBrush(mSelectedColor);
-		}
-		else if(mSelectedWaypoint != this)
-		{
-			mSelectedWaypoint->Connect(this);
-			Connect(mSelectedWaypoint);
+			mWasDragged = true;
 
-			mSelectedWaypoint->SetColor(mNormalColor);
-			mRenderDot.SetBrush(mSelectedColor);
-			mSelectedWaypoint = this;
+			SetPosition(static_cast<float>(iEvent.MouseMove.X), static_cast<float>(iEvent.MouseMove.Y));
 		}
-		else
+	}
+
+	if(iEvent.MouseButton.Button == sf::Mouse::Left)
+	{
+		if(iEvent.Type == sf::Event::MouseButtonPressed)
 		{
-			mRenderDot.SetBrush(mHoverColor);
-			mSelectedWaypoint = 0;
+			mCanDrag = true;
 		}
+		else if(iEvent.Type == sf::Event::MouseButtonReleased)
+		{
+			mCanDrag = false;
+
+			if(mWasDragged)
+			{
+				mWasDragged = false;
+			}
+			else
+			{
+				if(!mSelectedWaypoint)
+				{
+					mSelectedWaypoint = this;
+					mRenderDot.SetBrush(mSelectedColor);
+				}
+				else if(mSelectedWaypoint != this)
+				{
+					mSelectedWaypoint->Connect(this);
+					Connect(mSelectedWaypoint);
+
+					mSelectedWaypoint->SetColor(mNormalColor);
+					mRenderDot.SetBrush(mSelectedColor);
+					mSelectedWaypoint = this;
+				}
+				else
+				{
+					mRenderDot.SetBrush(mHoverColor);
+					mSelectedWaypoint = 0;
+				}
+			}
+		}
+	}
+	else if(iEvent.MouseButton.Button == sf::Mouse::Right)
+	{
+		mWorld->DestroyObject(this);
 	}
 
 	return true;

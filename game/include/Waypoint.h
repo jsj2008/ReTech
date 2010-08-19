@@ -8,6 +8,7 @@ public:
 	typedef std::vector<rt::RTID>	IDsVec;
 
 	Waypoint();
+	virtual ~Waypoint();
 
 	virtual void Serialize(YAML::Emitter& iEmitter);
 
@@ -33,6 +34,9 @@ protected:
 	sf::Color			mSelectedColor;
 
 	float				mDotRadius;
+
+	bool				mCanDrag;
+	bool				mWasDragged;
 
 	rt::Line			mRenderLine;
 

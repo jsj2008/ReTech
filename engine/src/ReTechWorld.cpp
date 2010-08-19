@@ -22,16 +22,23 @@ namespace rt
 
 	void World::DestroyObject( WorldObject* iObject )
 	{
-		ObjectsManagedVec::iterator finded = std::find(mObjects.begin(), mObjects.end(), boost::shared_ptr<WorldObject>(iObject));
-
-		if(finded != mObjects.end())
+		for(ObjectsManagedVec::iterator iter = mObjects.begin(); iter != mObjects.end(); ++iter)
 		{
-			(*finded).reset(static_cast<WorldObject*>(0));
+			if((*iter).get() == iObject)
+			{
+				(*iter).reset();
+			}
 		}
-		else
-		{
-			LogManager::Get()->Warning("Cannot destroy object. Out of world.");
-		}
+// 		ObjectsManagedVec::iterator finded = std::find(mObjects.begin(), mObjects.end(), boost::shared_ptr<WorldObject>(iObject));
+// 
+// 		if(finded != mObjects.end())
+// 		{
+// 			(*finded).reset();
+// 		}
+// 		else
+// 		{
+// 			LogManager::Get()->Warning("Cannot destroy object. Out of world.");
+// 		}
 	}
 
 	WorldObject* World::GetObject( const RTID& iObjectID )
