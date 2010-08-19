@@ -1,6 +1,8 @@
 #include "GameCommonIncludes.h"
 #include "Waypoint.h"
 
+#include "EditorScreen.h"
+
 Waypoint* Waypoint::mSelectedWaypoint = 0;
 
 Waypoint::Waypoint()
@@ -10,23 +12,19 @@ Waypoint::Waypoint()
 
 	CreateVarProperty("connections", mConnectedWaypointsIDs);
 
-	mNormalColor = sf::Color(82, 255, 63, 255);
-	mHoverColor = sf::Color(82, 0, 63, 255);
-	mSelectedColor = sf::Color(255, 0, 0, 255);
+	mNormalColor = sf::Color(82, 255, 63, 128);
+	mHoverColor = sf::Color(82, 0, 63, 128);
 
 	mRenderDot.SetCenter(sf::Vector2f(0.0f, 0.0f), mDotRadius);
 	mRenderDot.SetBrush(mNormalColor);
-	mRenderDot.SetOutline(1.0f, sf::Color(128, 128, 128, 255));
+	mRenderDot.SetOutline(1.0f, sf::Color(128, 128, 128, 128));
 
-	mRenderLine.SetBrush(2.0f, sf::Color(255, 255, 0, 255));
+	mRenderLine.SetBrush(2.0f, sf::Color(255, 255, 0, 128));
 }
 
 Waypoint::~Waypoint()
 {
-	for(WaypointsVec::const_iterator iter = mConnectedWaypoints.begin(); iter != mConnectedWaypoints.end(); ++iter)
-	{
-		(*iter)->Disconnect(this);
-	}
+
 }
 
 void Waypoint::Serialize( YAML::Emitter& iEmitter )
@@ -80,7 +78,7 @@ bool Waypoint::HandleFocusedEvent( const sf::Event& iEvent )
 {
 	if(iEvent.Type == sf::Event::MouseMoved)
 	{
-		if(mCanDrag)
+		if(mCanDrag && !EditorScreen::Get()->IsSpecialMode())
 		{
 			mWasDragged = true;
 
@@ -102,33 +100,31 @@ bool Waypoint::HandleFocusedEvent( const sf::Event& iEvent )
 			{
 				mWasDragged = false;
 			}
-			else
+			else if(EditorScreen::Get()->IsSpecialMode())
 			{
-				if(!mSelectedWaypoint)
-				{
-					mSelectedWaypoint = this;
-					mRenderDot.SetBrush(mSelectedColor);
-				}
-				else if(mSelectedWaypoint != this)
-				{
-					mSelectedWaypoint->Connect(this);
-					Connect(mSelectedWaypoint);
+				Waypoint* activeWaypoint = EditorScreen::Get()->GetActiveWaypoint();
 
-					mSelectedWaypoint->SetColor(mNormalColor);
-					mRenderDot.SetBrush(mSelectedColor);
-					mSelectedWaypoint = this;
-				}
-				else
+ 				if(!activeWaypoint)
+ 				{
+ 					EditorScreen::Get()->SetActiveWaypoint(this);
+ 				}
+				else if(activeWaypoint != this)
 				{
-					mRenderDot.SetBrush(mHoverColor);
-					mSelectedWaypoint = 0;
+					activeWaypoint->Connect(this);
+					Connect(activeWaypoint);
+					EditorScreen::Get()->SetActiveWaypoint(this);
 				}
 			}
 		}
 	}
-	else if(iEvent.MouseButton.Button == sf::Mouse::Right)
+	else if(iEvent.MouseButton.Button == sf::Mouse::Right && iEvent.Type == sf::Event::MouseButtonReleased)
 	{
-		mWorld->DestroyObject(this);
+		DisconnectAll();
+
+		if(!EditorScreen::Get()->IsSpecialMode())
+		{
+			mWorld->DestroyObject(this);
+		}
 	}
 
 	return true;
@@ -160,7 +156,12 @@ void Waypoint::Disconnect( Waypoint* iWaypoint )
 	mConnectedWaypoints.erase(iWaypoint);
 }
 
-void Waypoint::SetColor( const sf::Color& iColor )
+void Waypoint::DisconnectAll()
 {
-	mRenderDot.SetBrush(iColor);
+	for(WaypointsVec::const_iterator iter = mConnectedWaypoints.begin(); iter != mConnectedWaypoints.end(); ++iter)
+	{
+		(*iter)->Disconnect(this);
+	}
+
+	mConnectedWaypoints.clear();
 }

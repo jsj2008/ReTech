@@ -25,13 +25,12 @@ public:
 	void Connect(Waypoint* iWaypoint);
 	void Disconnect(Waypoint* iWaypoint);
 
-	void SetColor(const sf::Color& iColor);
+	void DisconnectAll();
 
 protected:
 	rt::Circle			mRenderDot;
 	sf::Color			mNormalColor;
 	sf::Color			mHoverColor;
-	sf::Color			mSelectedColor;
 
 	float				mDotRadius;
 
