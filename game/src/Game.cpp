@@ -3,10 +3,12 @@
 
 #include "EditorScreen.h"
 #include "Waypoint.h"
+#include "EditorWaypoint.h"
 
 int WINAPI WinMain(HINSTANCE /*hInstance*/, HINSTANCE /*hPrevInstance*/, LPSTR /*lpCmdLine*/, int /*nCmdShow*/)
 {
 	URegisterObject(Waypoint);
+	URegisterObject(EditorWaypoint);
 
 	rt::GameCore gameCore;
 

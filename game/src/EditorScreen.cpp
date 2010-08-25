@@ -1,7 +1,7 @@
 #include "GameCommonIncludes.h"
 #include "EditorScreen.h"
 
-#include "Waypoint.h"
+#include "EditorWaypoint.h"
 
 URegisterSingleton(EditorScreen)
 
@@ -29,6 +29,8 @@ EditorScreen::EditorScreen()
 
 	mWorld->AddObject(mPointerLine);
 
+	rt::ObjectsFactory::AddRedirect("Waypoint", "EditorWaypoint");
+
 	mWorldFileName = "test.world";
 }
 
@@ -36,6 +38,8 @@ EditorScreen::~EditorScreen()
 {
 	rt::WorldsManager::Get()->DestroyWorld("Editor");
 	rt::InputManager::Get()->UnregisterHandler(&mHandler);
+
+	rt::ObjectsFactory::RemoveRedirect("Waypoint");
 }
 
 void EditorScreen::Pushed()
@@ -65,7 +69,7 @@ void EditorScreen::New()
 	mEditingWorld = rt::WorldsManager::Get()->CreateWorld("Editor");
 	mWorldFileName = "test.world";
 
-	mActiveWaypoint = 0;
+	ResetActiveWaypoint();
 }
 
 void EditorScreen::Load()
@@ -90,7 +94,7 @@ bool EditorScreen::HandleEvent( const sf::Event& iEvent )
 	{
 		if(!mIsSpecialMode || mActiveWaypoint)
 		{
-			Waypoint* newWaypoint = new Waypoint();
+			EditorWaypoint* newWaypoint = new EditorWaypoint();
 			newWaypoint->SetPosition(static_cast<float>(iEvent.MouseButton.X), static_cast<float>(iEvent.MouseButton.Y));
 
 			mEditingWorld->AddObject(newWaypoint);
@@ -110,14 +114,19 @@ bool EditorScreen::HandleEvent( const sf::Event& iEvent )
 	return false;
 }
 
-void EditorScreen::SetActiveWaypoint( Waypoint* iWaypoint )
+void EditorScreen::SetActiveWaypoint( EditorWaypoint* iWaypoint )
 {
 	mActiveWaypoint = iWaypoint;
 }
 
-Waypoint* EditorScreen::GetActiveWaypoint()
+EditorWaypoint* EditorScreen::GetActiveWaypoint()
 {
 	return mActiveWaypoint;
+}
+
+void EditorScreen::ResetActiveWaypoint()
+{
+	mActiveWaypoint = 0;
 }
 
 void EditorScreen::SetSpicialMode( bool iActive )
@@ -128,7 +137,7 @@ void EditorScreen::SetSpicialMode( bool iActive )
 
 	if(!iActive)
 	{
-		mActiveWaypoint = 0;
+		ResetActiveWaypoint();
 	}
 }
 

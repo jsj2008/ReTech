@@ -45,7 +45,8 @@
 //utilities helpers
 #define UResource(Type, Name) static_cast<Type*>(ResourceManager::Get()->GetResource(Name))
 
-#define URegisterObject(Class) rt::ObjectsFactory::RegisterObject<Class>(""#Class)
+#define URegisterObject(Class) URegisterObjectName(Class, ""#Class)
+#define URegisterObjectName(Class, Name) rt::ObjectsFactory::RegisterObject<Class>(Name)
 
 #define URegisterSingleton(Class) rt::Class* rt::Singleton<rt::Class>::mInstance = 0;
 

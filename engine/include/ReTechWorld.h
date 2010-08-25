@@ -19,6 +19,8 @@ namespace rt
 		void DestroyObject(WorldObject* iObject);
 		WorldObject* GetObject(const RTID& iObjectID);
 
+		void QueryObjects(const sf::Vector2f& iPoint, std::vector<WorldObject*>& iObjects);
+
 		void Update(float iFrameTime);
 
 		void GetVisibleObjects(std::vector<boost::weak_ptr<WorldObject>>& iVisibleObjects);

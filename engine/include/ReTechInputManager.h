@@ -35,6 +35,8 @@ namespace rt
 
 		sf::Vector2f GetMousePosition();
 
+		void SetFocusLock(bool iFocusLock);
+
 	protected:
 		template <class T>
 		void processUnary(T iKey, std::multimap<T, std::string>& iStorage)
@@ -87,6 +89,8 @@ namespace rt
 		HandlersList					mHandlers;
 
 		boost::weak_ptr<WorldObject>	mFocusedObject;
+
+		bool							mFocusLock;
 	};
 }
 

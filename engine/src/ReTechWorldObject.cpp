@@ -81,7 +81,7 @@ namespace rt
 		return false;
 	}
 
-	bool WorldObject::IsMouseInside( const sf::Vector2f& iMousePos )
+	bool WorldObject::IsPointInside( const sf::Vector2f& iMousePos )
 	{
 		return false;
 	}

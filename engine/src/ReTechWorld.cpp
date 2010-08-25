@@ -29,16 +29,6 @@ namespace rt
 				(*iter).reset();
 			}
 		}
-// 		ObjectsManagedVec::iterator finded = std::find(mObjects.begin(), mObjects.end(), boost::shared_ptr<WorldObject>(iObject));
-// 
-// 		if(finded != mObjects.end())
-// 		{
-// 			(*finded).reset();
-// 		}
-// 		else
-// 		{
-// 			LogManager::Get()->Warning("Cannot destroy object. Out of world.");
-// 		}
 	}
 
 	WorldObject* World::GetObject( const RTID& iObjectID )
@@ -53,6 +43,20 @@ namespace rt
 
 		return 0;
 	}
+
+	void World::QueryObjects( const sf::Vector2f& iPoint, std::vector<WorldObject*>& iObjects )
+	{
+		for(ObjectsManagedVec::iterator iter = mObjects.begin(); iter != mObjects.end(); ++iter)
+		{
+			if((*iter))
+			{
+				if((*iter)->IsPointInside(iPoint))
+				{
+					iObjects.push_back((*iter).get());
+				}
+			}
+		}
+	}	
 
 	void World::Update( float iFrameTime )
 	{

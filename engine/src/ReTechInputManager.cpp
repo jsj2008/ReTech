@@ -9,6 +9,7 @@ URegisterSingleton(InputManager);
 namespace rt
 {
 	InputManager::InputManager()
+		: mFocusLock(false)
 	{
 
 	}
@@ -117,6 +118,11 @@ namespace rt
 		return WorldsManager::Get()->ScreenToWorld(GameCore::Get()->GetMainWindow()->GetInput().GetMouseX(), GameCore::Get()->GetMainWindow()->GetInput().GetMouseY());
 	}
 
+	void InputManager::SetFocusLock( bool iFocusLock )
+	{
+		mFocusLock = iFocusLock;
+	}
+
 	bool InputManager::isHandledByExternals(const sf::Event& iEvent)
 	{
 		mHandlers.erase(std::remove(mHandlers.begin(), mHandlers.end(), static_cast<InputHandler*>(0)), mHandlers.end());
@@ -141,33 +147,36 @@ namespace rt
 
 	void InputManager::updateFocused()
 	{
-		sf::Vector2f mousePos = GetMousePosition();
-		RenderManager::WorldObjectsVec visibleObjects = RenderManager::Get()->GetVisibleObjectsCache();
-
-		boost::weak_ptr<WorldObject> newFocused;
-		
-		for(RenderManager::WorldObjectsVec::reverse_iterator iter = visibleObjects.rbegin(); iter != visibleObjects.rend(); ++iter)
+		if(!mFocusLock)
 		{
-			if((*iter).lock()->IsMouseInside(mousePos))
-			{
-				newFocused = (*iter);
-				break;
-			}
-		}
+			sf::Vector2f mousePos = GetMousePosition();
+			RenderManager::WorldObjectsVec visibleObjects = RenderManager::Get()->GetVisibleObjectsCache();
 
-		if(newFocused.lock() != mFocusedObject.lock())
-		{
-			if(!mFocusedObject.expired())
-			{
-				mFocusedObject.lock()->MouseLeave();
-			}
+			boost::weak_ptr<WorldObject> newFocused;
 
-			if(!newFocused.expired())
+			for(RenderManager::WorldObjectsVec::reverse_iterator iter = visibleObjects.rbegin(); iter != visibleObjects.rend(); ++iter)
 			{
-				newFocused.lock()->MouseEnter();
+				if((*iter).lock()->IsPointInside(mousePos))
+				{
+					newFocused = (*iter);
+					break;
+				}
 			}
 
-			mFocusedObject = newFocused;
+			if(newFocused.lock() != mFocusedObject.lock())
+			{
+				if(!mFocusedObject.expired())
+				{
+					mFocusedObject.lock()->MouseLeave();
+				}
+
+				if(!newFocused.expired())
+				{
+					newFocused.lock()->MouseEnter();
+				}
+
+				mFocusedObject = newFocused;
+			}
 		}
 	}
 }

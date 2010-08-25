@@ -27,7 +27,7 @@ namespace rt
 
 		virtual bool LowerThen(const WorldObject* const iOther); 
 
-		virtual bool IsMouseInside(const sf::Vector2f& iMousePos);
+		virtual bool IsPointInside(const sf::Vector2f& iMousePos);
 		virtual bool HandleFocusedEvent(const sf::Event& iEvent);
 
 		virtual void MouseEnter();

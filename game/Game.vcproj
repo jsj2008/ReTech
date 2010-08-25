@@ -222,6 +222,14 @@
 			Name="Objects"
 			>
 			<File
+				RelativePath=".\src\EditorWaypoint.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\EditorWaypoint.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\Waypoint.cpp"
 				>
 			</File>

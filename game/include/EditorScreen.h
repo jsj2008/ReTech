@@ -1,7 +1,7 @@
 #ifndef __EditorScreen_H__
 #define __EditorScreen_H__
 
-class Waypoint;
+class EditorWaypoint;
 
 class EditorScreen : public rt::Screen, public rt::Singleton<EditorScreen>
 {
@@ -21,21 +21,22 @@ public:
 
 	bool HandleEvent(const sf::Event& iEvent);
 
-	void SetActiveWaypoint(Waypoint* iWaypoint);
-	Waypoint* GetActiveWaypoint();
+	void SetActiveWaypoint(EditorWaypoint* iWaypoint);
+	EditorWaypoint* GetActiveWaypoint();
+	void ResetActiveWaypoint();
 
 	void SetSpicialMode(bool iActive);
 	bool IsSpecialMode();
 
 protected:
-	rt::World*	mEditingWorld;
+	rt::World*		mEditingWorld;
 
-	std::string mWorldFileName;
+	std::string		mWorldFileName;
 
-	Waypoint*	mActiveWaypoint;
-	bool		mIsSpecialMode;
+	EditorWaypoint*	mActiveWaypoint;
+	bool			mIsSpecialMode;
 
-	rt::Line*	mPointerLine;
+	rt::Line*		mPointerLine;
 
 	rt::InputManager::InputHandler mHandler;
 };

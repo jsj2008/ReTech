@@ -37,7 +37,7 @@ namespace rt
 		WorldObject::Serialize(iEmitter);
 	}
 
-	bool Button::IsMouseInside( const sf::Vector2f& iMousePos )
+	bool Button::IsPointInside( const sf::Vector2f& iMousePos )
 	{
 		return sf::FloatRect(GetPosition(), mSprite.GetSize()).Contains(iMousePos);
 	}

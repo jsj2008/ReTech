@@ -16,7 +16,7 @@ namespace rt
 		virtual void UnSerialize(const YAML::Node& iNode);
 		virtual void Serialize(YAML::Emitter& iEmitter);
 
-		virtual bool IsMouseInside(const sf::Vector2f& iMousePos);
+		virtual bool IsPointInside(const sf::Vector2f& iMousePos);
 		virtual bool HandleFocusedEvent(const sf::Event& iEvent);
 
 		virtual void MouseEnter();
