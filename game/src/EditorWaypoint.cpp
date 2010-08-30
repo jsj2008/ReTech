@@ -52,6 +52,8 @@ bool EditorWaypoint::HandleFocusedEvent( const sf::Event& iEvent )
 
 			SetPosition(static_cast<float>(iEvent.MouseMove.X), static_cast<float>(iEvent.MouseMove.Y));
 		}
+
+		return true;
 	}
 
 	if(iEvent.MouseButton.Button == sf::Mouse::Left)
@@ -103,6 +105,8 @@ bool EditorWaypoint::HandleFocusedEvent( const sf::Event& iEvent )
 				}
 			}
 		}
+
+		return true;
 	}
 	else if(iEvent.MouseButton.Button == sf::Mouse::Right && iEvent.Type == sf::Event::MouseButtonReleased && !mCanDrag)
 	{
@@ -112,9 +116,11 @@ bool EditorWaypoint::HandleFocusedEvent( const sf::Event& iEvent )
 		{
 			mWorld->DestroyObject(this);
 		}
+
+		return true;
 	}
 
-	return true;
+	return false;
 }
 
 void EditorWaypoint::MouseEnter()
