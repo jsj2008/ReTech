@@ -1,5 +1,7 @@
 Prerequisites
 1 - Slik SVN Client (http://www.sliksvn.com/en/download)
+2 - MSysGit (http://code.google.com/p/msysgit/downloads/list)
+3 - CMake (http://www.cmake.org/cmake/resources/software.html)
 
 Workflow
 1 - If you don't have code dir with libraries or it is broken, use GetCleanCopy.bat.
