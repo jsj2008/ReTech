@@ -8,6 +8,7 @@
 *.pdb
 *.log
 *.suo
+*.sdf
 /dependencies/include
 /dependencies/lib
 /libraries/code

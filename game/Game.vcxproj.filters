@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Common">
+      <UniqueIdentifier>{f3d2797a-4b0a-4faf-9957-00f8055ae6bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Screens">
+      <UniqueIdentifier>{27c04dde-d386-4dec-839d-60f88f74949e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{ef35d4f5-1082-4faa-a5a1-a182850c6f13}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\GameCommonIncludes.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EditorScreen.cpp">
+      <Filter>Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EditorWaypoint.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Waypoint.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\GameCommonIncludes.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameLibraries.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EditorScreen.h">
+      <Filter>Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EditorWaypoint.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Waypoint.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

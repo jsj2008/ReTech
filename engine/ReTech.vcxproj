@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{CF22AF4E-AA31-479D-B054-E769566ED22B}</ProjectGuid>
+    <RootNamespace>Discord</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)/engine/lib\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)/engine/build/obj/$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)/engine/lib\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)/engine/build/obj/$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(SolutionDir)\engine\include;$(SolutionDir)\dependencies\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>ReTechCommonIncludes.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(ProjectName)_d.lib</OutputFile>
+      <IgnoreSpecificDefaultLibraries>libc.lib; libcmt.lib; msvcrt.lib; libcd.lib; libcmtd.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>$(SolutionDir)\engine\include;$(SolutionDir)\dependencies\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>ReTechCommonIncludes.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <IgnoreSpecificDefaultLibraries>libc.lib; libcmt.lib; msvcrt.lib; libcd.lib; libcmtd.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\ReTechAnimation.cpp" />
+    <ClCompile Include="src\ReTechCircle.cpp" />
+    <ClCompile Include="src\ReTechLine.cpp" />
+    <ClCompile Include="src\ReTechParticleSystem.cpp" />
+    <ClCompile Include="src\ReTechRectangle.cpp" />
+    <ClCompile Include="src\ReTechSprite.cpp" />
+    <ClCompile Include="src\ReTechText.cpp" />
+    <ClCompile Include="src\ReTechFont.cpp" />
+    <ClCompile Include="src\ReTechImage.cpp" />
+    <ClCompile Include="src\ReTechParticle.cpp" />
+    <ClCompile Include="src\ReTechSequence.cpp" />
+    <ClCompile Include="src\ReTechButton.cpp" />
+    <ClCompile Include="src\ReTechFrameAnimation.cpp" />
+    <ClCompile Include="src\ReTechGameCore.cpp" />
+    <ClCompile Include="src\ReTechCollectionIterator.cpp" />
+    <ClCompile Include="src\ReTechObjectsFactory.cpp" />
+    <ClCompile Include="src\ReTechSerializeable.cpp" />
+    <ClCompile Include="src\ReTechOption.cpp" />
+    <ClCompile Include="src\ReTechOptionsManager.cpp" />
+    <ClCompile Include="src\ReTechConsoleManager.cpp" />
+    <ClCompile Include="src\ReTechLogManager.cpp" />
+    <ClCompile Include="src\ReTechInputManager.cpp" />
+    <ClCompile Include="src\ReTechResource.cpp" />
+    <ClCompile Include="src\ReTechResourceManager.cpp" />
+    <ClCompile Include="src\ReTechWorld.cpp" />
+    <ClCompile Include="src\ReTechWorldObject.cpp" />
+    <ClCompile Include="src\ReTechWorldsManager.cpp" />
+    <ClCompile Include="src\ReTechRenderManager.cpp" />
+    <ClCompile Include="src\ReTechScreen.cpp" />
+    <ClCompile Include="src\ReTechScreenManager.cpp" />
+    <ClCompile Include="src\micropather.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\SfMath.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\ReTechCommonIncludes.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\ReTech.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\ReTechAnimation.h" />
+    <ClInclude Include="include\ReTechCircle.h" />
+    <ClInclude Include="include\ReTechLine.h" />
+    <ClInclude Include="include\ReTechParticleSystem.h" />
+    <ClInclude Include="include\ReTechRectangle.h" />
+    <ClInclude Include="include\ReTechSprite.h" />
+    <ClInclude Include="include\ReTechText.h" />
+    <ClInclude Include="include\ReTechFont.h" />
+    <ClInclude Include="include\ReTechImage.h" />
+    <ClInclude Include="include\ReTechParticle.h" />
+    <ClInclude Include="include\ReTechSequence.h" />
+    <ClInclude Include="include\ReTechButton.h" />
+    <ClInclude Include="include\ReTechFrameAnimation.h" />
+    <ClInclude Include="include\ReTechGameCore.h" />
+    <ClInclude Include="include\ReTechSingleton.h" />
+    <ClInclude Include="include\ReTechCollectionIterator.h" />
+    <ClInclude Include="include\ReTechObjectsFactory.h" />
+    <ClInclude Include="include\ReTechProperty.h" />
+    <ClInclude Include="include\ReTechSerializeable.h" />
+    <ClInclude Include="include\ReTechOption.h" />
+    <ClInclude Include="include\ReTechOptionsManager.h" />
+    <ClInclude Include="include\ReTechConsoleManager.h" />
+    <ClInclude Include="include\ReTechLogManager.h" />
+    <ClInclude Include="include\ReTechInputManager.h" />
+    <ClInclude Include="include\ReTechResource.h" />
+    <ClInclude Include="include\ReTechResourceManager.h" />
+    <ClInclude Include="include\ReTechWorld.h" />
+    <ClInclude Include="include\ReTechWorldObject.h" />
+    <ClInclude Include="include\ReTechWorldsManager.h" />
+    <ClInclude Include="include\ReTechRenderManager.h" />
+    <ClInclude Include="include\ReTechScreen.h" />
+    <ClInclude Include="include\ReTechScreenManager.h" />
+    <ClInclude Include="include\micropather.h" />
+    <ClInclude Include="include\SfMath.h" />
+    <ClInclude Include="include\ReTechCommonIncludes.h" />
+    <ClInclude Include="include\ReTechLibraries.h" />
+    <ClInclude Include="include\ReTech.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

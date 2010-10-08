@@ -1,12 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ReTech", "engine\ReTech.vcproj", "{CF22AF4E-AA31-479D-B054-E769566ED22B}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ReTech", "engine\ReTech.vcxproj", "{CF22AF4E-AA31-479D-B054-E769566ED22B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game", "game\Game.vcproj", "{E3708B7E-8FE0-4AEC-99D2-DE7C6E5EBE69}"
-	ProjectSection(ProjectDependencies) = postProject
-		{CF22AF4E-AA31-479D-B054-E769566ED22B} = {CF22AF4E-AA31-479D-B054-E769566ED22B}
-	EndProjectSection
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game", "game\Game.vcxproj", "{E3708B7E-8FE0-4AEC-99D2-DE7C6E5EBE69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

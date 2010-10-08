@@ -7,7 +7,6 @@
 #include <sstream>
 
 //External libs
-#define BOOST_ALL_DYN_LINK
 #include "boost/shared_ptr.hpp"
 #include "boost/weak_ptr.hpp"
 #include "boost/any.hpp"
