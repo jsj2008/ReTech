@@ -9,6 +9,8 @@
 *.log
 *.suo
 *.sdf
+*.opensdf
+/ipch
 /dependencies/include
 /dependencies/lib
 /libraries/code

@@ -100,17 +100,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\EditorScreen.cpp" />
-    <ClCompile Include="src\EditorWaypoint.cpp" />
-    <ClCompile Include="src\Waypoint.cpp" />
     <ClCompile Include="src\Game.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GameCommonIncludes.h" />
     <ClInclude Include="include\GameLibraries.h" />
-    <ClInclude Include="include\EditorScreen.h" />
-    <ClInclude Include="include\EditorWaypoint.h" />
-    <ClInclude Include="include\Waypoint.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\engine\ReTech.vcxproj">
