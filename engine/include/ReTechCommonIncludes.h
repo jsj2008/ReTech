@@ -6,21 +6,14 @@
 #include <fstream>
 #include <sstream>
 
+//External libs
+#define BOOST_ALL_DYN_LINK
 #include "boost/shared_ptr.hpp"
 #include "boost/weak_ptr.hpp"
-
-#define POCO_STATIC
-#include "POCO/SharedPtr.h"
-#include "POCO/DynamicFactory.h"
-#include "POCO/FileStream.h"
-#include "poco/SingletonHolder.h"
-#include "poco/NumberFormatter.h"
-#include "poco/NumberParser.h"
-#include "poco/Glob.h"
-#include "poco/Path.h"
-#include "poco/Any.h"
-#include "poco/HashMap.h"
-#include "poco/StringTokenizer.h"
+#include "boost/any.hpp"
+#include "boost/tokenizer.hpp"
+#include "boost/filesystem/path.hpp"
+#include "boost/lexical_cast.hpp"
 
 #include "SFML/Audio.hpp"
 #include "SFML/Graphics.hpp"
@@ -31,8 +24,10 @@
 #include "spark/SPK.h"
 #include "spark/SPK_SFML.h"
 
+//Extensions
 #include "yaml-cpp/yaml.h"
 #include "fastdelegates/fastdelegate.h"
+#include "micropather.h"
 #include "SFMath.h"
 
 #include "ReTechLogManager.h"
@@ -46,7 +41,7 @@
 #define UResource(Type, Name) static_cast<Type*>(ResourceManager::Get()->GetResource(Name))
 
 #define URegisterObject(Class) URegisterObjectName(Class, ""#Class)
-#define URegisterObjectName(Class, Name) rt::ObjectsFactory::RegisterObject<Class>(Name)
+#define URegisterObjectName(Class, Name) rt::ObjectsFactory<rt::Serializeable>::RegisterObject<Class>(Name)
 
 #define URegisterSingleton(Class) rt::Class* rt::Singleton<rt::Class>::mInstance = 0;
 

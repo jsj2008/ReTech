@@ -30,7 +30,7 @@ namespace rt
 
 	bool CollectionIterator::End()
 	{
-		return mSectionNode ? mCurrentIndex >= mSectionNode->size() : true;
+		return mSectionNode ? mCurrentIndex >= static_cast<int>(mSectionNode->size()) : true;
 	}
 
 	const YAML::Node& CollectionIterator::Node()

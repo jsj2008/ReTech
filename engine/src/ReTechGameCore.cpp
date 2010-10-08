@@ -43,7 +43,6 @@ namespace rt
 		recreateWindow();
 
 		mRandomizeSeed = (int)time(0);
-		SPK::randomSeed = mRandomizeSeed;
 
 		mLog.Initialize();
 

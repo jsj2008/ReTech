@@ -29,7 +29,7 @@ EditorScreen::EditorScreen()
 
 	mWorld->AddObject(mPointerLine);
 
-	rt::ObjectsFactory::AddRedirect("Waypoint", "EditorWaypoint");
+	rt::ObjectsFactory<rt::Serializeable>::AddRedirect("Waypoint", "EditorWaypoint");
 
 	mWorldFileName = "test.world";
 }
@@ -39,7 +39,7 @@ EditorScreen::~EditorScreen()
 	rt::WorldsManager::Get()->DestroyWorld("Editor");
 	rt::InputManager::Get()->UnregisterHandler(&mHandler);
 
-	rt::ObjectsFactory::RemoveRedirect("Waypoint");
+	rt::ObjectsFactory<rt::Serializeable>::RemoveRedirect("Waypoint");
 }
 
 void EditorScreen::Pushed()
@@ -74,10 +74,7 @@ void EditorScreen::New()
 
 void EditorScreen::Load()
 {
-	if(Poco::Path(mWorldFileName).isFile())
-	{
-		mEditingWorld->Load(mWorldFileName, true);
-	}
+	mEditingWorld->Load(mWorldFileName, true);
 }
 
 void EditorScreen::Save()

@@ -36,16 +36,16 @@ namespace rt
 
 	std::string Option::ToString()
 	{
-		return Poco::AnyCast<std::string>(mDataHolder);
+		return boost::any_cast<std::string>(mDataHolder);
 	}
 
 	int Option::ToInt()
 	{
-		return Poco::AnyCast<int>(mDataHolder);
+		return boost::any_cast<int>(mDataHolder);
 	}
 
 	float Option::ToFloat()
 	{
-		return Poco::AnyCast<float>(mDataHolder);
+		return boost::any_cast<float>(mDataHolder);
 	}
 }

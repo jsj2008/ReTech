@@ -102,7 +102,7 @@ namespace rt
 
 			if(!className.empty())
 			{
-				WorldObject* worldObject = static_cast<WorldObject*>(ObjectsFactory::CreateObject(className));
+				WorldObject* worldObject = static_cast<WorldObject*>(ObjectsFactory<Serializeable>::CreateObject(className));
 				AddObject(worldObject);
 				mObjectsIterator->Node() >> worldObject;
 

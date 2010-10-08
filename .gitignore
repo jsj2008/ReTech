@@ -1,6 +1,7 @@
 *.ncb
 *.user
 *.exe
+*.dll
 *.exp
 *.ilk
 *.lib

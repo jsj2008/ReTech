@@ -18,7 +18,7 @@ namespace rt
 		float		ToFloat();
 
 	protected:
-		Poco::Any mDataHolder;
+		boost::any mDataHolder;
 	};
 }
 

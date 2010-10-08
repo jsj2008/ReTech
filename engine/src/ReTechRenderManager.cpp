@@ -73,7 +73,7 @@ namespace rt
 	void RenderManager::renderStatistics()
 	{
 		sf::String statisticsString = 
-			"FPS: " + Poco::NumberFormatter::format(1.0f / GameCore::Get()->GetMainWindow()->GetFrameTime());
+			"FPS: " + boost::lexical_cast<std::string>(1.0f / GameCore::Get()->GetMainWindow()->GetFrameTime());
 
 		mStatisticsText.SetString(statisticsString);
 

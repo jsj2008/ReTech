@@ -18,12 +18,17 @@ namespace rt
 		WorldObject::UnSerialize(iNode);
 
 		SafeGet(iNode, "on_press", mOnPressExec);
-		
-		Poco::StringTokenizer tokenizer(mOnPressExec, " ");
-		if(tokenizer.count() == 2)
+
+		boost::char_separator<char> sep(" ");
+		boost::tokenizer<boost::char_separator<char>> tokenizer(mOnPressExec, sep);
+		std::vector<std::string> tokens;
+
+		std::copy(tokenizer.begin(), tokenizer.end(), std::back_inserter(tokens));
+
+		if(tokens.size() == 2)
 		{
-			mOnPressExec = tokenizer[0];
-			mOnPressExecParam = tokenizer[1];
+			mOnPressExec = tokens[0];
+			mOnPressExecParam = tokens[1];
 		}
 
 		SafeGet(iNode, "normal", mNormalResource);
