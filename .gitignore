@@ -8,7 +8,8 @@
 *.pdb
 *.log
 *.suo
-/dependencies
+/dependencies/include
+/dependencies/lib
 /libraries/code
 /libraries/external
 /game/build

@@ -1,0 +1,8 @@
+1. boost (1.44.0) bjam --build-type=complete stage --with=filesystem --toolset=msvc-10.0
+2. box2d (2.1.2)
+3. sfml2 (08.10.2010 snapshot)
+4. yaml-cpp (0.2.5)
+5. spark (1.05.04)
+6. camp (0.7.1)
+7. sfgui (08.10.2010 snapshot)
+8. fastdelegates

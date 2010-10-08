@@ -125,10 +125,10 @@ xcopy code\yaml-cpp\lib\*.lib ..\dependencies\lib /q /y
 xcopy code\spark\trunk\lib\vc2008\dynamic\*.lib ..\dependencies\lib /q /y
 xcopy code\camp\Debug\campd.lib ..\dependencies\lib /q /y
 xcopy code\camp\Release\camp.lib ..\dependencies\lib /q /y
-xcopy code\boost\stage\lib\boost_filesystem-vc90-mt-gd-1_45.lib ..\dependencies\lib /q /y
-xcopy code\boost\stage\lib\boost_filesystem-vc90-mt-1_45.lib ..\dependencies\lib /q /y
-xcopy code\boost\stage\lib\boost_system-vc90-mt-gd-1_45.lib ..\dependencies\lib /q /y
-xcopy code\boost\stage\lib\boost_system-vc90-mt-1_45.lib ..\dependencies\lib /q /y
+xcopy code\boost\stage\lib\libboost_filesystem-vc90-mt-gd-1_45.lib ..\dependencies\lib /q /y
+xcopy code\boost\stage\lib\libboost_filesystem-vc90-mt-1_45.lib ..\dependencies\lib /q /y
+xcopy code\boost\stage\lib\libboost_system-vc90-mt-gd-1_45.lib ..\dependencies\lib /q /y
+xcopy code\boost\stage\lib\libboost_system-vc90-mt-1_45.lib ..\dependencies\lib /q /y
 
 rem ********** BINARIES ****************
 echo Copy binaries...
@@ -136,10 +136,6 @@ xcopy code\camp\Debug\campd.dll ..\bin /q /y
 xcopy code\camp\Release\camp.dll ..\bin /q /y
 xcopy code\sfml\lib\vc2008\*.dll ..\bin /q /y
 xcopy code\spark\trunk\lib\vc2008\dynamic\*.dll ..\bin /q /y
-xcopy code\boost\stage\lib\boost_filesystem-vc90-mt-gd-1_45.dll ..\bin /q /y
-xcopy code\boost\stage\lib\boost_filesystem-vc90-mt-1_45.dll ..\bin /q /y
-xcopy code\boost\stage\lib\boost_system-vc90-mt-gd-1_45.dll ..\bin /q /y
-xcopy code\boost\stage\lib\boost_system-vc90-mt-1_45.dll ..\bin /q /y
 
 echo Done
 
