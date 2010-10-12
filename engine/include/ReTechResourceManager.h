@@ -44,7 +44,7 @@ namespace rt
 		void ClearResources();
 
 	protected:
-		//void findResources(const std::string& iResourceDirectory);
+		void findResources(const std::string& iResourceDirectory);
 
 		ResourceMap mResources;
 		StringMap	mExtensions;

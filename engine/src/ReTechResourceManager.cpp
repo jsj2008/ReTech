@@ -58,7 +58,7 @@ namespace rt
 	void ResourceManager::CreateResources()
 	{
 		//TODO make config file with resources
-		//findResources(OptionsManager::Get()->GetOption("media_dir").ToString());
+		findResources(OptionsManager::Get()->GetOption("media_dir").ToString());
 	}
 
 	void ResourceManager::ClearResources()
@@ -70,34 +70,37 @@ namespace rt
 		}
 	}
 
-// 	void ResourceManager::findResources( const std::string& iResourceDirectory )
-// 	{
-// 		std::set<std::string>		resources;
-// 		boost::filesystem2::path	resourceName; 
-// 
-// 		Poco::Glob::glob(iResourceDirectory + "*", resources);
-// 
-// 		for(std::set<std::string>::iterator iter = resources.begin(); iter != resources.end(); ++iter)
-// 		{
-// 			resourceName.parse(*iter);
-// 
-// 			if(resourceName.isDirectory())
-// 			{
-// 				findResources(*iter);
-// 			}
-// 			else
-// 			{
-// 				Resource* newResource = dynamic_cast<Resource*>(ObjectsFactory<Serializeable>::CreateObject(mExtensions[resourceName.getExtension()]));
-// 				if(newResource != 0)
-// 				{
-// 					newResource->Initialize(*iter);
-// 					mResources[*iter].reset(newResource);
-// 				}
-// 				else
-// 				{
-// 					LogManager::Get()->Error("Type for " + (*iter) + " is not registered.");
-// 				}
-// 			}
-// 		}
-// 	}
+ 	void ResourceManager::findResources( const std::string& iResourceDirectory )
+ 	{
+ 		boost::filesystem2::path resourceName; 
+
+		if(boost::filesystem::exists(iResourceDirectory))
+		{
+			boost::filesystem::directory_iterator dir_iter(iResourceDirectory), end_dir;
+ 
+			for(;dir_iter != end_dir; ++dir_iter)
+ 			{
+			
+ 				resourceName = dir_iter->path();
+ 
+ 				if(boost::filesystem::is_directory(resourceName))
+ 				{
+					findResources(resourceName.string());
+ 				}
+ 				else
+ 				{
+					Resource* newResource = dynamic_cast<Resource*>(ObjectsFactory<Serializeable>::CreateObject(mExtensions[resourceName.extension()]));
+ 					if(newResource != 0)
+ 					{
+ 						newResource->Initialize(resourceName.string());
+ 						mResources[resourceName.string()].reset(newResource);
+ 					}
+ 					else
+ 					{
+ 						LogManager::Get()->Error("Type for " + (resourceName.string()) + " is not registered.");
+ 					}
+ 				}
+ 			}
+		}
+ 	}
 }

@@ -20,8 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#ifndef __ReTech_H__
-#define __ReTech_H__
+#pragma once
 
 #include "ReTechCommonIncludes.h"
 
@@ -57,5 +56,3 @@ THE SOFTWARE.
 #include "ReTechWorldsManager.h"
 #include "ReTechWorldObject.h"
 #include "ReTechWorld.h"
-
-#endif
