@@ -23,6 +23,7 @@ THE SOFTWARE.
 #include "ReTechCommonIncludes.h"
 #include "ReTechRenderManager.h"
 #include "ReTechWorldObject.h"
+#include "rtGuiManager.h"
 
 URegisterSingleton(RenderManager)
 
@@ -53,6 +54,8 @@ namespace rt
  		{
  			(*iter).lock()->Draw(GameCore::Get()->GetMainWindow());
  		}
+
+		GuiManager::Get()->Render();
 
 		if(mRenderStatistics)
 		{

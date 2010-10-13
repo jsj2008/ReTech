@@ -16,9 +16,6 @@
     <Filter Include="Game\Animations">
       <UniqueIdentifier>{5fec722f-a9cc-4df8-8162-8ef7b84d828a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Primitives">
-      <UniqueIdentifier>{1272ac76-5659-418f-b350-bac519895f8d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine">
       <UniqueIdentifier>{6a5f6d6b-bfa0-453f-a64e-61f47768c3b1}</UniqueIdentifier>
     </Filter>
@@ -58,9 +55,6 @@
     <Filter Include="Engine\Managers\RenderManager">
       <UniqueIdentifier>{bdf06e37-08d7-46ac-aff6-d6d82723c925}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Managers\ScreenManager">
-      <UniqueIdentifier>{c3887faa-06ae-46cb-aca0-2f6801bd714c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Micropather">
       <UniqueIdentifier>{ee39073a-2096-4a41-9172-3c85b52c275a}</UniqueIdentifier>
     </Filter>
@@ -69,6 +63,9 @@
     </Filter>
     <Filter Include="Common">
       <UniqueIdentifier>{11e39d16-6817-4c55-ad78-6f3ee8cda4a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Managers\GuiManager">
+      <UniqueIdentifier>{c3887faa-06ae-46cb-aca0-2f6801bd714c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -156,12 +153,6 @@
     <ClCompile Include="src\ReTechRenderManager.cpp">
       <Filter>Engine\Managers\RenderManager</Filter>
     </ClCompile>
-    <ClCompile Include="src\ReTechScreen.cpp">
-      <Filter>Engine\Managers\ScreenManager</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReTechScreenManager.cpp">
-      <Filter>Engine\Managers\ScreenManager</Filter>
-    </ClCompile>
     <ClCompile Include="src\micropather.cpp">
       <Filter>Engine\Micropather</Filter>
     </ClCompile>
@@ -172,6 +163,12 @@
       <Filter>Common</Filter>
     </ClCompile>
     <ClCompile Include="src\ReTech.cpp" />
+    <ClCompile Include="src\rtGuiManager.cpp">
+      <Filter>Engine\Managers\GuiManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtGuiScreen.cpp">
+      <Filter>Engine\Managers\GuiManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\ReTechAnimation.h">
@@ -264,12 +261,6 @@
     <ClInclude Include="include\ReTechRenderManager.h">
       <Filter>Engine\Managers\RenderManager</Filter>
     </ClInclude>
-    <ClInclude Include="include\ReTechScreen.h">
-      <Filter>Engine\Managers\ScreenManager</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ReTechScreenManager.h">
-      <Filter>Engine\Managers\ScreenManager</Filter>
-    </ClInclude>
     <ClInclude Include="include\micropather.h">
       <Filter>Engine\Micropather</Filter>
     </ClInclude>
@@ -283,5 +274,11 @@
       <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include="include\ReTech.h" />
+    <ClInclude Include="include\rtGuiManager.h">
+      <Filter>Engine\Managers\GuiManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtGuiScreen.h">
+      <Filter>Engine\Managers\GuiManager</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

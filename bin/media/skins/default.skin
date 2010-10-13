@@ -1,0 +1,79 @@
+# Default skin definition file for SFGUI.
+
+Font.Default.Face: black/discognate.ttf
+Font.Default.Size: 16
+Font.Large.Face: @Font.Default.Face
+Font.Large.Size: 40
+Color.Text: #ffffff
+Color.Window: #a0a0a0
+Generic.Smooth: 0
+Generic.Padding: 0 -2
+
+Window.BackgroundColor: @Color.Window
+
+Mouse.System: 0
+Mouse.Image.Filename: default/pointer.png
+Mouse.Image.Smooth: @Generic.Smooth
+Mouse.Origin: 6 0
+
+Label.Color: @Color.Text
+Label.Font.Face: @Font.Default.Face
+Label.Font.Size: @Font.Default.Size
+Label.Padding: @Generic.Padding
+
+FPSLabel.Color: @Color.Text
+FPSLabel.Font.Face: @Font.Large.Face
+FPSLabel.Font.Size: @Font.Large.Size
+FPSLabel.Padding: @Generic.Padding
+
+Button.Caption.Color: @Color.Text
+Button.Caption.Font.Face: @Font.Default.Face
+Button.Caption.Font.Size: @Font.Default.Size
+Button.Caption.Padding: @Generic.Padding
+Button.Image.Filename: default/button.png
+Button.Image.Smooth: @Generic.Smooth
+Button.MousePressed.Sound.Filename: default/mousedown.ogg
+#Button.MouseReleased.Sound.Filename: default/mousedown.ogg
+
+Editbox.Color: @Color.Text
+Editbox.Font.Face: @Font.Default.Face
+Editbox.Font.Size: @Font.Default.Size
+Editbox.Padding: 5 2
+Editbox.Image.Filename: default/editbox.png
+Editbox.Image.Smooth: @Generic.Smooth
+Editbox.MousePressed.Sound.Filename: default/mousedown.ogg
+Editbox.KeyPressed.Sound.Filename: default/mousedown.ogg
+
+Checkbox.Caption.Color: @Color.Text
+Checkbox.Caption.Font.Face: @Font.Default.Face
+Checkbox.Caption.Font.Size: @Font.Default.Size
+Checkbox.Caption.Padding: @Generic.Padding
+Checkbox.Image.Filename: default/checkbox.png
+Checkbox.Image.Smooth: @Generic.Smooth
+Checkbox.Spacing: 15
+Checkbox.MousePressed.Sound.Filename: default/mousedown.ogg
+
+Radiobutton.Caption.Color: @Color.Text
+Radiobutton.Caption.Font.Face: @Font.Default.Face
+Radiobutton.Caption.Font.Size: @Font.Default.Size
+Radiobutton.Caption.Padding: @Generic.Padding
+Radiobutton.Image.Filename: default/checkbox.png
+Radiobutton.Image.Smooth: @Generic.Smooth
+Radiobutton.Spacing: 15
+Radiobutton.MousePressed.Sound.Filename: default/mousedown.ogg
+
+Scrollbar.Image.Filename: default/scrollbar.png
+Scrollbar.Image.Smooth: @Generic.Smooth
+Scrollbar.MousePressed.Sound.Filename: default/mousedown.ogg
+
+Listbox.Image.Filename: default/listbox.png
+Listbox.Image.Smooth: @Generic.Smooth
+Listbox.Scrollbar.Image.Filename: default/scrollbar.png
+Listbox.Scrollbar.Image.Smooth: @Generic.Smooth
+Listbox.Item.Padding: 5 2
+Listbox.MousePressed.Sound.Filename: default/mousedown.ogg
+
+Listbox.Item.Label.Color: @Label.Color
+Listbox.Item.Label.Font.Face: @Label.Font.Face
+Listbox.Item.Label.Font.Size: @Label.Font.Size
+Listbox.Item.Label.Padding: @Label.Padding

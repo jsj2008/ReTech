@@ -20,40 +20,44 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#ifndef __rtScreenManager_H__
-#define __rtScreenManager_H__
+#pragma once
 
 #include "ReTechSingleton.h"
 
 namespace rt
 {
-	class Screen;
+	class GuiScreen;
 
-	class ScreenManager : public Singleton<ScreenManager>
+	class GuiManager : public Singleton<GuiManager>
 	{
 	public:
-		typedef std::map<std::string, boost::shared_ptr<Screen>>	ScreensMap;
-		typedef std::vector<Screen*>							ScreenStack;
+		typedef std::vector<GuiScreen*> ScreenVec;
+		typedef ScreenVec::iterator ScreenVecIter;
+		typedef std::map<std::string, boost::shared_ptr<GuiScreen>> ScreenMap;
+		typedef ScreenMap::iterator ScreenMapIter;
 
-		ScreenManager();
-		~ScreenManager();
+		GuiManager();
+		~GuiManager();
 
-		void AddScreen(const std::string& iScreenName, Screen* iScreen);
+		void Update(float iFrameTime);
+		bool HandleEvent(const sf::Event& iEvent);
+		void Render();
 
-		virtual void Update(float iFrameTime);
+		void CreateGui();
 
-		void PushScreen(const std::string& iScreenName);
+		sfg::GUI* GetGui();
+
+		void AddScreen(const std::string& iName, GuiScreen* iScreen);
+
+		void ChangeScreen(const std::string& iName);
+		void PushScreen(const std::string& iName);
 		void PopScreen();
-
-		void ChangeScreen(const std::string& iScreenName);
-
 		void ClearScreens();
 
 	protected:
-		ScreenStack	mScreenStack;
+		boost::shared_ptr<sfg::GUI> mGui;
 
-		ScreensMap	mScreens;
+		ScreenMap	mScreens;
+		ScreenVec	mScreenStack;
 	};
 }
-
-#endif

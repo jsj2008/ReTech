@@ -57,8 +57,6 @@ namespace rt
 
 		sf::Vector2f GetMousePosition();
 
-		void SetFocusLock(bool iFocusLock);
-
 	protected:
 		template <class T>
 		void processUnary(T iKey, std::multimap<T, std::string>& iStorage)
@@ -99,9 +97,6 @@ namespace rt
 		}
 
 		bool isHandledByExternals(const sf::Event& iEvent);
-		bool isHandledByFocused(const sf::Event& iEvent);
-
-		void updateFocused();
 
 		KeyboardBinds					mUnaryKeyboardBinds;
 		KeyboardBinds					mBinaryKeyboardBinds;
@@ -109,10 +104,6 @@ namespace rt
 		MouseBinds						mBinaryMouseBinds;
 
 		HandlersList					mHandlers;
-
-		boost::weak_ptr<WorldObject>	mFocusedObject;
-
-		bool							mFocusLock;
 	};
 }
 

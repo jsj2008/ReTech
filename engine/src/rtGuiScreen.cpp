@@ -20,32 +20,48 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#ifndef __rtScreen_H__
-#define __rtScreen_H__
+#include "ReTechCommonIncludes.h"
+#include "rtGuiScreen.h"
+#include "rtGuiManager.h"
 
 namespace rt
-{	
-	class ScreenManager;
-	class World;
-
-	class Screen
+{
+	GuiScreen::GuiScreen( const std::string& iName, const std::string& iLayout )
 	{
-	public:
-		Screen(const std::string& iLevelName);
-		virtual ~Screen();
+		mRoot = sfg::Container::Create(GuiManager::Get()->GetGui()->GetRect(), iName);
 
-		virtual void Pushed();
-		virtual void Poped();
-		virtual void Paused();
-		virtual void Resumed();
+		if(!iLayout.empty())
+		{
+			GuiManager::Get()->GetGui()->LoadYAML(iLayout, mRoot);
+		}
 
-		virtual void Update(float iFrameTime);
+		mRoot->Show(false);
 
-		World* GetWorld(); 
+		GuiManager::Get()->GetGui()->AddWidget(mRoot);
+	}
 
-	protected:
-		World*	 mWorld;
-	};
+	GuiScreen::~GuiScreen()
+	{
+
+	}
+
+	void GuiScreen::Activated()
+	{
+		mRoot->Show(true);
+	}
+
+	void GuiScreen::Deactivated()
+	{	
+		mRoot->Show(false);
+	}
+
+	void GuiScreen::Paused()
+	{
+		mRoot->Show(false);
+	}
+
+	void GuiScreen::Resumed()
+	{
+		mRoot->Show(true);
+	}
 }
-
-#endif

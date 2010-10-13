@@ -64,6 +64,8 @@ namespace rt
 
 		recreateWindow();
 
+		mMainWindow->ShowMouseCursor(false);
+
 		mRandomizeSeed = (int)time(0);
 
 		mLog.Initialize();
@@ -90,6 +92,7 @@ namespace rt
 		mResource.RegisterExtension("ps", "Particle");
 
 		mResource.CreateResources();
+		mGui.CreateGui();
 
 		//Register execs
 		mExec.RegisterExec("quit", &GameCore::Stop, this);
@@ -108,7 +111,7 @@ namespace rt
 			float frameTime = mMainWindow->GetFrameTime();
 
 			mInput.Update(frameTime);
-			mScreens.Update(frameTime);
+			mGui.Update(frameTime);
 			mWorlds.Update(frameTime);
 			mRender.Update(frameTime);
 		}

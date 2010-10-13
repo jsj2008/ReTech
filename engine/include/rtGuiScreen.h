@@ -20,63 +20,22 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#include "ReTechCommonIncludes.h"
-#include "ReTechScreen.h"
-#include "ReTechWorld.h"
+#pragma once
 
 namespace rt
 {
-	Screen::Screen(const std::string& iLevelName)
+	class GuiScreen
 	{
-		mWorld = WorldsManager::Get()->CreateWorld(iLevelName);
+	public:
+		GuiScreen(const std::string& iName, const std::string& iLayout);
+		virtual ~GuiScreen();
 
-		if(!iLevelName.empty())
-		{
-			mWorld->Load(iLevelName, false);
-		}
-	}
+		virtual void Activated();
+		virtual void Deactivated();
+		virtual void Paused();
+		virtual void Resumed();
 
-	Screen::~Screen()
-	{
-		WorldsManager::Get()->DestroyWorld(mWorld->GetName());
-	}
-
-	void Screen::Pushed()
-	{
-		if(mWorld->IsLoaded())
-		{
-			mWorld->SetVisible(true);
-		}
-	}
-
-	void Screen::Poped()
-	{
-		if(mWorld->IsLoaded())
-		{
-			mWorld->SetVisible(false);
-		}
-	}
-
-	void Screen::Paused()
-	{
-
-	}
-
-	void Screen::Resumed()
-	{
-
-	}
-
-	void Screen::Update( float iFrameTime )
-	{
-		if(!mWorld->IsVisible() && mWorld->IsLoaded())
-		{
-			mWorld->SetVisible(true);
-		}
-	}
-
-	rt::World* Screen::GetWorld()
-	{
-		return mWorld;
-	}
+	protected:
+		sfg::Container::Ptr mRoot;
+	};
 }

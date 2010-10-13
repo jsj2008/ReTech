@@ -25,13 +25,13 @@ THE SOFTWARE.
 #include "ReTechConsoleManager.h"
 #include "ReTechRenderManager.h"
 #include "ReTechWorldObject.h"
+#include "rtGuiManager.h"
 
 URegisterSingleton(InputManager);
 
 namespace rt
 {
 	InputManager::InputManager()
-		: mFocusLock(false)
 	{
 
 	}
@@ -43,13 +43,11 @@ namespace rt
 
 	void InputManager::Update( float iFrameTime )
 	{
-		updateFocused();
-
 		// Process events
 		sf::Event Event;
 		while (GameCore::Get()->GetMainWindow()->GetEvent(Event))
 		{
-			if(!isHandledByFocused(Event) && !isHandledByExternals(Event))
+			if(!GuiManager::Get()->HandleEvent(Event) && !isHandledByExternals(Event))
 			{
 				// Close window : exit
 				if (Event.Type == sf::Event::Closed)
@@ -140,11 +138,6 @@ namespace rt
 		return WorldsManager::Get()->ScreenToWorld(GameCore::Get()->GetMainWindow()->GetInput().GetMouseX(), GameCore::Get()->GetMainWindow()->GetInput().GetMouseY());
 	}
 
-	void InputManager::SetFocusLock( bool iFocusLock )
-	{
-		mFocusLock = iFocusLock;
-	}
-
 	bool InputManager::isHandledByExternals(const sf::Event& iEvent)
 	{
 		mHandlers.erase(std::remove(mHandlers.begin(), mHandlers.end(), static_cast<InputHandler*>(0)), mHandlers.end());
@@ -160,45 +153,5 @@ namespace rt
 		}
 
 		return false;
-	}
-
-	bool InputManager::isHandledByFocused( const sf::Event& iEvent )
-	{
-		return !mFocusedObject.expired() ? mFocusedObject.lock()->HandleFocusedEvent(iEvent) : false;
-	}
-
-	void InputManager::updateFocused()
-	{
-		if(!mFocusLock)
-		{
-			sf::Vector2f mousePos = GetMousePosition();
-			RenderManager::WorldObjectsVec visibleObjects = RenderManager::Get()->GetVisibleObjectsCache();
-
-			boost::weak_ptr<WorldObject> newFocused;
-
-			for(RenderManager::WorldObjectsVec::reverse_iterator iter = visibleObjects.rbegin(); iter != visibleObjects.rend(); ++iter)
-			{
-				if((*iter).lock()->IsPointInside(mousePos))
-				{
-					newFocused = (*iter);
-					break;
-				}
-			}
-
-			if(newFocused.lock() != mFocusedObject.lock())
-			{
-				if(!mFocusedObject.expired())
-				{
-					mFocusedObject.lock()->MouseLeave();
-				}
-
-				if(!newFocused.expired())
-				{
-					newFocused.lock()->MouseEnter();
-				}
-
-				mFocusedObject = newFocused;
-			}
-		}
 	}
 }

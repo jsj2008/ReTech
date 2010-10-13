@@ -45,6 +45,14 @@ THE SOFTWARE.
 #include "spark/SPK.h"
 #include "spark/SPK_SFML.h"
 
+#include "camp/camptype.hpp"
+#include "camp\class.hpp"
+#include "camp\enum.hpp"
+
+#include "sfgui/GUI.hpp"
+#include "sfgui/Align.hpp"
+#include "sfgui/Label.hpp"
+
 //Extensions
 #include "yaml-cpp/yaml.h"
 #include "fastdelegates/fastdelegate.h"

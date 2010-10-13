@@ -63,6 +63,7 @@
       <PrecompiledHeaderFile>GameCommonIncludes.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <AdditionalOptions>/Zm200 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <OutputFile>$(OutDir)$(ProjectName)_d.exe</OutputFile>
@@ -85,6 +86,7 @@
       <PrecompiledHeaderFile>GameCommonIncludes.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalOptions>/Zm200 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)\dependencies\lib;$(SolutionDir)\engine\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>

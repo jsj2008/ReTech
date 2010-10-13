@@ -34,6 +34,8 @@ THE SOFTWARE.
 	#pragma comment(lib, "SPARK_debug.lib")
 	#pragma comment(lib, "SPARK_GL_debug.lib")
 	#pragma comment(lib, "SPARK_SFML_debug.lib")
+	#pragma comment(lib, "campd.lib")
+	#pragma comment(lib, "sfgui-d.lib")
 #else
 	#pragma comment(lib, "Iphlpapi.lib")
 	#pragma comment(lib, "sfml2-audio-s.lib")
@@ -45,6 +47,8 @@ THE SOFTWARE.
 	#pragma comment(lib, "SPARK.lib")
 	#pragma comment(lib, "SPARK_GL.lib")
 	#pragma comment(lib, "SPARK_SFML.lib")
+	#pragma comment(lib, "camp.lib")
+	#pragma comment(lib, "sfgui.lib")
 #endif
 
 #endif

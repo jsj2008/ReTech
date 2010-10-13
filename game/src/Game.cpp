@@ -32,6 +32,7 @@ int WINAPI WinMain(HINSTANCE /*hInstance*/, HINSTANCE /*hPrevInstance*/, LPSTR /
 	rt::OptionsManager::Get()->GetOption("height") = 720;
 	rt::OptionsManager::Get()->GetOption("bpp") = 32;
 	rt::OptionsManager::Get()->GetOption("media_dir") = std::string("./media/");
+	rt::OptionsManager::Get()->GetOption("gui_skin") = std::string("skins/default.skin");
 
 	gameCore.Initialize();
 

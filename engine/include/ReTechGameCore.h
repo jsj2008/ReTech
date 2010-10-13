@@ -33,7 +33,7 @@ THE SOFTWARE.
 #include "ReTechLogManager.h"
 #include "ReTechConsoleManager.h"
 #include "ReTechWorldsManager.h"
-#include "ReTechScreenManager.h"
+#include "rtGuiManager.h"
 
 namespace rt
 {
@@ -75,7 +75,7 @@ namespace rt
 		LogManager			mLog;
 		ConsoleManager		mExec;
 		WorldsManager		mWorlds;
-		ScreenManager		mScreens;
+		GuiManager			mGui;
 
 		bool				mIsFullscreen;
 

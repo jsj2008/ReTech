@@ -36,8 +36,8 @@ THE SOFTWARE.
 #include "ReTechLogManager.h"
 #include "ReTechResourceManager.h"
 #include "ReTechResource.h"
-#include "ReTechScreenManager.h"
-#include "ReTechScreen.h"
+#include "rtGuiManager.h"
+#include "rtGuiScreen.h"
 
 #include "ReTechImage.h"
 #include "ReTechSequence.h"
