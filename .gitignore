@@ -10,6 +10,8 @@
 *.suo
 *.sdf
 *.opensdf
+.svn
+/lightheaded
 /ipch
 /dependencies/include
 /dependencies/lib
@@ -19,3 +21,4 @@
 /engine/build
 /engine/lib
 /bin/AS_DEBUG
+/bin/data
