@@ -35,6 +35,8 @@ namespace rt
 		typedef fastdelegate::FastDelegate1<const sf::Event&, bool>	InputHandler;
 		typedef std::list<InputHandler*>							HandlersList;
 
+		typedef boost::shared_ptr<InputManager>						Ptr;
+
 		InputManager();
 		~InputManager();
 

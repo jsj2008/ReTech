@@ -34,6 +34,7 @@ THE SOFTWARE.
 #include "ReTechConsoleManager.h"
 #include "ReTechWorldsManager.h"
 #include "rtGuiManager.h"
+#include "rtToolManager.h"
 
 namespace rt
 {
@@ -67,15 +68,16 @@ namespace rt
 		boost::shared_ptr<sf::RenderWindow>	mMainWindow;
 		boost::shared_ptr<sf::View>			mMainView;
 
-		OptionsManager		mOptionsManager;
+		OptionsManager::Ptr		mOptions;
 
-		RenderManager		mRender;
-		InputManager		mInput;
-		ResourceManager		mResource;
-		LogManager			mLog;
-		ConsoleManager		mExec;
-		WorldsManager		mWorlds;
-		GuiManager			mGui;
+		RenderManager::Ptr		mRender;
+		InputManager::Ptr		mInput;
+		ResourceManager::Ptr	mResource;
+		LogManager::Ptr			mLog;
+		ConsoleManager::Ptr		mExec;
+		WorldsManager::Ptr		mWorlds;
+		GuiManager::Ptr			mGui;
+		ToolManager::Ptr		mTools;
 
 		bool				mIsFullscreen;
 

@@ -38,6 +38,11 @@ THE SOFTWARE.
 #include "ReTechResource.h"
 #include "rtGuiManager.h"
 #include "rtGuiScreen.h"
+#include "rtToolManager.h"
+#include "rtTool.h"
+
+#include "rtStatistics.h"
+#include "rtConsole.h"
 
 #include "ReTechImage.h"
 #include "ReTechSequence.h"
@@ -50,8 +55,6 @@ THE SOFTWARE.
 #include "ReTechLine.h"
 #include "ReTechCircle.h"
 #include "ReTechRectangle.h"
-
-#include "ReTechButton.h"
 
 #include "ReTechWorldsManager.h"
 #include "ReTechWorldObject.h"

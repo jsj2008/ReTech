@@ -21,46 +21,31 @@ THE SOFTWARE.
 */
 
 #include "ReTechCommonIncludes.h"
-#include "ReTechLogManager.h"
-
-URegisterSingleton(LogManager)
+#include "rtStatistics.h"
 
 namespace rt
 {
-	LogManager::LogManager()
+	Statistics::Statistics()
 	{
-		mFileStream.open("game.log");
+		mStatisticsText.SetFont(sf::Font::GetDefaultFont());
+		mStatisticsText.SetCharacterSize(10);
 	}
 
-	LogManager::~LogManager()
+	Statistics::~Statistics()
 	{
-		if(mFileStream.is_open())
-		{
-			mFileStream.close();
-		}
+
 	}
 
-	void LogManager::Error( const std::string& iMessage )
+	void Statistics::Update( float iTimeElapsed )
 	{
-		if(mFileStream.is_open())
-		{
-			mFileStream << "ERROR:\t" << iMessage << "\n";
-		}
+		sf::String statisticsString = 
+			"FPS: " + boost::lexical_cast<std::string>(1.0f / iTimeElapsed/*GameCore::Get()->GetMainWindow()->GetFrameTime()*/);
+
+		mStatisticsText.SetString(statisticsString);
 	}
 
-	void LogManager::Warning( const std::string& iMessage )
+	void Statistics::Render()
 	{
-		if(mFileStream.is_open())
-		{
-			mFileStream << "WARNING:\t" << iMessage << "\n";
-		}
-	}
-
-	void LogManager::Notice( const std::string& iMessage )
-	{
-		if(mFileStream.is_open())
-		{
-			mFileStream << "NOTICE:\t" << iMessage << "\n";
-		}
+		GameCore::Get()->GetMainWindow()->Draw(mStatisticsText);
 	}
 }

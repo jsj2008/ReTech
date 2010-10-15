@@ -33,7 +33,11 @@ namespace rt
 	{
 	public:
 		typedef std::list<boost::shared_ptr<World>>			WorldsVec;
+		typedef WorldsVec::iterator							WorldsVecIter;
 		typedef std::vector<boost::weak_ptr<WorldObject>>	ObjectsVec;
+		typedef ObjectsVec::iterator						ObjectsVecIter;
+
+		typedef boost::shared_ptr<WorldsManager>			Ptr;
 
 		class IsNamed
 		{

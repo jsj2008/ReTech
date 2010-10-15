@@ -52,6 +52,10 @@ THE SOFTWARE.
 #include "sfgui/GUI.hpp"
 #include "sfgui/Align.hpp"
 #include "sfgui/Label.hpp"
+#include "sfgui/Spritebox.hpp"
+#include "sfgui/DefaultImage.hpp"
+#include "sfgui/Listbox.hpp"
+#include "sfgui/Editbox.hpp"
 
 //Extensions
 #include "yaml-cpp/yaml.h"

@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "ReTechRenderManager.h"
 #include "ReTechWorldObject.h"
 #include "rtGuiManager.h"
+#include "rtToolManager.h"
 
 URegisterSingleton(InputManager);
 
@@ -47,7 +48,7 @@ namespace rt
 		sf::Event Event;
 		while (GameCore::Get()->GetMainWindow()->GetEvent(Event))
 		{
-			if(!GuiManager::Get()->HandleEvent(Event) && !isHandledByExternals(Event))
+			if(!ToolManager::Get()->HandleEvent(Event) && !GuiManager::Get()->HandleEvent(Event) && !isHandledByExternals(Event))
 			{
 				// Close window : exit
 				if (Event.Type == sf::Event::Closed)

@@ -31,10 +31,12 @@ namespace rt
 	class GuiManager : public Singleton<GuiManager>
 	{
 	public:
-		typedef std::vector<GuiScreen*> ScreenVec;
-		typedef ScreenVec::iterator ScreenVecIter;
+		typedef std::vector<GuiScreen*>								ScreenVec;
+		typedef ScreenVec::iterator									ScreenVecIter;
 		typedef std::map<std::string, boost::shared_ptr<GuiScreen>> ScreenMap;
-		typedef ScreenMap::iterator ScreenMapIter;
+		typedef ScreenMap::iterator									ScreenMapIter;
+
+		typedef boost::shared_ptr<GuiManager>						Ptr;
 
 		GuiManager();
 		~GuiManager();
@@ -42,8 +44,6 @@ namespace rt
 		void Update(float iFrameTime);
 		bool HandleEvent(const sf::Event& iEvent);
 		void Render();
-
-		void CreateGui();
 
 		sfg::GUI* GetGui();
 

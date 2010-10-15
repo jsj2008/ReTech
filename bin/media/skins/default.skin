@@ -77,3 +77,5 @@ Listbox.Item.Label.Color: @Label.Color
 Listbox.Item.Label.Font.Face: @Label.Font.Face
 Listbox.Item.Label.Font.Size: @Label.Font.Size
 Listbox.Item.Label.Padding: @Label.Padding
+
+Console.Scrollbar.Image.Filename: default/listbox.png

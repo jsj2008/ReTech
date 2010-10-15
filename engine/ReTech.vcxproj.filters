@@ -10,9 +10,6 @@
     <Filter Include="Game\Resources">
       <UniqueIdentifier>{599f6452-69bc-45b8-bd43-75368a0277c5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\UI">
-      <UniqueIdentifier>{a071b181-d0cc-47e3-b7a7-ec832089c23f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Animations">
       <UniqueIdentifier>{5fec722f-a9cc-4df8-8162-8ef7b84d828a}</UniqueIdentifier>
     </Filter>
@@ -67,6 +64,12 @@
     <Filter Include="Engine\Managers\GuiManager">
       <UniqueIdentifier>{c3887faa-06ae-46cb-aca0-2f6801bd714c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Managers\ToolManager">
+      <UniqueIdentifier>{4da2d13a-8d60-4e38-bd87-a69fe26f47aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Tools">
+      <UniqueIdentifier>{ab2f52c1-f07e-44b9-b172-b0cc9ec127ec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ReTechAnimation.cpp">
@@ -101,9 +104,6 @@
     </ClCompile>
     <ClCompile Include="src\ReTechSequence.cpp">
       <Filter>Game\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReTechButton.cpp">
-      <Filter>Game\UI</Filter>
     </ClCompile>
     <ClCompile Include="src\ReTechFrameAnimation.cpp">
       <Filter>Game\Animations</Filter>
@@ -169,6 +169,18 @@
     <ClCompile Include="src\rtGuiScreen.cpp">
       <Filter>Engine\Managers\GuiManager</Filter>
     </ClCompile>
+    <ClCompile Include="src\rtToolManager.cpp">
+      <Filter>Engine\Managers\ToolManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtTool.cpp">
+      <Filter>Engine\Managers\ToolManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtStatistics.cpp">
+      <Filter>Game\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtConsole.cpp">
+      <Filter>Game\Tools</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\ReTechAnimation.h">
@@ -203,9 +215,6 @@
     </ClInclude>
     <ClInclude Include="include\ReTechSequence.h">
       <Filter>Game\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ReTechButton.h">
-      <Filter>Game\UI</Filter>
     </ClInclude>
     <ClInclude Include="include\ReTechFrameAnimation.h">
       <Filter>Game\Animations</Filter>
@@ -279,6 +288,18 @@
     </ClInclude>
     <ClInclude Include="include\rtGuiScreen.h">
       <Filter>Engine\Managers\GuiManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtToolManager.h">
+      <Filter>Engine\Managers\ToolManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtTool.h">
+      <Filter>Engine\Managers\ToolManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtStatistics.h">
+      <Filter>Game\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtConsole.h">
+      <Filter>Game\Tools</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

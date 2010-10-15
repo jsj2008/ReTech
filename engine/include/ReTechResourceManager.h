@@ -30,8 +30,12 @@ namespace rt
 	class ResourceManager : public Singleton<ResourceManager>
 	{
 	public:
-		typedef std::map<std::string, std::string> StringMap;
-		typedef std::map<std::string, boost::shared_ptr<Resource>> ResourceMap;
+		typedef std::map<std::string, std::string>					StringMap;
+		typedef std::map<std::string, boost::shared_ptr<Resource>>	ResourceMap;
+		typedef StringMap::iterator									StringMapIter;
+		typedef ResourceMap::iterator								ResourceMapIter;
+
+		typedef boost::shared_ptr<ResourceManager>					Ptr;
 
 		ResourceManager();
 		~ResourceManager();

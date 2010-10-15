@@ -30,10 +30,10 @@ namespace rt
 	class LogManager : public Singleton<LogManager>
 	{
 	public:
+		typedef boost::shared_ptr<LogManager> Ptr;
+
 		LogManager();
 		~LogManager();
-
-		void Initialize();
 
 		void Error(const std::string& iMessage);
 		void Warning(const std::string& iMessage);

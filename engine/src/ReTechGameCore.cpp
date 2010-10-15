@@ -30,7 +30,6 @@ THE SOFTWARE.
 
 #include "ReTechSprite.h"
 #include "ReTechAnimation.h"
-#include "ReTechButton.h"
 #include "ReTechText.h"
 #include "ReTechParticleSystem.h"
 #include "ReTechLine.h"
@@ -46,7 +45,9 @@ namespace rt
 	GameCore::GameCore()
 		: mIsFullscreen(false), mRandomizeSeed(0)
 	{
-
+		mExec		= ConsoleManager::Ptr(new ConsoleManager());
+		mOptions	= OptionsManager::Ptr(new OptionsManager()); 
+		mLog		= LogManager::Ptr(new LogManager());
 	}
 
 	GameCore::~GameCore()
@@ -68,8 +69,6 @@ namespace rt
 
 		mRandomizeSeed = (int)time(0);
 
-		mLog.Initialize();
-
 		//Register objects to factory
 		URegisterObject(Image);
 		URegisterObject(Font);
@@ -77,27 +76,33 @@ namespace rt
 		URegisterObject(Particle);
 		URegisterObject(Sprite);
 		URegisterObject(Animation);
-		URegisterObject(Button);
 		URegisterObject(Text);
 		URegisterObject(ParticleSystem);
 		URegisterObject(Line);
 		URegisterObject(Circle);
 		URegisterObject(Rectangle);
 
-		//Register resource classes
-		mResource.RegisterExtension("tga", "Image");
-		mResource.RegisterExtension("png", "Image");
-		mResource.RegisterExtension("ttf", "Font");
-		mResource.RegisterExtension("seq", "Sequence");
-		mResource.RegisterExtension("ps", "Particle");
+		//Create managers
+		mRender		= RenderManager::Ptr(new RenderManager());
+		mInput		= InputManager::Ptr(new InputManager());
+		mResource	= ResourceManager::Ptr(new ResourceManager());
+		mWorlds		= WorldsManager::Ptr(new WorldsManager());
+		mGui		= GuiManager::Ptr(new GuiManager());
+		mTools		= ToolManager::Ptr(new ToolManager());
 
-		mResource.CreateResources();
-		mGui.CreateGui();
+		//Register resource classes
+		mResource->RegisterExtension("tga", "Image");
+		mResource->RegisterExtension("png", "Image");
+		mResource->RegisterExtension("ttf", "Font");
+		mResource->RegisterExtension("seq", "Sequence");
+		mResource->RegisterExtension("ps", "Particle");
+
+		mResource->CreateResources();
 
 		//Register execs
-		mExec.RegisterExec("quit", &GameCore::Stop, this);
-		mExec.RegisterExec("set_fullscreen", &GameCore::SetFullscreen, this);
-		mExec.RegisterExec("toggle_fullscreen", &GameCore::ToggleFullscreen, this);
+		mExec->RegisterExec("quit", &GameCore::Stop, this);
+		mExec->RegisterExec("set_fullscreen", &GameCore::SetFullscreen, this);
+		mExec->RegisterExec("toggle_fullscreen", &GameCore::ToggleFullscreen, this);
 
 		LogManager::Get()->Notice("GameCore initialized.");
 	}
@@ -110,10 +115,11 @@ namespace rt
 		{
 			float frameTime = mMainWindow->GetFrameTime();
 
-			mInput.Update(frameTime);
-			mGui.Update(frameTime);
-			mWorlds.Update(frameTime);
-			mRender.Update(frameTime);
+			mInput->Update(frameTime);
+			mGui->Update(frameTime);
+			mWorlds->Update(frameTime);
+			mTools->Update(frameTime);
+			mRender->Update(frameTime);
 		}
 	}
 

@@ -20,37 +20,32 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#ifndef __rtButton_H__
-#define __rtButton_H__
+#pragma once
 
-#include "ReTechWorldObject.h"
-#include "ReTechSprite.h"
-#include "ReTechText.h"
+#include "ReTechSingleton.h"
 
 namespace rt
 {
-	class Button : public Sprite
+	class Tool;
+
+	class ToolManager : public Singleton<ToolManager>
 	{
 	public:
-		Button();
-		virtual ~Button();
+		typedef std::vector<boost::shared_ptr<Tool>>	ToolVec;
+		typedef ToolVec::iterator						ToolVecIter;
 
-		virtual void UnSerialize(const YAML::Node& iNode);
-		virtual void Serialize(YAML::Emitter& iEmitter);
+		typedef boost::shared_ptr<ToolManager>			Ptr;
 
-		virtual bool IsPointInside(const sf::Vector2f& iMousePos);
-		virtual bool HandleFocusedEvent(const sf::Event& iEvent);
+		ToolManager();
+		~ToolManager();
 
-		virtual void MouseEnter();
-		virtual void MouseLeave();
+		void Update(float iTimeElapsed);
+		void Render();
+		bool HandleEvent(const sf::Event& iEvent);
+
+		void AddTool(Tool* iTool);
 
 	protected:
-		std::string		mNormalResource;
-		std::string		mHoverResource;
-
-		std::string		mOnPressExec;
-		std::string		mOnPressExecParam;
+		ToolVec	mTools;
 	};
 }
-
-#endif

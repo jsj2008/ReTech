@@ -97,7 +97,6 @@
     <ClCompile Include="src\ReTechImage.cpp" />
     <ClCompile Include="src\ReTechParticle.cpp" />
     <ClCompile Include="src\ReTechSequence.cpp" />
-    <ClCompile Include="src\ReTechButton.cpp" />
     <ClCompile Include="src\ReTechFrameAnimation.cpp" />
     <ClCompile Include="src\ReTechGameCore.cpp" />
     <ClCompile Include="src\ReTechCollectionIterator.cpp" />
@@ -114,6 +113,7 @@
     <ClCompile Include="src\ReTechWorldObject.cpp" />
     <ClCompile Include="src\ReTechWorldsManager.cpp" />
     <ClCompile Include="src\ReTechRenderManager.cpp" />
+    <ClCompile Include="src\rtConsole.cpp" />
     <ClCompile Include="src\rtGuiManager.cpp" />
     <ClCompile Include="src\micropather.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -122,6 +122,9 @@
       </PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\rtGuiScreen.cpp" />
+    <ClCompile Include="src\rtStatistics.cpp" />
+    <ClCompile Include="src\rtTool.cpp" />
+    <ClCompile Include="src\rtToolManager.cpp" />
     <ClCompile Include="src\SfMath.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </PrecompiledHeader>
@@ -146,7 +149,6 @@
     <ClInclude Include="include\ReTechImage.h" />
     <ClInclude Include="include\ReTechParticle.h" />
     <ClInclude Include="include\ReTechSequence.h" />
-    <ClInclude Include="include\ReTechButton.h" />
     <ClInclude Include="include\ReTechFrameAnimation.h" />
     <ClInclude Include="include\ReTechGameCore.h" />
     <ClInclude Include="include\ReTechSingleton.h" />
@@ -165,9 +167,13 @@
     <ClInclude Include="include\ReTechWorldObject.h" />
     <ClInclude Include="include\ReTechWorldsManager.h" />
     <ClInclude Include="include\ReTechRenderManager.h" />
+    <ClInclude Include="include\rtConsole.h" />
     <ClInclude Include="include\rtGuiManager.h" />
     <ClInclude Include="include\micropather.h" />
     <ClInclude Include="include\rtGuiScreen.h" />
+    <ClInclude Include="include\rtStatistics.h" />
+    <ClInclude Include="include\rtTool.h" />
+    <ClInclude Include="include\rtToolManager.h" />
     <ClInclude Include="include\SfMath.h" />
     <ClInclude Include="include\ReTechCommonIncludes.h" />
     <ClInclude Include="include\ReTechLibraries.h" />

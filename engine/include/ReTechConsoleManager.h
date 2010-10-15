@@ -60,6 +60,9 @@ namespace rt
 		};
 
 		typedef std::map<std::string, boost::shared_ptr<BaseExec> > ExecMap;
+		typedef ExecMap::iterator									ExecMapIter;
+
+		typedef boost::shared_ptr<ConsoleManager>					Ptr;
 
 		ConsoleManager();
 		~ConsoleManager();

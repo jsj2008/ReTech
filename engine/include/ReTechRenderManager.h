@@ -32,7 +32,10 @@ namespace rt
 	class RenderManager : public Singleton<RenderManager>
 	{
 	public:
-		typedef std::vector<boost::weak_ptr<WorldObject>> WorldObjectsVec;
+		typedef std::vector<boost::weak_ptr<WorldObject>>	WorldObjectsVec;
+		typedef WorldObjectsVec::iterator					WorldObjectsVecIter;
+
+		typedef boost::shared_ptr<RenderManager>			Ptr;
 
 		RenderManager();
 		~RenderManager();
@@ -45,16 +48,9 @@ namespace rt
 
 		static bool Sort(boost::weak_ptr<WorldObject> iFirst, boost::weak_ptr<WorldObject> iSecond);
 
-		void SetRenderStatistics(bool iRenderStatistics);
-
 		const WorldObjectsVec& GetVisibleObjectsCache();
 
 	protected:
-		void renderStatistics();
-
-		bool			mRenderStatistics;
-		sf::Text		mStatisticsText;
-
 		WorldObjectsVec	mVisibleObjectsCache;
 	};
 }

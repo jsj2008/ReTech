@@ -31,7 +31,10 @@ namespace rt
 	class OptionsManager : public Singleton<OptionsManager>
 	{
 	public:
-		typedef std::map<std::string, Option> OptionsMap;
+		typedef std::map<std::string, Option>		OptionsMap;
+		typedef OptionsMap::iterator				OptionsMapIter;
+
+		typedef boost::shared_ptr<OptionsManager>	Ptr;
 
 		OptionsManager();
 		~OptionsManager();

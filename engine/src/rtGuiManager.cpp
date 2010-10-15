@@ -31,6 +31,11 @@ namespace rt
 {
 	GuiManager::GuiManager()
 	{
+		mGui.reset(new sfg::GUI(sf::FloatRect(0.0f, 0.0f, 
+			static_cast<float>(OptionsManager::Get()->GetOption("width").ToInt()), 
+			static_cast<float>(OptionsManager::Get()->GetOption("height").ToInt()))));
+
+		mGui->LoadSkinFromFile( OptionsManager::Get()->GetOption("media_dir").ToString() + OptionsManager::Get()->GetOption("gui_skin").ToString() );
 	}
 
 	GuiManager::~GuiManager()
@@ -49,15 +54,6 @@ namespace rt
 	void GuiManager::Render()
 	{
 		mGui->Render(*GameCore::Get()->GetMainWindow());
-	}
-
-	void GuiManager::CreateGui()
-	{
-		mGui.reset(new sfg::GUI(sf::FloatRect(0.0f, 0.0f, 
-			static_cast<float>(OptionsManager::Get()->GetOption("width").ToInt()), 
-			static_cast<float>(OptionsManager::Get()->GetOption("height").ToInt()))));
-
-		mGui->LoadSkinFromFile( OptionsManager::Get()->GetOption("media_dir").ToString() + OptionsManager::Get()->GetOption("gui_skin").ToString() );
 	}
 
 	sfg::GUI* GuiManager::GetGui()

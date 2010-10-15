@@ -21,46 +21,56 @@ THE SOFTWARE.
 */
 
 #include "ReTechCommonIncludes.h"
-#include "ReTechLogManager.h"
+#include "rtToolManager.h"
+#include "rtTool.h"
 
-URegisterSingleton(LogManager)
+URegisterSingleton(ToolManager)
 
 namespace rt
 {
-	LogManager::LogManager()
+	ToolManager::ToolManager()
 	{
-		mFileStream.open("game.log");
+
 	}
 
-	LogManager::~LogManager()
+	ToolManager::~ToolManager()
 	{
-		if(mFileStream.is_open())
-		{
-			mFileStream.close();
-		}
+
 	}
 
-	void LogManager::Error( const std::string& iMessage )
+	void ToolManager::Update( float iTimeElapsed )
 	{
-		if(mFileStream.is_open())
+		std::for_each(mTools.begin(), mTools.end(), [iTimeElapsed](boost::shared_ptr<Tool>& iTool)->void
 		{
-			mFileStream << "ERROR:\t" << iMessage << "\n";
-		}
+			iTool->Update(iTimeElapsed);
+		});
 	}
 
-	void LogManager::Warning( const std::string& iMessage )
+	void ToolManager::Render()
 	{
-		if(mFileStream.is_open())
+		std::for_each(mTools.begin(), mTools.end(), [](boost::shared_ptr<Tool>& iTool)->void
 		{
-			mFileStream << "WARNING:\t" << iMessage << "\n";
-		}
+			iTool->Render();
+		});
 	}
 
-	void LogManager::Notice( const std::string& iMessage )
+	bool ToolManager::HandleEvent( const sf::Event& iEvent )
 	{
-		if(mFileStream.is_open())
+		bool eventHandled = false;
+
+		std::for_each(mTools.begin(), mTools.end(), [&eventHandled, &iEvent](boost::shared_ptr<Tool>& iTool)->void
 		{
-			mFileStream << "NOTICE:\t" << iMessage << "\n";
-		}
+			if(iTool->HandleEvent(iEvent))
+			{
+				eventHandled = true;
+			}
+		});
+
+		return eventHandled;
+	}
+
+	void ToolManager::AddTool( Tool* iTool )
+	{
+		mTools.push_back(boost::shared_ptr<Tool>(iTool));
 	}
 }

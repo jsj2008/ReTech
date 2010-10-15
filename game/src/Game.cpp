@@ -27,6 +27,7 @@ int WINAPI WinMain(HINSTANCE /*hInstance*/, HINSTANCE /*hPrevInstance*/, LPSTR /
 {
 	rt::GameCore gameCore;
 
+	//Populate options
 	rt::OptionsManager::Get()->GetOption("title") = std::string("ReTech Engine v 0.3.0");
 	rt::OptionsManager::Get()->GetOption("width") = 1280;
 	rt::OptionsManager::Get()->GetOption("height") = 720;
@@ -34,9 +35,12 @@ int WINAPI WinMain(HINSTANCE /*hInstance*/, HINSTANCE /*hPrevInstance*/, LPSTR /
 	rt::OptionsManager::Get()->GetOption("media_dir") = std::string("./media/");
 	rt::OptionsManager::Get()->GetOption("gui_skin") = std::string("skins/default.skin");
 
+	//Initialize engine
 	gameCore.Initialize();
 
-	rt::RenderManager::Get()->SetRenderStatistics(true);
+	//Add debug tools
+	rt::ToolManager::Get()->AddTool(new rt::Statistics());
+	rt::ToolManager::Get()->AddTool(new rt::Console());
 
 	gameCore.Run();
 

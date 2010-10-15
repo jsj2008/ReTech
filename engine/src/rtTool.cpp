@@ -21,46 +21,32 @@ THE SOFTWARE.
 */
 
 #include "ReTechCommonIncludes.h"
-#include "ReTechLogManager.h"
-
-URegisterSingleton(LogManager)
+#include "rtTool.h"
 
 namespace rt
 {
-	LogManager::LogManager()
+	Tool::Tool()
 	{
-		mFileStream.open("game.log");
+
 	}
 
-	LogManager::~LogManager()
+	Tool::~Tool()
 	{
-		if(mFileStream.is_open())
-		{
-			mFileStream.close();
-		}
+
 	}
 
-	void LogManager::Error( const std::string& iMessage )
+	void Tool::Update( float iTimeElapsed )
 	{
-		if(mFileStream.is_open())
-		{
-			mFileStream << "ERROR:\t" << iMessage << "\n";
-		}
+
 	}
 
-	void LogManager::Warning( const std::string& iMessage )
+	void Tool::Render()
 	{
-		if(mFileStream.is_open())
-		{
-			mFileStream << "WARNING:\t" << iMessage << "\n";
-		}
+
 	}
 
-	void LogManager::Notice( const std::string& iMessage )
+	bool Tool::HandleEvent( const sf::Event& iEvent )
 	{
-		if(mFileStream.is_open())
-		{
-			mFileStream << "NOTICE:\t" << iMessage << "\n";
-		}
+		return false;
 	}
 }

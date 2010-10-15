@@ -24,23 +24,21 @@ THE SOFTWARE.
 #include "ReTechRenderManager.h"
 #include "ReTechWorldObject.h"
 #include "rtGuiManager.h"
+#include "rtToolManager.h"
 
 URegisterSingleton(RenderManager)
 
 namespace rt
 {
 	RenderManager::RenderManager()
-		: mRenderStatistics(false)
 	{
-		mStatisticsText.SetFont(sf::Font::GetDefaultFont());
-		mStatisticsText.SetCharacterSize(10);
 	}
 
 	RenderManager::~RenderManager()
 	{
 	}
 
-	void RenderManager::Update( float iFrameTime )
+	void RenderManager::Update( float iFrameTime)
 	{
  		GameCore::Get()->GetMainWindow()->Clear(sf::Color(0, 0, 0));
  
@@ -56,11 +54,7 @@ namespace rt
  		}
 
 		GuiManager::Get()->Render();
-
-		if(mRenderStatistics)
-		{
-			renderStatistics();
-		}
+		ToolManager::Get()->Render();
  
  		GameCore::Get()->GetMainWindow()->Display();
 	}
@@ -85,23 +79,8 @@ namespace rt
 		GameCore::Get()->GetMainView()->Zoom(iZoom);
 	}
 
-	void RenderManager::SetRenderStatistics( bool iRenderStatistics )
-	{
-		mRenderStatistics = iRenderStatistics;
-	}
-
 	const RenderManager::WorldObjectsVec& RenderManager::GetVisibleObjectsCache()
 	{
 		return mVisibleObjectsCache;
-	}
-
-	void RenderManager::renderStatistics()
-	{
-		sf::String statisticsString = 
-			"FPS: " + boost::lexical_cast<std::string>(1.0f / GameCore::Get()->GetMainWindow()->GetFrameTime());
-
-		mStatisticsText.SetString(statisticsString);
-
-		GameCore::Get()->GetMainWindow()->Draw(mStatisticsText);
 	}
 }

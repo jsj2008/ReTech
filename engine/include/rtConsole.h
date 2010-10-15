@@ -20,47 +20,34 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#include "ReTechCommonIncludes.h"
-#include "ReTechLogManager.h"
+#pragma once
 
-URegisterSingleton(LogManager)
+#include "rtTool.h"
 
 namespace rt
 {
-	LogManager::LogManager()
+	class Console : public Tool
 	{
-		mFileStream.open("game.log");
-	}
+	public:
+		typedef std::vector<sf::String> StringVec;
+		typedef StringVec::iterator		StringVecIter;
 
-	LogManager::~LogManager()
-	{
-		if(mFileStream.is_open())
-		{
-			mFileStream.close();
-		}
-	}
+		Console(sf::Key::Code iToggleKey = sf::Key::Tilde);
+		virtual ~Console();
 
-	void LogManager::Error( const std::string& iMessage )
-	{
-		if(mFileStream.is_open())
-		{
-			mFileStream << "ERROR:\t" << iMessage << "\n";
-		}
-	}
+		virtual void Render();
+		virtual bool HandleEvent(const sf::Event& iEvent);
 
-	void LogManager::Warning( const std::string& iMessage )
-	{
-		if(mFileStream.is_open())
-		{
-			mFileStream << "WARNING:\t" << iMessage << "\n";
-		}
-	}
+		void ToggleConsole();
 
-	void LogManager::Notice( const std::string& iMessage )
-	{
-		if(mFileStream.is_open())
-		{
-			mFileStream << "NOTICE:\t" << iMessage << "\n";
-		}
-	}
+	protected:
+		sf::Shape		mBackgroundShape;
+		sf::Text		mConsoleText;
+
+		StringVec		mConsoleStrings;
+
+		bool			mVisible;
+
+		sf::Key::Code	mToggleKeyCode;
+	};
 }

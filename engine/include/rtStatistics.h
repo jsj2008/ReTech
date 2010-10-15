@@ -20,47 +20,22 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#include "ReTechCommonIncludes.h"
-#include "ReTechLogManager.h"
+#pragma once
 
-URegisterSingleton(LogManager)
+#include "rtTool.h"
 
 namespace rt
 {
-	LogManager::LogManager()
+	class Statistics : public Tool
 	{
-		mFileStream.open("game.log");
-	}
+	public:
+		Statistics();
+		virtual ~Statistics();
 
-	LogManager::~LogManager()
-	{
-		if(mFileStream.is_open())
-		{
-			mFileStream.close();
-		}
-	}
+		virtual void Update(float iTimeElapsed);
+		virtual void Render();
 
-	void LogManager::Error( const std::string& iMessage )
-	{
-		if(mFileStream.is_open())
-		{
-			mFileStream << "ERROR:\t" << iMessage << "\n";
-		}
-	}
-
-	void LogManager::Warning( const std::string& iMessage )
-	{
-		if(mFileStream.is_open())
-		{
-			mFileStream << "WARNING:\t" << iMessage << "\n";
-		}
-	}
-
-	void LogManager::Notice( const std::string& iMessage )
-	{
-		if(mFileStream.is_open())
-		{
-			mFileStream << "NOTICE:\t" << iMessage << "\n";
-		}
-	}
+	protected:
+		sf::Text mStatisticsText;
+	};
 }
