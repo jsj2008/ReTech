@@ -20,32 +20,28 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#pragma once
+#ifndef __rtLogManager_H__
+#define __rtLogManager_H__
 
 #include "rtSingleton.h"
 
 namespace rt
 {
-	class Tool;
-
-	class ToolManager : public Singleton<ToolManager>
+	class LogManager : public Singleton<LogManager>
 	{
 	public:
-		typedef std::vector<boost::shared_ptr<Tool>>	ToolVec;
-		typedef ToolVec::iterator						ToolVecIter;
+		typedef boost::shared_ptr<LogManager> Ptr;
 
-		typedef boost::shared_ptr<ToolManager>			Ptr;
+		LogManager();
+		~LogManager();
 
-		ToolManager();
-		~ToolManager();
-
-		void Update(float iTimeElapsed);
-		void Render();
-		bool HandleEvent(const sf::Event& iEvent);
-
-		void AddTool(Tool* iTool);
+		void Error(const std::string& iMessage);
+		void Warning(const std::string& iMessage);
+		void Notice(const std::string& iMessage);
 
 	protected:
-		ToolVec	mTools;
+		std::ofstream mFileStream;
 	};
 }
+
+#endif

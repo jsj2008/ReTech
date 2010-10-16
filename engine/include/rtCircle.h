@@ -22,30 +22,49 @@ THE SOFTWARE.
 
 #pragma once
 
-#include "rtSingleton.h"
+#include "rtWorldObject.h"
 
 namespace rt
 {
-	class Tool;
-
-	class ToolManager : public Singleton<ToolManager>
+	class Circle : public WorldObject
 	{
 	public:
-		typedef std::vector<boost::shared_ptr<Tool>>	ToolVec;
-		typedef ToolVec::iterator						ToolVecIter;
+		Circle();
+		virtual ~Circle();
 
-		typedef boost::shared_ptr<ToolManager>			Ptr;
+		virtual void UnSerialize(const YAML::Node& iNode);
 
-		ToolManager();
-		~ToolManager();
+		virtual void Draw(sf::RenderWindow* iRenderWindow);
 
-		void Update(float iTimeElapsed);
-		void Render();
-		bool HandleEvent(const sf::Event& iEvent);
+		void SetCenter(const Vector2f& iCenter, float iRadius);
+		void SetBrush(const Color& iColor);
+		void SetOutline(float iThikness, const Color& iColor);
 
-		void AddTool(Tool* iTool);
+		static void RegisterMetaClass()
+		{
+			camp::Class::declare<Circle>("Circle")
+				.base<WorldObject>()
+				.constructor0()
+				.property("CenterPoint", &Circle::mCenterPoint)
+				.property("Radius", &Circle::mRadius)
+				.property("OutlineThikness", &Circle::mOutlineThikness)
+				.property("BrushColor", &Circle::mBrushColor)
+				.property("OutlineColor", &Circle::mOutlineColor);
+		}
 
 	protected:
-		ToolVec	mTools;
+		void updateShape();
+
+		sf::Shape	mShape;
+
+		Vector2f	mCenterPoint;
+		float		mRadius;
+
+		float		mOutlineThikness;
+
+		Color		mBrushColor;
+		Color		mOutlineColor;
 	};
 }
+
+CAMP_AUTO_TYPE(rt::Circle, &rt::Circle::RegisterMetaClass)

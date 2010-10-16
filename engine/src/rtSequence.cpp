@@ -20,32 +20,69 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#pragma once
+#include "rtCommonIncludes.h"
+#include "rtSequence.h"
 
-#include "rtSingleton.h"
+#include "rtResourceManager.h"
+#include "rtCollectionIterator.h"
 
 namespace rt
 {
-	class Tool;
-
-	class ToolManager : public Singleton<ToolManager>
+	Sequence::Sequence()
+		: mDefaultFrameImageName("./media/default/no_texture.tga")
 	{
-	public:
-		typedef std::vector<boost::shared_ptr<Tool>>	ToolVec;
-		typedef ToolVec::iterator						ToolVecIter;
 
-		typedef boost::shared_ptr<ToolManager>			Ptr;
+	}
 
-		ToolManager();
-		~ToolManager();
+	Sequence::Sequence( const std::string& iResourceName )
+		: mDefaultFrameImageName("./media/default/no_texture.tga")
+	{
+		Initialize(iResourceName);
+	}
 
-		void Update(float iTimeElapsed);
-		void Render();
-		bool HandleEvent(const sf::Event& iEvent);
+	Sequence::~Sequence()
+	{
 
-		void AddTool(Tool* iTool);
+	}
 
-	protected:
-		ToolVec	mTools;
-	};
+	void Sequence::Load()
+	{
+		if(!IsLoaded())
+		{
+			CollectionIterator frames(mResourceName);
+
+			while(!frames.End())
+			{
+				std::string frameFile;
+				frames.SafeGet("file", frameFile);
+
+				if(!frameFile.empty())
+				{
+					mFrames.push_back(UResource(Image, frameFile));
+				}
+				
+				frames.Next();
+			}
+		}
+	}
+
+	void Sequence::Unload()
+	{
+		mFrames.clear();
+	}
+
+	bool Sequence::IsLoaded()
+	{
+		return !mFrames.empty();
+	}
+
+	Image* Sequence::Frame( int iFrameIndex )
+	{
+		return mFrames[iFrameIndex];
+	}
+
+	int Sequence::Lenght()
+	{
+		return mFrames.size();
+	}
 }

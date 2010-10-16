@@ -57,7 +57,7 @@
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>ReTechCommonIncludes.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>rtCommonIncludes.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <AdditionalOptions>/Zm200 %(AdditionalOptions)</AdditionalOptions>
@@ -86,33 +86,33 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\ReTechAnimation.cpp" />
-    <ClCompile Include="src\ReTechCircle.cpp" />
-    <ClCompile Include="src\ReTechLine.cpp" />
-    <ClCompile Include="src\ReTechParticleSystem.cpp" />
-    <ClCompile Include="src\ReTechRectangle.cpp" />
-    <ClCompile Include="src\ReTechSprite.cpp" />
-    <ClCompile Include="src\ReTechText.cpp" />
-    <ClCompile Include="src\ReTechFont.cpp" />
-    <ClCompile Include="src\ReTechImage.cpp" />
-    <ClCompile Include="src\ReTechParticle.cpp" />
-    <ClCompile Include="src\ReTechSequence.cpp" />
-    <ClCompile Include="src\ReTechFrameAnimation.cpp" />
-    <ClCompile Include="src\ReTechGameCore.cpp" />
-    <ClCompile Include="src\ReTechCollectionIterator.cpp" />
-    <ClCompile Include="src\ReTechObjectsFactory.cpp" />
-    <ClCompile Include="src\ReTechSerializeable.cpp" />
-    <ClCompile Include="src\ReTechOption.cpp" />
-    <ClCompile Include="src\ReTechOptionsManager.cpp" />
-    <ClCompile Include="src\ReTechConsoleManager.cpp" />
-    <ClCompile Include="src\ReTechLogManager.cpp" />
-    <ClCompile Include="src\ReTechInputManager.cpp" />
-    <ClCompile Include="src\ReTechResource.cpp" />
-    <ClCompile Include="src\ReTechResourceManager.cpp" />
-    <ClCompile Include="src\ReTechWorld.cpp" />
-    <ClCompile Include="src\ReTechWorldObject.cpp" />
-    <ClCompile Include="src\ReTechWorldsManager.cpp" />
-    <ClCompile Include="src\ReTechRenderManager.cpp" />
+    <ClCompile Include="src\rtAnimation.cpp" />
+    <ClCompile Include="src\rtCircle.cpp" />
+    <ClCompile Include="src\rtLine.cpp" />
+    <ClCompile Include="src\rtParticleSystem.cpp" />
+    <ClCompile Include="src\rtRectangle.cpp" />
+    <ClCompile Include="src\rtSprite.cpp" />
+    <ClCompile Include="src\rtText.cpp" />
+    <ClCompile Include="src\rtFont.cpp" />
+    <ClCompile Include="src\rtImage.cpp" />
+    <ClCompile Include="src\rtParticle.cpp" />
+    <ClCompile Include="src\rtSequence.cpp" />
+    <ClCompile Include="src\rtFrameAnimation.cpp" />
+    <ClCompile Include="src\rtGameCore.cpp" />
+    <ClCompile Include="src\rtCollectionIterator.cpp" />
+    <ClCompile Include="src\rtObjectsFactory.cpp" />
+    <ClCompile Include="src\rtSerializeable.cpp" />
+    <ClCompile Include="src\rtOption.cpp" />
+    <ClCompile Include="src\rtOptionsManager.cpp" />
+    <ClCompile Include="src\rtConsoleManager.cpp" />
+    <ClCompile Include="src\rtLogManager.cpp" />
+    <ClCompile Include="src\rtInputManager.cpp" />
+    <ClCompile Include="src\rtResource.cpp" />
+    <ClCompile Include="src\rtResourceManager.cpp" />
+    <ClCompile Include="src\rtWorld.cpp" />
+    <ClCompile Include="src\rtWorldObject.cpp" />
+    <ClCompile Include="src\rtWorldsManager.cpp" />
+    <ClCompile Include="src\rtRenderManager.cpp" />
     <ClCompile Include="src\rtConsole.cpp" />
     <ClCompile Include="src\rtGuiManager.cpp" />
     <ClCompile Include="src\micropather.cpp">
@@ -131,42 +131,43 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\ReTechCommonIncludes.cpp">
+    <ClCompile Include="src\rtCommonIncludes.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\ReTech.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\ReTechAnimation.h" />
-    <ClInclude Include="include\ReTechCircle.h" />
-    <ClInclude Include="include\ReTechLine.h" />
-    <ClInclude Include="include\ReTechParticleSystem.h" />
-    <ClInclude Include="include\ReTechRectangle.h" />
-    <ClInclude Include="include\ReTechSprite.h" />
-    <ClInclude Include="include\ReTechText.h" />
-    <ClInclude Include="include\ReTechFont.h" />
-    <ClInclude Include="include\ReTechImage.h" />
-    <ClInclude Include="include\ReTechParticle.h" />
-    <ClInclude Include="include\ReTechSequence.h" />
-    <ClInclude Include="include\ReTechFrameAnimation.h" />
-    <ClInclude Include="include\ReTechGameCore.h" />
-    <ClInclude Include="include\ReTechSingleton.h" />
-    <ClInclude Include="include\ReTechCollectionIterator.h" />
-    <ClInclude Include="include\ReTechObjectsFactory.h" />
-    <ClInclude Include="include\ReTechProperty.h" />
-    <ClInclude Include="include\ReTechSerializeable.h" />
-    <ClInclude Include="include\ReTechOption.h" />
-    <ClInclude Include="include\ReTechOptionsManager.h" />
-    <ClInclude Include="include\ReTechConsoleManager.h" />
-    <ClInclude Include="include\ReTechLogManager.h" />
-    <ClInclude Include="include\ReTechInputManager.h" />
-    <ClInclude Include="include\ReTechResource.h" />
-    <ClInclude Include="include\ReTechResourceManager.h" />
-    <ClInclude Include="include\ReTechWorld.h" />
-    <ClInclude Include="include\ReTechWorldObject.h" />
-    <ClInclude Include="include\ReTechWorldsManager.h" />
-    <ClInclude Include="include\ReTechRenderManager.h" />
+    <ClInclude Include="include\rtAnimation.h" />
+    <ClInclude Include="include\rtCircle.h" />
+    <ClInclude Include="include\rtExternalTypes.h" />
+    <ClInclude Include="include\rtLine.h" />
+    <ClInclude Include="include\rtParticleSystem.h" />
+    <ClInclude Include="include\rtRectangle.h" />
+    <ClInclude Include="include\rtSprite.h" />
+    <ClInclude Include="include\rtText.h" />
+    <ClInclude Include="include\rtFont.h" />
+    <ClInclude Include="include\rtImage.h" />
+    <ClInclude Include="include\rtParticle.h" />
+    <ClInclude Include="include\rtSequence.h" />
+    <ClInclude Include="include\rtFrameAnimation.h" />
+    <ClInclude Include="include\rtGameCore.h" />
+    <ClInclude Include="include\rtSingleton.h" />
+    <ClInclude Include="include\rtCollectionIterator.h" />
+    <ClInclude Include="include\rtObjectsFactory.h" />
+    <ClInclude Include="include\rtProperty.h" />
+    <ClInclude Include="include\rtSerializeable.h" />
+    <ClInclude Include="include\rtOption.h" />
+    <ClInclude Include="include\rtOptionsManager.h" />
+    <ClInclude Include="include\rtConsoleManager.h" />
+    <ClInclude Include="include\rtLogManager.h" />
+    <ClInclude Include="include\rtInputManager.h" />
+    <ClInclude Include="include\rtResource.h" />
+    <ClInclude Include="include\rtResourceManager.h" />
+    <ClInclude Include="include\rtWorld.h" />
+    <ClInclude Include="include\rtWorldObject.h" />
+    <ClInclude Include="include\rtWorldsManager.h" />
+    <ClInclude Include="include\rtRenderManager.h" />
     <ClInclude Include="include\rtConsole.h" />
     <ClInclude Include="include\rtGuiManager.h" />
     <ClInclude Include="include\micropather.h" />
@@ -175,8 +176,8 @@
     <ClInclude Include="include\rtTool.h" />
     <ClInclude Include="include\rtToolManager.h" />
     <ClInclude Include="include\SfMath.h" />
-    <ClInclude Include="include\ReTechCommonIncludes.h" />
-    <ClInclude Include="include\ReTechLibraries.h" />
+    <ClInclude Include="include\rtCommonIncludes.h" />
+    <ClInclude Include="include\rtLibraries.h" />
     <ClInclude Include="include\ReTech.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

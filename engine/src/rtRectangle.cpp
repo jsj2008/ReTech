@@ -20,32 +20,63 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#pragma once
-
-#include "rtSingleton.h"
+#include "rtCommonIncludes.h"
+#include "rtRectangle.h"
 
 namespace rt
 {
-	class Tool;
-
-	class ToolManager : public Singleton<ToolManager>
+	Rectangle::Rectangle()
+		: mOutlineThikness(0)
 	{
-	public:
-		typedef std::vector<boost::shared_ptr<Tool>>	ToolVec;
-		typedef ToolVec::iterator						ToolVecIter;
+		mClassName = "Rectangle";
+	}
 
-		typedef boost::shared_ptr<ToolManager>			Ptr;
+	Rectangle::~Rectangle()
+	{
 
-		ToolManager();
-		~ToolManager();
+	}
 
-		void Update(float iTimeElapsed);
-		void Render();
-		bool HandleEvent(const sf::Event& iEvent);
+	void Rectangle::UnSerialize( const YAML::Node& iNode )
+	{
+		WorldObject::UnSerialize(iNode);
 
-		void AddTool(Tool* iTool);
+		updateShape();
+	}
 
-	protected:
-		ToolVec	mTools;
-	};
+	void Rectangle::Draw( sf::RenderWindow* iRenderWindow )
+	{
+		mShape.SetPosition(GetPosition());
+		mShape.SetScale(GetScale());
+		mShape.SetOrigin(GetOrigin());
+		mShape.SetRotation(GetRotation());
+
+		iRenderWindow->Draw(mShape);
+	}
+
+	void Rectangle::SetRect( const FloatRect& iRect)
+	{
+		mRect = iRect;
+
+		updateShape();
+	}
+
+	void Rectangle::SetBrush(const Color& iColor )
+	{
+		mBrushColor = iColor;
+
+		updateShape();
+	}
+
+	void Rectangle::SetOutline( float iThikness, const Color& iColor )
+	{
+		mOutlineThikness = iThikness;
+		mOutlineColor = iColor;
+
+		updateShape();
+	}
+
+	void Rectangle::updateShape()
+	{
+		mShape = sf::Shape::Rectangle(mRect, mBrushColor, mOutlineThikness, mOutlineColor);
+	}
 }

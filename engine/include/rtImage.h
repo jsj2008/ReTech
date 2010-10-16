@@ -20,32 +20,28 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#pragma once
+#ifndef __rtImage_H__
+#define __rtImage_H__
 
-#include "rtSingleton.h"
+#include "rtResource.h"
 
 namespace rt
 {
-	class Tool;
-
-	class ToolManager : public Singleton<ToolManager>
+	class Image : public Resource, public sf::Image
 	{
 	public:
-		typedef std::vector<boost::shared_ptr<Tool>>	ToolVec;
-		typedef ToolVec::iterator						ToolVecIter;
+		Image();
+		Image(const std::string& iResourceName);
+		virtual ~Image();
 
-		typedef boost::shared_ptr<ToolManager>			Ptr;
+		virtual void Load();
+		virtual void Unload();
 
-		ToolManager();
-		~ToolManager();
-
-		void Update(float iTimeElapsed);
-		void Render();
-		bool HandleEvent(const sf::Event& iEvent);
-
-		void AddTool(Tool* iTool);
+		virtual bool IsLoaded();
 
 	protected:
-		ToolVec	mTools;
+		std::string mDefaultResourceName;
 	};
 }
+
+#endif

@@ -20,32 +20,54 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#pragma once
-
-#include "rtSingleton.h"
+#include "rtCommonIncludes.h"
+#include "rtOption.h"
 
 namespace rt
 {
-	class Tool;
-
-	class ToolManager : public Singleton<ToolManager>
+	Option::Option()
 	{
-	public:
-		typedef std::vector<boost::shared_ptr<Tool>>	ToolVec;
-		typedef ToolVec::iterator						ToolVecIter;
 
-		typedef boost::shared_ptr<ToolManager>			Ptr;
+	}
 
-		ToolManager();
-		~ToolManager();
+	Option::~Option()
+	{
 
-		void Update(float iTimeElapsed);
-		void Render();
-		bool HandleEvent(const sf::Event& iEvent);
+	}
 
-		void AddTool(Tool* iTool);
+	Option& Option::operator=( const std::string& iValue )
+	{
+		mDataHolder = iValue;
 
-	protected:
-		ToolVec	mTools;
-	};
+		return *this;
+	}
+
+	Option& Option::operator=( int iValue )
+	{
+		mDataHolder = iValue;
+
+		return *this;
+	}
+
+	Option& Option::operator=( float iValue )
+	{
+		mDataHolder = iValue;
+
+		return *this;
+	}
+
+	std::string Option::ToString()
+	{
+		return boost::any_cast<std::string>(mDataHolder);
+	}
+
+	int Option::ToInt()
+	{
+		return boost::any_cast<int>(mDataHolder);
+	}
+
+	float Option::ToFloat()
+	{
+		return boost::any_cast<float>(mDataHolder);
+	}
 }

@@ -20,32 +20,65 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#pragma once
-
-#include "rtSingleton.h"
+#include "rtCommonIncludes.h"
+#include "rtLine.h"
 
 namespace rt
 {
-	class Tool;
-
-	class ToolManager : public Singleton<ToolManager>
+	Line::Line()
+		: mBrushThikness(1), mOutlineThikness(0)
 	{
-	public:
-		typedef std::vector<boost::shared_ptr<Tool>>	ToolVec;
-		typedef ToolVec::iterator						ToolVecIter;
+		mClassName = "Line";
+	}
 
-		typedef boost::shared_ptr<ToolManager>			Ptr;
+	Line::~Line()
+	{
 
-		ToolManager();
-		~ToolManager();
+	}
 
-		void Update(float iTimeElapsed);
-		void Render();
-		bool HandleEvent(const sf::Event& iEvent);
+	void Line::UnSerialize( const YAML::Node& iNode )
+	{
+		WorldObject::UnSerialize(iNode);
 
-		void AddTool(Tool* iTool);
+		updateShape();
+	}
 
-	protected:
-		ToolVec	mTools;
-	};
+	void Line::Draw( sf::RenderWindow* iRenderWindow )
+	{
+		mShape.SetPosition(GetPosition());
+		mShape.SetScale(GetScale());
+		mShape.SetOrigin(GetOrigin());
+		mShape.SetRotation(GetRotation());
+
+		iRenderWindow->Draw(mShape);
+	}
+
+	void Line::SetPoints( const Vector2f& iFirst, const Vector2f& iSecond )
+	{
+		mFirstPoint = iFirst;
+		mSecondPoint = iSecond;
+
+		updateShape();
+	}
+
+	void Line::SetBrush( float iThikness, const Color& iColor )
+	{
+		mBrushThikness = iThikness;
+		mBrushColor = iColor;
+
+		updateShape();
+	}
+
+	void Line::SetOutline( float iThikness, const Color& iColor )
+	{
+		mOutlineThikness = iThikness;
+		mOutlineColor = iColor;
+
+		updateShape();
+	}
+
+	void Line::updateShape()
+	{
+		mShape = sf::Shape::Line(mFirstPoint, mSecondPoint, mBrushThikness, mBrushColor, mOutlineThikness, mOutlineColor);
+	}
 }

@@ -20,32 +20,65 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#pragma once
-
-#include "rtSingleton.h"
+#include "rtCommonIncludes.h"
+#include "rtText.h"
+#include "rtFont.h"
 
 namespace rt
 {
-	class Tool;
-
-	class ToolManager : public Singleton<ToolManager>
+	Text::Text()
 	{
-	public:
-		typedef std::vector<boost::shared_ptr<Tool>>	ToolVec;
-		typedef ToolVec::iterator						ToolVecIter;
+		mClassName = "Text";
+	}
 
-		typedef boost::shared_ptr<ToolManager>			Ptr;
+	Text::~Text()
+	{
 
-		ToolManager();
-		~ToolManager();
+	}
 
-		void Update(float iTimeElapsed);
-		void Render();
-		bool HandleEvent(const sf::Event& iEvent);
+	void Text::Draw( sf::RenderWindow* iRenderWindow )
+	{
+		mText.SetPosition(GetPosition());
+		mText.SetScale(GetScale());
+		mText.SetOrigin(GetOrigin());
+		mText.SetRotation(GetRotation());
 
-		void AddTool(Tool* iTool);
 
-	protected:
-		ToolVec	mTools;
-	};
+		iRenderWindow->Draw(mText);
+	}
+
+	void Text::SetFont( const std::string& iResourceName )
+	{
+		mResourceName = iResourceName;
+
+		Font* font = UResource(Font, iResourceName);
+		font->Load();
+
+		mText.SetFont(*font);
+	}
+
+	std::string Text::GetFont()
+	{
+		return mResourceName;
+	}
+
+	void Text::SetString( const std::string& iString )
+	{
+		mText.SetString(iString);
+	}
+
+	std::string Text::GetString()
+	{
+		return mText.GetString();
+	}
+
+	void Text::SetCharacterSize( unsigned int iSize )
+	{
+		mText.SetCharacterSize(iSize);
+	}
+
+	unsigned int Text::GetCharacterSize()
+	{
+		return mText.GetCharacterSize();
+	}
 }

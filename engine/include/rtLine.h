@@ -21,31 +21,52 @@ THE SOFTWARE.
 */
 
 #pragma once
-
-#include "rtSingleton.h"
+#include "rtWorldObject.h"
 
 namespace rt
 {
-	class Tool;
-
-	class ToolManager : public Singleton<ToolManager>
+	class Line : public WorldObject
 	{
 	public:
-		typedef std::vector<boost::shared_ptr<Tool>>	ToolVec;
-		typedef ToolVec::iterator						ToolVecIter;
+		Line();
+		virtual ~Line();
 
-		typedef boost::shared_ptr<ToolManager>			Ptr;
+		virtual void UnSerialize(const YAML::Node& iNode);
 
-		ToolManager();
-		~ToolManager();
+		virtual void Draw(sf::RenderWindow* iRenderWindow);
 
-		void Update(float iTimeElapsed);
-		void Render();
-		bool HandleEvent(const sf::Event& iEvent);
+		void SetPoints(const Vector2f& iFirst, const Vector2f& iSecond);
+		void SetBrush(float iThikness, const Color& iColor);
+		void SetOutline(float iThikness, const Color& iColor);
 
-		void AddTool(Tool* iTool);
+		static void RegisterMetaClass()
+		{
+			camp::Class::declare<Line>("Line")
+				.base<WorldObject>()
+				.constructor0()
+				.property("StartPoint", &Line::mFirstPoint)
+				.property("EndPoint", &Line::mSecondPoint)
+				.property("BrushThikness", &Line::mBrushThikness)
+				.property("OutlineThikness", &Line::mOutlineThikness)
+				.property("BrushColor", &Line::mBrushColor)
+				.property("OutlineColor", &Line::mOutlineColor)
+				;
+		}
 
 	protected:
-		ToolVec	mTools;
+		void updateShape();
+
+		sf::Shape	mShape;
+
+		Vector2f	mFirstPoint;
+		Vector2f	mSecondPoint;
+
+		float		mBrushThikness;
+		float		mOutlineThikness;
+
+		Color		mBrushColor;
+		Color		mOutlineColor;
 	};
 }
+
+CAMP_AUTO_TYPE(rt::Line, &rt::Line::RegisterMetaClass)

@@ -20,32 +20,64 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#pragma once
-
-#include "rtSingleton.h"
+#include "rtCommonIncludes.h"
+#include "rtCircle.h"
 
 namespace rt
 {
-	class Tool;
-
-	class ToolManager : public Singleton<ToolManager>
+	Circle::Circle()
+		: mRadius(1), mOutlineThikness(0)
 	{
-	public:
-		typedef std::vector<boost::shared_ptr<Tool>>	ToolVec;
-		typedef ToolVec::iterator						ToolVecIter;
+		mClassName = "Circle";
+	}
 
-		typedef boost::shared_ptr<ToolManager>			Ptr;
+	Circle::~Circle()
+	{
 
-		ToolManager();
-		~ToolManager();
+	}
 
-		void Update(float iTimeElapsed);
-		void Render();
-		bool HandleEvent(const sf::Event& iEvent);
+	void Circle::UnSerialize( const YAML::Node& iNode )
+	{
+		WorldObject::UnSerialize(iNode);
 
-		void AddTool(Tool* iTool);
+		updateShape();
+	}
 
-	protected:
-		ToolVec	mTools;
-	};
+	void Circle::Draw( sf::RenderWindow* iRenderWindow )
+	{
+		mShape.SetPosition(GetPosition());
+		mShape.SetScale(GetScale());
+		mShape.SetOrigin(GetOrigin());
+		mShape.SetRotation(GetRotation());
+
+		iRenderWindow->Draw(mShape);
+	}
+
+	void Circle::SetCenter( const Vector2f& iCenter, float iRadius )
+	{
+		mCenterPoint = iCenter;
+		mRadius = iRadius;
+
+		updateShape();
+	}
+
+	void Circle::SetBrush( const Color& iColor )
+	{
+		mBrushColor = iColor;
+
+		updateShape();
+	}
+
+	void Circle::SetOutline( float iThikness, const Color& iColor )
+	{
+		mOutlineThikness = iThikness;
+		mOutlineColor = iColor;
+
+		updateShape();
+	}
+
+	void Circle::updateShape()
+	{
+		mShape = sf::Shape::Circle(mCenterPoint, mRadius, mBrushColor, mOutlineThikness, mOutlineColor);
+	}
 }

@@ -26,26 +26,39 @@ THE SOFTWARE.
 
 namespace rt
 {
-	class Tool;
-
-	class ToolManager : public Singleton<ToolManager>
+	class ConsoleManager : public Singleton<ConsoleManager>
 	{
 	public:
-		typedef std::vector<boost::shared_ptr<Tool>>	ToolVec;
-		typedef ToolVec::iterator						ToolVecIter;
+		struct CommandDesc
+		{
+			std::string			mName;
+			camp::UserObject	mObject;
+			std::string			mFunction;
+		};
 
-		typedef boost::shared_ptr<ToolManager>			Ptr;
+		typedef std::map<std::string, CommandDesc>	CommandMap;
+		typedef CommandMap::iterator				CommandMapIter;
 
-		ToolManager();
-		~ToolManager();
+		typedef boost::shared_ptr<ConsoleManager>	Ptr;
 
-		void Update(float iTimeElapsed);
-		void Render();
-		bool HandleEvent(const sf::Event& iEvent);
+		ConsoleManager();
+		~ConsoleManager();
 
-		void AddTool(Tool* iTool);
+		void RegisterCommand(const std::string& iName, camp::UserObject iObject, const std::string& iFunction);
+		void CallCommand(const std::string& iName, const camp::Args& iArgs = camp::Args::empty);
+		void ParseCommand(const std::string& iCommandString);
+
+		bool HasArguments(const std::string& iName);
+
+		static void RegisterMetaClass()
+		{
+			camp::Class::declare<ConsoleManager>("ConsoleManager")
+				.constructor0();
+		}
 
 	protected:
-		ToolVec	mTools;
+		CommandMap mCommands;
 	};
 }
+
+CAMP_AUTO_TYPE(rt::ConsoleManager, &rt::ConsoleManager::RegisterMetaClass)

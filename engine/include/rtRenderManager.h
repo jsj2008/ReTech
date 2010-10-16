@@ -20,32 +20,39 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#pragma once
+#ifndef __rtRenderManager_H__
+#define __rtRenderManager_H__
 
 #include "rtSingleton.h"
 
 namespace rt
 {
-	class Tool;
+	class WorldObject;
 
-	class ToolManager : public Singleton<ToolManager>
+	class RenderManager : public Singleton<RenderManager>
 	{
 	public:
-		typedef std::vector<boost::shared_ptr<Tool>>	ToolVec;
-		typedef ToolVec::iterator						ToolVecIter;
+		typedef std::vector<boost::weak_ptr<WorldObject>>	WorldObjectsVec;
+		typedef WorldObjectsVec::iterator					WorldObjectsVecIter;
 
-		typedef boost::shared_ptr<ToolManager>			Ptr;
+		typedef boost::shared_ptr<RenderManager>			Ptr;
 
-		ToolManager();
-		~ToolManager();
+		RenderManager();
+		~RenderManager();
 
-		void Update(float iTimeElapsed);
-		void Render();
-		bool HandleEvent(const sf::Event& iEvent);
+		void Update(float iFrameTime);
 
-		void AddTool(Tool* iTool);
+		void SetCameraCenter(float iX, float iY);
+		void MoverCameraCenter(float iDeltaX, float iDeltaY);
+		void SetCameraZoom(float iZoom);
+
+		static bool Sort(boost::weak_ptr<WorldObject> iFirst, boost::weak_ptr<WorldObject> iSecond);
+
+		const WorldObjectsVec& GetVisibleObjectsCache();
 
 	protected:
-		ToolVec	mTools;
+		WorldObjectsVec	mVisibleObjectsCache;
 	};
 }
+
+#endif

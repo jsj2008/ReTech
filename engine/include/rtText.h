@@ -22,30 +22,42 @@ THE SOFTWARE.
 
 #pragma once
 
-#include "rtSingleton.h"
+#include "rtWorldObject.h"
 
 namespace rt
 {
-	class Tool;
-
-	class ToolManager : public Singleton<ToolManager>
+	class Text : public WorldObject
 	{
 	public:
-		typedef std::vector<boost::shared_ptr<Tool>>	ToolVec;
-		typedef ToolVec::iterator						ToolVecIter;
+		Text();
+		virtual ~Text();
 
-		typedef boost::shared_ptr<ToolManager>			Ptr;
+		virtual void Draw(sf::RenderWindow* iRenderWindow);
 
-		ToolManager();
-		~ToolManager();
+		void SetFont(const std::string& iResourceName);
+		std::string GetFont();
 
-		void Update(float iTimeElapsed);
-		void Render();
-		bool HandleEvent(const sf::Event& iEvent);
+		void SetString(const std::string& iString);
+		std::string GetString();
 
-		void AddTool(Tool* iTool);
+		void SetCharacterSize(unsigned int iSize);
+		unsigned int GetCharacterSize();
+
+		static void RegisterMetaClass()
+		{
+			camp::Class::declare<Text>("Text")
+				.base<WorldObject>()
+				.constructor0()
+				.property("Font", &Text::GetFont, &Text::SetFont)
+				.property("String", &Text::GetString, &Text::SetString)
+				.property("CharacterSize", &Text::GetCharacterSize, &Text::SetCharacterSize);
+		}
 
 	protected:
-		ToolVec	mTools;
+		sf::Text mText;
+
+		std::string mResourceName;
 	};
 }
+
+CAMP_AUTO_TYPE(rt::Text, &rt::Text::RegisterMetaClass)

@@ -20,32 +20,48 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#pragma once
-
-#include "rtSingleton.h"
+#include "rtCommonIncludes.h"
+#include "rtSprite.h"
+#include "rtResourceManager.h"
+#include "rtImage.h"
 
 namespace rt
 {
-	class Tool;
-
-	class ToolManager : public Singleton<ToolManager>
+	Sprite::Sprite()
 	{
-	public:
-		typedef std::vector<boost::shared_ptr<Tool>>	ToolVec;
-		typedef ToolVec::iterator						ToolVecIter;
+		mClassName = "Sprite";
+	}
 
-		typedef boost::shared_ptr<ToolManager>			Ptr;
+	Sprite::~Sprite()
+	{
 
-		ToolManager();
-		~ToolManager();
+	}
 
-		void Update(float iTimeElapsed);
-		void Render();
-		bool HandleEvent(const sf::Event& iEvent);
+	void Sprite::Draw( sf::RenderWindow* iRenderWindow )
+	{
+		mSprite.SetPosition(GetPosition());
+		mSprite.SetScale(GetScale());
+		mSprite.SetOrigin(GetOrigin());
+		mSprite.SetRotation(GetRotation());
 
-		void AddTool(Tool* iTool);
+		iRenderWindow->Draw(mSprite);
+	}
 
-	protected:
-		ToolVec	mTools;
-	};
+	void Sprite::SetResource( const std::string& iResourceName )
+	{
+		mResourceName = iResourceName;
+
+		Image* image = UResource(Image, iResourceName);
+
+		if(image)
+		{
+			image->Load();
+			mSprite.SetImage(*image);
+		}
+	}
+
+	const std::string& Sprite::GetResource()
+	{
+		return  mResourceName;
+	}
 }

@@ -21,32 +21,68 @@ THE SOFTWARE.
 */
 
 #include "rtCommonIncludes.h"
-#include "rtTool.h"
+#include "rtCollectionIterator.h"
 
 namespace rt
 {
-	Tool::Tool()
+	CollectionIterator::CollectionIterator( const std::string& iFileName )
+		: mSectionNode(0), mCurrentIndex(0)
 	{
+		std::ifstream inFile(iFileName.c_str());
 
+		if(inFile.is_open())
+		{
+			YAML::Parser parser(inFile);
+			parser.GetNextDocument(mDocument);
+
+			mSectionNode = &mDocument;
+		}
 	}
 
-	Tool::~Tool()
+	CollectionIterator::CollectionIterator( const YAML::Node* iSectionNode )
+		: mSectionNode(iSectionNode), mCurrentIndex(0)
 	{
-
+		
 	}
 
-	void Tool::Update( float iTimeElapsed )
+	void CollectionIterator::Next()
 	{
-
+		++mCurrentIndex;
 	}
 
-	void Tool::Render()
+	bool CollectionIterator::End()
 	{
-
+		return mSectionNode ? mCurrentIndex >= static_cast<int>(mSectionNode->size()) : true;
 	}
 
-	bool Tool::HandleEvent( const sf::Event& iEvent )
+	const YAML::Node& CollectionIterator::Node()
 	{
-		return false;
+		switch(mSectionNode->GetType())
+		{
+		case YAML::CT_MAP:
+			return (*mSectionNode);
+			break;
+		case YAML::CT_SEQUENCE:
+			return (*mSectionNode)[mCurrentIndex];
+			break;
+		}
+
+		return (*mSectionNode);
+	}
+
+	float CollectionIterator::Progress()
+	{
+		return mSectionNode->size() ? mCurrentIndex / mSectionNode->size() : 1.0f;
+	}
+
+	CollectionIterator CollectionIterator::Extract( const std::string& iSectionName )
+	{
+		return CollectionIterator(mSectionNode->FindValue(iSectionName));
+	}
+
+	void CollectionIterator::Clear()
+	{
+		mDocument.Clear();
+		mSectionNode = 0;
 	}
 }

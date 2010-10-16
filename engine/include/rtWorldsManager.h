@@ -20,32 +20,56 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#pragma once
+#ifndef __rtWorldsManager_H__
+#define __rtWorldsManager_H__
 
 #include "rtSingleton.h"
 
 namespace rt
 {
-	class Tool;
+	class World;
 
-	class ToolManager : public Singleton<ToolManager>
+	class WorldsManager : public Singleton<WorldsManager>
 	{
 	public:
-		typedef std::vector<boost::shared_ptr<Tool>>	ToolVec;
-		typedef ToolVec::iterator						ToolVecIter;
+		typedef std::list<boost::shared_ptr<World>>			WorldsVec;
+		typedef WorldsVec::iterator							WorldsVecIter;
+		typedef std::vector<boost::weak_ptr<WorldObject>>	ObjectsVec;
+		typedef ObjectsVec::iterator						ObjectsVecIter;
 
-		typedef boost::shared_ptr<ToolManager>			Ptr;
+		typedef boost::shared_ptr<WorldsManager>			Ptr;
 
-		ToolManager();
-		~ToolManager();
+		class IsNamed
+		{
+		public:
+			IsNamed(const std::string& iName)
+				: mName(iName){}
 
-		void Update(float iTimeElapsed);
-		void Render();
-		bool HandleEvent(const sf::Event& iEvent);
+			bool operator()(const boost::shared_ptr<World>& iWorld);
 
-		void AddTool(Tool* iTool);
+		protected:
+			std::string mName;
+		};
+
+		WorldsManager();
+		~WorldsManager();
+
+		void Update(float iFrameTime);
+
+		World* CreateWorld(const std::string& iName, int iLayer = 0);
+		void DestroyWorld(const std::string& iName);
+
+		World* GetWorld(const std::string& iName);
+
+		void GetVisibleObjects(std::vector<boost::weak_ptr<WorldObject>>& iVisibleObjects);
+
+		sf::Vector2f ScreenToWorld(unsigned int iX, unsigned int iY);
 
 	protected:
-		ToolVec	mTools;
+		WorldsVec mWorlds;
+
+		ObjectsVec mVisibleObjectsCache;
 	};
 }
+
+#endif

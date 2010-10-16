@@ -20,32 +20,48 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#pragma once
-
-#include "rtSingleton.h"
+#include "rtCommonIncludes.h"
+#include "rtFont.h"
 
 namespace rt
 {
-	class Tool;
-
-	class ToolManager : public Singleton<ToolManager>
+	Font::Font()
+		: mIsLoaded(false)
 	{
-	public:
-		typedef std::vector<boost::shared_ptr<Tool>>	ToolVec;
-		typedef ToolVec::iterator						ToolVecIter;
 
-		typedef boost::shared_ptr<ToolManager>			Ptr;
+	}
 
-		ToolManager();
-		~ToolManager();
+	Font::Font( const std::string& iResourceName )
+		: mIsLoaded(false)
+	{
+		Initialize(iResourceName);
+	}
 
-		void Update(float iTimeElapsed);
-		void Render();
-		bool HandleEvent(const sf::Event& iEvent);
+	Font::~Font()
+	{
 
-		void AddTool(Tool* iTool);
+	}
 
-	protected:
-		ToolVec	mTools;
-	};
+	void Font::Load()
+	{
+		if(!IsLoaded())
+		{
+			if(!LoadFromFile(mResourceName))
+			{
+				*static_cast<sf::Font*>(this) = sf::Font::GetDefaultFont();
+			}
+		}
+
+		mIsLoaded;
+	}
+
+	void Font::Unload()
+	{
+		*static_cast<sf::Font*>(this) = sf::Font();
+	}
+
+	bool Font::IsLoaded()
+	{
+		return mIsLoaded;
+	}
 }

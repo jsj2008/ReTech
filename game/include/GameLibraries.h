@@ -1,7 +1,7 @@
 #ifndef __GameLibraries_H__
 #define __GameLibraries_H__
 
-#include "ReTechLibraries.h"
+#include "rtLibraries.h"
 
  #ifdef _DEBUG
  	#pragma comment(lib, "ReTech_d.lib")

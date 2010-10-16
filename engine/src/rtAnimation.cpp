@@ -20,32 +20,35 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#pragma once
-
-#include "rtSingleton.h"
+#include "rtCommonIncludes.h"
+#include "rtAnimation.h"
 
 namespace rt
 {
-	class Tool;
-
-	class ToolManager : public Singleton<ToolManager>
+	Animation::Animation()
 	{
-	public:
-		typedef std::vector<boost::shared_ptr<Tool>>	ToolVec;
-		typedef ToolVec::iterator						ToolVecIter;
+		mClassName = "Animation";
+	}
 
-		typedef boost::shared_ptr<ToolManager>			Ptr;
+	Animation::~Animation()
+	{
 
-		ToolManager();
-		~ToolManager();
+	}
 
-		void Update(float iTimeElapsed);
-		void Render();
-		bool HandleEvent(const sf::Event& iEvent);
+	void Animation::UnSerialize( const YAML::Node& iNode )
+	{
+		Sprite::UnSerialize(iNode);
 
-		void AddTool(Tool* iTool);
+		mAnimation.reset(new FrameAnimation(mAnimationFile, &mSprite));
+	}
 
-	protected:
-		ToolVec	mTools;
-	};
+	void Animation::Serialize( YAML::Emitter& iEmitter ) const
+	{
+
+	}
+
+	void Animation::Update( float iFrameTime )
+	{
+		mAnimation->Update(iFrameTime);
+	}
 }

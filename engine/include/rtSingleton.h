@@ -21,31 +21,23 @@ THE SOFTWARE.
 */
 
 #pragma once
-
-#include "rtSingleton.h"
-
 namespace rt
 {
-	class Tool;
-
-	class ToolManager : public Singleton<ToolManager>
+	template<class T>
+	class Singleton
 	{
 	public:
-		typedef std::vector<boost::shared_ptr<Tool>>	ToolVec;
-		typedef ToolVec::iterator						ToolVecIter;
+		Singleton()
+		{
+			mInstance = static_cast<T*>(this);
+		}
 
-		typedef boost::shared_ptr<ToolManager>			Ptr;
-
-		ToolManager();
-		~ToolManager();
-
-		void Update(float iTimeElapsed);
-		void Render();
-		bool HandleEvent(const sf::Event& iEvent);
-
-		void AddTool(Tool* iTool);
+		static T* Get()
+		{
+			return mInstance;
+		}
 
 	protected:
-		ToolVec	mTools;
+		static T* mInstance;
 	};
 }

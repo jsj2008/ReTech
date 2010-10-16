@@ -22,7 +22,7 @@ THE SOFTWARE.
 
 #pragma once
 
-#include "ReTechSingleton.h"
+#include "rtSingleton.h"
 
 namespace rt
 {

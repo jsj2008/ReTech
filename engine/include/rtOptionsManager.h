@@ -20,32 +20,30 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#pragma once
+#ifndef __rtOptionsManager_H__
+#define __rtOptionsManager_H__
 
 #include "rtSingleton.h"
+#include "rtOption.h"
 
 namespace rt
 {
-	class Tool;
-
-	class ToolManager : public Singleton<ToolManager>
+	class OptionsManager : public Singleton<OptionsManager>
 	{
 	public:
-		typedef std::vector<boost::shared_ptr<Tool>>	ToolVec;
-		typedef ToolVec::iterator						ToolVecIter;
+		typedef std::map<std::string, Option>		OptionsMap;
+		typedef OptionsMap::iterator				OptionsMapIter;
 
-		typedef boost::shared_ptr<ToolManager>			Ptr;
+		typedef boost::shared_ptr<OptionsManager>	Ptr;
 
-		ToolManager();
-		~ToolManager();
+		OptionsManager();
+		~OptionsManager();
 
-		void Update(float iTimeElapsed);
-		void Render();
-		bool HandleEvent(const sf::Event& iEvent);
-
-		void AddTool(Tool* iTool);
+		Option& GetOption(const std::string& iName);
 
 	protected:
-		ToolVec	mTools;
+		OptionsMap mOptions;
 	};
 }
+
+#endif

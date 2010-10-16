@@ -22,30 +22,34 @@ THE SOFTWARE.
 
 #pragma once
 
-#include "rtSingleton.h"
+#include "rtWorldObject.h"
 
 namespace rt
 {
-	class Tool;
-
-	class ToolManager : public Singleton<ToolManager>
+	class Sprite : public WorldObject
 	{
 	public:
-		typedef std::vector<boost::shared_ptr<Tool>>	ToolVec;
-		typedef ToolVec::iterator						ToolVecIter;
+		Sprite();
+		virtual ~Sprite();
 
-		typedef boost::shared_ptr<ToolManager>			Ptr;
+		virtual void Draw(sf::RenderWindow* iRenderWindow);
 
-		ToolManager();
-		~ToolManager();
+		void SetResource(const std::string& iResourceName);
+		const std::string& GetResource();
 
-		void Update(float iTimeElapsed);
-		void Render();
-		bool HandleEvent(const sf::Event& iEvent);
+		static void RegisterMetaClass()
+		{
+			camp::Class::declare<Sprite>("Sprite")
+				.base<WorldObject>()
+				.constructor0()
+				.property("Sprite", &Sprite::GetResource, &Sprite::SetResource);
+		}
 
-		void AddTool(Tool* iTool);
+		protected:
+			sf::Sprite mSprite;
 
-	protected:
-		ToolVec	mTools;
+			std::string mResourceName;
 	};
 }
+
+CAMP_AUTO_TYPE(rt::Sprite, &rt::Sprite::RegisterMetaClass)

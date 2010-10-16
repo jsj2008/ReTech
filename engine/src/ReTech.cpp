@@ -20,8 +20,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#include "ReTechCommonIncludes.h"
-#include "ReTechLibraries.h"
+#include "rtCommonIncludes.h"
+#include "rtLibraries.h"
 
 namespace sfg 
 {

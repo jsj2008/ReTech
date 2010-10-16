@@ -22,30 +22,35 @@ THE SOFTWARE.
 
 #pragma once
 
-#include "rtSingleton.h"
+#include "rtSprite.h"
+#include "rtFrameAnimation.h"
 
 namespace rt
 {
-	class Tool;
-
-	class ToolManager : public Singleton<ToolManager>
+	class Animation : virtual public Sprite
 	{
 	public:
-		typedef std::vector<boost::shared_ptr<Tool>>	ToolVec;
-		typedef ToolVec::iterator						ToolVecIter;
+		Animation();
+		virtual ~Animation();
 
-		typedef boost::shared_ptr<ToolManager>			Ptr;
+		virtual void UnSerialize(const YAML::Node& iNode);
+		virtual void Serialize(YAML::Emitter& iEmitter) const;
 
-		ToolManager();
-		~ToolManager();
+		virtual void Update(float iFrameTime);
 
-		void Update(float iTimeElapsed);
-		void Render();
-		bool HandleEvent(const sf::Event& iEvent);
-
-		void AddTool(Tool* iTool);
+		static void RegisterMetaClass()
+		{
+			camp::Class::declare<Animation>("Animation")
+				.base<WorldObject>()
+				.constructor0()
+				.property("Sequence", &Animation::mAnimationFile);
+		}
 
 	protected:
-		ToolVec	mTools;
+		std::string mAnimationFile;
+
+		boost::shared_ptr<FrameAnimation> mAnimation;
 	};
 }
+
+CAMP_AUTO_TYPE(rt::Animation, &rt::Animation::RegisterMetaClass)

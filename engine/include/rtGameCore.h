@@ -22,40 +22,76 @@ THE SOFTWARE.
 
 #pragma once
 
-#include "rtCommonIncludes.h"
+#include "rtSingleton.h"
 
-#include "rtGameCore.h"
-
-#include "rtConsoleManager.h"
 #include "rtOptionsManager.h"
-
-#include "rtCollectionIterator.h"
 
 #include "rtRenderManager.h"
 #include "rtInputManager.h"
-#include "rtLogManager.h"
 #include "rtResourceManager.h"
-#include "rtResource.h"
-#include "rtGuiManager.h"
-#include "rtGuiScreen.h"
-#include "rtToolManager.h"
-#include "rtTool.h"
-
-#include "rtStatistics.h"
-#include "rtConsole.h"
-
-#include "rtImage.h"
-#include "rtSequence.h"
-#include "rtParticle.h"
-
-#include "rtAnimation.h"
-#include "rtSprite.h"
-#include "rtText.h"
-#include "rtParticleSystem.h"
-#include "rtLine.h"
-#include "rtCircle.h"
-#include "rtRectangle.h"
-
+#include "rtLogManager.h"
+#include "rtConsoleManager.h"
 #include "rtWorldsManager.h"
-#include "rtWorldObject.h"
-#include "rtWorld.h"
+#include "rtGuiManager.h"
+#include "rtToolManager.h"
+
+namespace rt
+{
+	typedef unsigned int RTID;
+
+	class Atom;
+
+	class GameCore : public Singleton<GameCore>
+	{
+	public:
+		GameCore();
+		~GameCore();
+
+		void Initialize();
+
+		void Run();
+		void Stop();
+		void Shutdown();
+
+		RTID CreateUniqueId();
+
+		sf::RenderWindow*	GetMainWindow();
+		sf::View*			GetMainView();
+
+		void SetFullscreen(bool iIsFullscreen);
+		void ToggleFullscreen();
+
+		static void RegisterMetaClass()
+		{
+			camp::Class::declare<GameCore>("GameCore")
+				.constructor0()
+				.function("Stop", &GameCore::Stop)
+				.function("SetFullscreen", &GameCore::SetFullscreen)
+				.function("ToggleFullscreen", &GameCore::ToggleFullscreen);
+		}
+
+	protected:
+		void recreateWindow();
+
+		boost::shared_ptr<sf::RenderWindow>	mMainWindow;
+		boost::shared_ptr<sf::View>			mMainView;
+
+		OptionsManager::Ptr		mOptions;
+
+		RenderManager::Ptr		mRender;
+		InputManager::Ptr		mInput;
+		ResourceManager::Ptr	mResource;
+		LogManager::Ptr			mLog;
+		ConsoleManager::Ptr		mExec;
+		WorldsManager::Ptr		mWorlds;
+		GuiManager::Ptr			mGui;
+		ToolManager::Ptr		mTools;
+
+		bool					mIsFullscreen;
+
+		int						mRandomizeSeed;
+		static RTID				mLastId;
+	};
+}
+
+CAMP_AUTO_TYPE(rt::GameCore, &rt::GameCore::RegisterMetaClass)

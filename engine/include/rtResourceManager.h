@@ -20,32 +20,39 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#pragma once
+#ifndef __rtResourceManager_H__
+#define __rtResourceManager_H__
 
-#include "rtSingleton.h"
+#include "rtResource.h"
 
 namespace rt
 {
-	class Tool;
-
-	class ToolManager : public Singleton<ToolManager>
+	class ResourceManager : public Singleton<ResourceManager>
 	{
 	public:
-		typedef std::vector<boost::shared_ptr<Tool>>	ToolVec;
-		typedef ToolVec::iterator						ToolVecIter;
+		typedef std::map<std::string, std::string>					StringMap;
+		typedef std::map<std::string, boost::shared_ptr<Resource>>	ResourceMap;
+		typedef StringMap::iterator									StringMapIter;
+		typedef ResourceMap::iterator								ResourceMapIter;
 
-		typedef boost::shared_ptr<ToolManager>			Ptr;
+		typedef boost::shared_ptr<ResourceManager>					Ptr;
 
-		ToolManager();
-		~ToolManager();
+		ResourceManager();
+		~ResourceManager();
 
-		void Update(float iTimeElapsed);
-		void Render();
-		bool HandleEvent(const sf::Event& iEvent);
+		Resource* GetResource(const std::string& iResourceName);
 
-		void AddTool(Tool* iTool);
+		void RegisterExtension(const std::string& iExtension, const std::string& iTypeName);
+
+		void CreateResources();
+		void ClearResources();
 
 	protected:
-		ToolVec	mTools;
+		void findResources(const std::string& iResourceDirectory);
+
+		ResourceMap mResources;
+		StringMap	mExtensions;
 	};
 }
+
+#endif

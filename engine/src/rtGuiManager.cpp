@@ -20,10 +20,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#include "ReTechCommonIncludes.h"
+#include "rtCommonIncludes.h"
 #include "rtGuiManager.h"
 #include "rtGuiScreen.h"
-#include "ReTechLogManager.h"
+#include "rtLogManager.h"
 
 URegisterSingleton(GuiManager)
 

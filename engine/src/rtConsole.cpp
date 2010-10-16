@@ -20,10 +20,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#include "ReTechCommonIncludes.h"
+#include "rtCommonIncludes.h"
 #include "rtConsole.h"
-#include "ReTechGameCore.h"
-#include "ReTechConsoleManager.h"
+#include "rtGameCore.h"
+#include "rtConsoleManager.h"
 
 namespace rt
 {
@@ -88,7 +88,7 @@ namespace rt
 				else if(iEvent.Key.Code == sf::Key::Return && consoleString.GetSize() > 1)
 				{
 					consoleString.Erase(0);
-					ConsoleManager::Get()->RunExec(consoleString);
+					ConsoleManager::Get()->ParseCommand(consoleString);
 
 					mConsoleStrings.push_back("Try to execute:" + consoleString);
 					mConsoleStrings[0] = ">";

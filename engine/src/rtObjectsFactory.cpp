@@ -20,32 +20,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#pragma once
+#include "rtCommonIncludes.h"
+#include "rtObjectsFactory.h"
+#include "rtSerializeable.h"
 
-#include "rtSingleton.h"
-
-namespace rt
-{
-	class Tool;
-
-	class ToolManager : public Singleton<ToolManager>
-	{
-	public:
-		typedef std::vector<boost::shared_ptr<Tool>>	ToolVec;
-		typedef ToolVec::iterator						ToolVecIter;
-
-		typedef boost::shared_ptr<ToolManager>			Ptr;
-
-		ToolManager();
-		~ToolManager();
-
-		void Update(float iTimeElapsed);
-		void Render();
-		bool HandleEvent(const sf::Event& iEvent);
-
-		void AddTool(Tool* iTool);
-
-	protected:
-		ToolVec	mTools;
-	};
-}
+template<> std::map<std::string, boost::shared_ptr<rt::BaseInstantiator<rt::Serializeable> > >	rt::ObjectsFactory<rt::Serializeable>::mRegisteredClasses;
+template<> std::map<std::string, std::string> rt::ObjectsFactory<rt::Serializeable>::mRedirects;

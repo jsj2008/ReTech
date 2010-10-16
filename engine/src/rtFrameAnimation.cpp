@@ -20,32 +20,58 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#pragma once
-
-#include "rtSingleton.h"
+#include "rtCommonIncludes.h"
+#include "rtFrameAnimation.h"
+#include "rtResourceManager.h"
+#include "rtSequence.h"
 
 namespace rt
 {
-	class Tool;
-
-	class ToolManager : public Singleton<ToolManager>
+	FrameAnimation::FrameAnimation( const std::string& iAnimationName, sf::Sprite* iTargetSprite )
+		: mTargetSprite(iTargetSprite), mFrameTime(0.4f), mElapsedTime(0.0f), mCurrentFrame(0), mMaxFrame(0)
 	{
-	public:
-		typedef std::vector<boost::shared_ptr<Tool>>	ToolVec;
-		typedef ToolVec::iterator						ToolVecIter;
+		mSequenceResource = UResource(Sequence, iAnimationName);
 
-		typedef boost::shared_ptr<ToolManager>			Ptr;
+		mSequenceResource->Load();
 
-		ToolManager();
-		~ToolManager();
+		mMaxFrame = mSequenceResource->Lenght();
 
-		void Update(float iTimeElapsed);
-		void Render();
-		bool HandleEvent(const sf::Event& iEvent);
+		Image* imageResource = mSequenceResource->Frame(mCurrentFrame);
+		if(!imageResource->IsLoaded())
+		{
+			imageResource->Load();
+		}
 
-		void AddTool(Tool* iTool);
+		mTargetSprite->SetImage(*imageResource);
+	}
 
-	protected:
-		ToolVec	mTools;
-	};
+	FrameAnimation::~FrameAnimation()
+	{
+
+	}
+
+	void FrameAnimation::Update( float iFrameTime )
+	{
+		mElapsedTime += iFrameTime;
+
+		if(mElapsedTime > mFrameTime)
+		{
+			mElapsedTime -= mFrameTime;
+
+			++mCurrentFrame;
+
+			if(mCurrentFrame >= mMaxFrame)
+			{
+				mCurrentFrame = 0;
+			}
+
+			Image* imageResource = mSequenceResource->Frame(mCurrentFrame);
+			if(!imageResource->IsLoaded())
+			{
+				imageResource->Load();
+			}
+
+			mTargetSprite->SetImage(*imageResource);
+		}
+	}
 }

@@ -20,32 +20,47 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#pragma once
+#include "rtCommonIncludes.h"
+#include "rtLogManager.h"
 
-#include "rtSingleton.h"
+URegisterSingleton(LogManager)
 
 namespace rt
 {
-	class Tool;
-
-	class ToolManager : public Singleton<ToolManager>
+	LogManager::LogManager()
 	{
-	public:
-		typedef std::vector<boost::shared_ptr<Tool>>	ToolVec;
-		typedef ToolVec::iterator						ToolVecIter;
+		mFileStream.open("game.log");
+	}
 
-		typedef boost::shared_ptr<ToolManager>			Ptr;
+	LogManager::~LogManager()
+	{
+		if(mFileStream.is_open())
+		{
+			mFileStream.close();
+		}
+	}
 
-		ToolManager();
-		~ToolManager();
+	void LogManager::Error( const std::string& iMessage )
+	{
+		if(mFileStream.is_open())
+		{
+			mFileStream << "ERROR:\t" << iMessage << "\n";
+		}
+	}
 
-		void Update(float iTimeElapsed);
-		void Render();
-		bool HandleEvent(const sf::Event& iEvent);
+	void LogManager::Warning( const std::string& iMessage )
+	{
+		if(mFileStream.is_open())
+		{
+			mFileStream << "WARNING:\t" << iMessage << "\n";
+		}
+	}
 
-		void AddTool(Tool* iTool);
-
-	protected:
-		ToolVec	mTools;
-	};
+	void LogManager::Notice( const std::string& iMessage )
+	{
+		if(mFileStream.is_open())
+		{
+			mFileStream << "NOTICE:\t" << iMessage << "\n";
+		}
+	}
 }

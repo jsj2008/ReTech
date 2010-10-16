@@ -72,95 +72,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\ReTechAnimation.cpp">
-      <Filter>Game\WorldObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReTechCircle.cpp">
-      <Filter>Game\WorldObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReTechLine.cpp">
-      <Filter>Game\WorldObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReTechParticleSystem.cpp">
-      <Filter>Game\WorldObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReTechRectangle.cpp">
-      <Filter>Game\WorldObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReTechSprite.cpp">
-      <Filter>Game\WorldObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReTechText.cpp">
-      <Filter>Game\WorldObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReTechFont.cpp">
-      <Filter>Game\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReTechImage.cpp">
-      <Filter>Game\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReTechParticle.cpp">
-      <Filter>Game\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReTechSequence.cpp">
-      <Filter>Game\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReTechFrameAnimation.cpp">
-      <Filter>Game\Animations</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReTechGameCore.cpp">
-      <Filter>Engine\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReTechCollectionIterator.cpp">
-      <Filter>Engine\Subsystems\Serialization</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReTechObjectsFactory.cpp">
-      <Filter>Engine\Subsystems\Serialization</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReTechSerializeable.cpp">
-      <Filter>Engine\Subsystems\Serialization</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReTechOption.cpp">
-      <Filter>Engine\Managers\OptionsManager</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReTechOptionsManager.cpp">
-      <Filter>Engine\Managers\OptionsManager</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReTechConsoleManager.cpp">
-      <Filter>Engine\Managers\ConsoleManager</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReTechLogManager.cpp">
-      <Filter>Engine\Managers\LogManager</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReTechInputManager.cpp">
-      <Filter>Engine\Managers\InputManager</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReTechResource.cpp">
-      <Filter>Engine\Managers\ResourceManager</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReTechResourceManager.cpp">
-      <Filter>Engine\Managers\ResourceManager</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReTechWorld.cpp">
-      <Filter>Engine\Managers\WorldsManager</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReTechWorldObject.cpp">
-      <Filter>Engine\Managers\WorldsManager</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReTechWorldsManager.cpp">
-      <Filter>Engine\Managers\WorldsManager</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReTechRenderManager.cpp">
-      <Filter>Engine\Managers\RenderManager</Filter>
-    </ClCompile>
     <ClCompile Include="src\micropather.cpp">
       <Filter>Engine\Micropather</Filter>
     </ClCompile>
     <ClCompile Include="src\SfMath.cpp">
       <Filter>Engine\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReTechCommonIncludes.cpp">
-      <Filter>Common</Filter>
     </ClCompile>
     <ClCompile Include="src\ReTech.cpp" />
     <ClCompile Include="src\rtGuiManager.cpp">
@@ -181,106 +97,97 @@
     <ClCompile Include="src\rtConsole.cpp">
       <Filter>Game\Tools</Filter>
     </ClCompile>
+    <ClCompile Include="src\rtGameCore.cpp">
+      <Filter>Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtCommonIncludes.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtConsoleManager.cpp">
+      <Filter>Engine\Managers\ConsoleManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtInputManager.cpp">
+      <Filter>Engine\Managers\InputManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtLogManager.cpp">
+      <Filter>Engine\Managers\LogManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtOption.cpp">
+      <Filter>Engine\Managers\OptionsManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtOptionsManager.cpp">
+      <Filter>Engine\Managers\OptionsManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtRenderManager.cpp">
+      <Filter>Engine\Managers\RenderManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtResource.cpp">
+      <Filter>Engine\Managers\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtResourceManager.cpp">
+      <Filter>Engine\Managers\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtWorld.cpp">
+      <Filter>Engine\Managers\WorldsManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtWorldObject.cpp">
+      <Filter>Engine\Managers\WorldsManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtWorldsManager.cpp">
+      <Filter>Engine\Managers\WorldsManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtSerializeable.cpp">
+      <Filter>Engine\Subsystems\Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtObjectsFactory.cpp">
+      <Filter>Engine\Subsystems\Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtCollectionIterator.cpp">
+      <Filter>Engine\Subsystems\Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtAnimation.cpp">
+      <Filter>Game\WorldObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtCircle.cpp">
+      <Filter>Game\WorldObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtLine.cpp">
+      <Filter>Game\WorldObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtParticleSystem.cpp">
+      <Filter>Game\WorldObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtRectangle.cpp">
+      <Filter>Game\WorldObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtSprite.cpp">
+      <Filter>Game\WorldObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtText.cpp">
+      <Filter>Game\WorldObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtFont.cpp">
+      <Filter>Game\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtImage.cpp">
+      <Filter>Game\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtParticle.cpp">
+      <Filter>Game\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtSequence.cpp">
+      <Filter>Game\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtFrameAnimation.cpp">
+      <Filter>Game\Animations</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\ReTechAnimation.h">
-      <Filter>Game\WorldObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ReTechCircle.h">
-      <Filter>Game\WorldObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ReTechLine.h">
-      <Filter>Game\WorldObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ReTechParticleSystem.h">
-      <Filter>Game\WorldObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ReTechRectangle.h">
-      <Filter>Game\WorldObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ReTechSprite.h">
-      <Filter>Game\WorldObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ReTechText.h">
-      <Filter>Game\WorldObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ReTechFont.h">
-      <Filter>Game\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ReTechImage.h">
-      <Filter>Game\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ReTechParticle.h">
-      <Filter>Game\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ReTechSequence.h">
-      <Filter>Game\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ReTechFrameAnimation.h">
-      <Filter>Game\Animations</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ReTechGameCore.h">
-      <Filter>Engine\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ReTechSingleton.h">
-      <Filter>Engine\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ReTechCollectionIterator.h">
-      <Filter>Engine\Subsystems\Serialization</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ReTechObjectsFactory.h">
-      <Filter>Engine\Subsystems\Serialization</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ReTechProperty.h">
-      <Filter>Engine\Subsystems\Serialization</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ReTechSerializeable.h">
-      <Filter>Engine\Subsystems\Serialization</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ReTechOption.h">
-      <Filter>Engine\Managers\OptionsManager</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ReTechOptionsManager.h">
-      <Filter>Engine\Managers\OptionsManager</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ReTechConsoleManager.h">
-      <Filter>Engine\Managers\ConsoleManager</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ReTechLogManager.h">
-      <Filter>Engine\Managers\LogManager</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ReTechInputManager.h">
-      <Filter>Engine\Managers\InputManager</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ReTechResource.h">
-      <Filter>Engine\Managers\ResourceManager</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ReTechResourceManager.h">
-      <Filter>Engine\Managers\ResourceManager</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ReTechWorld.h">
-      <Filter>Engine\Managers\WorldsManager</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ReTechWorldObject.h">
-      <Filter>Engine\Managers\WorldsManager</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ReTechWorldsManager.h">
-      <Filter>Engine\Managers\WorldsManager</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ReTechRenderManager.h">
-      <Filter>Engine\Managers\RenderManager</Filter>
-    </ClInclude>
     <ClInclude Include="include\micropather.h">
       <Filter>Engine\Micropather</Filter>
     </ClInclude>
     <ClInclude Include="include\SfMath.h">
       <Filter>Engine\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ReTechCommonIncludes.h">
-      <Filter>Common</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ReTechLibraries.h">
-      <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include="include\ReTech.h" />
     <ClInclude Include="include\rtGuiManager.h">
@@ -300,6 +207,102 @@
     </ClInclude>
     <ClInclude Include="include\rtConsole.h">
       <Filter>Game\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtGameCore.h">
+      <Filter>Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtSingleton.h">
+      <Filter>Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtLibraries.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtCommonIncludes.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtConsoleManager.h">
+      <Filter>Engine\Managers\ConsoleManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtInputManager.h">
+      <Filter>Engine\Managers\InputManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtLogManager.h">
+      <Filter>Engine\Managers\LogManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtOption.h">
+      <Filter>Engine\Managers\OptionsManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtOptionsManager.h">
+      <Filter>Engine\Managers\OptionsManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtRenderManager.h">
+      <Filter>Engine\Managers\RenderManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtResource.h">
+      <Filter>Engine\Managers\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtResourceManager.h">
+      <Filter>Engine\Managers\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtWorld.h">
+      <Filter>Engine\Managers\WorldsManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtWorldObject.h">
+      <Filter>Engine\Managers\WorldsManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtWorldsManager.h">
+      <Filter>Engine\Managers\WorldsManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtSerializeable.h">
+      <Filter>Engine\Subsystems\Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtProperty.h">
+      <Filter>Engine\Subsystems\Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtObjectsFactory.h">
+      <Filter>Engine\Subsystems\Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtCollectionIterator.h">
+      <Filter>Engine\Subsystems\Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtAnimation.h">
+      <Filter>Game\WorldObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtCircle.h">
+      <Filter>Game\WorldObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtLine.h">
+      <Filter>Game\WorldObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtParticleSystem.h">
+      <Filter>Game\WorldObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtRectangle.h">
+      <Filter>Game\WorldObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtSprite.h">
+      <Filter>Game\WorldObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtText.h">
+      <Filter>Game\WorldObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtFont.h">
+      <Filter>Game\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtImage.h">
+      <Filter>Game\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtParticle.h">
+      <Filter>Game\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtSequence.h">
+      <Filter>Game\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtFrameAnimation.h">
+      <Filter>Game\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtExternalTypes.h">
+      <Filter>Common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

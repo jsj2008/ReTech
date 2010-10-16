@@ -22,30 +22,30 @@ THE SOFTWARE.
 
 #pragma once
 
-#include "rtSingleton.h"
-
-namespace rt
-{
-	class Tool;
-
-	class ToolManager : public Singleton<ToolManager>
-	{
-	public:
-		typedef std::vector<boost::shared_ptr<Tool>>	ToolVec;
-		typedef ToolVec::iterator						ToolVecIter;
-
-		typedef boost::shared_ptr<ToolManager>			Ptr;
-
-		ToolManager();
-		~ToolManager();
-
-		void Update(float iTimeElapsed);
-		void Render();
-		bool HandleEvent(const sf::Event& iEvent);
-
-		void AddTool(Tool* iTool);
-
-	protected:
-		ToolVec	mTools;
-	};
-}
+#ifdef _DEBUG
+	#pragma comment(lib, "Iphlpapi.lib")
+	#pragma comment(lib, "sfml2-audio-s-d.lib")
+	#pragma comment(lib, "sfml2-graphics-s-d.lib")
+	#pragma comment(lib, "sfml2-network-s-d.lib")
+	#pragma comment(lib, "sfml2-system-s-d.lib")
+	#pragma comment(lib, "sfml2-window-s-d.lib")
+	#pragma comment(lib, "yamlcppd.lib")
+	#pragma comment(lib, "SPARK_debug.lib")
+	#pragma comment(lib, "SPARK_GL_debug.lib")
+	#pragma comment(lib, "SPARK_SFML_debug.lib")
+	#pragma comment(lib, "campd.lib")
+	#pragma comment(lib, "sfgui-d.lib")
+#else
+	#pragma comment(lib, "Iphlpapi.lib")
+	#pragma comment(lib, "sfml2-audio-s.lib")
+	#pragma comment(lib, "sfml2-graphics-s.lib")
+	#pragma comment(lib, "sfml2-network-s.lib")
+	#pragma comment(lib, "sfml2-system-s.lib")
+	#pragma comment(lib, "sfml2-window-s.lib")
+	#pragma comment(lib, "yamlcpp.lib")
+	#pragma comment(lib, "SPARK.lib")
+	#pragma comment(lib, "SPARK_GL.lib")
+	#pragma comment(lib, "SPARK_SFML.lib")
+	#pragma comment(lib, "camp.lib")
+	#pragma comment(lib, "sfgui.lib")
+#endif

@@ -22,30 +22,47 @@ THE SOFTWARE.
 
 #pragma once
 
-#include "rtSingleton.h"
+#include "rtWorldObject.h"
 
 namespace rt
 {
-	class Tool;
-
-	class ToolManager : public Singleton<ToolManager>
+	class Rectangle : public WorldObject
 	{
 	public:
-		typedef std::vector<boost::shared_ptr<Tool>>	ToolVec;
-		typedef ToolVec::iterator						ToolVecIter;
+		Rectangle();
+		virtual ~Rectangle();
 
-		typedef boost::shared_ptr<ToolManager>			Ptr;
+		virtual void UnSerialize(const YAML::Node& iNode);
 
-		ToolManager();
-		~ToolManager();
+		virtual void Draw(sf::RenderWindow* iRenderWindow);
 
-		void Update(float iTimeElapsed);
-		void Render();
-		bool HandleEvent(const sf::Event& iEvent);
+		void SetRect(const FloatRect& iRect);
+		void SetBrush(const Color& iColor);
+		void SetOutline(float iThikness, const Color& iColor);
 
-		void AddTool(Tool* iTool);
+		static void RegisterMetaClass()
+		{
+			camp::Class::declare<Rectangle>("Rectangle")
+				.base<WorldObject>()
+				.constructor0()
+				.property("Rect", &Rectangle::mRect)
+				.property("BrushColor", &Rectangle::mBrushColor)
+				.property("OutlineThikness", &Rectangle::mOutlineThikness)
+				.property("OutlineColor", &Rectangle::mOutlineColor);
+		}
 
 	protected:
-		ToolVec	mTools;
+		void updateShape();
+
+		sf::Shape	mShape;
+
+		FloatRect	mRect;
+
+		float		mOutlineThikness;
+
+		Color		mBrushColor;
+		Color		mOutlineColor;
 	};
 }
+
+CAMP_AUTO_TYPE(rt::Rectangle, &rt::Rectangle::RegisterMetaClass)

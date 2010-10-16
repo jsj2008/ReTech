@@ -20,32 +20,49 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#pragma once
-
-#include "rtSingleton.h"
+#include "rtCommonIncludes.h"
+#include "rtImage.h"
 
 namespace rt
 {
-	class Tool;
-
-	class ToolManager : public Singleton<ToolManager>
+	Image::Image()
+		: mDefaultResourceName("./media/default/no_texture.tga")
 	{
-	public:
-		typedef std::vector<boost::shared_ptr<Tool>>	ToolVec;
-		typedef ToolVec::iterator						ToolVecIter;
 
-		typedef boost::shared_ptr<ToolManager>			Ptr;
+	}
 
-		ToolManager();
-		~ToolManager();
+	Image::Image( const std::string& iResourceName )
+		: mDefaultResourceName("./media/default/no_texture.tga")
+	{
+		Initialize(iResourceName);
+	}
 
-		void Update(float iTimeElapsed);
-		void Render();
-		bool HandleEvent(const sf::Event& iEvent);
+	Image::~Image()
+	{
 
-		void AddTool(Tool* iTool);
+	}
 
-	protected:
-		ToolVec	mTools;
-	};
+	void Image::Load()
+	{
+		if(!IsLoaded())
+		{
+			if(!LoadFromFile(mResourceName))
+			{
+				if(!LoadFromFile(mDefaultResourceName))
+				{
+					LogManager::Get()->Warning("Missed default texture for Image.");
+				}
+			}
+		}
+	}
+
+	void Image::Unload()
+	{
+		*static_cast<sf::Image*>(this) = sf::Image();
+	}
+
+	bool Image::IsLoaded()
+	{
+		return GetPixelsPtr() != 0;
+	}
 }

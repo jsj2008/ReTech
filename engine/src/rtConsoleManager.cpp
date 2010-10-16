@@ -20,32 +20,64 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#pragma once
+#include "rtCommonIncludes.h"
+#include "rtConsoleManager.h"
 
-#include "rtSingleton.h"
+URegisterSingleton(ConsoleManager)
 
 namespace rt
 {
-	class Tool;
-
-	class ToolManager : public Singleton<ToolManager>
+	ConsoleManager::ConsoleManager()
 	{
-	public:
-		typedef std::vector<boost::shared_ptr<Tool>>	ToolVec;
-		typedef ToolVec::iterator						ToolVecIter;
 
-		typedef boost::shared_ptr<ToolManager>			Ptr;
+	}
 
-		ToolManager();
-		~ToolManager();
+	ConsoleManager::~ConsoleManager()
+	{
 
-		void Update(float iTimeElapsed);
-		void Render();
-		bool HandleEvent(const sf::Event& iEvent);
+	}
 
-		void AddTool(Tool* iTool);
+	void ConsoleManager::RegisterCommand( const std::string& iName, camp::UserObject iObject, const std::string& iFunction )
+	{
+		if(mCommands.find(iName) != mCommands.end())
+		{
+			//TODO log
+			return;
+		}
 
-	protected:
-		ToolVec	mTools;
-	};
+		CommandDesc newCommand;
+
+		newCommand.mName = iName;
+		newCommand.mObject = iObject;
+		newCommand.mFunction = iFunction;
+
+		mCommands[iName] = newCommand;
+	}
+
+	void ConsoleManager::CallCommand( const std::string& iName, const camp::Args& iArgs/* = camp::Args::empty*/ )
+	{
+		if(mCommands.find(iName) == mCommands.end())
+		{
+			//TODO log
+			return;
+		}
+
+		mCommands[iName].mObject.call(mCommands[iName].mFunction, iArgs);
+	}
+
+	void ConsoleManager::ParseCommand( const std::string& iCommandString )
+	{
+		CallCommand(iCommandString);
+	}
+
+	bool ConsoleManager::HasArguments( const std::string& iName )
+	{
+		if(mCommands.find(iName) == mCommands.end())
+		{
+			//TODO log
+			return false;
+		}
+
+		return mCommands[iName].mObject.getClass().function(mCommands[iName].mFunction).argCount() != 0;
+	}
 }
