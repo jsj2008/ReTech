@@ -20,14 +20,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#ifndef __rtResource_H__
-#define __rtResource_H__
-
-#include "rtSerializeable.h"
+#pragma once
 
 namespace rt
 {
-	class Resource : public Serializeable
+	class Resource
 	{
 	public:
 		Resource();
@@ -42,9 +39,14 @@ namespace rt
 
 		virtual bool IsLoaded() = 0;
 
+		static void RegisterMetaClass()
+		{
+			camp::Class::declare<Resource>("Resource");
+		}
+
 	protected:
 			std::string mResourceName;
 	};
 }
 
-#endif
+CAMP_AUTO_TYPE(rt::Resource, &rt::Resource::RegisterMetaClass)

@@ -20,8 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#ifndef __rtFont_H__
-#define __rtFont_H__
+#pragma once
 
 namespace rt
 {
@@ -37,9 +36,16 @@ namespace rt
 
 		virtual bool IsLoaded();
 
+		static void RegisterMetaClass()
+		{
+			camp::Class::declare<Font>("Font")
+				.base<rt::Resource>()
+				.constructor0();
+		}
+
 	protected:
 		bool mIsLoaded;
 	};
 }
 
-#endif
+CAMP_AUTO_TYPE(rt::Font, &rt::Font::RegisterMetaClass)

@@ -20,8 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#ifndef __rtSequence_H__
-#define __rtSequence_H__
+#pragma once
 
 #include "rtResource.h"
 #include "rtImage.h"
@@ -45,6 +44,13 @@ namespace rt
 		Image* Frame(int iFrameIndex);
 		int Lenght();
 
+		static void RegisterMetaClass()
+		{
+			camp::Class::declare<Sequence>("Sequence")
+				.base<rt::Resource>()
+				.constructor0();
+		}
+
 	protected:
 		FramesVect	mFrames;
 
@@ -52,4 +58,4 @@ namespace rt
 	};
 }
 
-#endif
+CAMP_AUTO_TYPE(rt::Sequence, &rt::Sequence::RegisterMetaClass)

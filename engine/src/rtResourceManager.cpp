@@ -23,6 +23,8 @@ THE SOFTWARE.
 #include "rtCommonIncludes.h"
 #include "rtResourceManager.h"
 
+#include "rtImage.h"
+
 URegisterSingleton(ResourceManager)
 
 namespace rt
@@ -89,16 +91,36 @@ namespace rt
  				}
  				else
  				{
-					Resource* newResource = dynamic_cast<Resource*>(ObjectsFactory<Serializeable>::CreateObject(mExtensions[resourceName.extension()]));
- 					if(newResource != 0)
- 					{
- 						newResource->Initialize(resourceName.string());
- 						mResources[resourceName.string()].reset(newResource);
- 					}
- 					else
- 					{
- 						LogManager::Get()->Error("Type for " + (resourceName.string()) + " is not registered.");
- 					}
+					std::string className = mExtensions[resourceName.extension()];
+
+					if(!className.empty())
+					{
+						Resource* newResource = 0;
+						try
+						{
+							const camp::Class& metaClass = camp::classByName(className);
+							newResource = metaClass.construct<Resource>();
+						}
+						catch(...)
+						{
+							LogManager::Get()->Error("Class " + (className) + " is not registered.");
+						}
+
+						if(newResource != 0)
+						{
+							newResource->Initialize(resourceName.string());
+							mResources[resourceName.string()].reset(newResource);
+						}
+						else
+						{
+							LogManager::Get()->Error("Class " + (className) + " is not a resource.");
+						}
+
+					}
+					else
+					{
+						LogManager::Get()->Error("Type for " + (resourceName.extension()) + " is not registered.");
+					}
  				}
  			}
 		}

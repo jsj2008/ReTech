@@ -43,6 +43,8 @@ namespace rt
 		void SetCharacterSize(unsigned int iSize);
 		unsigned int GetCharacterSize();
 
+		UDeclareUserObject
+
 		static void RegisterMetaClass()
 		{
 			camp::Class::declare<Text>("Text")

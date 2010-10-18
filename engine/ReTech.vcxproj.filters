@@ -136,12 +136,6 @@
     <ClCompile Include="src\rtWorldsManager.cpp">
       <Filter>Engine\Managers\WorldsManager</Filter>
     </ClCompile>
-    <ClCompile Include="src\rtSerializeable.cpp">
-      <Filter>Engine\Subsystems\Serialization</Filter>
-    </ClCompile>
-    <ClCompile Include="src\rtObjectsFactory.cpp">
-      <Filter>Engine\Subsystems\Serialization</Filter>
-    </ClCompile>
     <ClCompile Include="src\rtCollectionIterator.cpp">
       <Filter>Engine\Subsystems\Serialization</Filter>
     </ClCompile>
@@ -252,15 +246,6 @@
     </ClInclude>
     <ClInclude Include="include\rtWorldsManager.h">
       <Filter>Engine\Managers\WorldsManager</Filter>
-    </ClInclude>
-    <ClInclude Include="include\rtSerializeable.h">
-      <Filter>Engine\Subsystems\Serialization</Filter>
-    </ClInclude>
-    <ClInclude Include="include\rtProperty.h">
-      <Filter>Engine\Subsystems\Serialization</Filter>
-    </ClInclude>
-    <ClInclude Include="include\rtObjectsFactory.h">
-      <Filter>Engine\Subsystems\Serialization</Filter>
     </ClInclude>
     <ClInclude Include="include\rtCollectionIterator.h">
       <Filter>Engine\Subsystems\Serialization</Filter>

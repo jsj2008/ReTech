@@ -69,19 +69,6 @@ namespace rt
 
 		mRandomizeSeed = (int)time(0);
 
-		//Register objects to factory
-		URegisterObject(Image);
-		URegisterObject(Font);
-		URegisterObject(Sequence);
-		URegisterObject(Particle);
-		URegisterObject(Sprite);
-		URegisterObject(Animation);
-		URegisterObject(Text);
-		URegisterObject(ParticleSystem);
-		URegisterObject(Line);
-		URegisterObject(Circle);
-		URegisterObject(Rectangle);
-
 		//Create managers
 		mRender		= RenderManager::Ptr(new RenderManager());
 		mInput		= InputManager::Ptr(new InputManager());
@@ -90,12 +77,29 @@ namespace rt
 		mGui		= GuiManager::Ptr(new GuiManager());
 		mTools		= ToolManager::Ptr(new ToolManager());
 
+		//Register classes
+		URegisterObject(Font);
+		URegisterObject(Image);
+		URegisterObject(Particle);
+		URegisterObject(Sequence);
+
+		URegisterObject(Animation);
+		URegisterObject(Circle);
+		URegisterObject(Line);
+		URegisterObject(ParticleSystem);
+		URegisterObject(Rectangle);
+		URegisterObject(Sprite);
+		URegisterObject(Text);
+
+		int count = camp::classCount();
+		count++;
+
 		//Register resource classes
-		mResource->RegisterExtension("tga", "Image");
-		mResource->RegisterExtension("png", "Image");
-		mResource->RegisterExtension("ttf", "Font");
-		mResource->RegisterExtension("seq", "Sequence");
-		mResource->RegisterExtension("ps", "Particle");
+		mResource->RegisterExtension(".tga", "Image");
+		mResource->RegisterExtension(".png", "Image");
+		mResource->RegisterExtension(".ttf", "Font");
+		mResource->RegisterExtension(".seq", "Sequence");
+		mResource->RegisterExtension(".ps", "Particle");
 
 		mResource->CreateResources();
 

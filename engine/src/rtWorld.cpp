@@ -120,15 +120,35 @@ namespace rt
  		if(!mObjectsIterator->End())
  		{
 			std::string className;
-			mObjectsIterator->SafeGet("class", className);
+			mObjectsIterator->SafeGet("ClassName", className);
 
 			if(!className.empty())
 			{
-				WorldObject* worldObject = static_cast<WorldObject*>(ObjectsFactory<Serializeable>::CreateObject(className));
-				AddObject(worldObject);
-				mObjectsIterator->Node() >> worldObject;
+				WorldObject* worldObject = 0;
+				try
+				{
+					const camp::Class& metaClass = camp::classByName(className);
+					worldObject = metaClass.construct<WorldObject>();
+				}
+				catch(...)
+				{						
+					LogManager::Get()->Error("Class " + (className) + " is not registered.");
+				}
 
-				//AddObject(worldObject);
+				if(worldObject != 0)
+				{
+					UnserializeYAML(worldObject->ToUserObject(), mObjectsIterator->Node());
+
+					AddObject(worldObject);
+				}
+				else
+				{
+					LogManager::Get()->Error("Class " + (className) + " is not a world object.");
+				}
+			}
+			else
+			{
+				LogManager::Get()->Error("Object has no class.");
 			}
 
 			mObjectsIterator->Next();
@@ -204,7 +224,7 @@ namespace rt
 		for(ObjectsManagedVec::iterator iter = mObjects.begin(); iter != mObjects.end(); ++iter)
 		{
 			myEmitter << YAML::BeginMap;
-			(*iter)->Serialize(myEmitter);
+			SerializeYAML((*iter)->ToUserObject(), myEmitter);
 			myEmitter << YAML::EndMap;
 		}
 

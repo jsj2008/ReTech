@@ -48,7 +48,7 @@ namespace rt
 	public:
 		static void RegisterMetaClass()
 		{
-			camp::Class::declare<FloatRect>("Vector2f")
+			camp::Class::declare<FloatRect>("FloatRect")
 				.property("Left", &FloatRect::GetLeft)
 				.property("Top", &FloatRect::GetTop)
 				.property("Width", &FloatRect::GetWidth)

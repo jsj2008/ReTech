@@ -66,7 +66,6 @@ THE SOFTWARE.
 #include "rtGameCore.h"
 #include "rtOption.h"
 #include "rtOptionsManager.h"
-#include "rtObjectsFactory.h"
 #include "rtSingleton.h"
 
 #include "rtExternalTypes.h"
@@ -74,7 +73,7 @@ THE SOFTWARE.
 //utilities helpers
 #define UResource(Type, Name) static_cast<Type*>(ResourceManager::Get()->GetResource(Name))
 
-#define URegisterObject(Class) URegisterObjectName(Class, ""#Class)
-#define URegisterObjectName(Class, Name) rt::ObjectsFactory<rt::Serializeable>::RegisterObject<Class>(Name)
+#define URegisterObject(Class) camp::classByType<Class>()
+#define UDeclareUserObject virtual camp::UserObject ToUserObject(){ return camp::UserObject(this); }
 
 #define URegisterSingleton(Class) rt::Class* rt::Singleton<rt::Class>::mInstance = 0;

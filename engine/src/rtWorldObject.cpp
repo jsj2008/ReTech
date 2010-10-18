@@ -24,8 +24,6 @@ THE SOFTWARE.
 #include "rtWorldObject.h"
 #include "rtWorld.h"
 
-#include "rtProperty.h"
-
 namespace rt
 {
 	WorldObject::WorldObject()
@@ -36,33 +34,6 @@ namespace rt
 
 	WorldObject::~WorldObject()
 	{
-	}
-
-	void WorldObject::UnSerialize( const YAML::Node& iNode )
-	{
-// 		RTID savedID = -1;
-// 		if(SafeGet(iNode, "id", savedID))
-// 		{
-// 			mWorld->AddIDPair(savedID, mUniqueID);
-// 		}
-// 
-// 		for(SerializeableVecIter iter = mProperties.begin(); iter != mProperties.end(); ++iter)
-// 		{
-// 			(*iter)->UnSerialize(iNode);
-// 		}
-	}
-
-	void WorldObject::Serialize( YAML::Emitter& iEmitter )
-	{
-// 		iEmitter << YAML::Key << "class";
-// 		iEmitter << YAML::Value << GetClassName();
-// 		iEmitter << YAML::Key << "id";
-// 		iEmitter << YAML::Value << mUniqueID;
-// 
-// 		for(SerializeableVec::const_iterator iter = mProperties.begin(); iter != mProperties.end(); ++iter)
-// 		{
-// 			(*iter)->Serialize(iEmitter);
-// 		}
 	}
 
 	void WorldObject::Fix()
@@ -217,10 +188,5 @@ namespace rt
 	void WorldObject::Render( sf::RenderTarget& target, sf::Renderer& renderer ) const
 	{
 
-	}
-
-	void WorldObject::AddProperty( Serializeable* iProperty )
-	{
-		mProperties.push_back(boost::shared_ptr<Serializeable>(iProperty));
 	}
 }

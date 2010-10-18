@@ -32,13 +32,13 @@ namespace rt
 		Rectangle();
 		virtual ~Rectangle();
 
-		virtual void UnSerialize(const YAML::Node& iNode);
-
 		virtual void Draw(sf::RenderWindow* iRenderWindow);
 
 		void SetRect(const FloatRect& iRect);
 		void SetBrush(const Color& iColor);
 		void SetOutline(float iThikness, const Color& iColor);
+
+		UDeclareUserObject
 
 		static void RegisterMetaClass()
 		{

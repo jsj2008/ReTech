@@ -20,8 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#ifndef __rtParticle_H__
-#define __rtParticle_H__
+#pragma once
 
 #include "rtResource.h"
 
@@ -34,7 +33,7 @@ namespace rt
 	class ModifierDesc;
 	class ZoneDesc;
 
-	class SystemDesc : public Serializeable
+	class SystemDesc
 	{
 	public:
 		typedef std::vector<GroupDesc> GroupDescVec;
@@ -49,7 +48,7 @@ namespace rt
 		GroupDescVec mGroupDescs;
 	};
 
-	class ParamDesc : public Serializeable
+	class ParamDesc
 	{
 	public:
 		ParamDesc();
@@ -73,7 +72,7 @@ namespace rt
 		std::vector<float>	mValues;
 	};
 
-	class ModelDesc : public Serializeable
+	class ModelDesc
 	{
 	public:
 		typedef std::vector<ParamDesc> ParamDescVec;
@@ -92,7 +91,7 @@ namespace rt
 		ParamDescVec		mParams;
 	};
 
-	class RendererDesc : public Serializeable
+	class RendererDesc
 	{
 	public:
 		RendererDesc();
@@ -117,7 +116,7 @@ namespace rt
 		std::string		mImageName;
 	};
 
-	class GroupDesc : public Serializeable
+	class GroupDesc
 	{
 	public:
 		typedef std::vector<EmitterDesc> EmmiterDescVec;
@@ -146,7 +145,7 @@ namespace rt
 		ModifierDescVec	mModifierDescs;
 	};
 
-	class ZoneDesc : public Serializeable
+	class ZoneDesc
 	{
 	public:
 		virtual void UnSerialize(const YAML::Node& iNode);
@@ -166,7 +165,7 @@ namespace rt
 		float			mCustomFloatTwo;
 	};
 
-	class EmitterDesc : public Serializeable
+	class EmitterDesc
 	{
 	public:
 		EmitterDesc();
@@ -196,7 +195,7 @@ namespace rt
 		float				mCustomFloatTwo;
 	};
 
-	class ModifierDesc : public Serializeable
+	class ModifierDesc
 	{
 	public:
 		virtual void UnSerialize(const YAML::Node& iNode);
@@ -221,9 +220,16 @@ namespace rt
 
 		SPK::SPK_ID GetSystemID();
 
+		static void RegisterMetaClass()
+		{
+			camp::Class::declare<Particle>("Particle")
+				.base<rt::Resource>()
+				.constructor0();
+		}
+
 	protected:
 		SPK::SFML::SFMLSystem* mSystem;
 	};
 }
 
-#endif
+CAMP_AUTO_TYPE(rt::Particle, &rt::Particle::RegisterMetaClass)

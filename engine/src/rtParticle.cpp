@@ -51,7 +51,7 @@ namespace rt
 			CollectionIterator particleFile(mResourceName);
 
 			SystemDesc systemDesc;
-			particleFile.Node() >> &systemDesc;
+			//particleFile.Node() >> &systemDesc;
 
 			mSystem = systemDesc.Create();
 		}
@@ -89,7 +89,7 @@ namespace rt
 		{
 			GroupDesc groupDesc;
 
-			groups.Node() >> &groupDesc;
+			//groups.Node() >> &groupDesc;
 
 			mGroupDescs.push_back(groupDesc);
 
@@ -122,12 +122,12 @@ namespace rt
 
 	void GroupDesc::UnSerialize( const YAML::Node& iNode )
 	{
-		SafeGet(iNode, "name", mName);
-		SafeGet(iNode, "gravity", mGravity);
-		SafeGet(iNode, "friction", mFriction);
-		SafeGet(iNode, "capacity", mCapacity);
-		SafeGet(iNode, "model", &mModelDesc);
-		SafeGet(iNode, "renderer", &mRendererDesc);
+		//SafeGet(iNode, "name", mName);
+		//SafeGet(iNode, "gravity", mGravity);
+		//SafeGet(iNode, "friction", mFriction);
+		//SafeGet(iNode, "capacity", mCapacity);
+		//SafeGet(iNode, "model", &mModelDesc);
+		//SafeGet(iNode, "renderer", &mRendererDesc);
 		
  		CollectionIterator particleFile(&iNode);
 
@@ -136,7 +136,7 @@ namespace rt
 		{
 			EmitterDesc emitterDesc;
 
-			emitters.Node() >> &emitterDesc;
+			//emitters.Node() >> &emitterDesc;
 
 			mEmitterDescs.push_back(emitterDesc);
 
@@ -148,7 +148,7 @@ namespace rt
 		{
 			ModifierDesc modifierDesc;
 
-			modifiers.Node() >> &modifierDesc;
+			//modifiers.Node() >> &modifierDesc;
 
 			mModifierDescs.push_back(modifierDesc);
 
@@ -192,13 +192,13 @@ namespace rt
 	void ParamDesc::UnSerialize( const YAML::Node& iNode )
 	{
 		std::string paramName;
-		SafeGet(iNode, "param", paramName);
+		//SafeGet(iNode, "param", paramName);
 		GetFlagAndParamByName(paramName, mFlag, mParam);
 
-		SafeGet(iNode, "value", mValues);
-		SafeGet(iNode, "mutable", mMutable);
-		SafeGet(iNode, "random", mRandom);
-		SafeGet(iNode, "interpolated", mInterpolated);
+		//SafeGet(iNode, "value", mValues);
+		//SafeGet(iNode, "mutable", mMutable);
+		//SafeGet(iNode, "random", mRandom);
+		//SafeGet(iNode, "interpolated", mInterpolated);
 	}
 
 	void ParamDesc::Serialize( YAML::Emitter& iEmitter ) const
@@ -265,8 +265,8 @@ namespace rt
 
 	void ModelDesc::UnSerialize( const YAML::Node& iNode )
 	{
-		SafeGet(iNode, "name", mName);
-		SafeGet(iNode, "lifetime", mLifetime);
+		//SafeGet(iNode, "name", mName);
+		//SafeGet(iNode, "lifetime", mLifetime);
 
 		CollectionIterator particleFile(&iNode);
 		CollectionIterator params(particleFile.Extract("params"));
@@ -274,7 +274,7 @@ namespace rt
 		{
 			ParamDesc paramDesc;
 
-			params.Node() >> &paramDesc;
+			//params.Node() >> &paramDesc;
 
 			mParams.push_back(paramDesc);
 
@@ -329,17 +329,17 @@ namespace rt
 
 	void RendererDesc::UnSerialize( const YAML::Node& iNode )
 	{
-		SafeGet(iNode, "name", mName);
-		SafeGet(iNode, "type", mType);
-		SafeGet(iNode, "ground_culling", mGroundCulling);
+		//SafeGet(iNode, "name", mName);
+		//SafeGet(iNode, "type", mType);
+		//SafeGet(iNode, "ground_culling", mGroundCulling);
 		std::string blendMode;
-		SafeGet(iNode, "blend_mode", blendMode);
+		//SafeGet(iNode, "blend_mode", blendMode);
 		mBlendingMode = GetModeByName(blendMode);
-		SafeGet(iNode, "z_factor", mZFactor);
+		//SafeGet(iNode, "z_factor", mZFactor);
 
-		SafeGet(iNode, "custom_one", mCustomOne);
-		SafeGet(iNode, "custom_two", mCustomTwo);
-		SafeGet(iNode, "image_name", mImageName);
+		//SafeGet(iNode, "custom_one", mCustomOne);
+		//SafeGet(iNode, "custom_two", mCustomTwo);
+		//SafeGet(iNode, "image_name", mImageName);
 	}
 
 	void RendererDesc::Serialize( YAML::Emitter& iEmitter ) const
@@ -402,17 +402,17 @@ namespace rt
 
 	void EmitterDesc::UnSerialize( const YAML::Node& iNode )
 	{
-		SafeGet(iNode, "name", mName);
-		SafeGet(iNode, "type", mType);
-		SafeGet(iNode, "flow", mFlow);
-		SafeGet(iNode, "force", mForce);
-		SafeGet(iNode, "tank", mTank);
-		SafeGet(iNode, "use_borders", mUseBorders);
-		SafeGet(iNode, "zone", &mZoneDesc);
+		//SafeGet(iNode, "name", mName);
+		//SafeGet(iNode, "type", mType);
+		//SafeGet(iNode, "flow", mFlow);
+		//SafeGet(iNode, "force", mForce);
+		//SafeGet(iNode, "tank", mTank);
+		//SafeGet(iNode, "use_borders", mUseBorders);
+		//SafeGet(iNode, "zone", &mZoneDesc);
 
-		SafeGet(iNode, "custom_vec_one", mCustomVecOne);
-		SafeGet(iNode, "custom_float_one", mCustomFloatOne);
-		SafeGet(iNode, "custom_float_two", mCustomFloatTwo);
+		//SafeGet(iNode, "custom_vec_one", mCustomVecOne);
+		//SafeGet(iNode, "custom_float_one", mCustomFloatOne);
+		//SafeGet(iNode, "custom_float_two", mCustomFloatTwo);
 	}
 
 	void EmitterDesc::Serialize( YAML::Emitter& iEmitter ) const
@@ -459,11 +459,11 @@ namespace rt
 
 	void ZoneDesc::UnSerialize( const YAML::Node& iNode )
 	{
-		SafeGet(iNode, "type", mType);
-		SafeGet(iNode, "custom_vec_one", mCustomVecOne);
-		SafeGet(iNode, "custom_vec_two", mCustomVecTwo);
-		SafeGet(iNode, "custom_float_one", mCustomFloatOne);
-		SafeGet(iNode, "custom_float_two", mCustomFloatTwo);
+		//SafeGet(iNode, "type", mType);
+		//SafeGet(iNode, "custom_vec_one", mCustomVecOne);
+		//SafeGet(iNode, "custom_vec_two", mCustomVecTwo);
+		//SafeGet(iNode, "custom_float_one", mCustomFloatOne);
+		//SafeGet(iNode, "custom_float_two", mCustomFloatTwo);
 	}
 
 	void ZoneDesc::Serialize( YAML::Emitter& iEmitter ) const

@@ -32,13 +32,13 @@ namespace rt
 		Circle();
 		virtual ~Circle();
 
-		virtual void UnSerialize(const YAML::Node& iNode);
-
 		virtual void Draw(sf::RenderWindow* iRenderWindow);
 
 		void SetCenter(const Vector2f& iCenter, float iRadius);
 		void SetBrush(const Color& iColor);
 		void SetOutline(float iThikness, const Color& iColor);
+
+		UDeclareUserObject
 
 		static void RegisterMetaClass()
 		{

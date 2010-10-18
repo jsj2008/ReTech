@@ -36,13 +36,6 @@ namespace rt
 
 	}
 
-	void Line::UnSerialize( const YAML::Node& iNode )
-	{
-		WorldObject::UnSerialize(iNode);
-
-		updateShape();
-	}
-
 	void Line::Draw( sf::RenderWindow* iRenderWindow )
 	{
 		mShape.SetPosition(GetPosition());

@@ -35,20 +35,15 @@ namespace rt
 
 	}
 
-	void Animation::UnSerialize( const YAML::Node& iNode )
-	{
-		Sprite::UnSerialize(iNode);
-
-		mAnimation.reset(new FrameAnimation(mAnimationFile, &mSprite));
-	}
-
-	void Animation::Serialize( YAML::Emitter& iEmitter ) const
-	{
-
-	}
-
 	void Animation::Update( float iFrameTime )
 	{
-		mAnimation->Update(iFrameTime);
+		if(mAnimation)
+		{
+			mAnimation->Update(iFrameTime);
+		}
+		else
+		{
+			mAnimation.reset(new FrameAnimation(mAnimationFile, &mSprite));
+		}
 	}
 }

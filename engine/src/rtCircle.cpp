@@ -36,13 +36,6 @@ namespace rt
 
 	}
 
-	void Circle::UnSerialize( const YAML::Node& iNode )
-	{
-		WorldObject::UnSerialize(iNode);
-
-		updateShape();
-	}
-
 	void Circle::Draw( sf::RenderWindow* iRenderWindow )
 	{
 		mShape.SetPosition(GetPosition());

@@ -27,21 +27,20 @@ THE SOFTWARE.
 
 namespace rt
 {
-	class Animation : virtual public Sprite
+	class Animation : public Sprite
 	{
 	public:
 		Animation();
 		virtual ~Animation();
 
-		virtual void UnSerialize(const YAML::Node& iNode);
-		virtual void Serialize(YAML::Emitter& iEmitter) const;
-
 		virtual void Update(float iFrameTime);
+
+		UDeclareUserObject
 
 		static void RegisterMetaClass()
 		{
 			camp::Class::declare<Animation>("Animation")
-				.base<WorldObject>()
+				.base<Sprite>()
 				.constructor0()
 				.property("Sequence", &Animation::mAnimationFile);
 		}

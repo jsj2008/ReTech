@@ -20,8 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#ifndef __rtImage_H__
-#define __rtImage_H__
+#pragma once
 
 #include "rtResource.h"
 
@@ -39,9 +38,16 @@ namespace rt
 
 		virtual bool IsLoaded();
 
+		static void RegisterMetaClass()
+		{
+			camp::Class::declare<Image>("Image")
+				.base<rt::Resource>()
+				.constructor0();
+		}
+
 	protected:
 		std::string mDefaultResourceName;
 	};
 }
 
-#endif
+CAMP_AUTO_TYPE(rt::Image, &rt::Image::RegisterMetaClass)

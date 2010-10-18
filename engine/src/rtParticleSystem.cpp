@@ -31,8 +31,6 @@ namespace rt
 		: mSystem(0)
 	{
 		mClassName = "ParticleSystem";
-
-		CreateFuncProperty("particle", fastdelegate::MakeDelegate(this, &ParticleSystem::SetResource), fastdelegate::MakeDelegate(this, &ParticleSystem::GetResource));
 	}
 
 	ParticleSystem::~ParticleSystem()

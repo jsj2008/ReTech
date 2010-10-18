@@ -37,6 +37,8 @@ namespace rt
 		void SetResource(const std::string& iResourceName);
 		const std::string& GetResource();
 
+		UDeclareUserObject
+
 		static void RegisterMetaClass()
 		{
 			camp::Class::declare<Sprite>("Sprite")

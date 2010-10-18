@@ -20,8 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#ifndef __rtCollectionIterator_H__
-#define __rtCollectionIterator_H__
+#pragma once
 
 namespace rt
 {
@@ -87,6 +86,7 @@ namespace rt
 
 		int					mCurrentIndex;
 	};
-}
 
-#endif
+	void SerializeYAML(const camp::UserObject& iObject, YAML::Emitter& iEmitter);
+ 	void UnserializeYAML(const camp::UserObject& iObject, const YAML::Node& iNode);
+}

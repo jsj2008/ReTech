@@ -36,13 +36,6 @@ namespace rt
 
 	}
 
-	void Rectangle::UnSerialize( const YAML::Node& iNode )
-	{
-		WorldObject::UnSerialize(iNode);
-
-		updateShape();
-	}
-
 	void Rectangle::Draw( sf::RenderWindow* iRenderWindow )
 	{
 		mShape.SetPosition(GetPosition());

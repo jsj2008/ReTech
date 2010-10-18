@@ -22,22 +22,13 @@ THE SOFTWARE.
 
 #pragma once
 
-#include "rtSerializeable.h"
-#include "rtProperty.h"
-
 namespace rt
 {
-	class WorldObject : public Serializeable/*, public sf::Drawable*/
+	class WorldObject
 	{
 	public:
-		typedef std::vector<boost::shared_ptr<Serializeable>> SerializeableVec;
-		typedef SerializeableVec::iterator SerializeableVecIter;
-
 		WorldObject();
 		virtual ~WorldObject();
-
-		virtual void UnSerialize(const YAML::Node& iNode);
-		virtual void Serialize(YAML::Emitter& iEmitter);
 
 		virtual void Fix();
 
@@ -83,25 +74,7 @@ namespace rt
 
 		RTID GetUniqueID();
 
-		template<class T>
-		void CreateVarProperty(const std::string& iName, T& iVariable)
-		{
-			mProperties.push_back(boost::shared_ptr<Serializeable>(new Property<T>(iName, iVariable)));
-		}
-
-		template<class T>
-		void CreateFuncProperty(const std::string& iName, fastdelegate::FastDelegate1<T> iSetter, fastdelegate::FastDelegate0<T> iGetter)
-		{
-			mProperties.push_back(boost::shared_ptr<Serializeable>(new Property<T>(iName, iSetter, iGetter)));
-		}
-
-		template<class T>
-		void CreateFuncProperty(const std::string& iName, fastdelegate::FastDelegate1<const T&> iSetter, fastdelegate::FastDelegate0<const T&> iGetter)
-		{
-			mProperties.push_back(boost::shared_ptr<Serializeable>(new Property<T>(iName, iSetter, iGetter)));
-		}
-
-		void AddProperty(Serializeable* iProperty);
+		UDeclareUserObject
 
 		static void RegisterMetaClass()
 		{
@@ -134,8 +107,6 @@ namespace rt
 		World*				mWorld;
 
 		std::string			mClassName;
-
-		SerializeableVec	mProperties;
 
 		RTID				mUniqueID;
 	};

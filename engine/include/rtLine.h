@@ -31,13 +31,13 @@ namespace rt
 		Line();
 		virtual ~Line();
 
-		virtual void UnSerialize(const YAML::Node& iNode);
-
 		virtual void Draw(sf::RenderWindow* iRenderWindow);
 
 		void SetPoints(const Vector2f& iFirst, const Vector2f& iSecond);
 		void SetBrush(float iThikness, const Color& iColor);
 		void SetOutline(float iThikness, const Color& iColor);
+
+		UDeclareUserObject
 
 		static void RegisterMetaClass()
 		{

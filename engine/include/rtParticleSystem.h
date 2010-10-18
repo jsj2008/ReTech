@@ -20,8 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#ifndef __rtParticleSystem_H__
-#define __rtParticleSystem_H__
+#pragma once
 
 #include "rtWorldObject.h"
 
@@ -39,6 +38,16 @@ namespace rt
 		void SetResource(const std::string& iResourceName);
 		const std::string& GetResource();
 
+		UDeclareUserObject
+
+		static void RegisterMetaClass()
+		{
+			camp::Class::declare<ParticleSystem>("ParticleSystem")
+				.base<WorldObject>()
+				.constructor0()
+				.property("Particle", &ParticleSystem::GetResource, &ParticleSystem::SetResource);
+		}
+
 	protected:
 		SPK::SFML::SFMLSystem* mSystem;
 
@@ -46,4 +55,4 @@ namespace rt
 	};
 }
 
-#endif
+CAMP_AUTO_TYPE(rt::ParticleSystem, &rt::ParticleSystem::RegisterMetaClass)

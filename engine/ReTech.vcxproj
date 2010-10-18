@@ -47,6 +47,7 @@
     <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectName)_d</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -100,8 +101,6 @@
     <ClCompile Include="src\rtFrameAnimation.cpp" />
     <ClCompile Include="src\rtGameCore.cpp" />
     <ClCompile Include="src\rtCollectionIterator.cpp" />
-    <ClCompile Include="src\rtObjectsFactory.cpp" />
-    <ClCompile Include="src\rtSerializeable.cpp" />
     <ClCompile Include="src\rtOption.cpp" />
     <ClCompile Include="src\rtOptionsManager.cpp" />
     <ClCompile Include="src\rtConsoleManager.cpp" />
@@ -154,9 +153,6 @@
     <ClInclude Include="include\rtGameCore.h" />
     <ClInclude Include="include\rtSingleton.h" />
     <ClInclude Include="include\rtCollectionIterator.h" />
-    <ClInclude Include="include\rtObjectsFactory.h" />
-    <ClInclude Include="include\rtProperty.h" />
-    <ClInclude Include="include\rtSerializeable.h" />
     <ClInclude Include="include\rtOption.h" />
     <ClInclude Include="include\rtOptionsManager.h" />
     <ClInclude Include="include\rtConsoleManager.h" />
