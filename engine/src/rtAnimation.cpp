@@ -27,7 +27,6 @@ namespace rt
 {
 	Animation::Animation()
 	{
-		mClassName = "Animation";
 	}
 
 	Animation::~Animation()

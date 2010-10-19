@@ -22,11 +22,11 @@ THE SOFTWARE.
 
 #pragma once
 
-#include "rtWorldObject.h"
+#include "rtComponent.h"
 
 namespace rt
 {
-	class Circle : public WorldObject
+	class Circle : public Component
 	{
 	public:
 		Circle();
@@ -43,7 +43,7 @@ namespace rt
 		static void RegisterMetaClass()
 		{
 			camp::Class::declare<Circle>("Circle")
-				.base<WorldObject>()
+				.base<Component>()
 				.constructor0()
 				.property("CenterPoint", &Circle::mCenterPoint)
 				.property("Radius", &Circle::mRadius)

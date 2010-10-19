@@ -123,9 +123,6 @@ namespace rt
 				std::size_t count = arrayProperty.size(iObject);
 				for (std::size_t j = 0; j < count; ++j)
 				{
-					iEmitter << YAML::Key << "Item";
-					iEmitter << YAML::Value;
-
 					if (arrayProperty.elementType() == camp::userType)
 					{
 						// The array elements are composed objects: serialize them recursively
@@ -172,44 +169,43 @@ namespace rt
 			}
 			else if (property.type() == camp::arrayType)
 			{
-// 				// The current property is an array
-// 				const ArrayProperty& arrayProperty = static_cast<const ArrayProperty&>(property);
-// 
-// 				// Iterate over the child XML node and extract all the array elements
-// 				std::size_t index = 0;
-// 				for (typename Proxy::NodeType item = Proxy::findFirstChild(child, "item")
-// 					; Proxy::isValid(item)
-// 					; item = Proxy::findNextSibling(item, "item"))
-// 				{
-// 					// Make sure that there are enough elements in the array
-// 					std::size_t count = arrayProperty.size(object);
-// 					if (index >= count)
-// 					{
-// 						if (arrayProperty.dynamic())
-// 							arrayProperty.resize(object, index + 1);
-// 						else
-// 							break;
-// 					}
-// 
-// 					if (arrayProperty.elementType() == userType)
-// 					{
-// 						// The array elements are composed objects: deserialize them recursively
-// 						deserialize<Proxy>(arrayProperty.get(object, index).to<UserObject>(), item, exclude);
-// 					}
-// 					else
-// 					{
-// 						// The array elements are simple properties: read their value from the text of their XML node
-// 						arrayProperty.set(object, index, Proxy::getText(item));
-// 					}
-// 
-// 					index++;
-// 				}
+				// The current property is an array
+ 				const camp::ArrayProperty& arrayProperty = static_cast<const camp::ArrayProperty&>(property);
+ 
+				const YAML::Node* arrayNode = iNode.FindValue(property.name());
+				std::size_t index = 0;
+
+ 				for (YAML::Iterator iter = arrayNode->begin(); iter != arrayNode->end(); ++iter)
+ 				{
+					std::size_t arraySize = arrayProperty.size(iObject);
+					if (index >= arraySize)
+					{
+						if (arrayProperty.dynamic())
+							arrayProperty.resize(iObject, index + 1);
+						else
+							break;
+					}
+
+  					if (arrayProperty.elementType() == camp::userType)
+ 					{
+ 						// The array elements are composed objects: deserialize them recursively
+ 						UnserializeYAML(arrayProperty.get(iObject, index).to<camp::UserObject>(), *iter);
+ 					}
+ 					else
+ 					{
+ 						// The array elements are simple properties: read their value from the text of their XML node
+						std::string valueString;
+						iter->GetScalar(valueString);
+						arrayProperty.set(iObject, index, valueString);
+ 					}
+
+					++index;
+ 				}
 			}
 			else
 			{
 				// The current property is a simple property: read its value from the node's text
 				std::string valueString;
-				valueString = property.name();
 				(*iNode.FindValue(property.name())) >> valueString;
 				property.set(iObject, valueString);
 			}

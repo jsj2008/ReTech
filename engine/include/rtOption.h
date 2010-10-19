@@ -35,6 +35,20 @@ namespace rt
 		Option& operator=(int iValue);
 		Option& operator=(float iValue);
 
+		template<class T>
+		Option& operator=(T iValue)
+		{
+			mDataHolder = iValue;
+
+			return *this;
+		}
+
+		template<class T>
+		T To()
+		{
+			return boost::any_cast<T>(mDataHolder);
+		}
+
 		std::string ToString();
 		int			ToInt();
 		float		ToFloat();

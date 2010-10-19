@@ -70,6 +70,12 @@
     <Filter Include="Game\Tools">
       <UniqueIdentifier>{ab2f52c1-f07e-44b9-b172-b0cc9ec127ec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Managers\PhysicsManager">
+      <UniqueIdentifier>{12391cf1-f765-48c3-bc45-effaa070f225}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Components">
+      <UniqueIdentifier>{cf823493-601a-48f7-8090-3dfdcdf9a9f8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\micropather.cpp">
@@ -139,27 +145,6 @@
     <ClCompile Include="src\rtCollectionIterator.cpp">
       <Filter>Engine\Subsystems\Serialization</Filter>
     </ClCompile>
-    <ClCompile Include="src\rtAnimation.cpp">
-      <Filter>Game\WorldObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\rtCircle.cpp">
-      <Filter>Game\WorldObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\rtLine.cpp">
-      <Filter>Game\WorldObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\rtParticleSystem.cpp">
-      <Filter>Game\WorldObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\rtRectangle.cpp">
-      <Filter>Game\WorldObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\rtSprite.cpp">
-      <Filter>Game\WorldObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\rtText.cpp">
-      <Filter>Game\WorldObjects</Filter>
-    </ClCompile>
     <ClCompile Include="src\rtFont.cpp">
       <Filter>Game\Resources</Filter>
     </ClCompile>
@@ -174,6 +159,33 @@
     </ClCompile>
     <ClCompile Include="src\rtFrameAnimation.cpp">
       <Filter>Game\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtPhysicsManager.cpp">
+      <Filter>Engine\Managers\PhysicsManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtComponent.cpp">
+      <Filter>Engine\Managers\WorldsManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtAnimation.cpp">
+      <Filter>Game\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtCircle.cpp">
+      <Filter>Game\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtLine.cpp">
+      <Filter>Game\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtParticleSystem.cpp">
+      <Filter>Game\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtRectangle.cpp">
+      <Filter>Game\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtSprite.cpp">
+      <Filter>Game\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtText.cpp">
+      <Filter>Game\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -250,27 +262,6 @@
     <ClInclude Include="include\rtCollectionIterator.h">
       <Filter>Engine\Subsystems\Serialization</Filter>
     </ClInclude>
-    <ClInclude Include="include\rtAnimation.h">
-      <Filter>Game\WorldObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\rtCircle.h">
-      <Filter>Game\WorldObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\rtLine.h">
-      <Filter>Game\WorldObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\rtParticleSystem.h">
-      <Filter>Game\WorldObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\rtRectangle.h">
-      <Filter>Game\WorldObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\rtSprite.h">
-      <Filter>Game\WorldObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\rtText.h">
-      <Filter>Game\WorldObjects</Filter>
-    </ClInclude>
     <ClInclude Include="include\rtFont.h">
       <Filter>Game\Resources</Filter>
     </ClInclude>
@@ -288,6 +279,42 @@
     </ClInclude>
     <ClInclude Include="include\rtExternalTypes.h">
       <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtPhysicsManager.h">
+      <Filter>Engine\Managers\PhysicsManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtComponent.h">
+      <Filter>Engine\Managers\WorldsManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtText.h">
+      <Filter>Game\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtAnimation.h">
+      <Filter>Game\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtCircle.h">
+      <Filter>Game\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtLine.h">
+      <Filter>Game\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtParticleSystem.h">
+      <Filter>Game\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtRectangle.h">
+      <Filter>Game\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtSprite.h">
+      <Filter>Game\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtActorObject.h">
+      <Filter>Game\WorldObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtStaticObject.h">
+      <Filter>Game\WorldObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtSerializeable.h">
+      <Filter>Engine\Subsystems\Serialization</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

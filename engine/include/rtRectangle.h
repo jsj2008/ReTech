@@ -22,11 +22,11 @@ THE SOFTWARE.
 
 #pragma once
 
-#include "rtWorldObject.h"
+#include "rtComponent.h"
 
 namespace rt
 {
-	class Rectangle : public WorldObject
+	class Rectangle : public Component
 	{
 	public:
 		Rectangle();
@@ -43,7 +43,7 @@ namespace rt
 		static void RegisterMetaClass()
 		{
 			camp::Class::declare<Rectangle>("Rectangle")
-				.base<WorldObject>()
+				.base<Component>()
 				.constructor0()
 				.property("Rect", &Rectangle::mRect)
 				.property("BrushColor", &Rectangle::mBrushColor)

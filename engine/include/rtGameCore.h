@@ -34,6 +34,7 @@ THE SOFTWARE.
 #include "rtWorldsManager.h"
 #include "rtGuiManager.h"
 #include "rtToolManager.h"
+#include "rtPhysicsManager.h"
 
 namespace rt
 {
@@ -86,6 +87,7 @@ namespace rt
 		WorldsManager::Ptr		mWorlds;
 		GuiManager::Ptr			mGui;
 		ToolManager::Ptr		mTools;
+		PhysicsManager::Ptr		mPhysics;
 
 		bool					mIsFullscreen;
 

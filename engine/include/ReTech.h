@@ -26,6 +26,8 @@ THE SOFTWARE.
 
 #include "rtGameCore.h"
 
+#include "rtSerializeable.h"
+
 #include "rtConsoleManager.h"
 #include "rtOptionsManager.h"
 
@@ -48,6 +50,12 @@ THE SOFTWARE.
 #include "rtSequence.h"
 #include "rtParticle.h"
 
+#include "rtWorldsManager.h"
+#include "rtWorld.h"
+
+#include "rtWorldObject.h"
+
+#include "rtComponent.h"
 #include "rtAnimation.h"
 #include "rtSprite.h"
 #include "rtText.h"
@@ -56,6 +64,3 @@ THE SOFTWARE.
 #include "rtCircle.h"
 #include "rtRectangle.h"
 
-#include "rtWorldsManager.h"
-#include "rtWorldObject.h"
-#include "rtWorld.h"

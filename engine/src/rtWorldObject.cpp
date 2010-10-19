@@ -23,13 +23,13 @@ THE SOFTWARE.
 #include "rtCommonIncludes.h"
 #include "rtWorldObject.h"
 #include "rtWorld.h"
+#include "rtComponent.h"
 
 namespace rt
 {
 	WorldObject::WorldObject()
 		: mRotation(0.0f), mVisible(true), mEnabled(true), mLayer(0), mWorld(0), mUniqueID(GameCore::Get()->CreateUniqueId())
 	{
-		mClassName = "WorldObject";
 	}
 
 	WorldObject::~WorldObject()
@@ -41,19 +41,25 @@ namespace rt
 
 	}
 
-	std::string WorldObject::GetClassName() const
-	{
-		return mClassName;
-	}
-
 	void WorldObject::Update( float iFrameTime )
 	{
+		mComponents.erase(std::remove(mComponents.begin(), mComponents.end(), static_cast<Component*>(0)), mComponents.end());
 
+		std::for_each(mComponents.begin(), mComponents.end(), [iFrameTime](Component* iComponent)->void
+		{
+			if(iComponent)
+			{
+				iComponent->Update(iFrameTime);
+			}
+		});
 	}
 
 	void WorldObject::Draw( sf::RenderWindow* iRenderWindow )
 	{
-
+		std::for_each(mComponents.begin(), mComponents.end(), [iRenderWindow](Component* iComponent)->void
+		{
+			iComponent->Draw(iRenderWindow);
+		});
 	}
 
 	bool WorldObject::LowerThen (const WorldObject* const iOther)
@@ -73,21 +79,6 @@ namespace rt
 	bool WorldObject::IsPointInside( const sf::Vector2f& iMousePos )
 	{
 		return false;
-	}
-
-	bool WorldObject::HandleFocusedEvent( const sf::Event& iEvent )
-	{
-		return false;
-	}
-
-	void WorldObject::MouseEnter()
-	{
-
-	}
-
-	void WorldObject::MouseLeave()
-	{
-
 	}
 
 	void WorldObject::SetPosition( const Vector2f& iPosition )
@@ -183,6 +174,31 @@ namespace rt
 	rt::RTID WorldObject::GetUniqueID()
 	{
 		return mUniqueID;
+	}
+
+	void WorldObject::AddComponent( Component* iComponent )
+	{
+		if(std::find(mComponents.begin(), mComponents.end(), iComponent) != mComponents.end())
+		{
+			//TODO log
+			return;
+		}
+
+		iComponent->SetOwner(this);
+
+		mComponents.push_back(iComponent);
+	}
+
+	void WorldObject::RemoveComponent( Component* iComponent )
+	{
+		ComponentVecIter finded = std::find(mComponents.begin(), mComponents.end(), iComponent);
+		if(finded == mComponents.end())
+		{
+			//TODO log
+			return;
+		}
+
+		(*finded) = 0;
 	}
 
 	void WorldObject::Render( sf::RenderTarget& target, sf::Renderer& renderer ) const

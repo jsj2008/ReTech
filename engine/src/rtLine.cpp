@@ -22,13 +22,13 @@ THE SOFTWARE.
 
 #include "rtCommonIncludes.h"
 #include "rtLine.h"
+#include "rtWorldObject.h"
 
 namespace rt
 {
 	Line::Line()
 		: mBrushThikness(1), mOutlineThikness(0)
 	{
-		mClassName = "Line";
 	}
 
 	Line::~Line()
@@ -38,10 +38,10 @@ namespace rt
 
 	void Line::Draw( sf::RenderWindow* iRenderWindow )
 	{
-		mShape.SetPosition(GetPosition());
-		mShape.SetScale(GetScale());
-		mShape.SetOrigin(GetOrigin());
-		mShape.SetRotation(GetRotation());
+		mShape.SetPosition(mOwner->GetPosition());
+		mShape.SetScale(mOwner->GetScale());
+		mShape.SetOrigin(mOwner->GetOrigin());
+		mShape.SetRotation(mOwner->GetRotation());
 
 		iRenderWindow->Draw(mShape);
 	}

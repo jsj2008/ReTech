@@ -87,6 +87,8 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\rtComponent.cpp" />
+    <ClCompile Include="src\rtPhysicsManager.cpp" />
     <ClCompile Include="src\rtAnimation.cpp" />
     <ClCompile Include="src\rtCircle.cpp" />
     <ClCompile Include="src\rtLine.cpp" />
@@ -137,13 +139,18 @@
     <ClCompile Include="src\ReTech.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\rtActorObject.h" />
+    <ClInclude Include="include\rtComponent.h" />
+    <ClInclude Include="include\rtPhysicsManager.h" />
     <ClInclude Include="include\rtAnimation.h" />
     <ClInclude Include="include\rtCircle.h" />
     <ClInclude Include="include\rtExternalTypes.h" />
     <ClInclude Include="include\rtLine.h" />
     <ClInclude Include="include\rtParticleSystem.h" />
     <ClInclude Include="include\rtRectangle.h" />
+    <ClInclude Include="include\rtSerializeable.h" />
     <ClInclude Include="include\rtSprite.h" />
+    <ClInclude Include="include\rtStaticObject.h" />
     <ClInclude Include="include\rtText.h" />
     <ClInclude Include="include\rtFont.h" />
     <ClInclude Include="include\rtImage.h" />

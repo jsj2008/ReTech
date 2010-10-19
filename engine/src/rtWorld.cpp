@@ -224,7 +224,7 @@ namespace rt
 		for(ObjectsManagedVec::iterator iter = mObjects.begin(); iter != mObjects.end(); ++iter)
 		{
 			myEmitter << YAML::BeginMap;
-			SerializeYAML((*iter)->ToUserObject(), myEmitter);
+			SerializeYAML((*iter), myEmitter);
 			myEmitter << YAML::EndMap;
 		}
 

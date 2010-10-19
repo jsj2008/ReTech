@@ -22,13 +22,13 @@ THE SOFTWARE.
 
 #include "rtCommonIncludes.h"
 #include "rtRectangle.h"
+#include "rtWorldObject.h"
 
 namespace rt
 {
 	Rectangle::Rectangle()
 		: mOutlineThikness(0)
 	{
-		mClassName = "Rectangle";
 	}
 
 	Rectangle::~Rectangle()
@@ -38,10 +38,10 @@ namespace rt
 
 	void Rectangle::Draw( sf::RenderWindow* iRenderWindow )
 	{
-		mShape.SetPosition(GetPosition());
-		mShape.SetScale(GetScale());
-		mShape.SetOrigin(GetOrigin());
-		mShape.SetRotation(GetRotation());
+		mShape.SetPosition(mOwner->GetPosition());
+		mShape.SetScale(mOwner->GetScale());
+		mShape.SetOrigin(mOwner->GetOrigin());
+		mShape.SetRotation(mOwner->GetRotation());
 
 		iRenderWindow->Draw(mShape);
 	}

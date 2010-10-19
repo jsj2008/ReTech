@@ -23,11 +23,14 @@ THE SOFTWARE.
 #include "rtCommonIncludes.h"
 #include "rtGameCore.h"
 
+#include "rtSerializeable.h"
+
 #include "rtImage.h"
 #include "rtFont.h"
 #include "rtSequence.h"
 #include "rtParticle.h"
 
+#include "rtComponent.h"
 #include "rtSprite.h"
 #include "rtAnimation.h"
 #include "rtText.h"
@@ -35,6 +38,8 @@ THE SOFTWARE.
 #include "rtLine.h"
 #include "rtCircle.h"
 #include "rtRectangle.h"
+
+#include "rtWorldObject.h"
 
 URegisterSingleton(GameCore)
 
@@ -76,13 +81,17 @@ namespace rt
 		mWorlds		= WorldsManager::Ptr(new WorldsManager());
 		mGui		= GuiManager::Ptr(new GuiManager());
 		mTools		= ToolManager::Ptr(new ToolManager());
+		mPhysics	= PhysicsManager::Ptr(new PhysicsManager());
 
 		//Register classes
+		URegisterObject(Serializeable);
+
 		URegisterObject(Font);
 		URegisterObject(Image);
 		URegisterObject(Particle);
 		URegisterObject(Sequence);
 
+		URegisterObject(Component);
 		URegisterObject(Animation);
 		URegisterObject(Circle);
 		URegisterObject(Line);
@@ -90,6 +99,8 @@ namespace rt
 		URegisterObject(Rectangle);
 		URegisterObject(Sprite);
 		URegisterObject(Text);
+
+		URegisterObject(WorldObject);
 
 		int count = camp::classCount();
 		count++;
@@ -124,6 +135,7 @@ namespace rt
 			mWorlds->Update(frameTime);
 			mTools->Update(frameTime);
 			mRender->Update(frameTime);
+			mPhysics->Update(frameTime);
 		}
 	}
 

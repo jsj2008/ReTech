@@ -22,36 +22,28 @@ THE SOFTWARE.
 
 #pragma once
 
-#include "rtComponent.h"
-
 namespace rt
 {
-	class Sprite : public Component
+	class Serializeable
 	{
 	public:
-		Sprite();
-		virtual ~Sprite();
+		virtual ~Serializeable(){}
 
-		virtual void Draw(sf::RenderWindow* iRenderWindow);
-
-		void SetResource(const std::string& iResourceName);
-		const std::string& GetResource();
+		std::string GetClass()
+		{
+			return ToUserObject().getClass().name();
+		}
 
 		UDeclareUserObject
 
 		static void RegisterMetaClass()
 		{
-			camp::Class::declare<Sprite>("Sprite")
-				.base<Component>()
+			camp::Class::declare<Serializeable>("Serializeable")
 				.constructor0()
-				.property("Sprite", &Sprite::GetResource, &Sprite::SetResource);
+				.property("ClassName", &Serializeable::GetClass);
 		}
-
-		protected:
-			sf::Sprite mSprite;
-
-			std::string mResourceName;
 	};
 }
 
-CAMP_AUTO_TYPE(rt::Sprite, &rt::Sprite::RegisterMetaClass)
+UDeclareDynamicType(rt::Serializeable)
+CAMP_AUTO_TYPE(rt::Serializeable, &rt::Serializeable::RegisterMetaClass)

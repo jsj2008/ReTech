@@ -23,12 +23,12 @@ THE SOFTWARE.
 #include "rtCommonIncludes.h"
 #include "rtText.h"
 #include "rtFont.h"
+#include "rtWorldObject.h"
 
 namespace rt
 {
 	Text::Text()
 	{
-		mClassName = "Text";
 	}
 
 	Text::~Text()
@@ -38,10 +38,10 @@ namespace rt
 
 	void Text::Draw( sf::RenderWindow* iRenderWindow )
 	{
-		mText.SetPosition(GetPosition());
-		mText.SetScale(GetScale());
-		mText.SetOrigin(GetOrigin());
-		mText.SetRotation(GetRotation());
+		mText.SetPosition(mOwner->GetPosition());
+		mText.SetScale(mOwner->GetScale());
+		mText.SetOrigin(mOwner->GetOrigin());
+		mText.SetRotation(mOwner->GetRotation());
 
 
 		iRenderWindow->Draw(mText);

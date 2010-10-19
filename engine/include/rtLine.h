@@ -21,11 +21,11 @@ THE SOFTWARE.
 */
 
 #pragma once
-#include "rtWorldObject.h"
+#include "rtComponent.h"
 
 namespace rt
 {
-	class Line : public WorldObject
+	class Line : public Component
 	{
 	public:
 		Line();
@@ -42,7 +42,7 @@ namespace rt
 		static void RegisterMetaClass()
 		{
 			camp::Class::declare<Line>("Line")
-				.base<WorldObject>()
+				.base<Component>()
 				.constructor0()
 				.property("StartPoint", &Line::mFirstPoint)
 				.property("EndPoint", &Line::mSecondPoint)

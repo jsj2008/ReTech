@@ -22,11 +22,11 @@ THE SOFTWARE.
 
 #pragma once
 
-#include "rtWorldObject.h"
+#include "rtComponent.h"
 
 namespace rt
 {
-	class ParticleSystem : public WorldObject
+	class ParticleSystem : public Component
 	{
 	public:
 		ParticleSystem();
@@ -43,7 +43,7 @@ namespace rt
 		static void RegisterMetaClass()
 		{
 			camp::Class::declare<ParticleSystem>("ParticleSystem")
-				.base<WorldObject>()
+				.base<Component>()
 				.constructor0()
 				.property("Particle", &ParticleSystem::GetResource, &ParticleSystem::SetResource);
 		}

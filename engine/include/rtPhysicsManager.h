@@ -20,38 +20,20 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#pragma once
+#pragma once 
 
-#include "rtComponent.h"
+#include "rtSingleton.h"
 
 namespace rt
 {
-	class Sprite : public Component
+	class PhysicsManager : public Singleton<PhysicsManager>
 	{
 	public:
-		Sprite();
-		virtual ~Sprite();
+		typedef boost::shared_ptr<PhysicsManager>	Ptr;
 
-		virtual void Draw(sf::RenderWindow* iRenderWindow);
+		PhysicsManager();
+		~PhysicsManager();
 
-		void SetResource(const std::string& iResourceName);
-		const std::string& GetResource();
-
-		UDeclareUserObject
-
-		static void RegisterMetaClass()
-		{
-			camp::Class::declare<Sprite>("Sprite")
-				.base<Component>()
-				.constructor0()
-				.property("Sprite", &Sprite::GetResource, &Sprite::SetResource);
-		}
-
-		protected:
-			sf::Sprite mSprite;
-
-			std::string mResourceName;
+		void Update(float iTimeElapsed);
 	};
 }
-
-CAMP_AUTO_TYPE(rt::Sprite, &rt::Sprite::RegisterMetaClass)

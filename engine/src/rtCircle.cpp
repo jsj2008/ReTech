@@ -22,13 +22,13 @@ THE SOFTWARE.
 
 #include "rtCommonIncludes.h"
 #include "rtCircle.h"
+#include "rtWorldObject.h"
 
 namespace rt
 {
 	Circle::Circle()
 		: mRadius(1), mOutlineThikness(0)
 	{
-		mClassName = "Circle";
 	}
 
 	Circle::~Circle()
@@ -38,10 +38,10 @@ namespace rt
 
 	void Circle::Draw( sf::RenderWindow* iRenderWindow )
 	{
-		mShape.SetPosition(GetPosition());
-		mShape.SetScale(GetScale());
-		mShape.SetOrigin(GetOrigin());
-		mShape.SetRotation(GetRotation());
+		mShape.SetPosition(mOwner->GetPosition());
+		mShape.SetScale(mOwner->GetScale());
+		mShape.SetOrigin(mOwner->GetOrigin());
+		mShape.SetRotation(mOwner->GetRotation());
 
 		iRenderWindow->Draw(mShape);
 	}

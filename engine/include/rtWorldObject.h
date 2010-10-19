@@ -22,17 +22,21 @@ THE SOFTWARE.
 
 #pragma once
 
+#include "rtSerializeable.h"
+#include "rtComponent.h"
+
 namespace rt
 {
-	class WorldObject
+	class WorldObject : public Serializeable
 	{
 	public:
+		typedef std::vector<Component*>	ComponentVec;
+		typedef ComponentVec::iterator	ComponentVecIter;
+
 		WorldObject();
 		virtual ~WorldObject();
 
 		virtual void Fix();
-
-		virtual std::string GetClassName() const;
 
 		virtual void Update(float iFrameTime);
 		virtual void Draw(sf::RenderWindow* iRenderWindow);
@@ -40,10 +44,6 @@ namespace rt
 		virtual bool LowerThen(const WorldObject* const iOther); 
 
 		virtual bool IsPointInside(const sf::Vector2f& iMousePos);
-		virtual bool HandleFocusedEvent(const sf::Event& iEvent);
-
-		virtual void MouseEnter();
-		virtual void MouseLeave();
 
 		void SetPosition(const Vector2f& iPosition);
 		Vector2f GetPosition();
@@ -74,11 +74,15 @@ namespace rt
 
 		RTID GetUniqueID();
 
+		void AddComponent(Component* iComponent);
+		void RemoveComponent(Component* iComponent);
+
 		UDeclareUserObject
 
 		static void RegisterMetaClass()
 		{
 			camp::Class::declare<WorldObject>("WorldObject")
+				.base<Serializeable>()
 				.constructor0()
 				.property("Position", &WorldObject::GetPosition, &WorldObject::SetPosition)
 				.property("Origin", &WorldObject::GetOrigin, &WorldObject::SetOrigin)
@@ -88,8 +92,8 @@ namespace rt
 				.property("Enabled", &WorldObject::IsEnabled, &WorldObject::SetEnabled)
 				.property("Layer", &WorldObject::GetLayer, &WorldObject::SetLayer)
 				.property("Tag", &WorldObject::GetTag, &WorldObject::SetTag)
-				.property("ClassName", &WorldObject::GetClassName)
-				.property("ID", &WorldObject::GetUniqueID);
+				.property("ID", &WorldObject::GetUniqueID)
+				.property("Components", &WorldObject::mComponents);
 		}
 
 	protected:
@@ -106,10 +110,11 @@ namespace rt
 		std::string			mTag;
 		World*				mWorld;
 
-		std::string			mClassName;
-
 		RTID				mUniqueID;
+
+		ComponentVec		mComponents;		
 	};
 }
 
+UDeclareDynamicType(rt::WorldObject)
 CAMP_AUTO_TYPE(rt::WorldObject, &rt::WorldObject::RegisterMetaClass)

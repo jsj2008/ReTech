@@ -22,7 +22,7 @@ THE SOFTWARE.
 
 #include "rtCommonIncludes.h"
 #include "rtParticleSystem.h"
-
+#include "rtWorldObject.h"
 #include "rtParticle.h"
 
 namespace rt
@@ -30,7 +30,6 @@ namespace rt
 	ParticleSystem::ParticleSystem()
 		: mSystem(0)
 	{
-		mClassName = "ParticleSystem";
 	}
 
 	ParticleSystem::~ParticleSystem()
@@ -42,10 +41,10 @@ namespace rt
 	{
 		if(mSystem)
 		{
- 			mSystem->SetPosition(GetPosition());
-  			mSystem->SetScale(GetScale());
-  			mSystem->SetOrigin(GetOrigin());
-  			mSystem->SetRotation(GetRotation());
+ 			mSystem->SetPosition(mOwner->GetPosition());
+  			mSystem->SetScale(mOwner->GetScale());
+  			mSystem->SetOrigin(mOwner->GetOrigin());
+  			mSystem->SetRotation(mOwner->GetRotation());
 
 			mSystem->update(iFrameTime * 0.1f);
 		}

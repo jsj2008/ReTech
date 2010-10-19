@@ -22,11 +22,11 @@ THE SOFTWARE.
 
 #pragma once
 
-#include "rtWorldObject.h"
+#include "rtComponent.h"
 
 namespace rt
 {
-	class Text : public WorldObject
+	class Text : public Component
 	{
 	public:
 		Text();
@@ -48,7 +48,7 @@ namespace rt
 		static void RegisterMetaClass()
 		{
 			camp::Class::declare<Text>("Text")
-				.base<WorldObject>()
+				.base<Component>()
 				.constructor0()
 				.property("Font", &Text::GetFont, &Text::SetFont)
 				.property("String", &Text::GetString, &Text::SetString)

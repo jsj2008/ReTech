@@ -20,38 +20,25 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#pragma once
-
+#include "rtCommonIncludes.h"
 #include "rtComponent.h"
+#include "rtWorldObject.h"
 
 namespace rt
 {
-	class Sprite : public Component
+	Component::Component()
+		: mOwner(0)
 	{
-	public:
-		Sprite();
-		virtual ~Sprite();
 
-		virtual void Draw(sf::RenderWindow* iRenderWindow);
+	}
 
-		void SetResource(const std::string& iResourceName);
-		const std::string& GetResource();
+	Component::~Component()
+	{
 
-		UDeclareUserObject
+	}
 
-		static void RegisterMetaClass()
-		{
-			camp::Class::declare<Sprite>("Sprite")
-				.base<Component>()
-				.constructor0()
-				.property("Sprite", &Sprite::GetResource, &Sprite::SetResource);
-		}
-
-		protected:
-			sf::Sprite mSprite;
-
-			std::string mResourceName;
-	};
+	void Component::SetOwner( WorldObject* iOwner )
+	{
+		mOwner = iOwner;
+	}
 }
-
-CAMP_AUTO_TYPE(rt::Sprite, &rt::Sprite::RegisterMetaClass)

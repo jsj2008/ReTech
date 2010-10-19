@@ -24,12 +24,12 @@ THE SOFTWARE.
 #include "rtSprite.h"
 #include "rtResourceManager.h"
 #include "rtImage.h"
+#include "rtWorldObject.h"
 
 namespace rt
 {
 	Sprite::Sprite()
 	{
-		mClassName = "Sprite";
 	}
 
 	Sprite::~Sprite()
@@ -39,10 +39,10 @@ namespace rt
 
 	void Sprite::Draw( sf::RenderWindow* iRenderWindow )
 	{
-		mSprite.SetPosition(GetPosition());
-		mSprite.SetScale(GetScale());
-		mSprite.SetOrigin(GetOrigin());
-		mSprite.SetRotation(GetRotation());
+		mSprite.SetPosition(mOwner->GetPosition());
+		mSprite.SetScale(mOwner->GetScale());
+		mSprite.SetOrigin(mOwner->GetOrigin());
+		mSprite.SetRotation(mOwner->GetRotation());
 
 		iRenderWindow->Draw(mSprite);
 	}
