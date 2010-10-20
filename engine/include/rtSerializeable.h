@@ -45,5 +45,4 @@ namespace rt
 	};
 }
 
-UDeclareDynamicType(rt::Serializeable)
 CAMP_AUTO_TYPE(rt::Serializeable, &rt::Serializeable::RegisterMetaClass)

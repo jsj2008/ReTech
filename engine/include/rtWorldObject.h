@@ -116,5 +116,4 @@ namespace rt
 	};
 }
 
-UDeclareDynamicType(rt::WorldObject)
 CAMP_AUTO_TYPE(rt::WorldObject, &rt::WorldObject::RegisterMetaClass)

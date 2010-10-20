@@ -76,6 +76,5 @@ THE SOFTWARE.
 
 #define URegisterObject(Class) camp::classByType<Class>()
 #define UDeclareUserObject virtual camp::UserObject ToUserObject(){ return camp::UserObject(this); }
-#define UDeclareDynamicType(Type) namespace camp_ext{template <>struct ValueMapper<Type*>{static const int type = camp::userType;static camp::UserObject to(Type* const source){return source->ToUserObject();}template <typename T>static Type* from(const T& source){return 0;}};}
 
 #define URegisterSingleton(Class) rt::Class* rt::Singleton<rt::Class>::mInstance = 0;

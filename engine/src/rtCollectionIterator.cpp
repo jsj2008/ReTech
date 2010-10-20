@@ -22,6 +22,7 @@ THE SOFTWARE.
 
 #include "rtCommonIncludes.h"
 #include "rtCollectionIterator.h"
+#include "rtSerializeable.h"
 
 namespace rt
 {
@@ -108,7 +109,14 @@ namespace rt
 				// The current property is a composed type: serialize it recursively
 				iEmitter << YAML::BeginMap;
 
-				SerializeYAML(property.get(iObject).to<camp::UserObject>(), iEmitter);
+				if(property.get(iObject).isCompatible<rt::Serializeable*>())
+				{
+					SerializeYAML(property.get(iObject).to<rt::Serializeable*>()->ToUserObject(), iEmitter);
+				}
+				else
+				{
+					SerializeYAML(property.get(iObject).to<camp::UserObject>(), iEmitter);
+				}
 
 				iEmitter << YAML::EndMap;
 			}
@@ -128,7 +136,14 @@ namespace rt
 						// The array elements are composed objects: serialize them recursively
 						iEmitter << YAML::BeginMap;
 
-						SerializeYAML(arrayProperty.get(iObject, j).to<camp::UserObject>(), iEmitter);
+						if(property.get(iObject).isCompatible<rt::Serializeable*>())
+						{
+							SerializeYAML(arrayProperty.get(iObject, j).to<rt::Serializeable*>()->ToUserObject(), iEmitter);
+						}
+						else
+						{
+							SerializeYAML(arrayProperty.get(iObject, j).to<camp::UserObject>(), iEmitter);
+						}
 
 						iEmitter << YAML::EndMap;
 					}
@@ -164,8 +179,14 @@ namespace rt
 
 			if (property.type() == camp::userType)
 			{
-				// The current property is a composed type: deserialize it recursively
-				UnserializeYAML(property.get(iObject).to<camp::UserObject>(), (*iNode.FindValue(property.name())));
+				if(property.get(iObject).isCompatible<Serializeable*>())
+				{
+
+				}
+				else
+				{
+					UnserializeYAML(property.get(iObject).to<camp::UserObject>(), (*iNode.FindValue(property.name())));
+				}
 			}
 			else if (property.type() == camp::arrayType)
 			{
@@ -178,22 +199,58 @@ namespace rt
  				for (YAML::Iterator iter = arrayNode->begin(); iter != arrayNode->end(); ++iter)
  				{
 					std::size_t arraySize = arrayProperty.size(iObject);
-					if (index >= arraySize)
-					{
-						if (arrayProperty.dynamic())
-							arrayProperty.resize(iObject, index + 1);
-						else
-							break;
-					}
 
   					if (arrayProperty.elementType() == camp::userType)
  					{
- 						// The array elements are composed objects: deserialize them recursively
- 						UnserializeYAML(arrayProperty.get(iObject, index).to<camp::UserObject>(), *iter);
+						std::string className;
+						const YAML::Node* classNode;
+
+						classNode = iter->FindValue("ClassName");
+						if(classNode)
+						{
+							*classNode >> className;
+						}
+
+						if(!className.empty())
+						{
+							Serializeable* newObject = 0;
+							const camp::Class& metaClass = camp::classByName(className);
+							newObject = metaClass.construct<Serializeable>();
+
+							if (index >= arraySize)
+							{
+								if (arrayProperty.dynamic())
+									arrayProperty.insert(iObject, index, newObject);
+								else
+									break;
+							}
+
+							UnserializeYAML(arrayProperty.get(iObject, index).to<Serializeable*>()->ToUserObject(), *iter);
+						}
+						else
+						{
+							if (index >= arraySize)
+							{
+								if (arrayProperty.dynamic())
+									arrayProperty.resize(iObject, index + 1);
+								else
+									break;
+							}
+
+							UnserializeYAML(arrayProperty.get(iObject, index).to<camp::UserObject>(), *iter);
+						}			
  					}
  					else
  					{
- 						// The array elements are simple properties: read their value from the text of their XML node
+						if (index >= arraySize)
+						{
+							if (arrayProperty.dynamic())
+								arrayProperty.resize(iObject, index + 1);
+							else
+								break;
+						}
+
+ 						
 						std::string valueString;
 						iter->GetScalar(valueString);
 						arrayProperty.set(iObject, index, valueString);

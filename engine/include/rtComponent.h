@@ -53,5 +53,4 @@ namespace rt
 	};
 }
 
-UDeclareDynamicType(rt::Component)
 CAMP_AUTO_TYPE(rt::Component, &rt::Component::RegisterMetaClass)
