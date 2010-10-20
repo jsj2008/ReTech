@@ -22,48 +22,25 @@ THE SOFTWARE.
 
 #pragma once
 
-#include "rtCommonIncludes.h"
+#include "rtSingleton.h"
 
-#include "rtGameCore.h"
+namespace rt
+{
+	class AudioManager : public Singleton<AudioManager>
+	{
+	public:
+		typedef boost::shared_ptr<AudioManager> Ptr;
 
-#include "rtSerializeable.h"
+		AudioManager();
+		~AudioManager();
 
-#include "rtConsoleManager.h"
-#include "rtOptionsManager.h"
+		void Update(float iTimeElapsed);
 
-#include "rtCollectionIterator.h"
+		void PlayMusic(std::string const & iFileName);
+		void PlayFX(std::string const & iFileName);
 
-#include "rtAudioManager.h"
-#include "rtRenderManager.h"
-#include "rtInputManager.h"
-#include "rtLogManager.h"
-#include "rtResourceManager.h"
-#include "rtResource.h"
-#include "rtGuiManager.h"
-#include "rtGuiScreen.h"
-#include "rtToolManager.h"
-#include "rtTool.h"
-
-#include "rtStatistics.h"
-#include "rtConsole.h"
-
-#include "rtImage.h"
-#include "rtSequence.h"
-#include "rtParticle.h"
-#include "rtSound.h"
-#include "rtMusic.h"
-
-#include "rtWorldsManager.h"
-#include "rtWorld.h"
-
-#include "rtWorldObject.h"
-
-#include "rtComponent.h"
-#include "rtAnimation.h"
-#include "rtSprite.h"
-#include "rtText.h"
-#include "rtParticleSystem.h"
-#include "rtLine.h"
-#include "rtCircle.h"
-#include "rtRectangle.h"
-
+	protected:
+		sf::Music	mMusic;
+		sf::Sound	mFX;
+	};
+}

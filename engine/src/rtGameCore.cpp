@@ -29,6 +29,8 @@ THE SOFTWARE.
 #include "rtFont.h"
 #include "rtSequence.h"
 #include "rtParticle.h"
+#include "rtSound.h"
+#include "rtMusic.h"
 
 #include "rtComponent.h"
 #include "rtSprite.h"
@@ -82,6 +84,7 @@ namespace rt
 		mGui		= GuiManager::Ptr(new GuiManager());
 		mTools		= ToolManager::Ptr(new ToolManager());
 		mPhysics	= PhysicsManager::Ptr(new PhysicsManager());
+		mAudio		= AudioManager::Ptr(new AudioManager());
 
 		//Register classes
 		URegisterObject(Serializeable);
@@ -90,6 +93,8 @@ namespace rt
 		URegisterObject(Image);
 		URegisterObject(Particle);
 		URegisterObject(Sequence);
+		URegisterObject(Sound);
+		URegisterObject(Music);
 
 		URegisterObject(Component);
 		URegisterObject(Animation);
@@ -111,6 +116,7 @@ namespace rt
 		mResource->RegisterExtension(".ttf", "Font");
 		mResource->RegisterExtension(".seq", "Sequence");
 		mResource->RegisterExtension(".ps", "Particle");
+		mResource->RegisterExtension(".ogg", "Music");
 
 		mResource->CreateResources();
 

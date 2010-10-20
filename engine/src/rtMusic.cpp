@@ -20,50 +20,38 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#pragma once
-
 #include "rtCommonIncludes.h"
-
-#include "rtGameCore.h"
-
-#include "rtSerializeable.h"
-
-#include "rtConsoleManager.h"
-#include "rtOptionsManager.h"
-
-#include "rtCollectionIterator.h"
-
-#include "rtAudioManager.h"
-#include "rtRenderManager.h"
-#include "rtInputManager.h"
-#include "rtLogManager.h"
-#include "rtResourceManager.h"
-#include "rtResource.h"
-#include "rtGuiManager.h"
-#include "rtGuiScreen.h"
-#include "rtToolManager.h"
-#include "rtTool.h"
-
-#include "rtStatistics.h"
-#include "rtConsole.h"
-
-#include "rtImage.h"
-#include "rtSequence.h"
-#include "rtParticle.h"
-#include "rtSound.h"
 #include "rtMusic.h"
 
-#include "rtWorldsManager.h"
-#include "rtWorld.h"
+namespace rt
+{
+	Music::Music()
+	{
 
-#include "rtWorldObject.h"
+	}
 
-#include "rtComponent.h"
-#include "rtAnimation.h"
-#include "rtSprite.h"
-#include "rtText.h"
-#include "rtParticleSystem.h"
-#include "rtLine.h"
-#include "rtCircle.h"
-#include "rtRectangle.h"
+	Music::Music( const std::string& iResourceName )
+	{
+		Initialize(iResourceName);
+	}
 
+	Music::~Music()
+	{
+
+	}
+
+	void Music::Load()
+	{
+		*static_cast<std::string*>(this) = mResourceName;
+	}
+
+	void Music::Unload()
+	{
+		*static_cast<std::string*>(this) = std::string();
+	}
+
+	bool Music::IsLoaded()
+	{
+		return !empty();
+	}
+}

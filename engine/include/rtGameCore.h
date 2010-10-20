@@ -35,6 +35,7 @@ THE SOFTWARE.
 #include "rtGuiManager.h"
 #include "rtToolManager.h"
 #include "rtPhysicsManager.h"
+#include "rtAudioManager.h"
 
 namespace rt
 {
@@ -88,6 +89,7 @@ namespace rt
 		GuiManager::Ptr			mGui;
 		ToolManager::Ptr		mTools;
 		PhysicsManager::Ptr		mPhysics;
+		AudioManager::Ptr		mAudio;
 
 		bool					mIsFullscreen;
 

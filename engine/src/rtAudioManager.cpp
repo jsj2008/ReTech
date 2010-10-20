@@ -20,50 +20,44 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#pragma once
-
 #include "rtCommonIncludes.h"
-
-#include "rtGameCore.h"
-
-#include "rtSerializeable.h"
-
-#include "rtConsoleManager.h"
-#include "rtOptionsManager.h"
-
-#include "rtCollectionIterator.h"
-
 #include "rtAudioManager.h"
-#include "rtRenderManager.h"
-#include "rtInputManager.h"
-#include "rtLogManager.h"
-#include "rtResourceManager.h"
-#include "rtResource.h"
-#include "rtGuiManager.h"
-#include "rtGuiScreen.h"
-#include "rtToolManager.h"
-#include "rtTool.h"
-
-#include "rtStatistics.h"
-#include "rtConsole.h"
-
-#include "rtImage.h"
-#include "rtSequence.h"
-#include "rtParticle.h"
-#include "rtSound.h"
 #include "rtMusic.h"
+#include "rtSound.h"
 
-#include "rtWorldsManager.h"
-#include "rtWorld.h"
+URegisterSingleton(AudioManager)
 
-#include "rtWorldObject.h"
+namespace rt
+{
+	AudioManager::AudioManager()
+	{
 
-#include "rtComponent.h"
-#include "rtAnimation.h"
-#include "rtSprite.h"
-#include "rtText.h"
-#include "rtParticleSystem.h"
-#include "rtLine.h"
-#include "rtCircle.h"
-#include "rtRectangle.h"
+	}
 
+	AudioManager::~AudioManager()
+	{
+
+	}
+
+	void AudioManager::Update( float iTimeElapsed )
+	{
+
+	}
+
+	void AudioManager::PlayMusic( std::string const & iFileName )
+	{
+		UResource(Music, iFileName)->Load();
+		mMusic.OpenFromFile(*UResource(Music, iFileName));
+		
+		mMusic.GetSampleRate();
+
+		mMusic.Play();
+	}
+
+	void AudioManager::PlayFX( std::string const & iFileName )
+	{
+		UResource(Sound, iFileName)->Load();
+		mFX.SetBuffer(*UResource(Sound, iFileName));
+		mFX.Play();
+	}
+}

@@ -22,48 +22,32 @@ THE SOFTWARE.
 
 #pragma once
 
-#include "rtCommonIncludes.h"
-
-#include "rtGameCore.h"
-
-#include "rtSerializeable.h"
-
-#include "rtConsoleManager.h"
-#include "rtOptionsManager.h"
-
-#include "rtCollectionIterator.h"
-
-#include "rtAudioManager.h"
-#include "rtRenderManager.h"
-#include "rtInputManager.h"
-#include "rtLogManager.h"
-#include "rtResourceManager.h"
 #include "rtResource.h"
-#include "rtGuiManager.h"
-#include "rtGuiScreen.h"
-#include "rtToolManager.h"
-#include "rtTool.h"
 
-#include "rtStatistics.h"
-#include "rtConsole.h"
+namespace rt
+{
+	class Sound : public Resource, public sf::SoundBuffer
+	{
+	public:
+		Sound();
+		Sound(const std::string& iResourceName);
+		virtual ~Sound();
 
-#include "rtImage.h"
-#include "rtSequence.h"
-#include "rtParticle.h"
-#include "rtSound.h"
-#include "rtMusic.h"
+		virtual void Load();
+		virtual void Unload();
 
-#include "rtWorldsManager.h"
-#include "rtWorld.h"
+		virtual bool IsLoaded();
 
-#include "rtWorldObject.h"
+		static void RegisterMetaClass()
+		{
+			camp::Class::declare<Sound>("Sound")
+				.base<rt::Resource>()
+				.constructor0();
+		}
 
-#include "rtComponent.h"
-#include "rtAnimation.h"
-#include "rtSprite.h"
-#include "rtText.h"
-#include "rtParticleSystem.h"
-#include "rtLine.h"
-#include "rtCircle.h"
-#include "rtRectangle.h"
+	protected:
+		std::string mDefaultResourceName;
+	};
+}
 
+CAMP_AUTO_TYPE(rt::Sound, &rt::Sound::RegisterMetaClass)

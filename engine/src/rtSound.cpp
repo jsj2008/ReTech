@@ -20,50 +20,44 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#pragma once
-
 #include "rtCommonIncludes.h"
-
-#include "rtGameCore.h"
-
-#include "rtSerializeable.h"
-
-#include "rtConsoleManager.h"
-#include "rtOptionsManager.h"
-
-#include "rtCollectionIterator.h"
-
-#include "rtAudioManager.h"
-#include "rtRenderManager.h"
-#include "rtInputManager.h"
-#include "rtLogManager.h"
-#include "rtResourceManager.h"
-#include "rtResource.h"
-#include "rtGuiManager.h"
-#include "rtGuiScreen.h"
-#include "rtToolManager.h"
-#include "rtTool.h"
-
-#include "rtStatistics.h"
-#include "rtConsole.h"
-
-#include "rtImage.h"
-#include "rtSequence.h"
-#include "rtParticle.h"
 #include "rtSound.h"
-#include "rtMusic.h"
 
-#include "rtWorldsManager.h"
-#include "rtWorld.h"
+namespace rt
+{
+	Sound::Sound()
+	{
 
-#include "rtWorldObject.h"
+	}
 
-#include "rtComponent.h"
-#include "rtAnimation.h"
-#include "rtSprite.h"
-#include "rtText.h"
-#include "rtParticleSystem.h"
-#include "rtLine.h"
-#include "rtCircle.h"
-#include "rtRectangle.h"
+	Sound::Sound( const std::string& iResourceName )
+	{
+		Initialize(iResourceName);
+	}
 
+	Sound::~Sound()
+	{
+
+	}
+
+	void Sound::Load()
+	{
+		if(!IsLoaded())
+		{
+			if(!LoadFromFile(mResourceName))
+			{
+				LogManager::Get()->Warning("Missed default texture for Image.");
+			}
+		}
+	}
+
+	void Sound::Unload()
+	{
+		*static_cast<sf::SoundBuffer*>(this) = sf::SoundBuffer();
+	}
+
+	bool Sound::IsLoaded()
+	{
+		return GetSamplesCount() != 0;
+	}
+}

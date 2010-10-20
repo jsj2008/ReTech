@@ -77,7 +77,7 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>ReTechCommonIncludes.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>rtCommonIncludes.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <AdditionalOptions>/Zm200 %(AdditionalOptions)</AdditionalOptions>
@@ -87,13 +87,16 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\rtAudioManager.cpp" />
     <ClCompile Include="src\rtComponent.cpp" />
+    <ClCompile Include="src\rtMusic.cpp" />
     <ClCompile Include="src\rtPhysicsManager.cpp" />
     <ClCompile Include="src\rtAnimation.cpp" />
     <ClCompile Include="src\rtCircle.cpp" />
     <ClCompile Include="src\rtLine.cpp" />
     <ClCompile Include="src\rtParticleSystem.cpp" />
     <ClCompile Include="src\rtRectangle.cpp" />
+    <ClCompile Include="src\rtSound.cpp" />
     <ClCompile Include="src\rtSprite.cpp" />
     <ClCompile Include="src\rtText.cpp" />
     <ClCompile Include="src\rtFont.cpp" />
@@ -140,7 +143,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\rtActorObject.h" />
+    <ClInclude Include="include\rtAudioManager.h" />
     <ClInclude Include="include\rtComponent.h" />
+    <ClInclude Include="include\rtMusic.h" />
     <ClInclude Include="include\rtPhysicsManager.h" />
     <ClInclude Include="include\rtAnimation.h" />
     <ClInclude Include="include\rtCircle.h" />
@@ -149,6 +154,7 @@
     <ClInclude Include="include\rtParticleSystem.h" />
     <ClInclude Include="include\rtRectangle.h" />
     <ClInclude Include="include\rtSerializeable.h" />
+    <ClInclude Include="include\rtSound.h" />
     <ClInclude Include="include\rtSprite.h" />
     <ClInclude Include="include\rtStaticObject.h" />
     <ClInclude Include="include\rtText.h" />

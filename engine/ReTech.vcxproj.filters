@@ -76,6 +76,9 @@
     <Filter Include="Game\Components">
       <UniqueIdentifier>{cf823493-601a-48f7-8090-3dfdcdf9a9f8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Managers\AudioManager">
+      <UniqueIdentifier>{61f528de-8ac3-4992-909a-2f9ecc746e42}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\micropather.cpp">
@@ -186,6 +189,15 @@
     </ClCompile>
     <ClCompile Include="src\rtText.cpp">
       <Filter>Game\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtAudioManager.cpp">
+      <Filter>Engine\Managers\AudioManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtSound.cpp">
+      <Filter>Game\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtMusic.cpp">
+      <Filter>Game\Resources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -315,6 +327,15 @@
     </ClInclude>
     <ClInclude Include="include\rtSerializeable.h">
       <Filter>Engine\Subsystems\Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtAudioManager.h">
+      <Filter>Engine\Managers\AudioManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtSound.h">
+      <Filter>Game\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtMusic.h">
+      <Filter>Game\Resources</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
