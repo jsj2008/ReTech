@@ -34,6 +34,9 @@ THE SOFTWARE.
 #include "boost/tokenizer.hpp"
 #include "boost/filesystem.hpp"
 #include "boost/lexical_cast.hpp"
+#include "boost/date_time/gregorian/gregorian.hpp"
+#include "boost/date_time/posix_time/posix_time.hpp"
+
 
 #include "SFML/Audio.hpp"
 #include "SFML/Graphics.hpp"
@@ -78,3 +81,12 @@ THE SOFTWARE.
 #define UDeclareUserObject virtual camp::UserObject ToUserObject(){ return camp::UserObject(this); }
 
 #define URegisterSingleton(Class) rt::Class* rt::Singleton<rt::Class>::mInstance = 0;
+
+#define UStringify(x) #x
+#define UToString(x) UStringify(x)
+#define ULocation __FILE__ "(" UToString(__LINE__) ") - " __FUNCTION__
+
+#define ULogCritical(Message) rt::LogManager::Get()->Critical(Message, ULocation)
+#define ULogError(Message) rt::LogManager::Get()->Error(Message, ULocation)
+#define ULogWarning(Message) rt::LogManager::Get()->Warning(Message, ULocation)
+#define ULogNotice(Message) rt::LogManager::Get()->Notice(Message, ULocation)

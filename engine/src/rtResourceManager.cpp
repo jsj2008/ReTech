@@ -45,7 +45,7 @@ namespace rt
 
 		if(mResources.find(resourceName) == mResources.end())
 		{
-			LogManager::Get()->Error("Cant find resource - " + resourceName);
+			ULogError("Cant find resource - " + resourceName);
 			return 0;
 		}
 
@@ -103,7 +103,7 @@ namespace rt
 						}
 						catch(...)
 						{
-							LogManager::Get()->Error("Class " + (className) + " is not registered.");
+							ULogError("Class " + (className) + " is not registered.");
 						}
 
 						if(newResource != 0)
@@ -113,13 +113,13 @@ namespace rt
 						}
 						else
 						{
-							LogManager::Get()->Error("Class " + (className) + " is not a resource.");
+							ULogError("Class " + (className) + " is not a resource.");
 						}
 
 					}
 					else
 					{
-						LogManager::Get()->Error("Type for " + (resourceName.extension()) + " is not registered.");
+						ULogError("Type for " + (resourceName.extension()) + " is not registered.");
 					}
  				}
  			}

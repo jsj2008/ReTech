@@ -132,7 +132,7 @@ namespace rt
 				}
 				catch(...)
 				{						
-					LogManager::Get()->Error("Class " + (className) + " is not registered.");
+					ULogError("Class " + (className) + " is not registered.");
 				}
 
 				if(worldObject != 0)
@@ -143,12 +143,12 @@ namespace rt
 				}
 				else
 				{
-					LogManager::Get()->Error("Class " + (className) + " is not a world object.");
+					ULogError("Class " + (className) + " is not a world object.");
 				}
 			}
 			else
 			{
-				LogManager::Get()->Error("Object has no class.");
+				ULogError("Object has no class.");
 			}
 
 			mObjectsIterator->Next();
@@ -268,7 +268,7 @@ namespace rt
 	{
 		if(mIDResolveMap.find(iOld) != mIDResolveMap.end())
 		{
-			LogManager::Get()->Warning("ID pair already exists");
+			ULogWarning("ID pair already exists");
 			return;
 		}
 
@@ -279,7 +279,7 @@ namespace rt
 	{
 		if(mIDResolveMap.find(iOld) == mIDResolveMap.end())
 		{
-			LogManager::Get()->Warning("ID pair dont exists");
+			ULogWarning("ID pair dont exists");
 			return -1;
 		}
 

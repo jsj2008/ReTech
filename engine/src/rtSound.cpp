@@ -46,7 +46,7 @@ namespace rt
 		{
 			if(!LoadFromFile(mResourceName))
 			{
-				LogManager::Get()->Warning("Missed default texture for Image.");
+				ULogWarning("Missed default texture for Image.");
 			}
 		}
 	}

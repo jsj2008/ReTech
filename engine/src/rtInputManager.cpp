@@ -99,7 +99,7 @@ namespace rt
 	{
  		if(std::find(mHandlers.begin(), mHandlers.end(), iHandler) != mHandlers.end())
  		{
- 			LogManager::Get()->Warning("Handler already registered");
+ 			ULogWarning("Handler already registered");
  			return;
  		}
 

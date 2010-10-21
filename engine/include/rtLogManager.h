@@ -35,9 +35,10 @@ namespace rt
 		LogManager();
 		~LogManager();
 
-		void Error(const std::string& iMessage);
-		void Warning(const std::string& iMessage);
-		void Notice(const std::string& iMessage);
+		void Critical(const std::string& iMessage, const std::string& iLocation = "Unknown");
+		void Error(const std::string& iMessage, const std::string& iLocation = "Unknown");
+		void Warning(const std::string& iMessage, const std::string& iLocation = "Unknown");
+		void Notice(const std::string& iMessage, const std::string& iLocation = "Unknown");
 
 	protected:
 		std::ofstream mFileStream;

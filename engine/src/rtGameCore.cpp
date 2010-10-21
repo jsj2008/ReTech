@@ -125,7 +125,7 @@ namespace rt
 		mExec->RegisterCommand("set_fullscreen", this, "SetFullscreen");
 		mExec->RegisterCommand("toggle_fullscreen", this, "ToggleFullscreen");
 
-		LogManager::Get()->Notice("GameCore initialized.");
+		ULogNotice("GameCore initialized.");
 	}
 
 	void GameCore::Run()

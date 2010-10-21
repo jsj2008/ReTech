@@ -60,7 +60,7 @@ namespace rt
 	{
 		if(GetWorld(iName) != 0)
 		{
-			LogManager::Get()->Warning("World " + iName + " already exist.");
+			ULogWarning("World " + iName + " already exist.");
 			return 0;
 		}
 		mWorlds.push_back(boost::shared_ptr<World>(new World(iName, iLayer)));
@@ -73,7 +73,7 @@ namespace rt
 		WorldsVec::iterator finded = std::find_if(mWorlds.begin(), mWorlds.end(), IsNamed(iName));
 		if(finded == mWorlds.end())
 		{
-			LogManager::Get()->Warning("World " + iName + " doesnt exist.");
+			ULogWarning("World " + iName + " doesnt exist.");
 			return;
 		}
 
