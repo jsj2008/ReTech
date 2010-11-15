@@ -201,6 +201,5 @@ namespace rt
 		mMainWindow->SetView(*mMainView);
 
 		mMainWindow->ShowMouseCursor(false);
-		mMainwindow->SetFocus();
 	}
 }

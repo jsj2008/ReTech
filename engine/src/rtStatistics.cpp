@@ -27,6 +27,9 @@ namespace rt
 {
 	Statistics::Statistics()
 	{
+		//always enabled
+		SetEnabled(true);
+
 		mStatisticsText.SetFont(sf::Font::GetDefaultFont());
 		mStatisticsText.SetCharacterSize(10);
 	}

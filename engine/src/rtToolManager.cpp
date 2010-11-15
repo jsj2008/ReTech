@@ -23,6 +23,7 @@ THE SOFTWARE.
 #include "rtCommonIncludes.h"
 #include "rtToolManager.h"
 #include "rtTool.h"
+#include "rtConsoleManager.h"
 
 URegisterSingleton(ToolManager)
 
@@ -30,7 +31,7 @@ namespace rt
 {
 	ToolManager::ToolManager()
 	{
-
+		ConsoleManager::Get()->RegisterCommand("toggle_tool", this, "ToggleTool");
 	}
 
 	ToolManager::~ToolManager()
@@ -40,17 +41,23 @@ namespace rt
 
 	void ToolManager::Update( float iTimeElapsed )
 	{
-		std::for_each(mTools.begin(), mTools.end(), [iTimeElapsed](boost::shared_ptr<Tool>& iTool)->void
+		std::for_each(mTools.begin(), mTools.end(), [iTimeElapsed](std::pair<const std::string, boost::shared_ptr<Tool>>& iTool)->void
 		{
-			iTool->Update(iTimeElapsed);
+			if(iTool.second->IsEnabled())
+			{
+				iTool.second->Update(iTimeElapsed);
+			}
 		});
 	}
 
 	void ToolManager::Render()
 	{
-		std::for_each(mTools.begin(), mTools.end(), [](boost::shared_ptr<Tool>& iTool)->void
+		std::for_each(mTools.begin(), mTools.end(), [](std::pair<const std::string, boost::shared_ptr<Tool>>& iTool)->void
 		{
-			iTool->Render();
+			if(iTool.second->IsEnabled())
+			{
+				iTool.second->Render();
+			}
 		});
 	}
 
@@ -58,9 +65,9 @@ namespace rt
 	{
 		bool eventHandled = false;
 
-		std::for_each(mTools.begin(), mTools.end(), [&eventHandled, &iEvent](boost::shared_ptr<Tool>& iTool)->void
+		std::for_each(mTools.begin(), mTools.end(), [&eventHandled, &iEvent](std::pair<const std::string, boost::shared_ptr<Tool>>& iTool)->void
 		{
-			if(iTool->HandleEvent(iEvent))
+			if(iTool.second->IsEnabled() && iTool.second->HandleEvent(iEvent))
 			{
 				eventHandled = true;
 			}
@@ -69,8 +76,25 @@ namespace rt
 		return eventHandled;
 	}
 
-	void ToolManager::AddTool( Tool* iTool )
+	void ToolManager::AddTool(const std::string& iToolName, Tool* iTool)
 	{
-		mTools.push_back(boost::shared_ptr<Tool>(iTool));
+		if(mTools.find(iToolName) != mTools.end())
+		{
+			//TODO log
+			return;
+		}
+
+		mTools[iToolName] = boost::shared_ptr<Tool>(iTool);
+	}
+
+	void ToolManager::ToggleTool(const std::string& iToolName)
+	{
+		if(mTools.find(iToolName) == mTools.end())
+		{
+			//TODO log
+			return;
+		}
+
+		mTools[iToolName]->ToggleEnabled();
 	}
 }

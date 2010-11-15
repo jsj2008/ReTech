@@ -30,10 +30,24 @@ namespace rt
 	{
 	public:
 		typedef boost::shared_ptr<PhysicsManager>	Ptr;
+		typedef std::vector<cpSpace*>				SpaceVec;
+		typedef SpaceVec::iterator					SpaceVecIter;
 
 		PhysicsManager();
 		~PhysicsManager();
 
 		void Update(float iTimeElapsed);
+
+		void SetStepTime(float iTime);
+		float GetStepTime();
+
+		cpSpace* CreatePhysicsSpace();
+		void DestroyPhysicsSpace(cpSpace* iSpace);
+
+	protected:
+		SpaceVec	mSpaces;
+
+		float		mStepTime;
+		float		mBufferedTime;
 	};
 }

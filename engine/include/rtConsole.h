@@ -32,22 +32,16 @@ namespace rt
 		typedef std::vector<sf::String> StringVec;
 		typedef StringVec::iterator		StringVecIter;
 
-		Console(sf::Key::Code iToggleKey = sf::Key::Tilde);
+		Console();
 		virtual ~Console();
 
 		virtual void Render();
 		virtual bool HandleEvent(const sf::Event& iEvent);
-
-		void ToggleConsole();
 
 	protected:
 		sf::Shape		mBackgroundShape;
 		sf::Text		mConsoleText;
 
 		StringVec		mConsoleStrings;
-
-		bool			mVisible;
-
-		sf::Key::Code	mToggleKeyCode;
 	};
 }

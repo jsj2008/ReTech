@@ -72,6 +72,12 @@ namespace rt
 		*/
 		void Initialize();
 
+
+		/**
+		* Runs game loop
+		*
+		* @author Alexander Novitsky
+		*/
 		void Run();
 		void Stop();
 		void Shutdown();

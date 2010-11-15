@@ -91,6 +91,7 @@
     <ClCompile Include="src\rtAudioManager.cpp" />
     <ClCompile Include="src\rtComponent.cpp" />
     <ClCompile Include="src\rtMusic.cpp" />
+    <ClCompile Include="src\rtParticleEditor.cpp" />
     <ClCompile Include="src\rtPhysicsManager.cpp" />
     <ClCompile Include="src\rtAnimation.cpp" />
     <ClCompile Include="src\rtCircle.cpp" />
@@ -148,6 +149,7 @@
     <ClInclude Include="include\rtAudioManager.h" />
     <ClInclude Include="include\rtComponent.h" />
     <ClInclude Include="include\rtMusic.h" />
+    <ClInclude Include="include\rtParticleEditor.h" />
     <ClInclude Include="include\rtPhysicsManager.h" />
     <ClInclude Include="include\rtAnimation.h" />
     <ClInclude Include="include\rtCircle.h" />

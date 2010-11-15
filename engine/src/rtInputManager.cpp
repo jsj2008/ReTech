@@ -75,14 +75,24 @@ namespace rt
 		}
 	}
 
-	void InputManager::RegisterBind( sf::Key::Code iKey, const std::string& iExecName)
+	void InputManager::RegisterBind( sf::Key::Code iKey, const std::string& iExecName, const camp::Args& iArguments)
 	{
-		mKeyboardBinds.insert(std::make_pair(iKey, iExecName));
+		ExecHolder execHolder;
+		execHolder.FunctionName = iExecName;
+		execHolder.FunctionArguments = iArguments;
+		execHolder.PredefinedArguments = iArguments.count() != 0;
+
+		mKeyboardBinds.insert(std::make_pair(iKey, execHolder));
 	}
 
-	void InputManager::RegisterBind( sf::Mouse::Button iButton, const std::string& iExecName)
+	void InputManager::RegisterBind( sf::Mouse::Button iButton, const std::string& iExecName, const camp::Args& iArguments)
 	{
-		mMouseBinds.insert(std::make_pair(iButton, iExecName));
+		ExecHolder execHolder;
+		execHolder.FunctionName = iExecName;
+		execHolder.FunctionArguments = iArguments;
+		execHolder.PredefinedArguments = iArguments.count() != 0;
+
+		mMouseBinds.insert(std::make_pair(iButton, execHolder));
 	}	
 
 	void InputManager::UnregisterBind( sf::Key::Code iKey )
@@ -147,14 +157,24 @@ namespace rt
 
 			for(;iter != end; ++iter)
 			{
-				if(!iter->second.empty())
+				if(!iter->second.FunctionName.empty())
 				{
-					if(iPressed && !ConsoleManager::Get()->HasArguments(iter->second))
+					if(iPressed && !ConsoleManager::Get()->HasArguments(iter->second.FunctionName))
 					{
 						continue;
 					}
 
-					ConsoleManager::Get()->CallCommand(iter->second, camp::Args(iPressed));
+					if(iter->second.PredefinedArguments)
+					{
+						if(!iPressed)
+						{
+							ConsoleManager::Get()->CallCommand(iter->second.FunctionName, iter->second.FunctionArguments);
+						}
+					}
+					else
+					{
+						ConsoleManager::Get()->CallCommand(iter->second.FunctionName, camp::Args(iPressed));
+					}		
 				}
 			}
 		}
@@ -170,14 +190,21 @@ namespace rt
 
 			for(;iter != end; ++iter)
 			{
-				if(!iter->second.empty())
+				if(!iter->second.FunctionName.empty())
 				{
-					if(iPressed && !ConsoleManager::Get()->HasArguments(iter->second))
+					if(iPressed && !ConsoleManager::Get()->HasArguments(iter->second.FunctionName))
 					{
 						continue;
 					}
 
-					ConsoleManager::Get()->CallCommand(iter->second, camp::Args(iPressed));
+					if(iter->second.PredefinedArguments && !iPressed)
+					{
+						ConsoleManager::Get()->CallCommand(iter->second.FunctionName, iter->second.FunctionArguments);
+					}
+					else
+					{
+						ConsoleManager::Get()->CallCommand(iter->second.FunctionName, camp::Args(iPressed));
+					}
 				}
 			}
 		}

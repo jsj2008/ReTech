@@ -31,8 +31,8 @@ namespace rt
 	class ToolManager : public Singleton<ToolManager>
 	{
 	public:
-		typedef std::vector<boost::shared_ptr<Tool>>	ToolVec;
-		typedef ToolVec::iterator						ToolVecIter;
+		typedef std::map<std::string, boost::shared_ptr<Tool>>	ToolMap;
+		typedef ToolMap::iterator								ToolMapIter;
 
 		typedef boost::shared_ptr<ToolManager>			Ptr;
 
@@ -43,9 +43,19 @@ namespace rt
 		void Render();
 		bool HandleEvent(const sf::Event& iEvent);
 
-		void AddTool(Tool* iTool);
+		void AddTool(const std::string& iToolName, Tool* iTool);
+
+		void ToggleTool(const std::string& iToolName);
+
+		static void RegisterMetaClass()
+		{
+			camp::Class::declare<ToolManager>("ToolManager")
+				.function("ToggleTool", &ToolManager::ToggleTool);
+		}
 
 	protected:
-		ToolVec	mTools;
+		ToolMap	mTools;
 	};
 }
+
+CAMP_AUTO_TYPE(rt::ToolManager, &rt::ToolManager::RegisterMetaClass)

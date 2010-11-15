@@ -39,8 +39,10 @@ int WINAPI WinMain(HINSTANCE /*hInstance*/, HINSTANCE /*hPrevInstance*/, LPSTR /
 	gameCore.Initialize();
 
 	//Add debug tools
-	rt::ToolManager::Get()->AddTool(new rt::Statistics());
-	rt::ToolManager::Get()->AddTool(new rt::Console());
+	rt::ToolManager::Get()->AddTool("Statistics", new rt::Statistics());
+	rt::ToolManager::Get()->AddTool("Console", new rt::Console());
+
+	rt::InputManager::Get()->RegisterBind(sf::Key::Tilde, "toggle_tool", camp::Args("Console"));
 
 	gameCore.Run();
 

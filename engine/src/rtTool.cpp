@@ -26,6 +26,7 @@ THE SOFTWARE.
 namespace rt
 {
 	Tool::Tool()
+		: mIsEnabled(false)
 	{
 
 	}
@@ -48,5 +49,20 @@ namespace rt
 	bool Tool::HandleEvent( const sf::Event& iEvent )
 	{
 		return false;
+	}
+
+	void Tool::SetEnabled(bool iEnabled)
+	{
+		mIsEnabled = iEnabled;
+	}
+
+	bool Tool::IsEnabled()
+	{
+		return mIsEnabled;
+	}
+
+	void Tool::ToggleEnabled()
+	{
+		mIsEnabled = !mIsEnabled;
 	}
 }

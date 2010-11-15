@@ -27,8 +27,7 @@ THE SOFTWARE.
 
 namespace rt
 {
-	Console::Console(sf::Key::Code iToggleKey/* = sf::Key::Tilde*/)
-		: mVisible(false), mToggleKeyCode(iToggleKey)
+	Console::Console()
 	{
 		mBackgroundShape = sf::Shape::Rectangle(sf::FloatRect(0.0f, 0.0f, 
 			static_cast<float>(GameCore::Get()->GetMainWindow()->GetWidth()), static_cast<float>(GameCore::Get()->GetMainWindow()->GetHeight() * 0.5f)), 
@@ -48,43 +47,37 @@ namespace rt
 
 	void Console::Render()
 	{
-		if(mVisible)
+		GameCore::Get()->GetMainWindow()->Draw(mBackgroundShape);
+
+		float textHeightPos = GameCore::Get()->GetMainWindow()->GetHeight() * 0.5f;
+
+		std::for_each(mConsoleStrings.begin(), mConsoleStrings.end(), [this,&textHeightPos](sf::String& iString)->void
 		{
-			GameCore::Get()->GetMainWindow()->Draw(mBackgroundShape);
-
-			float textHeightPos = GameCore::Get()->GetMainWindow()->GetHeight() * 0.5f;
-
-			std::for_each(mConsoleStrings.begin(), mConsoleStrings.end(), [this,&textHeightPos](sf::String& iString)->void
+			if(textHeightPos > 0.0f)
 			{
-				if(textHeightPos > 0.0f)
-				{
-					textHeightPos -= 15.0f;
+				textHeightPos -= 15.0f;
 
-					mConsoleText.SetString(iString);
-					mConsoleText.SetPosition(0.0f, textHeightPos);
-					GameCore::Get()->GetMainWindow()->Draw(mConsoleText);
-				}
-			});
-		}
+				mConsoleText.SetString(iString);
+				mConsoleText.SetPosition(0.0f, textHeightPos);
+				GameCore::Get()->GetMainWindow()->Draw(mConsoleText);
+			}
+		});
 	}
 
 	bool Console::HandleEvent( const sf::Event& iEvent )
 	{
-		if(iEvent.Type == sf::Event::KeyPressed && iEvent.Key.Code == mToggleKeyCode)
-		{
-			ToggleConsole();
-			return true;
-		}
-
+		bool eventHandled = false;
 		sf::String& consoleString = mConsoleStrings[0];
 
-		if(mVisible && (iEvent.Type == sf::Event::KeyPressed || iEvent.Type == sf::Event::KeyReleased))
+		if(iEvent.Type == sf::Event::KeyPressed || iEvent.Type == sf::Event::KeyReleased)
 		{
 			if(iEvent.Type == sf::Event::KeyPressed)
 			{
 				if(iEvent.Key.Code == sf::Key::Back && consoleString.GetSize() > 1)
 				{
 					consoleString.Erase(consoleString.GetSize() - 1);
+
+					eventHandled = true;
 				}
 				else if(iEvent.Key.Code == sf::Key::Return && consoleString.GetSize() > 1)
 				{
@@ -93,9 +86,10 @@ namespace rt
 
 					mConsoleStrings.push_back("Try to execute:" + consoleString);
 					mConsoleStrings[0] = ">";
+
+					eventHandled = true;
 				}
 			}
-			return true;
 		}
 		else if(iEvent.Type == sf::Event::TextEntered)
 		{
@@ -104,14 +98,9 @@ namespace rt
 				consoleString.Insert(consoleString.GetSize(), iEvent.Text.Unicode);
 			}
 
-			return true;
+			eventHandled = true;
 		}
 
-		return false;
-	}
-
-	void Console::ToggleConsole()
-	{
-		mVisible = !mVisible;
+		return eventHandled;
 	}
 }

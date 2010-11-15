@@ -30,9 +30,17 @@ namespace rt
 	class InputManager : public Singleton<InputManager>
 	{
 	public:
-		typedef std::multimap<sf::Key::Code, std::string>			KeyboardBinds;
+		class ExecHolder
+		{
+		public:
+			std::string FunctionName;
+			camp::Args	FunctionArguments;
+			bool		PredefinedArguments;
+		};
+
+		typedef std::multimap<sf::Key::Code, ExecHolder>			KeyboardBinds;
 		typedef KeyboardBinds::iterator								KeyboardBindsIter;
-		typedef std::multimap<sf::Mouse::Button, std::string>		MouseBinds;
+		typedef std::multimap<sf::Mouse::Button, ExecHolder>		MouseBinds;
 		typedef MouseBinds::iterator								MouseBindsIter;
 
 		typedef fastdelegate::FastDelegate1<const sf::Event&, bool>	InputHandler;
@@ -45,8 +53,8 @@ namespace rt
 
 		void Update(float iFrameTime);
 
-		void RegisterBind(sf::Key::Code iKey, const std::string& iExecName);
-		void RegisterBind(sf::Mouse::Button iButton, const std::string& iExecName);
+		void RegisterBind(sf::Key::Code iKey, const std::string& iExecName, const camp::Args& iArguments = camp::Args::empty);
+		void RegisterBind(sf::Mouse::Button iButton, const std::string& iExecName, const camp::Args& iArguments = camp::Args::empty);
 
 		void UnregisterBind(sf::Key::Code iKey);
 		void UnregisterBind(sf::Mouse::Button iButton);
@@ -66,50 +74,10 @@ namespace rt
 		void processKey(sf::Key::Code iKey, bool iPressed);
 		void processMouse(sf::Mouse::Button iButton, bool iPressed);
 
-// 		template <class T>
-// 		void processUnary(T iKey, std::multimap<T, std::string>& iStorage)
-// 		{
-// 			std::multimap<T, std::string>::iterator iter = iStorage.find(iKey);
-// 
-// 			if(iter != iStorage.end())
-// 			{
-// 				std::multimap<T, std::string>::iterator end = iStorage.upper_bound(iKey);
-// 
-// 				for(;iter != end; ++iter)
-// 				{
-// 					if(!iter->second.empty())
-// 					{
-// 						ConsoleManager::Get()->RunExec(iter->second);
-// 					}
-// 				}
-// 			}
-// 		}
-// 
-// 		template <class T>
-// 		void processBinary(T iKey, bool iSwitch, std::multimap<T, std::string>& iStorage)
-// 		{
-// 			std::multimap<T, std::string>::iterator iter = iStorage.find(iKey);
-// 
-// 			if(iter != iStorage.end())
-// 			{
-// 				std::multimap<T, std::string>::iterator end = iStorage.upper_bound(iKey);
-// 
-// 				for(;iter != end; ++iter)
-// 				{
-// 					if(!iter->second.empty())
-// 					{
-// 						ConsoleManager::Get()->RunExec(iter->second, iSwitch);
-// 					}
-// 				}
-// 			}
-// 		}
-
 		bool isHandledByExternals(const sf::Event& iEvent);
 
 		KeyboardBinds					mKeyboardBinds;
-		//KeyboardBinds					mBinaryKeyboardBinds;
 		MouseBinds						mMouseBinds;
-		//MouseBinds						mBinaryMouseBinds;
 
 		HandlersList					mHandlers;
 	};

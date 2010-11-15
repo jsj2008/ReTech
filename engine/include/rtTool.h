@@ -33,5 +33,13 @@ namespace rt
 		virtual void Update(float iTimeElapsed);
 		virtual void Render();
 		virtual bool HandleEvent(const sf::Event& iEvent);
+
+		void SetEnabled(bool iEnabled);
+		bool IsEnabled();
+
+		void ToggleEnabled();
+
+	protected:
+		bool mIsEnabled;
 	};
 }
