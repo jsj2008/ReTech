@@ -8,6 +8,7 @@ namespace rt
 {
 	PhysicsManager::PhysicsManager()
 	{
+		cpInitChipmunk();
 	}
 
 	PhysicsManager::~PhysicsManager()

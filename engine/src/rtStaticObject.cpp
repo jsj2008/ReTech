@@ -20,34 +20,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#pragma once
+#include "rtCommonIncludes.h"
+#include "rtStaticObject.h"
 
-#ifdef _DEBUG
-	#pragma comment(lib, "Iphlpapi.lib")
-	#pragma comment(lib, "sfml2-audio-s-d.lib")
-	#pragma comment(lib, "sfml2-graphics-s-d.lib")
-	#pragma comment(lib, "sfml2-network-s-d.lib")
-	#pragma comment(lib, "sfml2-system-s-d.lib")
-	#pragma comment(lib, "sfml2-window-s-d.lib")
-	#pragma comment(lib, "yamlcppd.lib")
-	#pragma comment(lib, "SPARK_debug.lib")
-	#pragma comment(lib, "SPARK_GL_debug.lib")
-	#pragma comment(lib, "SPARK_SFML_debug.lib")
-	#pragma comment(lib, "campd.lib")
-	#pragma comment(lib, "sfgui-d.lib")
-	#pragma comment(lib, "chipmunk_d.lib")
-#else
-	#pragma comment(lib, "Iphlpapi.lib")
-	#pragma comment(lib, "sfml2-audio-s.lib")
-	#pragma comment(lib, "sfml2-graphics-s.lib")
-	#pragma comment(lib, "sfml2-network-s.lib")
-	#pragma comment(lib, "sfml2-system-s.lib")
-	#pragma comment(lib, "sfml2-window-s.lib")
-	#pragma comment(lib, "yamlcpp.lib")
-	#pragma comment(lib, "SPARK.lib")
-	#pragma comment(lib, "SPARK_GL.lib")
-	#pragma comment(lib, "SPARK_SFML.lib")
-	#pragma comment(lib, "camp.lib")
-	#pragma comment(lib, "sfgui.lib")
-	#pragma comment(lib, "chipmunk.lib")
-#endif
+namespace rt
+{
+	StaticObject::StaticObject()
+	{
+
+	}
+
+	StaticObject::~StaticObject()
+	{
+
+	}
+}

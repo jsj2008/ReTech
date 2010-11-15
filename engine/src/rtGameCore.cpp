@@ -42,6 +42,8 @@ THE SOFTWARE.
 #include "rtRectangle.h"
 
 #include "rtWorldObject.h"
+#include "rtActorObject.h"
+#include "rtStaticObject.h"
 
 URegisterSingleton(GameCore)
 
@@ -71,8 +73,6 @@ namespace rt
 			sf::Vector2f(static_cast<float>(width), static_cast<float>(height))));
 
 		recreateWindow();
-
-		mMainWindow->ShowMouseCursor(false);
 
 		mRandomizeSeed = (int)time(0);
 
@@ -106,9 +106,8 @@ namespace rt
 		URegisterObject(Text);
 
 		URegisterObject(WorldObject);
-
-		int count = camp::classCount();
-		count++;
+		URegisterObject(ActorObject);
+		URegisterObject(StaticObject);
 
 		//Register resource classes
 		mResource->RegisterExtension(".tga", "Image");
@@ -200,5 +199,8 @@ namespace rt
 		}
 
 		mMainWindow->SetView(*mMainView);
+
+		mMainWindow->ShowMouseCursor(false);
+		mMainwindow->SetFocus();
 	}
 }

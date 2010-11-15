@@ -43,12 +43,33 @@ namespace rt
 
 	class Atom;
 
+	/**
+	*	Main manger class that creates all the stuff and initializes game engine.
+	*
+	* 	@author Alexander Novitsky
+	*/
 	class GameCore : public Singleton<GameCore>
 	{
 	public:
+		/**
+		* Default constructor
+		*
+		* @author Alexander Novitsky
+		*/
 		GameCore();
+
+		/**
+		* Default destructor
+		*
+		* @author Alexander Novitsky
+		*/
 		~GameCore();
 
+		/**
+		* Initializes game engine. Must be called before {@link #Run()}
+		*
+		* @author Alexander Novitsky
+		*/
 		void Initialize();
 
 		void Run();

@@ -57,6 +57,8 @@ THE SOFTWARE.
 #include "rtWorld.h"
 
 #include "rtWorldObject.h"
+#include "rtActorObject.h"
+#include "rtStaticObject.h"
 
 #include "rtComponent.h"
 #include "rtAnimation.h"

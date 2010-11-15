@@ -76,11 +76,12 @@ namespace rt
 			return true;
 		}
 
+		sf::String& consoleString = mConsoleStrings[0];
+
 		if(mVisible && (iEvent.Type == sf::Event::KeyPressed || iEvent.Type == sf::Event::KeyReleased))
 		{
 			if(iEvent.Type == sf::Event::KeyPressed)
 			{
-				sf::String& consoleString = mConsoleStrings[0];
 				if(iEvent.Key.Code == sf::Key::Back && consoleString.GetSize() > 1)
 				{
 					consoleString.Erase(consoleString.GetSize() - 1);
@@ -93,10 +94,14 @@ namespace rt
 					mConsoleStrings.push_back("Try to execute:" + consoleString);
 					mConsoleStrings[0] = ">";
 				}
-				else if((iEvent.Key.Code >= sf::Key::A && iEvent.Key.Code <= sf::Key::Z) || (iEvent.Key.Code >= sf::Key::Num0 && iEvent.Key.Code <= sf::Key::Num9))
-				{
-					consoleString.Insert(consoleString.GetSize(), static_cast<char>(iEvent.Key.Code));
-				}
+			}
+			return true;
+		}
+		else if(iEvent.Type == sf::Event::TextEntered)
+		{
+			if(iEvent.Text.Unicode != 96 && iEvent.Text.Unicode != 13 && iEvent.Text.Unicode != 8)
+			{
+				consoleString.Insert(consoleString.GetSize(), iEvent.Text.Unicode);
 			}
 
 			return true;

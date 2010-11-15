@@ -79,7 +79,7 @@ namespace rt
 
 		UDeclareUserObject
 
-		static void RegisterMetaClass()
+			static void RegisterMetaClass()
 		{
 			camp::Class::declare<WorldObject>("WorldObject")
 				.base<Serializeable>()
@@ -99,9 +99,9 @@ namespace rt
 	protected:
 		virtual void Render(sf::RenderTarget& target, sf::Renderer& renderer) const;
 
-		Vector2f		mPosition;
-		Vector2f		mOrigin;
-		Vector2f		mScale;
+		Vector2f			mPosition;
+		Vector2f			mOrigin;
+		Vector2f			mScale;
 		float				mRotation;				
 
 		bool				mVisible;

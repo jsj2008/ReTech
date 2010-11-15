@@ -79,6 +79,15 @@
     <Filter Include="Engine\Managers\AudioManager">
       <UniqueIdentifier>{61f528de-8ac3-4992-909a-2f9ecc746e42}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Subsystems\Animation">
+      <UniqueIdentifier>{f1d08ffd-29fd-45af-8ac1-84d6ec1623ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Subsystems\Animation\Framed">
+      <UniqueIdentifier>{b4d28c90-ac5c-437c-b417-e997eeda34c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Subsystems\Animation\Skeletal">
+      <UniqueIdentifier>{717be4b8-322d-4a46-bc19-f823795749b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\micropather.cpp">
@@ -198,6 +207,12 @@
     </ClCompile>
     <ClCompile Include="src\rtMusic.cpp">
       <Filter>Game\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtActorObject.cpp">
+      <Filter>Game\WorldObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtStaticObject.cpp">
+      <Filter>Game\WorldObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

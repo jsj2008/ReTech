@@ -87,6 +87,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\rtActorObject.cpp" />
     <ClCompile Include="src\rtAudioManager.cpp" />
     <ClCompile Include="src\rtComponent.cpp" />
     <ClCompile Include="src\rtMusic.cpp" />
@@ -98,6 +99,7 @@
     <ClCompile Include="src\rtRectangle.cpp" />
     <ClCompile Include="src\rtSound.cpp" />
     <ClCompile Include="src\rtSprite.cpp" />
+    <ClCompile Include="src\rtStaticObject.cpp" />
     <ClCompile Include="src\rtText.cpp" />
     <ClCompile Include="src\rtFont.cpp" />
     <ClCompile Include="src\rtImage.cpp" />

@@ -60,6 +60,8 @@ THE SOFTWARE.
 #include "sfgui/Listbox.hpp"
 #include "sfgui/Editbox.hpp"
 
+#include "chipmunk/chipmunk.h"
+
 //Extensions
 #include "yaml-cpp/yaml.h"
 #include "fastdelegates/fastdelegate.h"
