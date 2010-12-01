@@ -29,9 +29,10 @@ Main goal is "Powerful for programmer, simple for designer".
 
 Current libraries used
 
-* [SFML2] http://www.sfml-dev.org/
-* [Box2d] http://www.box2d.org/
+* [SFML2] http://www.sfml-dev.org
+* [Bullet] http://bulletphysics.org/wordpress
 * [Camp] http://dev.tegesoft.com/projects/camp
+* [POCO] http://pocoproject.org
 * [Fastdelegates] http://www.codeproject.com/KB/cpp/FastDelegate.aspx
 * [SPARK] http://spark.developpez.com/index.php?page=features&lang=en
 * [SfGUI] http://github.com/TankOs/SFGUI
