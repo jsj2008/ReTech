@@ -48,12 +48,12 @@ namespace rt
 		sf::Event Event;
 		while (GameCore::Get()->GetMainWindow()->GetEvent(Event))
 		{
-			if(!ToolManager::Get()->HandleEvent(Event) && !GuiManager::Get()->HandleEvent(Event) && !isHandledByExternals(Event))
-			{
-				// Close window : exit
-				if (Event.Type == sf::Event::Closed)
-					GameCore::Get()->Stop();
+			// Close window : exit
+			if (Event.Type == sf::Event::Closed)
+				GameCore::Get()->Stop();
 
+			if(!GuiManager::Get()->HandleEvent(Event) && !ToolManager::Get()->HandleEvent(Event) && !isHandledByExternals(Event))
+			{
 				//Process binds
 				if(Event.Type == sf::Event::KeyPressed)
 				{

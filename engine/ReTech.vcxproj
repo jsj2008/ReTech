@@ -90,8 +90,11 @@
     <ClCompile Include="src\rtActorObject.cpp" />
     <ClCompile Include="src\rtAudioManager.cpp" />
     <ClCompile Include="src\rtComponent.cpp" />
+    <ClCompile Include="src\rtMemoryManager.cpp" />
+    <ClCompile Include="src\rtMemoryObject.cpp" />
     <ClCompile Include="src\rtMusic.cpp" />
     <ClCompile Include="src\rtParticleEditor.cpp" />
+    <ClCompile Include="src\rtParticleEditorScreen.cpp" />
     <ClCompile Include="src\rtPhysicsManager.cpp" />
     <ClCompile Include="src\rtAnimation.cpp" />
     <ClCompile Include="src\rtCircle.cpp" />
@@ -148,8 +151,12 @@
     <ClInclude Include="include\rtActorObject.h" />
     <ClInclude Include="include\rtAudioManager.h" />
     <ClInclude Include="include\rtComponent.h" />
+    <ClInclude Include="include\rtDefines.h" />
+    <ClInclude Include="include\rtMemoryManager.h" />
+    <ClInclude Include="include\rtMemoryObject.h" />
     <ClInclude Include="include\rtMusic.h" />
     <ClInclude Include="include\rtParticleEditor.h" />
+    <ClInclude Include="include\rtParticleEditorScreen.h" />
     <ClInclude Include="include\rtPhysicsManager.h" />
     <ClInclude Include="include\rtAnimation.h" />
     <ClInclude Include="include\rtCircle.h" />

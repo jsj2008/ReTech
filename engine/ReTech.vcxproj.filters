@@ -88,6 +88,21 @@
     <Filter Include="Engine\Subsystems\Animation\Skeletal">
       <UniqueIdentifier>{717be4b8-322d-4a46-bc19-f823795749b0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Tools\Console">
+      <UniqueIdentifier>{c6624292-1a92-4690-9b6e-feeedc2df44f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Tools\Statistics">
+      <UniqueIdentifier>{808a98f3-09a8-4a3c-8454-b53b77a29678}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Tools\ParticleEditor">
+      <UniqueIdentifier>{c9463c7c-1300-4b72-95dd-847dd809cf06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Systems">
+      <UniqueIdentifier>{933e2502-db96-4f71-ba12-c98fb08ad1e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Systems\Memory System">
+      <UniqueIdentifier>{cece00e1-7e4f-48ad-aaec-5fd6fafc1078}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\micropather.cpp">
@@ -108,12 +123,6 @@
     </ClCompile>
     <ClCompile Include="src\rtTool.cpp">
       <Filter>Engine\Managers\ToolManager</Filter>
-    </ClCompile>
-    <ClCompile Include="src\rtStatistics.cpp">
-      <Filter>Game\Tools</Filter>
-    </ClCompile>
-    <ClCompile Include="src\rtConsole.cpp">
-      <Filter>Game\Tools</Filter>
     </ClCompile>
     <ClCompile Include="src\rtGameCore.cpp">
       <Filter>Engine\Core</Filter>
@@ -214,8 +223,23 @@
     <ClCompile Include="src\rtStaticObject.cpp">
       <Filter>Game\WorldObjects</Filter>
     </ClCompile>
+    <ClCompile Include="src\rtConsole.cpp">
+      <Filter>Game\Tools\Console</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtStatistics.cpp">
+      <Filter>Game\Tools\Statistics</Filter>
+    </ClCompile>
     <ClCompile Include="src\rtParticleEditor.cpp">
-      <Filter>Game\Tools</Filter>
+      <Filter>Game\Tools\ParticleEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtParticleEditorScreen.cpp">
+      <Filter>Game\Tools\ParticleEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtMemoryObject.cpp">
+      <Filter>Engine\Systems\Memory System</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rtMemoryManager.cpp">
+      <Filter>Engine\Systems\Memory System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -237,12 +261,6 @@
     </ClInclude>
     <ClInclude Include="include\rtTool.h">
       <Filter>Engine\Managers\ToolManager</Filter>
-    </ClInclude>
-    <ClInclude Include="include\rtStatistics.h">
-      <Filter>Game\Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="include\rtConsole.h">
-      <Filter>Game\Tools</Filter>
     </ClInclude>
     <ClInclude Include="include\rtGameCore.h">
       <Filter>Engine\Core</Filter>
@@ -355,8 +373,26 @@
     <ClInclude Include="include\rtMusic.h">
       <Filter>Game\Resources</Filter>
     </ClInclude>
+    <ClInclude Include="include\rtConsole.h">
+      <Filter>Game\Tools\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtStatistics.h">
+      <Filter>Game\Tools\Statistics</Filter>
+    </ClInclude>
     <ClInclude Include="include\rtParticleEditor.h">
-      <Filter>Game\Tools</Filter>
+      <Filter>Game\Tools\ParticleEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtParticleEditorScreen.h">
+      <Filter>Game\Tools\ParticleEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtDefines.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtMemoryManager.h">
+      <Filter>Engine\Systems\Memory System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rtMemoryObject.h">
+      <Filter>Engine\Systems\Memory System</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

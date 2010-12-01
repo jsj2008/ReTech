@@ -22,59 +22,55 @@ THE SOFTWARE.
 
 #pragma once
 
+#include "rtDefines.h"
+
 namespace rt
 {
 	class Vector2f : public sf::Vector2f
 	{
-		float& GetX(){ return x; }
-		float& GetY(){ return y; }
+		UWriteableProperyOverride(X, float, x)
+		UWriteableProperyOverride(Y, float, y)
 
-	public:
-		static void RegisterMetaClass()
-		{
-			camp::Class::declare<Vector2f>("Vector2f")
-				.property("X", &Vector2f::GetX)
-				.property("Y", &Vector2f::GetY);
-		}
+ 		UDesc_Begin(Vector2f)
+		UDesc_Constructor
+ 		UDesc_WriteableProperty(X)
+ 		UDesc_WriteableProperty(Y)
+ 		UDesc_End
 	};
 
 	class FloatRect : public sf::FloatRect
 	{
-		float& GetLeft(){ return Left; }
-		float& GetTop(){ return Top; }
-		float& GetWidth(){ return Width; }
-		float& GetHeight(){ return Height; }
+		UWriteableProperyOverride(Left, float, Left)
+		UWriteableProperyOverride(Top, float, Top)
+		UWriteableProperyOverride(Width, float, Width)
+		UWriteableProperyOverride(Height, float, Height)
 
-	public:
-		static void RegisterMetaClass()
-		{
-			camp::Class::declare<FloatRect>("FloatRect")
-				.property("Left", &FloatRect::GetLeft)
-				.property("Top", &FloatRect::GetTop)
-				.property("Width", &FloatRect::GetWidth)
-				.property("Height", &FloatRect::GetHeight);
-		}
+		UDesc_Begin(FloatRect)
+		UDesc_Constructor
+		UDesc_WriteableProperty(Left)
+		UDesc_WriteableProperty(Top)
+		UDesc_WriteableProperty(Width)
+		UDesc_WriteableProperty(Height)
+		UDesc_End
 	};
 
 	class Color : public sf::Color
 	{
-		sf::Uint8& GetR(){ return r; }
-		sf::Uint8& GetG(){ return g; }
-		sf::Uint8& GetB(){ return b; }
-		sf::Uint8& GetA(){ return a; }
+		UWriteableProperyOverride(R, sf::Uint8, r)
+		UWriteableProperyOverride(G, sf::Uint8, g)
+		UWriteableProperyOverride(B, sf::Uint8, b)
+		UWriteableProperyOverride(A, sf::Uint8, a)
 
-	public:
-		static void RegisterMetaClass()
-		{
-			camp::Class::declare<Color>("Color")
-				.property("R", &Color::GetR)
-				.property("G", &Color::GetG)
-				.property("B", &Color::GetB)
-				.property("A", &Color::GetA);
-		}
+		UDesc_Begin(Color)
+		UDesc_Constructor
+		UDesc_WriteableProperty(R)
+		UDesc_WriteableProperty(G)
+		UDesc_WriteableProperty(B)
+		UDesc_WriteableProperty(A)
+		UDesc_End
 	};
 }
 
-CAMP_AUTO_TYPE(rt::Vector2f, &rt::Vector2f::RegisterMetaClass)
-CAMP_AUTO_TYPE(rt::FloatRect, &rt::FloatRect::RegisterMetaClass)
-CAMP_AUTO_TYPE(rt::Color, &rt::Color::RegisterMetaClass)
+UDesc_AutoType(Vector2f)
+UDesc_AutoType(FloatRect)
+UDesc_AutoType(Color)

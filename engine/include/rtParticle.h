@@ -44,6 +44,13 @@ namespace rt
 
 		SPK::SFML::SFMLSystem* Create();
 
+		static void RegisterMetaClass()
+		{
+			camp::Class::declare<SystemDesc>("SystemDesc")
+				.constructor0()
+				.property("Groups", &SystemDesc::mGroupDescs);
+		}
+
 	protected:
 		GroupDescVec mGroupDescs;
 	};
@@ -58,6 +65,19 @@ namespace rt
 
 		void AddParamTo(SPK::Model* iModel);
 		void AddFlags(int& iEnableFlag, int& iMutableFlag, int& iRandomFlag, int& iInterpolatedFlag);
+
+		static void RegisterMetaClass()
+		{
+			camp::Class::declare<ParamDesc>("ParamDesc")
+				.constructor0()
+				//.property("ModelParamFlag", &ParamDesc::mFlag)
+				//.property("ModelParam", &ParamDesc::mParam)
+				.property("Mutable", &ParamDesc::mMutable)
+				.property("Random", &ParamDesc::mRandom)
+				.property("Interpolated", &ParamDesc::mInterpolated)
+				.property("Values", &ParamDesc::mValues)
+				;
+		}
 
 	protected:
 		void GetFlagAndParamByName(const std::string& iName, SPK::ModelParamFlag& iFlag, SPK::ModelParam& iParam);
@@ -83,6 +103,12 @@ namespace rt
 
 		SPK::Model* Create();
 
+		static void RegisterMetaClass()
+		{
+			camp::Class::declare<ModelDesc>("ModelDesc")
+				.constructor0();
+		}
+
 	protected:
 		void MakeFlags(int& iEnableFlag, int& iMutableFlag, int& iRandomFlag, int& iInterpolatedFlag);
 
@@ -100,6 +126,12 @@ namespace rt
 		virtual void Serialize(YAML::Emitter& iEmitter) const;
 
 		SPK::SFML::SFMLRenderer* Create();
+
+		static void RegisterMetaClass()
+		{
+			camp::Class::declare<RendererDesc>("RendererDesc")
+				.constructor0();
+		}
 
 	protected:
 		sf::Blend::Mode GetModeByName(const std::string& iName);
@@ -132,6 +164,12 @@ namespace rt
 
 		SPK::Group* Create();
 
+		static void RegisterMetaClass()
+		{
+			camp::Class::declare<GroupDesc>("GroupDesc")
+				.constructor0();
+		}
+
 	protected:
 		std::string		mName;
 
@@ -152,6 +190,12 @@ namespace rt
 		virtual void Serialize(YAML::Emitter& iEmitter) const;
 
 		SPK::Zone* Create();
+
+		static void RegisterMetaClass()
+		{
+			camp::Class::declare<ZoneDesc>("ZoneDesc")
+				.constructor0();
+		}
 
 	protected:
 		SPK::Zone* CreateZoneByName(const std::string& iName);
@@ -174,6 +218,12 @@ namespace rt
 		virtual void Serialize(YAML::Emitter& iEmitter) const;
 
 		SPK::Emitter* Create();
+
+		static void RegisterMetaClass()
+		{
+			camp::Class::declare<EmitterDesc>("EmitterDesc")
+				.constructor0();
+		}
 
 	protected:
 		SPK::Emitter* CreateEmitterByName(const std::string& iName);
@@ -203,6 +253,12 @@ namespace rt
 
 		SPK::Modifier* Create();
 
+		static void RegisterMetaClass()
+		{
+			camp::Class::declare<ModifierDesc>("ModifierDesc")
+				.constructor0();
+		}
+
 	protected:
 	};
 
@@ -228,8 +284,16 @@ namespace rt
 		}
 
 	protected:
-		SPK::SFML::SFMLSystem* mSystem;
+		SPK::SFML::SFMLSystem*	mSystem;
 	};
 }
 
 CAMP_AUTO_TYPE(rt::Particle, &rt::Particle::RegisterMetaClass)
+CAMP_AUTO_TYPE(rt::SystemDesc, &rt::SystemDesc::RegisterMetaClass)
+CAMP_AUTO_TYPE(rt::ModelDesc, &rt::ModelDesc::RegisterMetaClass)
+CAMP_AUTO_TYPE(rt::GroupDesc, &rt::GroupDesc::RegisterMetaClass)
+CAMP_AUTO_TYPE(rt::ParamDesc, &rt::ParamDesc::RegisterMetaClass)
+CAMP_AUTO_TYPE(rt::RendererDesc, &rt::RendererDesc::RegisterMetaClass)
+CAMP_AUTO_TYPE(rt::EmitterDesc, &rt::EmitterDesc::RegisterMetaClass)
+CAMP_AUTO_TYPE(rt::ModifierDesc, &rt::ModifierDesc::RegisterMetaClass)
+CAMP_AUTO_TYPE(rt::ZoneDesc, &rt::ZoneDesc::RegisterMetaClass)

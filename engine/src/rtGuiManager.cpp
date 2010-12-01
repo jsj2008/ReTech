@@ -108,6 +108,7 @@ namespace rt
 		if(!mScreenStack.empty())
 		{
 			mScreenStack.back()->Deactivated();
+			mScreenStack.pop_back();
 		}
 
 		if(!mScreenStack.empty())

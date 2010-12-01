@@ -54,6 +54,15 @@ namespace rt
 	void Tool::SetEnabled(bool iEnabled)
 	{
 		mIsEnabled = iEnabled;
+
+		if(mIsEnabled)
+		{
+			OnEnabled();
+		}
+		else
+		{
+			OnDisabled();
+		}
 	}
 
 	bool Tool::IsEnabled()
@@ -63,6 +72,16 @@ namespace rt
 
 	void Tool::ToggleEnabled()
 	{
-		mIsEnabled = !mIsEnabled;
+		SetEnabled(!mIsEnabled);
+	}
+
+	void Tool::OnEnabled()
+	{
+
+	}
+
+	void Tool::OnDisabled()
+	{
+
 	}
 }

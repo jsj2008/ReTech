@@ -20,35 +20,26 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#include "GameCommonIncludes.h"
-#include "GameLibraries.h"
+#pragma once
 
-int WINAPI WinMain(HINSTANCE /*hInstance*/, HINSTANCE /*hPrevInstance*/, LPSTR /*lpCmdLine*/, int /*nCmdShow*/)
+#include "rtGuiScreen.h"
+
+namespace rt
 {
-	rt::GameCore gameCore;
+	class ParticleEditor;
 
-	//Populate options
-	rt::OptionsManager::Get()->GetOption("title") = std::string("ReTech Engine v 0.3.0");
-	rt::OptionsManager::Get()->GetOption("width") = 1280;
-	rt::OptionsManager::Get()->GetOption("height") = 720;
-	rt::OptionsManager::Get()->GetOption("bpp") = 32;
-	rt::OptionsManager::Get()->GetOption("media_dir") = std::string("./media/");
-	rt::OptionsManager::Get()->GetOption("gui_skin") = std::string("skins/default.skin");
+	class ParticleEditorScreen : public GuiScreen
+	{
+	public:
+		ParticleEditorScreen(ParticleEditor* iEditor);
+		virtual ~ParticleEditorScreen();
 
-	//Initialize engine
-	gameCore.Initialize();
+	protected:
+		ParticleEditor* mEditor;
 
-	//Add debug tools
-	rt::ToolManager::Get()->AddTool("statistics", new rt::Statistics());
-	rt::ToolManager::Get()->AddTool("console", new rt::Console());
-	rt::ToolManager::Get()->AddTool("particle_editor", new rt::ParticleEditor());
-
-	rt::InputManager::Get()->RegisterBind(sf::Key::Tilde, "toggle_tool", camp::Args("console"));
-	rt::InputManager::Get()->RegisterBind(sf::Key::F1, "toggle_tool", camp::Args("particle_editor"));
-
-	gameCore.Run();
-
-	gameCore.Shutdown();
-
-	return EXIT_SUCCESS;
+		sfg::Editbox::Ptr	mFileNameEdit;
+		sfg::Button::Ptr	mLoadButton;
+		sfg::Button::Ptr	mSaveButton;
+		sfg::Button::Ptr	mExitButton;
+	};
 }

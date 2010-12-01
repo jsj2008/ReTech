@@ -23,6 +23,7 @@ THE SOFTWARE.
 #pragma once
 
 #include "rtSingleton.h"
+#include "rtDefines.h"
 
 #include "rtOptionsManager.h"
 

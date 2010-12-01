@@ -47,6 +47,7 @@ THE SOFTWARE.
 #include "rtStatistics.h"
 #include "rtConsole.h"
 #include "rtParticleEditor.h"
+#include "rtParticleEditorScreen.h"
 
 #include "rtImage.h"
 #include "rtSequence.h"

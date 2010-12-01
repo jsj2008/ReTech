@@ -181,7 +181,7 @@ namespace rt
 			{
 				if(property.get(iObject).isCompatible<Serializeable*>())
 				{
-
+					UnserializeYAML(property.get(iObject).to<rt::Serializeable*>()->ToUserObject(), (*iNode.FindValue(property.name())));
 				}
 				else
 				{

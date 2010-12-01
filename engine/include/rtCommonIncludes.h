@@ -68,27 +68,11 @@ THE SOFTWARE.
 #include "micropather.h"
 #include "SFMath.h"
 
+#include "rtDefines.h"
+#include "rtExternalTypes.h"
+
 #include "rtLogManager.h"
 #include "rtGameCore.h"
 #include "rtOption.h"
 #include "rtOptionsManager.h"
 #include "rtSingleton.h"
-
-#include "rtExternalTypes.h"
-
-//utilities helpers
-#define UResource(Type, Name) static_cast<Type*>(ResourceManager::Get()->GetResource(Name))
-
-#define URegisterObject(Class) camp::classByType<Class>()
-#define UDeclareUserObject virtual camp::UserObject ToUserObject(){ return camp::UserObject(this); }
-
-#define URegisterSingleton(Class) rt::Class* rt::Singleton<rt::Class>::mInstance = 0;
-
-#define UStringify(x) #x
-#define UToString(x) UStringify(x)
-#define ULocation __FILE__ "(" UToString(__LINE__) ") - " __FUNCTION__
-
-#define ULogCritical(Message) rt::LogManager::Get()->Critical(Message, ULocation)
-#define ULogError(Message) rt::LogManager::Get()->Error(Message, ULocation)
-#define ULogWarning(Message) rt::LogManager::Get()->Warning(Message, ULocation)
-#define ULogNotice(Message) rt::LogManager::Get()->Notice(Message, ULocation)

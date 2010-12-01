@@ -39,6 +39,9 @@ namespace rt
 
 		void ToggleEnabled();
 
+		virtual void OnEnabled();
+		virtual void OnDisabled();
+
 	protected:
 		bool mIsEnabled;
 	};

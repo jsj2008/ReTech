@@ -51,7 +51,8 @@ namespace rt
 			CollectionIterator particleFile(mResourceName);
 
 			SystemDesc systemDesc;
-			//particleFile.Node() >> &systemDesc;
+			
+			UnserializeYAML(systemDesc, particleFile.Node());
 
 			mSystem = systemDesc.Create();
 		}
